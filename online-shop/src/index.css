@@ -1,0 +1,37 @@
+body {
+  width: 100%;
+  background-color: rgb(228, 228, 228);
+  overflow-x: hidden;
+  margin: 0;
+  direction: rtl;
+}
+
+@font-face {
+  font-family: "Vazir-Bold";
+  src: local("Vazir-Bold"),
+    url("./fonts/vazir/Vazir-Bold.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "Vazir-Medium";
+  src: local("Vazir-Medium"),
+    url("./fonts/vazir/Vazir-Medium.ttf") format("truetype");
+}
+
+
+@font-face {
+  font-family: "Vazir-Light";
+  src: local("Vazir-Light"),
+    url("./fonts/vazir/Vazir-Light.ttf") format("truetype");
+}
+
+.main {
+  display: flex;
+  flex-direction: column;
+  direction: rtl;
+}
+
+a {
+  text-decoration: none;
+}
+
