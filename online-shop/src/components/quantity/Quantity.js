@@ -1,11 +1,11 @@
 import React from 'react'
 
-function Basket() {
+function Quantity() {
   return (
     <div>
-      سبد خرید
+      Quantity
     </div>
   )
 }
 
-export default Basket
+export default Quantity
