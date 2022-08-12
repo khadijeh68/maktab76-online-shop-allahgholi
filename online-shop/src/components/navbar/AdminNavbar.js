@@ -24,20 +24,20 @@ function AdminNavbar() {
     <div className={classes.nav}>
       <h3>پنل مدیریت فروشگاه</h3>
       <div>
-        <NavLink to="/" className={classes.nav_link}>
+        <NavLink to="/products" className={classes.nav_link}>
           <span>کالاها</span>
         </NavLink>
 
-        <NavLink to="/" className={classes.nav_link}>
+        <NavLink to="/quantity" className={classes.nav_link}>
           <span>موجودی و قیمت ها</span>
         </NavLink>
 
-        <NavLink to="/" className={classes.nav_link}>
+        <NavLink to="/orders" className={classes.nav_link}>
           <span>سفارش ها</span>
         </NavLink>
 
         <NavLink to="/" className={classes.nav_link}>
-          <span>کالاها</span>
+          <span>بازگشت به سایت</span>
         </NavLink>
 
       
