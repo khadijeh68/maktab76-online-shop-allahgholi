@@ -23,7 +23,7 @@ function App() {
           <Route index element={<Home />} />
 
           <Route path="categories" element={<SharedCategoryLayout />}>
-            <Route index element={<Categories />} />
+            <Route index  element={<Categories />} />
           </Route>
 
           <Route path="products" element={<Products />} />

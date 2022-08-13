@@ -1,6 +1,5 @@
 import { NavLink } from "react-router-dom";
-import { IconButton, InputBase, makeStyles, Paper } from "@material-ui/core";
-import SearchIcon from "@mui/icons-material/Search";
+import { makeStyles } from "@material-ui/core";
 import ShoppingCartSharpIcon from "@mui/icons-material/ShoppingCartSharp";
 
 const useStyles = makeStyles({
@@ -18,7 +17,7 @@ const useStyles = makeStyles({
   },
   span: {
     textDecoration: "none",
-    margin: "10px",
+    margin: "15px",
     fontFamily: "Vazir-Medium",
     color: "inherit",
   },

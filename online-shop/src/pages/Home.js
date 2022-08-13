@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
+import ProductCard from "../components/product/ProductCard"
 
 const useStyles = makeStyles({
   category: {
@@ -23,22 +24,31 @@ function Home() {
   const classes = useStyles();
   return (
     <div className={classes.category}>
-      <p className={classes.h4}>دسته بندی کالاها</p>
-      <Link to="/" className={classes.link}>
+
+       <Link to="/categories" className={classes.link}>
         گوشی موبایل
       </Link>
-      <Link to="/" className={classes.link}>
+      <ProductCard/>
+
+      <Link to="/categories" className={classes.link}>
         هدفون و هندزفری
       </Link>
-      <Link to="/" className={classes.link}>
+      <ProductCard/>
+
+      <Link to="/categories" className={classes.link}>
         کیف و کاور
       </Link>
-      <Link to="/" className={classes.link}>
+      <ProductCard/>
+
+      <Link to="/categories" className={classes.link}>
         محافظ صفحه نمایش
       </Link>
-      <Link to="/" className={classes.link}>
+      <ProductCard/>
+      
+      <Link to="/categories" className={classes.link}>
         ساعت هوشمند
       </Link>
+      <ProductCard/>
     </div>
   );
 }

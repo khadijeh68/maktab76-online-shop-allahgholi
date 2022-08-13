@@ -11,7 +11,6 @@ const SharedCategoryLayout = () => {
   const classes = useStyles();
   return (
     <div className={classes.title}>
-      دسته بندی ها
       <Outlet />
     </div>
   );
