@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
-import ProductCard from "../components/product/ProductCard"
+
 
 const useStyles = makeStyles({
   category: {
@@ -20,6 +20,8 @@ const useStyles = makeStyles({
   },
 });
 
+//Home : <Categories/> , <Products/>
+
 function Home() {
   const classes = useStyles();
   return (
@@ -28,27 +30,28 @@ function Home() {
        <Link to="/categories" className={classes.link}>
         گوشی موبایل
       </Link>
-      <ProductCard/>
+      
+      نمایش 6 محصول
 
       <Link to="/categories" className={classes.link}>
         هدفون و هندزفری
       </Link>
-      <ProductCard/>
+      نمایش 6 محصول
 
       <Link to="/categories" className={classes.link}>
         کیف و کاور
       </Link>
-      <ProductCard/>
+      نمایش 6 محصول
 
       <Link to="/categories" className={classes.link}>
         محافظ صفحه نمایش
       </Link>
-      <ProductCard/>
+      نمایش 6 محصول
       
       <Link to="/categories" className={classes.link}>
         ساعت هوشمند
       </Link>
-      <ProductCard/>
+      نمایش 6 محصول
     </div>
   );
 }

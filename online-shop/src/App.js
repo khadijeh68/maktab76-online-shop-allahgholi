@@ -3,7 +3,6 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from "./pages/Home";
 import SharedLayout from "./pages/SharedLayout";
 import Error from "./pages/Error";
-import SharedCategoryLayout from "./pages/SharedCategoryLayout";
 import ShoppingCart from "./pages/ShoppingCart";
 import Footer from "./components/footer/Footer";
 import Categories from "./pages/Categories";
@@ -26,9 +25,8 @@ function App() {
         <Route path="/" element={<SharedLayout />}>
           <Route index element={<Home />} />
 
-          <Route path="categories" element={<SharedCategoryLayout />}>
-            <Route index element={<Categories />} />
-          </Route>
+          <Route path="categories" element={<Categories />}/>
+          
 
           <Route path="products" element={<Products />} />
           <Route path="shoppingCart" element={<ShoppingCart />} />
