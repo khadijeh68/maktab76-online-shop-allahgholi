@@ -3,7 +3,7 @@ import React from 'react'
 function Quantity() {
   return (
     <div>
-      Quantity
+      مدیریت موجودی و قیمت ها
     </div>
   )
 }

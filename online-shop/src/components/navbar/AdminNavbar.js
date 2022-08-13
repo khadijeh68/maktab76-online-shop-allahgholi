@@ -1,14 +1,19 @@
 import { makeStyles } from "@material-ui/core/styles";
-import { NavLink } from "react-router-dom";
+import { NavLink, Outlet } from "react-router-dom";
 import "../../index.css"
 
 const useStyles = makeStyles({
   nav: {
+    direction: "rtl",
     display: "flex",
-    flexDirection: "row",
-    justifyContent: "center",
     alignItems: "center",
-    fontFamily: "Vazir-Medium",
+    justifyContent: "space-between",
+    backgroundColor: "#fff",
+    width: "100vw",
+    height: "50px",
+    boxShadow: "0 0 6px rgb(0 0 0 / 40%)",
+    position: "fixed",
+    zIndex: "100",
   },
   nav_link:{
     margin: "10px",
@@ -22,25 +27,24 @@ function AdminNavbar() {
 
   return (
     <div className={classes.nav}>
-      <h3>پنل مدیریت فروشگاه</h3>
+      <h3 className={classes.nav_link}>پنل مدیریت فروشگاه</h3>
       <div>
-        <NavLink to="/products" className={classes.nav_link}>
+        <NavLink to="/product"  className={classes.nav_link}>
           <span>کالاها</span>
         </NavLink>
 
         <NavLink to="/quantity" className={classes.nav_link}>
-          <span>موجودی و قیمت ها</span>
+          <span className={classes.nav_link}>موجودی و قیمت ها</span>
         </NavLink>
 
         <NavLink to="/orders" className={classes.nav_link}>
-          <span>سفارش ها</span>
+          <span className={classes.nav_link}>سفارش ها</span>
         </NavLink>
 
         <NavLink to="/" className={classes.nav_link}>
-          <span>بازگشت به سایت</span>
+          <span className={classes.nav_link}>بازگشت به سایت</span>
         </NavLink>
 
-      
       </div>
     </div>
   );

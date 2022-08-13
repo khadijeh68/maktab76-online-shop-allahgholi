@@ -1,7 +1,6 @@
 import { makeStyles } from "@material-ui/core/styles";
-import { Link, Outlet, useNavigate } from "react-router-dom";
-import AdminNavbar from "../components/navbar/AdminNavbar";
-import Admin from "./Admin";
+import { Link, useNavigate } from "react-router-dom";
+
 
 const useStyles = makeStyles({
   form: {

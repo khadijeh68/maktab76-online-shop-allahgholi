@@ -1,13 +1,13 @@
-import React from 'react'
-import AdminNavbar from '../components/navbar/AdminNavbar'
+import { Outlet } from "react-router-dom";
+import AdminNavbar from "../components/navbar/AdminNavbar";
 
 function Admin() {
   return (
-    <div>
-      <AdminNavbar/>
+    <>
+      <AdminNavbar />
       مدیریت سفارشات
-    </div>
-  )
+    </>
+  );
 }
 
-export default Admin
+export default Admin;

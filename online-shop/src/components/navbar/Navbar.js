@@ -22,10 +22,6 @@ const useStyles = makeStyles({
     fontFamily: "Vazir-Medium",
     color: "inherit",
   },
-  // input: {
-  //   width: "600px",
-  //   borderRadius: "5px",
-  // },
   basket: {
     display: "flex",
     justifyContent: "center",
@@ -67,15 +63,6 @@ function Navbar() {
             <span>کالاها</span>
           </NavLink>
         </div>
-
-        {/* <div className={classes.input}>
-          <Paper component="form" className={classes.form}>
-            <IconButton type="submit">
-              <SearchIcon />
-            </IconButton>
-            <InputBase type="search"  placeholder="جستجو..." />
-          </Paper>
-        </div> */}
 
         <div className={classes.leftNav}>
           <NavLink to="/login" className={classes.span}>
