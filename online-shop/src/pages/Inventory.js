@@ -1,6 +1,6 @@
 import React from 'react'
 
-function Quantity() {
+function Inventory() {
   return (
     <div>
       مدیریت موجودی و قیمت ها
@@ -8,4 +8,4 @@ function Quantity() {
   )
 }
 
-export default Quantity
+export default Inventory;

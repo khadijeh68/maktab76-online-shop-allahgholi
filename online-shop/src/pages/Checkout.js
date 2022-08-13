@@ -1,5 +1,7 @@
 import { makeStyles } from "@material-ui/core/styles";
 import { Button, Form } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
+
 
 const useStyles = makeStyles({
   title: {
@@ -10,6 +12,12 @@ const useStyles = makeStyles({
 
 function Checkout() {
   const classes = useStyles();
+  const navigate = useNavigate();
+
+  const navigatePaymantPanel = () => {
+    navigate('/PaymantPanel');
+  };
+
   return (
     <div className={classes.title}>
       <h3>نهایی کردن خرید</h3>
@@ -40,7 +48,7 @@ function Checkout() {
           <Form.Control type="date" />
         </Form.Group>
 
-        <Button variant="primary" type="submit">
+        <Button variant="primary" type="submit" onClick={navigatePaymantPanel}>
           پرداخت
         </Button>
       </Form>

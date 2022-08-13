@@ -33,7 +33,7 @@ function AdminNavbar() {
           <span>کالاها</span>
         </NavLink>
 
-        <NavLink to="/quantity" className={classes.nav_link}>
+        <NavLink to="/inventory" className={classes.nav_link}>
           <span className={classes.nav_link}>موجودی و قیمت ها</span>
         </NavLink>
 
