@@ -14,6 +14,8 @@ import Product from "./pages/Product";
 import Login from "./pages/Login";
 import PaymentPanel from "./pages/PaymentPanel";
 import Admin from "./pages/Admin";
+import Checkout from "./pages/Checkout";
+
 
 function App() {
   return (
@@ -28,7 +30,9 @@ function App() {
 
           <Route path="products" element={<Products />} />
           <Route path="shoppingCart" element={<ShoppingCart />} />
+          <Route path="checkout" element={<Checkout/>}/>
           <Route path="*" element={<Error />} />
+
         </Route>
 
         <Route path="paymentPanel" element={<PaymentPanel />} />

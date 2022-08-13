@@ -1,7 +1,9 @@
 import { makeStyles } from "@material-ui/core/styles";
+import { Link } from "react-router-dom";
+
 
 const useStyles = makeStyles({
-  h3: {
+  title: {
     fontFamily: "Vazir-Medium",
     margin: "70px 20px",
   },
@@ -9,7 +11,12 @@ const useStyles = makeStyles({
 
 function Basket() {
   const classes = useStyles();
-  return <div className={classes.h3}>سبد خرید</div>;
+  return (
+    <div className={classes.title}>
+      <p>سبد خرید</p>
+      <Link to="/checkout">نهایی کردن سبد خرید</Link>
+    </div>
+  );
 }
 
 export default Basket;
