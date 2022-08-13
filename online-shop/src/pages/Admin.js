@@ -1,12 +1,10 @@
-import { Outlet } from "react-router-dom";
-import AdminNavbar from "../components/navbar/AdminNavbar";
+import Orders from "./Orders";
 
 function Admin() {
   return (
-    <>
-      <AdminNavbar />
-      مدیریت سفارشات
-    </>
+    <div className="admin">
+      <Orders />
+    </div>
   );
 }
 

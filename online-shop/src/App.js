@@ -1,4 +1,4 @@
-import 'bootstrap/dist/css/bootstrap.min.css';
+import "bootstrap/dist/css/bootstrap.min.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from "./pages/Home";
 import SharedLayout from "./pages/SharedLayout";
@@ -14,11 +14,10 @@ import Product from "./pages/Product";
 import Login from "./pages/Login";
 import Checkout from "./pages/Checkout";
 import PaymentPanel from "./pages/PaymantPanel";
-import SuccessPaymant from './pages/SuccessPaymant';
-import FailPaymant from './pages/FailPaymant';
-import Inventory from './pages/Inventory';
-
-
+import SuccessPaymant from "./pages/SuccessPaymant";
+import FailPaymant from "./pages/FailPaymant";
+import Inventory from "./pages/Inventory";
+import Admin from "./pages/Admin";
 
 function App() {
   return (
@@ -28,14 +27,13 @@ function App() {
           <Route index element={<Home />} />
 
           <Route path="categories" element={<SharedCategoryLayout />}>
-            <Route index  element={<Categories />} />
+            <Route index element={<Categories />} />
           </Route>
 
           <Route path="products" element={<Products />} />
           <Route path="shoppingCart" element={<ShoppingCart />} />
-          <Route path="checkout" element={<Checkout/>}/>
+          <Route path="checkout" element={<Checkout />} />
           <Route path="*" element={<Error />} />
-
         </Route>
 
         <Route path="paymantPanel" element={<PaymentPanel />} />
@@ -45,10 +43,12 @@ function App() {
         <Route path="login" element={<Login />} />
 
         <Route path="admin" element={<SharedAdminLayout />}>
+          <Route index element={<Admin />} />
           <Route path="product" element={<Product />} />
           <Route path="inventory" element={<Inventory />} />
           <Route path="orders" element={<Orders />} />
         </Route>
+        
       </Routes>
       <Footer />
     </BrowserRouter>

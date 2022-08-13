@@ -5,6 +5,8 @@ import AdminNavbar from "../components/navbar/AdminNavbar";
 const useStyles = makeStyles({
   h3: {
     fontFamily: "Vazir-Medium",
+    display: 'flex',
+    flexDirection: 'column'
   },
 });
 

@@ -1,6 +1,6 @@
 import { makeStyles } from "@material-ui/core/styles";
+import { Button, Form } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
-
 
 const useStyles = makeStyles({
   form: {
@@ -18,25 +18,28 @@ function Login() {
   const classes = useStyles();
 
   const navigateAdmin = () => {
-    navigate('/admin');
+    navigate("/admin");
   };
 
   return (
     <div className={classes.form}>
-      <h3>ورود به پنل مدیریت فروشگاه</h3>
-      <form action="">
-        <div>
-          <label htmlFor="">نام کاربری</label>
-          <input type="text" />
-        </div>
-        <div>
-          <label htmlFor="">رمز عبور</label>
-          <input type="text" />
-        </div>
+      <h4 className="mt-4">ورود به پنل مدیریت فروشگاه</h4>
+      <Form>
+        <Form.Group className="mb-3">
+          <Form.Label className="mt-5">نام کاربری</Form.Label>
+          <Form.Control type="text" />
+        </Form.Group>
 
-        <button onClick={navigateAdmin}>ورود</button>
-      </form>
-      <Link to="/" className={classes.nav_link}>
+        <Form.Group className="mb-3">
+          <Form.Label>رمز عبور</Form.Label>
+          <Form.Control type="email" />
+        </Form.Group>
+
+        <Button type="submit"  className="mt-3" onClick={navigateAdmin}>
+          ورود
+        </Button>
+      </Form>
+      <Link to="/" className="mt-3 text-decoration-none">
         <span>بازگشت به سایت </span>
       </Link>
     </div>

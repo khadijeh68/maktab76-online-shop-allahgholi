@@ -1,5 +1,5 @@
 import { makeStyles } from "@material-ui/core/styles";
-import { NavLink, Outlet } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import "../../index.css"
 
 const useStyles = makeStyles({
@@ -14,11 +14,13 @@ const useStyles = makeStyles({
     boxShadow: "0 0 6px rgb(0 0 0 / 40%)",
     position: "fixed",
     zIndex: "100",
+
   },
   nav_link:{
     margin: "10px",
     fontFamily: "Vazir-Medium",
-  
+    textDecoration: 'none',
+    color: 'black'
   }
 });
 
@@ -27,9 +29,9 @@ function AdminNavbar() {
 
   return (
     <div className={classes.nav}>
-      <h3 className={classes.nav_link}>پنل مدیریت فروشگاه</h3>
+      <h4 className={classes.nav_link}>پنل مدیریت فروشگاه</h4>
       <div>
-        <NavLink to="/product"  className={classes.nav_link}>
+        <NavLink to="/product" className={classes.nav_link}>
           <span>کالاها</span>
         </NavLink>
 
