@@ -1,21 +1,21 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Home from "./pages/Home";
-import SharedLayout from "./pages/SharedLayout";
-import Error from "./pages/Error";
-import ShoppingCart from "./pages/ShoppingCart";
+import Home from "./pages/home/Home";
+import SharedLayout from "./pages/shared/SharedLayout";
+import Error from "./pages/error/Error";
+import ShoppingCart from "./pages/shoppingCart/ShoppingCart";
 // import Footer from "./components/footer/Footer";
-import Categories from "./pages/Categories";
-import Products from "./pages/Products";
-import SharedAdminLayout from "./pages/SharedAdminLayout";
-import Orders from "./pages/Orders";
-import Product from "./pages/Product";
-import Login from "./pages/Login";
-import Checkout from "./pages/Checkout";
-import PaymentPanel from "./pages/PaymantPanel";
-import SuccessPaymant from "./pages/SuccessPaymant";
-import FailPaymant from "./pages/FailPaymant";
-import Inventory from "./pages/Inventory";
+import Categories from "./pages/categories/Categories";
+import Products from "./pages/product/Products";
+import SharedAdminLayout from "./pages/shared/SharedAdminLayout";
+import Orders from "./pages/orders/Orders";
+import Product from "./pages/product/Product";
+import Login from "./pages/login/Login";
+import Checkout from "./pages/checkout/Checkout";
+import PaymentPanel from "./pages/paymant/PaymantPanel";
+import SuccessPaymant from "./pages/paymant/SuccessPaymant";
+import FailPaymant from "./pages/paymant/FailPaymant";
+import Inventory from "./pages/inventory/Inventory";
 
 function App() {
   return (

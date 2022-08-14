@@ -30,15 +30,15 @@ function AdminNavbar() {
     <div className={classes.nav}>
       <h4 className={classes.nav_link}>پنل مدیریت فروشگاه</h4>
       <div>
-        <NavLink to="/product" className={classes.nav_link}>
+        <NavLink to="product" className={classes.nav_link}>
           <span>کالاها</span>
         </NavLink>
 
-        <NavLink to="/inventory" className={classes.nav_link}>
+        <NavLink to="inventory" className={classes.nav_link}>
           <span className={classes.nav_link}>موجودی و قیمت ها</span>
         </NavLink>
 
-        <NavLink to="/orders" className={classes.nav_link}>
+        <NavLink to="orders" className={classes.nav_link}>
           <span className={classes.nav_link}>سفارش ها</span>
         </NavLink>
 

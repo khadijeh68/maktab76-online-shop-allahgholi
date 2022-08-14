@@ -26,23 +26,27 @@ function Home() {
   return (
     <div className={classes.category}>
       <Link to="/categories" className={classes.link}>
-        گوشی موبایل
+        گوشی اپل
+      </Link>
+      <img
+        src="http://localhost:3002/files/2318b36a701e3687514700df5927fb66"
+        alt="apple"
+      />
+      نمایش 6 محصول
+      <Link to="/categories" className={classes.link}>
+        گوشی سامسونگ
       </Link>
       نمایش 6 محصول
       <Link to="/categories" className={classes.link}>
-        هدفون و هندزفری
+        گوشی شیائومی
       </Link>
       نمایش 6 محصول
       <Link to="/categories" className={classes.link}>
-        کیف و کاور
+        گوشی هواوی
       </Link>
       نمایش 6 محصول
       <Link to="/categories" className={classes.link}>
-        محافظ صفحه نمایش
-      </Link>
-      نمایش 6 محصول
-      <Link to="/categories" className={classes.link}>
-        ساعت هوشمند
+        گوشی نوکیا
       </Link>
       نمایش 6 محصول
     </div>

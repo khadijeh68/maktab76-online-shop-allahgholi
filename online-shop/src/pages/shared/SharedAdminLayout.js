@@ -1,6 +1,6 @@
 import { makeStyles } from "@material-ui/core/styles";
 import { Outlet } from "react-router-dom";
-import AdminNavbar from "../components/navbar/AdminNavbar";
+import AdminNavbar from "../../components/navbar/AdminNavbar";
 
 const useStyles = makeStyles({
   h3: {
