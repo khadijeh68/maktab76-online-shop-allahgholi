@@ -1,11 +1,13 @@
-import { Link } from 'react-router-dom';
+import { Link } from "react-router-dom";
 
 const Error = () => {
   return (
-    <div className=''>
+    <div className="">
       <h2>404</h2>
       <p>صفحه پیدا نشد</p>
-      <Link to='/' className="">بازگشت به صفحه اصلی</Link>
+      <Link to="/" className="">
+        بازگشت به صفحه اصلی
+      </Link>
     </div>
   );
 };

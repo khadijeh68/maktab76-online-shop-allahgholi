@@ -35,7 +35,7 @@ function Login() {
           <Form.Control type="email" />
         </Form.Group>
 
-        <Button type="submit"  className="mt-3" onClick={navigateAdmin}>
+        <Button type="submit" className="mt-3" onClick={navigateAdmin}>
           ورود
         </Button>
       </Form>

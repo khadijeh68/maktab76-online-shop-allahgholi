@@ -14,7 +14,7 @@ function Orders() {
           <span className="px-2" style={{ marginRight: "20px" }}>
             سفارش های در حال انتظار{" "}
           </span>
-          <Form.Check type="radio" aria-label="radio 1" name="group1"/>
+          <Form.Check type="radio" aria-label="radio 1" name="group1" />
         </div>
       </div>
 

@@ -14,20 +14,24 @@ function PaymantPanel() {
   const navigate = useNavigate();
 
   const navigateSuccessPaymant = () => {
-    navigate('/successPaymant');
+    navigate("/successPaymant");
   };
 
   const navigateFailPaymant = () => {
-    navigate('/failPaymant');
+    navigate("/failPaymant");
   };
-  
+
   return (
-    <div  className={classes.title}>
+    <div className={classes.title}>
       <p>درگاه اینترنتی</p>
-      <Button variant="success" type="submit" onClick={navigateSuccessPaymant}>پرداخت</Button>{' '}
-      <Button variant="danger" type="submit" onClick={navigateFailPaymant}>انصراف</Button>{' '}
+      <Button variant="success" type="submit" onClick={navigateSuccessPaymant}>
+        پرداخت
+      </Button>{" "}
+      <Button variant="danger" type="submit" onClick={navigateFailPaymant}>
+        انصراف
+      </Button>{" "}
     </div>
-  )
+  );
 }
 
 export default PaymantPanel;

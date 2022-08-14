@@ -1,7 +1,6 @@
 import { makeStyles } from "@material-ui/core/styles";
 import { Link } from "react-router-dom";
 
-
 const useStyles = makeStyles({
   container: {
     fontFamily: "Vazir-Light",
@@ -12,11 +11,11 @@ const useStyles = makeStyles({
     width: "200px",
     borderLeft: "3px solid black",
     height: "1210px",
-    marginTop: '70px'
+    marginTop: "70px",
   },
   Categories: {
     marginRight: "15px",
-    marginTop: '70px'
+    marginTop: "70px",
   },
 });
 
@@ -37,7 +36,6 @@ function Categories() {
           <p>هوآوی</p>
           <p>نوکیا</p>
         </div>
-
 
         <div>
           <Link to="/" className={classes.link}>

@@ -39,12 +39,12 @@ const useStyles = makeStyles({
   h4: {
     marginTop: "100px",
     fontFamily: "Vazir-Medium",
-    margin: '10px'
+    margin: "10px",
   },
   container: {
     display: "flex",
     flexDirection: "column",
-  }
+  },
 });
 
 function FailPaymant() {
@@ -52,42 +52,41 @@ function FailPaymant() {
   return (
     <div className={classes.container}>
       <div className={classes.nav}>
-            <div className={classes.rightNav}>
-            <NavLink to="/" className={classes.span}>
-                <span className={classes.logo}>
-                فروشگاه آنلاین موبایل و لوازم جانبی{" "}
-                </span>
-            </NavLink>
+        <div className={classes.rightNav}>
+          <NavLink to="/" className={classes.span}>
+            <span className={classes.logo}>
+              فروشگاه آنلاین موبایل و لوازم جانبی{" "}
+            </span>
+          </NavLink>
 
-            <NavLink to="/" className={classes.span}>
-                <span>صفحه اصلی </span>
-            </NavLink>
+          <NavLink to="/" className={classes.span}>
+            <span>صفحه اصلی </span>
+          </NavLink>
 
-            <NavLink to="/categories" className={classes.span}>
-                <span>دسته بندی کالاها </span>
-            </NavLink>
+          <NavLink to="/categories" className={classes.span}>
+            <span>دسته بندی کالاها </span>
+          </NavLink>
 
-            <NavLink to="/products" className={classes.span}>
-                <span>کالاها</span>
-            </NavLink>
-            </div>
+          <NavLink to="/products" className={classes.span}>
+            <span>کالاها</span>
+          </NavLink>
+        </div>
 
-            <div className={classes.leftNav}>
-            <NavLink to="/login" className={classes.span}>
-                <span>مدیریت </span>
-            </NavLink>
-           
+        <div className={classes.leftNav}>
+          <NavLink to="/login" className={classes.span}>
+            <span>مدیریت </span>
+          </NavLink>
 
-            <NavLink to="/shoppingCart" className={classes.span}>
+          <NavLink to="/shoppingCart" className={classes.span}>
             <div className={classes.basket}>
               <ShoppingCartSharpIcon />
               <span>سبد خرید </span>
             </div>
           </NavLink>
-          </div>
+        </div>
       </div>
 
-      <div  className={classes.h4}>
+      <div className={classes.h4}>
         <h4>نتیجه پرداخت</h4>
         <p>پرداخت موفقیت آمیز نبود </p>
       </div>

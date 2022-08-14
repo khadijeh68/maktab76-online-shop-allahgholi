@@ -2,7 +2,6 @@ import { makeStyles } from "@material-ui/core/styles";
 import { Button, Form } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 
-
 const useStyles = makeStyles({
   title: {
     fontFamily: "Vazir-Medium",
@@ -15,7 +14,7 @@ function Checkout() {
   const navigate = useNavigate();
 
   const navigatePaymantPanel = () => {
-    navigate('/PaymantPanel');
+    navigate("/paymantPanel");
   };
 
   return (

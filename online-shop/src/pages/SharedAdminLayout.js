@@ -5,8 +5,8 @@ import AdminNavbar from "../components/navbar/AdminNavbar";
 const useStyles = makeStyles({
   h3: {
     fontFamily: "Vazir-Medium",
-    display: 'flex',
-    flexDirection: 'column'
+    display: "flex",
+    flexDirection: "column",
   },
 });
 
@@ -14,8 +14,8 @@ function SharedAdminLayout() {
   const classes = useStyles();
   return (
     <div className={classes.h3}>
-      <AdminNavbar/>
-      <Outlet/>
+      <AdminNavbar />
+      <Outlet />
     </div>
   );
 }

@@ -8,10 +8,8 @@ const useStyles = makeStyles({
 });
 
 function Products() {
-    const classes = useStyles();
-  return (
-    <div className={classes.title}>کالاها</div>
-  )
+  const classes = useStyles();
+  return <div className={classes.title}>کالاها</div>;
 }
 
-export default Products
+export default Products;
