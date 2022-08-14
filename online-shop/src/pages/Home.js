@@ -19,26 +19,32 @@ const useStyles = makeStyles({
   },
 });
 
+//Home : <Categories/> , <Products/>
+
 function Home() {
   const classes = useStyles();
   return (
     <div className={classes.category}>
-      <p className={classes.h4}>دسته بندی کالاها</p>
-      <Link to="/" className={classes.link}>
+      <Link to="/categories" className={classes.link}>
         گوشی موبایل
       </Link>
-      <Link to="/" className={classes.link}>
+      نمایش 6 محصول
+      <Link to="/categories" className={classes.link}>
         هدفون و هندزفری
       </Link>
-      <Link to="/" className={classes.link}>
+      نمایش 6 محصول
+      <Link to="/categories" className={classes.link}>
         کیف و کاور
       </Link>
-      <Link to="/" className={classes.link}>
+      نمایش 6 محصول
+      <Link to="/categories" className={classes.link}>
         محافظ صفحه نمایش
       </Link>
-      <Link to="/" className={classes.link}>
+      نمایش 6 محصول
+      <Link to="/categories" className={classes.link}>
         ساعت هوشمند
       </Link>
+      نمایش 6 محصول
     </div>
   );
 }

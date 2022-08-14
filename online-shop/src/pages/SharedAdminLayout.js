@@ -1,11 +1,12 @@
 import { makeStyles } from "@material-ui/core/styles";
 import { Outlet } from "react-router-dom";
-import Login from "./Login";
+import AdminNavbar from "../components/navbar/AdminNavbar";
 
 const useStyles = makeStyles({
   h3: {
-    margin: "70px 20px",
     fontFamily: "Vazir-Medium",
+    display: "flex",
+    flexDirection: "column",
   },
 });
 
@@ -13,8 +14,8 @@ function SharedAdminLayout() {
   const classes = useStyles();
   return (
     <div className={classes.h3}>
-      <Login/>
-      <Outlet/>
+      <AdminNavbar />
+      <Outlet />
     </div>
   );
 }

@@ -2,7 +2,7 @@ import React from 'react'
 
 function ProductCard() {
   return (
-    <div>ProductCard</div>
+    <div>نمایش 6 محصول از دسته بندی</div>
   )
 }
 

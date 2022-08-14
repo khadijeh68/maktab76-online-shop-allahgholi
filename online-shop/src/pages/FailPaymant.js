@@ -1,5 +1,5 @@
-import { NavLink } from "react-router-dom";
 import { makeStyles } from "@material-ui/core";
+import { NavLink } from "react-router-dom";
 import ShoppingCartSharpIcon from "@mui/icons-material/ShoppingCartSharp";
 
 const useStyles = makeStyles({
@@ -36,12 +36,21 @@ const useStyles = makeStyles({
   logo: {
     color: "#D43C37",
   },
+  h4: {
+    marginTop: "100px",
+    fontFamily: "Vazir-Medium",
+    margin: "10px",
+  },
+  container: {
+    display: "flex",
+    flexDirection: "column",
+  },
 });
 
-function Navbar() {
+function FailPaymant() {
   const classes = useStyles();
   return (
-    <div>
+    <div className={classes.container}>
       <div className={classes.nav}>
         <div className={classes.rightNav}>
           <NavLink to="/" className={classes.span}>
@@ -50,17 +59,17 @@ function Navbar() {
             </span>
           </NavLink>
 
-          {/* <NavLink to="/" className={classes.span}>
+          <NavLink to="/" className={classes.span}>
             <span>صفحه اصلی </span>
           </NavLink>
 
           <NavLink to="/categories" className={classes.span}>
             <span>دسته بندی کالاها </span>
-          </NavLink> */}
+          </NavLink>
 
-          {/* <NavLink to="/products" className={classes.span}>
+          <NavLink to="/products" className={classes.span}>
             <span>کالاها</span>
-          </NavLink> */}
+          </NavLink>
         </div>
 
         <div className={classes.leftNav}>
@@ -76,8 +85,13 @@ function Navbar() {
           </NavLink>
         </div>
       </div>
+
+      <div className={classes.h4}>
+        <h4>نتیجه پرداخت</h4>
+        <p>پرداخت موفقیت آمیز نبود </p>
+      </div>
     </div>
   );
 }
 
-export default Navbar;
+export default FailPaymant;
