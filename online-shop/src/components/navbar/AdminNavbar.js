@@ -8,10 +8,10 @@ const useStyles = makeStyles({
     display: "flex",
     alignItems: "center",
     justifyContent: "space-between",
-    backgroundColor: "#fff",
+    backgroundColor: "#fff7fd",
     width: "100vw",
-    height: "50px",
-    boxShadow: "0 0 6px rgb(0 0 0 / 40%)",
+    height: "60px",
+    boxShadow: "0 0 6px rgb(0 0 0 / 30%)",
     position: "fixed",
     zIndex: "100",
   },
@@ -23,31 +23,44 @@ const useStyles = makeStyles({
   },
 });
 
-function AdminNavbar() {
+const AdminNavbar = () => {
+  const navLinkStyles = ({ isActive }) => {
+    return {
+      color: isActive ? "#C14795" : "black",
+    };
+  };
   const classes = useStyles();
 
   return (
     <div className={classes.nav}>
-      <h4 className={classes.nav_link}>پنل مدیریت فروشگاه</h4>
+      <span className={classes.nav_link}>پنل مدیریت فروشگاه</span>
       <div>
-        <NavLink to="product" className={classes.nav_link}>
+        <NavLink
+          to="product"
+          className={classes.nav_link}
+          style={navLinkStyles}
+        >
           <span>کالاها</span>
         </NavLink>
 
-        <NavLink to="inventory" className={classes.nav_link}>
-          <span className={classes.nav_link}>موجودی و قیمت ها</span>
+        <NavLink
+          to="inventory"
+          className={classes.nav_link}
+          style={navLinkStyles}
+        >
+          <span>موجودی و قیمت ها</span>
         </NavLink>
 
-        <NavLink to="orders" className={classes.nav_link}>
-          <span className={classes.nav_link}>سفارش ها</span>
+        <NavLink to="orders" className={classes.nav_link} style={navLinkStyles}>
+          <span>سفارش ها</span>
         </NavLink>
 
-        <NavLink to="/" className={classes.nav_link}>
-          <span className={classes.nav_link}>بازگشت به سایت</span>
+        <NavLink to="/" className={classes.nav_link} style={navLinkStyles}>
+          <span>بازگشت به سایت</span>
         </NavLink>
       </div>
     </div>
   );
-}
+};
 
 export default AdminNavbar;

@@ -23,7 +23,7 @@ function Login() {
 
   return (
     <div className={classes.form}>
-      <h4 className="mt-4">ورود به پنل مدیریت فروشگاه</h4>
+      <h5 className="mt-4">ورود به پنل مدیریت فروشگاه</h5>
       <Form className="form_data">
         <Form.Group className="mb-3">
           <Form.Label className="mt-2 text-white">نام کاربری :</Form.Label>

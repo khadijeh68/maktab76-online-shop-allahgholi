@@ -1,11 +1,12 @@
+import { Link } from "@mui/material";
 import React from "react";
 import { Form, Table } from "react-bootstrap";
 
 function Orders() {
   return (
-    <div className="">
+    <div className="orders">
       <div className="d-flex flex-row justify-content-between">
-        <h5>مدیریت سفارش ها</h5>
+        <h6 className="mx-2">مدیریت سفارش ها</h6>
 
         <div className="d-flex flex-row mx-3">
           <span className="px-2">سفارش های تحویل شده </span>
@@ -18,13 +19,13 @@ function Orders() {
         </div>
       </div>
 
-      <Table striped bordered hover className="w-75 text-center">
+      <Table striped bordered hover className="w-75 text-center order_table">
         <thead>
           <tr>
             <th>نام کاربر</th>
             <th>مجموع مبلغ </th>
             <th>زمان ثبت سفارش</th>
-            <th>بررسی سفارش</th>
+            <th></th>
           </tr>
         </thead>
         <tbody>
@@ -32,25 +33,25 @@ function Orders() {
             <td></td>
             <td></td>
             <td></td>
-            <td></td>
+            <td><Link>بررسی سفارش</Link></td>
           </tr>
           <tr>
             <td></td>
             <td></td>
             <td></td>
-            <td></td>
+            <td><Link>بررسی سفارش</Link></td>
           </tr>
           <tr>
             <td></td>
             <td></td>
             <td></td>
-            <td></td>
+            <td><Link>بررسی سفارش</Link></td>
           </tr>
           <tr>
             <td></td>
             <td></td>
             <td></td>
-            <td></td>
+            <td><Link>بررسی سفارش</Link></td>
           </tr>
         </tbody>
       </Table>
