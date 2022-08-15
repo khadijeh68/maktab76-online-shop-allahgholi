@@ -8,10 +8,10 @@ const useStyles = makeStyles({
     display: "flex",
     alignItems: "center",
     justifyContent: "space-between",
-    backgroundColor: "#fff",
+    backgroundColor: "#fff7fd",
     width: "100vw",
-    height: "50px",
-    boxShadow: "0 0 6px rgb(0 0 0 / 40%)",
+    height: "60px",
+    boxShadow: "0 0 6px rgb(0 0 0 / 30%)",
     position: "fixed",
     zIndex: "100",
   },
@@ -34,8 +34,12 @@ const useStyles = makeStyles({
     backgroundColor: "whitesmoke",
   },
   logo: {
-    color: "#D43C37",
+    color: "#C14795",
   },
+  img:{
+    width: "50px",
+    height: "52px"
+  }
 });
 
 function Navbar() {
@@ -46,6 +50,7 @@ function Navbar() {
         <div className={classes.rightNav}>
           <NavLink to="/" className={classes.span}>
             <span className={classes.logo}>
+              <img className={classes.img} src={`../../../image/logo.png`} alt="logo"/>
               فروشگاه آنلاین موبایل و لوازم جانبی{" "}
             </span>
           </NavLink>

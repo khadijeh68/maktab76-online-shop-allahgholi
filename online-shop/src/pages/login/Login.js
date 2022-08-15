@@ -1,6 +1,7 @@
 import { makeStyles } from "@material-ui/core/styles";
 import { Button, Form } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
+import "../../index.css"
 
 const useStyles = makeStyles({
   form: {
@@ -9,7 +10,6 @@ const useStyles = makeStyles({
     flexDirection: "column",
     fontFamily: "Vazir-Medium",
     alignItems: "center",
-    textAlign: "center",
   },
 });
 
@@ -24,24 +24,25 @@ function Login() {
   return (
     <div className={classes.form}>
       <h4 className="mt-4">ورود به پنل مدیریت فروشگاه</h4>
-      <Form>
+      <Form className="form_data">
         <Form.Group className="mb-3">
-          <Form.Label className="mt-5">نام کاربری</Form.Label>
-          <Form.Control type="text" />
+          <Form.Label className="mt-2 text-white">نام کاربری :</Form.Label>
+          <Form.Control type="text" className="w-100"/>
         </Form.Group>
 
         <Form.Group className="mb-3">
-          <Form.Label>رمز عبور</Form.Label>
-          <Form.Control type="email" />
+          <Form.Label  className="mt-3 text-white">رمز عبور :</Form.Label>
+          <Form.Control type="email" className="w-100"/>
         </Form.Group>
 
         <Button type="submit" className="mt-3" onClick={navigateAdmin}>
           ورود
         </Button>
-      </Form>
-      <Link to="/" className="mt-3 text-decoration-none">
+        <Link to="/" className="mt-3 text-decoration-none text-white ">
         <span>بازگشت به سایت </span>
       </Link>
+      </Form>
+      
     </div>
   );
 }
