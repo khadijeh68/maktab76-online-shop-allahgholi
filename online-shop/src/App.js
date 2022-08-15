@@ -17,6 +17,7 @@ import SuccessPaymant from "./pages/paymant/SuccessPaymant";
 import FailPaymant from "./pages/paymant/FailPaymant";
 import Inventory from "./pages/inventory/Inventory";
 
+
 function App() {
   return (
     <BrowserRouter>
@@ -37,6 +38,7 @@ function App() {
         <Route path="login" element={<Login />} />
 
         <Route path="admin" element={<SharedAdminLayout />}>
+          <Route index element={<Orders />}/>
           <Route path="product" element={<Product />} />
           <Route path="inventory" element={<Inventory />} />
           <Route path="orders" element={<Orders />} />

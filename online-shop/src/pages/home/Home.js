@@ -42,7 +42,11 @@ function Home() {
       </Link>
       نمایش 6 محصول
       <Link to="/categories" className={classes.link}>
-        گوشی هواوی
+        گوشی هوآوی
+      </Link>
+      نمایش 6 محصول
+      <Link to="/categories" className={classes.link}>
+        گوشی آنر
       </Link>
       نمایش 6 محصول
       <Link to="/categories" className={classes.link}>

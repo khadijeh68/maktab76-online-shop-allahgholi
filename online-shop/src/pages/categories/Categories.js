@@ -28,68 +28,74 @@ function Categories() {
       <div className={classes.sidebar}>
         <div>
           <Link to="/" className={classes.link}>
-            گوشی موبایل
+            گوشی اپل
           </Link>
           <p>اپل</p>
-          <p>سامسونگ</p>
-          <p>شیائومی</p>
-          <p>هوآوی</p>
-          <p>نوکیا</p>
+          <p>اپل</p>
+          <p>اپل</p>
+          <p>اپل</p>
+          <p>اپل</p>
+          <p>اپل</p>
         </div>
 
         <div>
           <Link to="/" className={classes.link}>
-            هدفون و هندزفری
+           گوشی سامسونگ
           </Link>
-          <p>اپل</p>
           <p>سامسونگ</p>
-          <p>شیائومی</p>
-          <p>هوآوی</p>
-          <p>نوکیا</p>
+          <p>سامسونگ</p>
+          <p>سامسونگ</p>
+          <p>سامسونگ</p>
+          <p>سامسونگ</p>
+          <p>سامسونگ</p>
         </div>
 
         <div>
           <Link to="/" className={classes.link}>
-            کیف و کاور
+          گوشی شیائومی
           </Link>
-          <p>اپل</p>
-          <p>سامسونگ</p>
           <p>شیائومی</p>
-          <p>هوآوی</p>
-          <p>نوکیا</p>
+          <p>شیائومی</p>
+          <p>شیائومی</p>
+          <p>شیائومی</p>
+          <p>شیائومی</p>
+          <p>شیائومی</p>
         </div>
 
         <div>
           <Link to="/" className={classes.link}>
-            محافظ صفحه نمایش
+            گوشی هوآوی
           </Link>
-          <p>اپل</p>
-          <p>سامسونگ</p>
-          <p>شیائومی</p>
           <p>هوآوی</p>
-          <p>نوکیا</p>
+          <p>هوآوی</p>
+          <p>هوآوی</p>
+          <p>هوآوی</p>
+          <p>هوآوی</p>
+          <p>هوآوی</p>
         </div>
 
         <div>
           <Link to="/" className={classes.link}>
-            ساعت هوشمند
+        گوشی آنر
           </Link>
-          <p>اپل</p>
-          <p>سامسونگ</p>
-          <p>شیائومی</p>
-          <p>هوآوی</p>
+          <p>آنر</p>
+          <p>آنر</p>
+          <p>آنر</p>
+          <p>آنر</p>
+          <p>آنر</p>
           <p>آنر</p>
         </div>
       </div>
 
       <div className={classes.Categories}>
         <Link to="/" className={classes.link}>
-          گوشی موبایل
+          گوشی نوکیا
         </Link>
-        <p>اپل</p>
-        <p>سامسونگ</p>
-        <p>شیائومی</p>
-        <p>هوآوی</p>
+        <p>نوکیا</p>
+        <p>نوکیا</p>
+        <p>نوکیا</p>
+        <p>نوکیا</p>
+        <p>نوکیا</p>
         <p>نوکیا</p>
       </div>
     </div>
