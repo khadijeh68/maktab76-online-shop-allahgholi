@@ -16,7 +16,7 @@ const useStyles = makeStyles({
     zIndex: "100",
   },
   nav_link: {
-    margin: "10px",
+    margin: "30px",
     fontFamily: "Vazir-Medium",
     textDecoration: "none",
     color: "black",

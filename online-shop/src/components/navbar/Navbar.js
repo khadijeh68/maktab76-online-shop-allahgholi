@@ -17,7 +17,7 @@ const useStyles = makeStyles({
   },
   span: {
     textDecoration: "none",
-    margin: "15px",
+    margin: "30px",
     fontFamily: "Vazir-Medium",
     color: "inherit",
   },

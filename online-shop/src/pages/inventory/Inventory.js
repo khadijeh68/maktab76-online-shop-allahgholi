@@ -1,6 +1,5 @@
-import { Link } from "@mui/material";
 import React from "react";
-import { Button, Form, Table } from "react-bootstrap";
+import { Button, Table } from "react-bootstrap";
 
 function Inventory() {
   return (
