@@ -1,19 +1,21 @@
-import { Outlet } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
+import { Link } from "react-router-dom";
 
 const useStyles = makeStyles({
   title: {
-    margin: "70px 20px",
     fontFamily: "Vazir-Medium",
+    margin: "70px 20px",
   },
 });
-const SharedCategoryLayout = () => {
+
+function Basket() {
   const classes = useStyles();
   return (
     <div className={classes.title}>
-      دسته بندی ها
-      <Outlet />
+      <p>سبد خرید</p>
+      <Link to="/checkout">نهایی کردن سبد خرید</Link>
     </div>
   );
-};
-export default SharedCategoryLayout;
+}
+
+export default Basket;

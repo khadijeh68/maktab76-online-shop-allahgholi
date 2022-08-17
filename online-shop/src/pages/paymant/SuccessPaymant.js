@@ -1,7 +1,7 @@
-import { NavLink } from "react-router-dom";
 import { makeStyles } from "@material-ui/core";
-import ShoppingCartSharpIcon from "@mui/icons-material/ShoppingCartSharp";
+import { NavLink } from "react-router-dom";
 import "../../index.css";
+
 const useStyles = makeStyles({
   nav: {
     direction: "rtl",
@@ -17,11 +17,10 @@ const useStyles = makeStyles({
   },
   span: {
     textDecoration: "none",
-    margin: "30px",
+    margin: "15px",
     fontFamily: "Vazir-Medium",
     color: "inherit",
   },
-
   basket: {
     display: "flex",
     justifyContent: "center",
@@ -37,43 +36,52 @@ const useStyles = makeStyles({
   logo: {
     color: "#C14795",
   },
+  h4: {
+    marginTop: "100px",
+    fontFamily: "Vazir-Medium",
+    margin: "10px",
+  },
+  container: {
+    display: "flex",
+    flexDirection: "column",
+  },
   img: {
     width: "50px",
     height: "52px",
   },
 });
 
-function Navbar() {
-  const classes = useStyles();
+function SuccessPaymant() {
   const navLinkStyles = ({ isActive }) => {
     return {
       color: isActive ? "#C14795" : "black",
     };
   };
+  const classes = useStyles();
   return (
-    <div>
+    <div className={classes.container}>
       <div className={classes.nav}>
         <div className={classes.rightNav}>
           <NavLink to="/" className={classes.span} style={navLinkStyles}>
+            <img
+              className={classes.img}
+              src={`../../../image/logo.png`}
+              alt="logo"
+            />
             <span className={classes.logo}>
-              <img
-                className={classes.img}
-                src={`../../../image/logo.png`}
-                alt="logo"
-              />
               فروشگاه آنلاین موبایل و لوازم جانبی
             </span>
           </NavLink>
-
-          {/* <NavLink to="/" className={classes.span}>
+          {/* 
+          <NavLink to="/" className={classes.span} style={navLinkStyles}>
             <span>صفحه اصلی </span>
           </NavLink>
 
-          <NavLink to="/categories" className={classes.span}>
+          <NavLink to="/categories" className={classes.span} style={navLinkStyles}>
             <span>دسته بندی کالاها </span>
-          </NavLink> */}
+          </NavLink>
 
-          {/* <NavLink to="/products" className={classes.span}>
+          <NavLink to="/products" className={classes.span}>
             <span>کالاها</span>
           </NavLink> */}
         </div>
@@ -82,21 +90,15 @@ function Navbar() {
           <NavLink to="/login" className={classes.span} style={navLinkStyles}>
             <span>مدیریت </span>
           </NavLink>
-
-          <NavLink
-            to="/shoppingCart"
-            className={classes.span}
-            style={navLinkStyles}
-          >
-            <div className={classes.basket}>
-              <ShoppingCartSharpIcon />
-              <span>سبد خرید </span>
-            </div>
-          </NavLink>
         </div>
+      </div>
+
+      <div className={classes.h4}>
+        <h4>نتیجه پرداخت</h4>
+        <p>پرداخت با موفقیت انجام شد</p>
       </div>
     </div>
   );
 }
 
-export default Navbar;
+export default SuccessPaymant;
