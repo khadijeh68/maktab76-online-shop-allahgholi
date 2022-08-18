@@ -11,14 +11,16 @@ const initialState = {
 // ${PRODUCTS_URL}/products/?_page=1&_limit=10"
 export const fetchProducts = createAsyncThunk(
   "products/fetchProducts",
-  async () => {
+  async (page = 1) => {
     // return await fetch(`${URL}/products`)
     //   .then((res) => res.json())
     //   .then((data) => data)
     //   .catch((error) => error.message);
-    const res = axois({ url: `${URL}/products` }).then((response) => {
-      return response.data;
-    });
+    const res = axois({ url: `${URL}/products/?_page=${page}&_limit=5` }).then(
+      (response) => {
+        return response.data;
+      }
+    );
     return res;
   }
 );
