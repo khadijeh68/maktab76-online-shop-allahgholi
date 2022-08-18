@@ -10,6 +10,7 @@ const useStyles = makeStyles({
     flexDirection: "column",
     fontFamily: "Vazir-Medium",
     alignItems: "center",
+    marginTop: '50px'
   },
 });
 

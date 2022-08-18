@@ -1,35 +1,17 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { Button, Table } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchProducts } from "../../redux/product/productSlice";
-import { URL } from "../../api/constants";
-import Pagination from "../../components/pagination/Pagination";
-
-// let active = 1;
-// let items = [];
-// for (let number = 1; number <= 6; number++) {
-//   items.push(
-//     <Pagination.Item key={number} active={number === active}>
-//       {number}
-//     </Pagination.Item>,
-//   );
-// }
+import { fetchProducts } from "../../redux/features/product/productSlice";
+import { URL } from "../../api/http";
 
 function Product() {
   const dispatch = useDispatch();
   const productsList = useSelector((state) => state.products.productsList);
-  const [currentPage, setCurrentPage] = useState(1);
-  const [productsPerPage] = useState(10);
 
   useEffect(() => {
     dispatch(fetchProducts());
   }, []);
 
-  const indexOfLastPost = currentPage * productsPerPage;
-  const indexOfFirstPost = indexOfLastPost - productsPerPage;
-  const currentProducts = productsList.slice(indexOfFirstPost, indexOfLastPost);
-
-  const paginate = (pageNumber) => setCurrentPage(pageNumber);
   return (
     <div className="orders">
       <div className="d-flex flex-row justify-content-between mx-3">
@@ -57,10 +39,7 @@ function Product() {
               return (
                 <tr key={item.id}>
                   <td>
-                    <img
-                      src={`${URL}/files/${item.image}`}
-                      alt="mobile"
-                    />
+                    <img src={`${URL}/files/${item.image}`} alt="mobile" />
                   </td>
                   <td>{item.name}</td>
                   <td>{item.category}</td>
@@ -75,11 +54,6 @@ function Product() {
             })}
         </tbody>
       </Table>
-      <Pagination
-        productsPerPage={productsPerPage}
-        totalProducts={productsList.length}
-        paginate={paginate}
-      />
     </div>
   );
 }
