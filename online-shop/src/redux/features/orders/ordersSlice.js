@@ -1,0 +1,38 @@
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { URL } from "../../../api/http";
+import axois from "axios";
+
+const initialState = {
+  ordersList: [],
+  loading: false,
+  error: "",
+};
+
+export const fetchOrders = createAsyncThunk("orders/fetchOrders", async () => {
+  const res = axois({ url: `${URL}/orders` }).then((response) => {
+    return response.data;
+  });
+  return res;
+});
+
+const ordersSlice = createSlice({
+  name: "orders",
+  initialState,
+  extraReducers: {
+    [fetchOrders.pending]: (state) => {
+      state.loading = true;
+    },
+    [fetchOrders.fulfilled]: (state, action) => {
+      state.loading = false;
+      state.ordersList = action.payload;
+    },
+
+    [fetchOrders.rejected]: (state, action) => {
+      console.log(action);
+      state.loading = false;
+      state.error = "wrong...";
+    },
+  },
+});
+
+export default ordersSlice.reducer;

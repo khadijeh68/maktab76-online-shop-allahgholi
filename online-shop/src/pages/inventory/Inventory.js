@@ -1,7 +1,18 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Button, Table } from "react-bootstrap";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchInventory } from "../../redux/features/inventory/inventorySlice";
 
 function Inventory() {
+  const dispatch = useDispatch();
+  const inventoriesList = useSelector(
+    (state) => state.inventory.inventoriesList
+  );
+
+  useEffect(() => {
+    dispatch(fetchInventory());
+  }, []);
+
   return (
     <div className="orders">
       <div className="d-flex flex-row justify-content-between mx-3">
@@ -23,26 +34,16 @@ function Inventory() {
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-          </tr>
-          <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-          </tr>
-          <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-          </tr>
-          <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-          </tr>
+          {inventoriesList.length &&
+            inventoriesList.map((item) => {
+              return (
+                <tr key={item.id}>
+                  <td>{item.name}</td>
+                  <td>{item.price}</td>
+                  <td>{item.quantity}</td>
+                </tr>
+              );
+            })}
         </tbody>
       </Table>
     </div>

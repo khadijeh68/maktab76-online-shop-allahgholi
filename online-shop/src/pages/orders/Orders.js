@@ -1,8 +1,16 @@
-import { Link } from "@mui/material";
-import React from "react";
-import { Form, Table } from "react-bootstrap";
+import { useEffect } from "react";
+import { Button, Form, Table } from "react-bootstrap";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchOrders } from "../../redux/features/orders/ordersSlice";
 
 function Orders() {
+  const dispatch = useDispatch();
+  const ordersList = useSelector((state) => state.orders.ordersList);
+
+  useEffect(() => {
+    dispatch(fetchOrders());
+  }, []);
+
   return (
     <div className="orders">
       <div className="d-flex flex-row justify-content-between">
@@ -29,30 +37,22 @@ function Orders() {
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td><Link>بررسی سفارش</Link></td>
-          </tr>
-          <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td><Link>بررسی سفارش</Link></td>
-          </tr>
-          <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td><Link>بررسی سفارش</Link></td>
-          </tr>
-          <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td><Link>بررسی سفارش</Link></td>
-          </tr>
+          {ordersList.length &&
+            ordersList.map((item) => {
+              return (
+                <tr key={item.id}>
+                  <td>
+                    {item.username} {item.lastname}
+                  </td>
+                  <td>{item.prices}</td>
+                  {/* <td>{`${item.createdAt}`}</td> */}
+                  <td>-</td>
+                  <td>
+                    <Button variant="warning">بررسی سفارش</Button>
+                  </td>
+                </tr>
+              );
+            })}
         </tbody>
       </Table>
     </div>

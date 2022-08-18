@@ -2,6 +2,7 @@ import { NavLink } from "react-router-dom";
 import { makeStyles } from "@material-ui/core";
 import ShoppingCartSharpIcon from "@mui/icons-material/ShoppingCartSharp";
 import "../../index.css";
+
 const useStyles = makeStyles({
   nav: {
     direction: "rtl",
