@@ -8,8 +8,8 @@ const initialState = {
   error: "",
 };
 
-export const fetchOrders = createAsyncThunk("orders/fetchOrders", async () => {
-  const res = axois({ url: `${URL}/orders` }).then((response) => {
+export const fetchOrders = createAsyncThunk("orders/fetchOrders", async (page = 1) => {
+  const res = axois({ url: `${URL}/orders/?_page=${page}&_limit=5` }).then((response) => {
     return response.data;
   });
   return res;
