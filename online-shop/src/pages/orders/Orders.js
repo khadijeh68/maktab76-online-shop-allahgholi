@@ -1,15 +1,32 @@
-import { useEffect } from "react";
+import { Pagination } from "@mui/material";
+import { useEffect, useState } from "react";
 import { Button, Form, Table } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchOrders } from "../../redux/features/orders/ordersSlice";
+import { makeStyles } from "@material-ui/core";
+
+const useStyles = makeStyles({
+  page: {
+    direction: "ltr",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    marginTop: "20px",
+    marginBottom: "20px"
+  }
+})
 
 function Orders() {
+  const classes = useStyles();
+
   const dispatch = useDispatch();
   const ordersList = useSelector((state) => state.orders.ordersList);
+  const [currentPage, setCurrentPage] = useState("");
+
 
   useEffect(() => {
-    dispatch(fetchOrders());
-  }, []);
+    dispatch(fetchOrders(currentPage));
+  }, [currentPage]);
 
   return (
     <div className="orders">
@@ -55,6 +72,10 @@ function Orders() {
             })}
         </tbody>
       </Table>
+      <Pagination className={classes.page}
+        count={2} variant="outlined" color="secondary"
+        onClick={(e) => setCurrentPage(e.target.textContent)}
+      />
     </div>
   );
 }

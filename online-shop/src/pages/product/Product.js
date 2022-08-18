@@ -1,16 +1,33 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Button, Table } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchProducts } from "../../redux/features/product/productSlice";
 import { URL } from "../../api/http";
+import { Pagination } from "@mui/material";
+import { makeStyles } from "@material-ui/core";
+
+const useStyles = makeStyles({
+  page: {
+    direction: "ltr",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    marginTop: "20px",
+    marginBottom: "20px"
+  }
+})
+
 
 function Product() {
+  const classes = useStyles();
+
   const dispatch = useDispatch();
   const productsList = useSelector((state) => state.products.productsList);
+  const [currentPage, setCurrentPage] = useState("");
 
   useEffect(() => {
-    dispatch(fetchProducts());
-  }, []);
+    dispatch(fetchProducts(currentPage));
+  }, [currentPage]);
 
   return (
     <div className="orders">
@@ -54,6 +71,10 @@ function Product() {
             })}
         </tbody>
       </Table>
+      <Pagination className={classes.page}
+        count={7} variant="outlined" color="secondary"
+        onClick={(e) => setCurrentPage(e.target.textContent)}
+      />
     </div>
   );
 }

@@ -1,17 +1,33 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Button, Table } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchInventory } from "../../redux/features/inventory/inventorySlice";
+import { makeStyles } from "@material-ui/core";
+import { Pagination } from "@mui/material";
+
+const useStyles = makeStyles({
+  page: {
+    direction: "ltr",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    marginTop: "20px",
+    marginBottom: "20px"
+  }
+})
 
 function Inventory() {
+  const classes = useStyles();
+
   const dispatch = useDispatch();
   const inventoriesList = useSelector(
     (state) => state.inventory.inventoriesList
   );
+  const [currentPage, setCurrentPage] = useState("");
 
   useEffect(() => {
-    dispatch(fetchInventory());
-  }, []);
+    dispatch(fetchInventory(currentPage));
+  }, [currentPage]);
 
   return (
     <div className="orders">
@@ -46,6 +62,10 @@ function Inventory() {
             })}
         </tbody>
       </Table>
+      <Pagination className={classes.page}
+        count={2} variant="outlined" color="secondary"
+        onClick={(e) => setCurrentPage(e.target.textContent)}
+      />
     </div>
   );
 }
