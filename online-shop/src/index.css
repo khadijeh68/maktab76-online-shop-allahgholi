@@ -38,3 +38,39 @@ a {
   margin-top: 70px;
   margin-right: 20px;
 }
+
+img {
+  width: 100px;
+  height: 120px;
+}
+
+.form_data {
+  width: 400px;
+  height: 450px;
+  background-image: url("../public/image/bg-login.png");
+  border-radius: 10px;
+  box-shadow: 1px 1px 8px rgb(156, 86, 177);
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.orders {
+  margin-top: 100px;
+  display: flex;
+  flex-direction: column;
+}
+
+.order_table {
+  margin-right: 180px;
+  margin-top: 30px;
+}
+.paging{
+  justify-content: center;
+    align-items: center;
+    flex-direction: row-reverse;
+}
+.li{
+  list-style-type: none;
+}
