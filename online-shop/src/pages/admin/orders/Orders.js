@@ -2,7 +2,7 @@ import { Pagination } from "@mui/material";
 import { useEffect, useState } from "react";
 import { Button, Form, Table } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchOrders } from "../../redux/features/orders/ordersSlice";
+import { fetchOrders } from "../../../redux/features/orders/ordersSlice";
 import { makeStyles } from "@material-ui/core";
 
 const useStyles = makeStyles({
@@ -26,7 +26,7 @@ function Orders() {
 
   useEffect(() => {
     dispatch(fetchOrders(currentPage));
-  }, [currentPage]);
+  }, [currentPage, dispatch]);
 
   return (
     <div className="orders">

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Button, Table } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchInventory } from "../../redux/features/inventory/inventorySlice";
+import { fetchInventory } from "../../../redux/features/inventory/inventorySlice";
 import { makeStyles } from "@material-ui/core";
 import { Pagination } from "@mui/material";
 
@@ -27,7 +27,7 @@ function Inventory() {
 
   useEffect(() => {
     dispatch(fetchInventory(currentPage));
-  }, [currentPage]);
+  }, [currentPage, dispatch]);
 
   return (
     <div className="orders">
