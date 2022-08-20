@@ -24,6 +24,7 @@ function Inventory() {
     (state) => state.inventory.inventoriesList
   );
   const [currentPage, setCurrentPage] = useState("");
+ 
 
   useEffect(() => {
     dispatch(fetchInventory(currentPage));

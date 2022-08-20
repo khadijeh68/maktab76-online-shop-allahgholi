@@ -21,12 +21,12 @@ function Orders() {
 
   const dispatch = useDispatch();
   const ordersList = useSelector((state) => state.orders.ordersList);
-  const [currentPage, setCurrentPage] = useState("");
-
+  const [currentPage, setCurrentPage] = useState(1);
+  const [delivered, setDelivered] = useState(true);
 
   useEffect(() => {
-    dispatch(fetchOrders(currentPage));
-  }, [currentPage, dispatch]);
+    dispatch(fetchOrders(delivered,currentPage ));
+  }, [delivered,currentPage,  dispatch]);
 
   return (
     <div className="orders">
@@ -35,12 +35,12 @@ function Orders() {
 
         <div className="d-flex flex-row mx-3">
           <span className="px-2">سفارش های تحویل شده </span>
-          <Form.Check type="radio" aria-label="radio 1" name="group1" />
+          <input type="radio" name="group1" onClick={() => setDelivered(true)} defaultChecked={true}/>
 
           <span className="px-2" style={{ marginRight: "20px" }}>
-            سفارش های در حال انتظار{" "}
+            سفارش های در حال انتظار
           </span>
-          <Form.Check type="radio" aria-label="radio 1" name="group1" />
+          <input type="radio" name="group1" onClick={() => setDelivered(false)}/>
         </div>
       </div>
 
