@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchInventory } from "../../../redux/features/inventory/inventorySlice";
 import { makeStyles } from "@material-ui/core";
 import { Pagination } from "@mui/material";
+import { digitsEnToFa } from "@persian-tools/persian-tools";
 
 const useStyles = makeStyles({
   page: {
@@ -46,7 +47,7 @@ function Inventory() {
         <thead>
           <tr>
             <th>کالا</th>
-            <th>قیمت</th>
+            <th>قیمت به تومان</th>
             <th>موجودی</th>
           </tr>
         </thead>
@@ -56,8 +57,8 @@ function Inventory() {
               return (
                 <tr key={item.id}>
                   <td>{item.name}</td>
-                  <td>{item.price}</td>
-                  <td>{item.quantity}</td>
+                  <td>{digitsEnToFa(item.price)}</td>
+                  <td>{digitsEnToFa(item.quantity)}</td>
                 </tr>
               );
             })}

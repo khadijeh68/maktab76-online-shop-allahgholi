@@ -1,9 +1,10 @@
 import { Pagination } from "@mui/material";
 import { useEffect, useState } from "react";
-import { Button, Form, Table } from "react-bootstrap";
+import { Button, Table } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchOrders } from "../../../redux/features/orders/ordersSlice";
 import { makeStyles } from "@material-ui/core";
+import { digitsEnToFa } from "@persian-tools/persian-tools";
 
 const useStyles = makeStyles({
   page: {
@@ -48,7 +49,7 @@ function Orders() {
         <thead>
           <tr>
             <th>نام کاربر</th>
-            <th>مجموع مبلغ </th>
+            <th>مجموع مبلغ به تومان</th>
             <th>زمان ثبت سفارش</th>
             <th></th>
           </tr>
@@ -61,9 +62,8 @@ function Orders() {
                   <td>
                     {item.username} {item.lastname}
                   </td>
-                  <td>{item.prices}</td>
-                  {/* <td>{`${item.createdAt}`}</td> */}
-                  <td>-</td>
+                  <td>{digitsEnToFa(item.prices)}</td>
+                  <td>{new Date(item.createdAt).toLocaleDateString('fa-IR') }</td>
                   <td>
                     <Button variant="warning">بررسی سفارش</Button>
                   </td>
