@@ -24,8 +24,9 @@ function Inventory() {
   const inventoriesList = useSelector(
     (state) => state.inventory.inventoriesList
   );
-  const [currentPage, setCurrentPage] = useState("");
- 
+  const [currentPage, setCurrentPage] = useState(1);
+
+  const count = Math.ceil(inventoriesList.length / 3);
 
   useEffect(() => {
     dispatch(fetchInventory(currentPage));
@@ -57,15 +58,16 @@ function Inventory() {
               return (
                 <tr key={item.id}>
                   <td>{item.name}</td>
-                  <td>{digitsEnToFa(item.price)}</td>
+                  <td>{digitsEnToFa(item.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, "،"))}</td>
                   <td>{digitsEnToFa(item.quantity)}</td>
                 </tr>
               );
+              
             })}
         </tbody>
       </Table>
       <Pagination className={classes.page}
-        count={2} variant="outlined" color="secondary"
+        count={count} variant="outlined" color="secondary"
         onClick={(e) => setCurrentPage(e.target.textContent)}
       />
     </div>

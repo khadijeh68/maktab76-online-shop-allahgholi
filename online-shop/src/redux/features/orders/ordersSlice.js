@@ -9,8 +9,8 @@ const initialState = {
   error: "",
 };
 
-export const fetchOrders = createAsyncThunk("orders/fetchOrders", async (delivered,page) => {
-  const res = axois({ url: `${URL}/orders/?delivered=${delivered}&_page=${page}&_limit=5` }).then((response) => {
+export const fetchOrders = createAsyncThunk("orders/fetchOrders", async ({delivered,currentPage}) => {
+  const res = axois({ url: `${URL}/orders/?delivered=${delivered}&_page=${currentPage}&_limit=5` }).then((response) => {
     return response.data;
   });
   return res;
