@@ -10,7 +10,7 @@ const initialState = {
 
 export const fetchInventory = createAsyncThunk(
   "inventory/fetchInventory",
-  async (page = 1) => {
+  async (page) => {
     const res = axois({ url: `${URL}/inventory/?_page=${page}&_limit=5` }).then((response) => {
       return response.data;
     });

@@ -6,16 +6,16 @@ import Error from "./pages/error/Error";
 import ShoppingCart from "./pages/shoppingCart/ShoppingCart";
 // import Footer from "./components/footer/Footer";
 import Categories from "./pages/categories/Categories";
-import Products from "./pages/product/Products";
+import Products from "./pages/admin/product/Products";
 import SharedAdminLayout from "./pages/shared/SharedAdminLayout";
-import Orders from "./pages/orders/Orders";
-import Product from "./pages/product/Product";
+import Orders from "./pages/admin/orders/Orders";
+import Product from "./pages/admin/product/Product";
 import Login from "./pages/login/Login";
 import Checkout from "./pages/checkout/Checkout";
 import PaymentPanel from "./pages/paymant/PaymantPanel";
 import SuccessPaymant from "./pages/paymant/SuccessPaymant";
 import FailPaymant from "./pages/paymant/FailPaymant";
-import Inventory from "./pages/inventory/Inventory";
+import Inventory from "./pages/admin/inventory/Inventory";
 
 
 function App() {

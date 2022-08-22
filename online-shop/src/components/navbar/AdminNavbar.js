@@ -33,7 +33,10 @@ const AdminNavbar = () => {
 
   return (
     <div className={classes.nav}>
-      <span className={classes.nav_link}>پنل مدیریت فروشگاه</span>
+      <NavLink to="orders" className={classes.nav_link} style={navLinkStyles}>
+        <span>پنل مدیریت فروشگاه</span>
+      </NavLink>
+
       <div>
         <NavLink
           to="product"

@@ -2,8 +2,9 @@ import { Pagination } from "@mui/material";
 import { useEffect, useState } from "react";
 import { Button, Form, Table } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchOrders } from "../../redux/features/orders/ordersSlice";
+import { fetchOrders } from "../../../redux/features/orders/ordersSlice";
 import { makeStyles } from "@material-ui/core";
+import { digitsEnToFa } from "@persian-tools/persian-tools";
 
 const useStyles = makeStyles({
   page: {
@@ -12,21 +13,23 @@ const useStyles = makeStyles({
     alignItems: "center",
     justifyContent: "center",
     marginTop: "20px",
-    marginBottom: "20px"
-  }
-})
+    marginBottom: "20px",
+  },
+});
 
 function Orders() {
   const classes = useStyles();
 
   const dispatch = useDispatch();
   const ordersList = useSelector((state) => state.orders.ordersList);
-  const [currentPage, setCurrentPage] = useState("");
-
+  const [currentPage, setCurrentPage] = useState(1);
+  const [delivered, setDelivered] = useState(true);
+  // console.log(currentPage);
+  const count = Math.ceil(ordersList.length / 3);
 
   useEffect(() => {
-    dispatch(fetchOrders(currentPage));
-  }, [currentPage]);
+    dispatch(fetchOrders({ delivered, currentPage }));
+  }, [delivered, currentPage, dispatch]);
 
   return (
     <div className="orders">
@@ -35,12 +38,21 @@ function Orders() {
 
         <div className="d-flex flex-row mx-3">
           <span className="px-2">سفارش های تحویل شده </span>
-          <Form.Check type="radio" aria-label="radio 1" name="group1" />
+          <input
+            type="radio"
+            name="group1"
+            onChange={() => setDelivered(true)}
+            defaultChecked={true}
+          />
 
           <span className="px-2" style={{ marginRight: "20px" }}>
-            سفارش های در حال انتظار{" "}
+            سفارش های در حال انتظار
           </span>
-          <Form.Check type="radio" aria-label="radio 1" name="group1" />
+          <input
+            type="radio"
+            name="group1"
+            onChange={() => setDelivered(false)}
+          />
         </div>
       </div>
 
@@ -48,7 +60,7 @@ function Orders() {
         <thead>
           <tr>
             <th>نام کاربر</th>
-            <th>مجموع مبلغ </th>
+            <th>مجموع مبلغ به تومان</th>
             <th>زمان ثبت سفارش</th>
             <th></th>
           </tr>
@@ -61,9 +73,10 @@ function Orders() {
                   <td>
                     {item.username} {item.lastname}
                   </td>
-                  <td>{item.prices}</td>
-                  {/* <td>{`${item.createdAt}`}</td> */}
-                  <td>-</td>
+                  <td>{digitsEnToFa(item.prices.toString().replace(/\B(?=(\d{3})+(?!\d))/g, "،"))}</td>
+                  <td>
+                    {new Date(item.createdAt).toLocaleDateString("fa-IR")}
+                  </td>
                   <td>
                     <Button variant="warning">بررسی سفارش</Button>
                   </td>
@@ -72,8 +85,11 @@ function Orders() {
             })}
         </tbody>
       </Table>
-      <Pagination className={classes.page}
-        count={2} variant="outlined" color="secondary"
+      <Pagination
+        className={classes.page}
+        count={count}
+        variant="outlined"
+        color="secondary"
         onClick={(e) => setCurrentPage(e.target.textContent)}
       />
     </div>
