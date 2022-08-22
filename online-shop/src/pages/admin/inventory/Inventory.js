@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { Button, Table } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchInventory } from "../../redux/features/inventory/inventorySlice";
+import { fetchInventory } from "../../../redux/features/inventory/inventorySlice";
 import { makeStyles } from "@material-ui/core";
 import { Pagination } from "@mui/material";
+import { digitsEnToFa } from "@persian-tools/persian-tools";
 
 const useStyles = makeStyles({
   page: {
@@ -23,11 +24,13 @@ function Inventory() {
   const inventoriesList = useSelector(
     (state) => state.inventory.inventoriesList
   );
-  const [currentPage, setCurrentPage] = useState("");
+  const [currentPage, setCurrentPage] = useState(1);
+
+  const count = Math.ceil(inventoriesList.length / 3);
 
   useEffect(() => {
     dispatch(fetchInventory(currentPage));
-  }, [currentPage]);
+  }, [currentPage, dispatch]);
 
   return (
     <div className="orders">
@@ -45,7 +48,7 @@ function Inventory() {
         <thead>
           <tr>
             <th>کالا</th>
-            <th>قیمت</th>
+            <th>قیمت به تومان</th>
             <th>موجودی</th>
           </tr>
         </thead>
@@ -55,15 +58,16 @@ function Inventory() {
               return (
                 <tr key={item.id}>
                   <td>{item.name}</td>
-                  <td>{item.price}</td>
-                  <td>{item.quantity}</td>
+                  <td>{digitsEnToFa(item.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, "،"))}</td>
+                  <td>{digitsEnToFa(item.quantity)}</td>
                 </tr>
               );
+              
             })}
         </tbody>
       </Table>
       <Pagination className={classes.page}
-        count={2} variant="outlined" color="secondary"
+        count={count} variant="outlined" color="secondary"
         onClick={(e) => setCurrentPage(e.target.textContent)}
       />
     </div>

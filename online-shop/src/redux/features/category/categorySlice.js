@@ -3,15 +3,15 @@ import { URL } from "../../../api/http";
 import axois from "axios";
 
 const initialState = {
-  productsList: [],
+  categoryList: [],
   loading: false,
   error: "",
 };
 
-export const fetchProducts = createAsyncThunk(
-  "products/fetchProducts",
-  async (page) => {
-    const res = axois({ url: `${URL}/products/?_page=${page}&_limit=5` }).then(
+export const fetchCategory = createAsyncThunk(
+  "categories/fetchCategory",
+  async () => {
+    const res = axois({ url: `${URL}/categories` }).then(
       (response) => {
         return response.data;
       }
@@ -20,19 +20,19 @@ export const fetchProducts = createAsyncThunk(
   }
 );
 
-const productSlice = createSlice({
-  name: "products",
+const categorySlice = createSlice({
+  name: "categories",
   initialState,
   extraReducers: {
-    [fetchProducts.pending]: (state) => {
+    [fetchCategory.pending]: (state) => {
       state.loading = true;
     },
-    [fetchProducts.fulfilled]: (state, action) => {
+    [fetchCategory.fulfilled]: (state, action) => {
       state.loading = false;
-      state.productsList = action.payload;
+      state.categoryList = action.payload;
     },
 
-    [fetchProducts.rejected]: (state, action) => {
+    [fetchCategory.rejected]: (state, action) => {
       console.log(action);
       state.loading = false;
       state.error = "wrong...";
@@ -40,4 +40,4 @@ const productSlice = createSlice({
   },
 });
 
-export default productSlice.reducer;
+export default categorySlice.reducer;
