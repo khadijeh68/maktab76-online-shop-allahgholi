@@ -1,5 +1,6 @@
 import { makeStyles } from "@material-ui/core/styles";
 import { Link } from "react-router-dom";
+import { fetchCategory } from "../../redux/features/category/categorySlice";
 
 const useStyles = makeStyles({
   container: {
@@ -28,7 +29,7 @@ function Categories() {
       <div className={classes.sidebar}>
         <div>
           <Link to="/" className={classes.link}>
-            گوشی اپل
+            گوشی موبایل اپل
           </Link>
           <p>اپل</p>
           <p>اپل</p>
