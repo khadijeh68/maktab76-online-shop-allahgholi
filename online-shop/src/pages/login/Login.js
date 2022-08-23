@@ -1,5 +1,5 @@
 import { makeStyles } from "@material-ui/core/styles";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Button, Form } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
 import "../../index.css";
@@ -28,15 +28,15 @@ function Login() {
     e.preventDefault();
     setFormErrors(validate(formValues));
     setIsSubmit(true);
-    // navigate("/admin");
+    navigate("/admin");
   };
 
-  useEffect(() => {
-    console.log(formErrors);
-    if (Object.keys(formErrors).length === 0 && isSubmit) {
-      console.log(formValues);
-    }
-  }, [formErrors, formValues, isSubmit]);
+  // useEffect(() => {
+  //   console.log(formErrors);
+  //   if (Object.keys(formErrors).length === 0 && isSubmit) {
+  //     console.log(formValues);
+  //   }
+  // }, [formErrors, formValues, isSubmit]);
 
   const validate = (values) => {
     const errors = {};
@@ -74,7 +74,7 @@ function Login() {
   return (
     <div className={classes.form}>
       <h5 className="mt-4">ورود به پنل مدیریت فروشگاه</h5>
-     
+
       <Form className="form_data" onSubmit={handleSubmit}>
         <Form.Group className="mb-3" controlId="username">
           <Form.Label className="mt-2 text-white">نام کاربری :</Form.Label>
@@ -100,15 +100,14 @@ function Login() {
           />
         </Form.Group>
         <p className="text-white">{formErrors.password}</p>
-        <Button type="submit" className="mt-3" >
-        {/* onClick={() =>  navigate("/admin")} */}
+        <Button type="submit" className="mt-3">
+          {/* onClick={() =>  navigate("/admin")} */}
           ورود
         </Button>
         <Link to="/" className="mt-3 text-decoration-none text-white ">
           <span>بازگشت به سایت </span>
         </Link>
       </Form>
-    
     </div>
   );
 }
