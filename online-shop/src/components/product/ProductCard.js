@@ -1,56 +1,63 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Button, Card } from "react-bootstrap";
-import { useDispatch, useSelector } from "react-redux";
-import { fetchProducts } from "../../redux/features/product/productSlice";
 import { makeStyles } from "@material-ui/core";
-import {URL} from "../../api/http";
-
+import { URL } from "../../api/http";
+import axios from "axios";
 
 const useStyles = makeStyles({
   page: {
     display: "flex",
-    flexDirection:"row",
     alignItems: "center",
     justifyContent: "center",
     margin: "20px",
-  padding:"20px"
+    padding: "20px",
+    fontFamily: "Vazir-Medium",
+  },
+  img: {
+    width: "14rem",
+    height: "28rem",
+    alignItems: "center",
+    padding: "10px",
   },
 });
 
 function ProductCard() {
-  const classes = useStyles();
-  const dispatch = useDispatch();
-  const productsList = useSelector((state) => state.products.productsList);
+  const [productsList, setProductsList] = useState([]);
 
-
+  const fetchData = () => {
+    axios.get(`${URL}/products`).then((response) => {
+      setProductsList(response.data);
+    });
+  };
   useEffect(() => {
-    dispatch(fetchProducts());
+    fetchData();
   }, []);
 
+  const classes = useStyles();
+
   return (
-    <div className={classes.page}>
+    <div>
       {productsList.map((product) => {
         return (
-          <Card style={{ width: "12rem" }} className="p-3 mx-3 d-flex flex-row" >
-            <Card.Img variant="top" src={`${URL}/files/${product.image}`} alt="mobile" />
-        
-            <Card.Body>
-              <Card.Title>{product.name}</Card.Title>
-              <Card.Text>
-               {product.os}
-              </Card.Text>
-              <Card.Text>
-               {product.weight}
-              </Card.Text>
-              <Card.Text>
-               {product.size}
-              </Card.Text>
-              <Card.Text>
-               {product.price}
-              </Card.Text>
-                  <Button variant="primary">افزودن به سبد خرید</Button>
-            </Card.Body>
-          </Card>
+          
+          <div className={classes.page}>
+            <Card className={classes.img}>
+              <Card.Img
+                style={{ width: "100px" }}
+                variant="top"
+                src={`${URL}/files/${product.image}`}
+                alt="mobile"
+              />
+              <Card.Body>
+                <Card.Title>{product.name}</Card.Title>
+                <Card.Text>{product.os}</Card.Text>
+                <Card.Text>{product.weight}</Card.Text>
+                <Card.Text>{product.size}</Card.Text>
+                <Card.Text>{product.price}</Card.Text>
+                <Button variant="primary">افزودن به سبد خرید</Button>
+              </Card.Body>
+            </Card>
+          </div>
         );
       })}
     </div>
