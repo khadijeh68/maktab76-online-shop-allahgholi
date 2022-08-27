@@ -8,7 +8,7 @@ import { digitsEnToFa } from "@persian-tools/persian-tools";
 
 const useStyles = makeStyles({
   page: {
-    direction: "ltr",
+    // direction: "ltr",
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
@@ -41,8 +41,8 @@ function Orders() {
           <input
             type="radio"
             name="group1"
-            onChange={() => setDelivered(true)}
-            defaultChecked={true}
+            onClick={() => setDelivered(true)}
+            defaultChecked
           />
 
           <span className="px-2" style={{ marginRight: "20px" }}>
@@ -51,7 +51,7 @@ function Orders() {
           <input
             type="radio"
             name="group1"
-            onChange={() => setDelivered(false)}
+            onClick={() => setDelivered(false)}
           />
         </div>
       </div>
@@ -90,7 +90,7 @@ function Orders() {
         count={count}
         variant="outlined"
         color="secondary"
-        onClick={(e) => setCurrentPage(e.target.textContent)}
+        onChange={(event,value) => setCurrentPage(value)}
       />
     </div>
   );

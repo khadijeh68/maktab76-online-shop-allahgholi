@@ -1,6 +1,8 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { URL } from "../../../api/http";
 import axois from "axios";
+import axios from "axios";
+
 
 const initialState = {
   productsList: [],
@@ -20,6 +22,17 @@ export const fetchProducts = createAsyncThunk(
   }
 );
 
+export const addProduct = createAsyncThunk(
+  "products/addProduct",
+  async (post) => {
+  try {
+    const response = await axios.post(`${URL}/products`, post);
+    return response.data;
+  } catch (error) {
+    return Promise.reject(error);
+  }
+})
+
 const productSlice = createSlice({
   name: "products",
   initialState,
@@ -33,6 +46,19 @@ const productSlice = createSlice({
     },
 
     [fetchProducts.rejected]: (state, action) => {
+      console.log(action);
+      state.loading = false;
+      state.error = "wrong...";
+    },
+    [addProduct.pending]: (state) => {
+      state.loading = true;
+    },
+    [addProduct.fulfilled]: (state, action) => {
+      state.loading = false;
+      state.productsList = action.payload;
+    },
+
+    [addProduct.rejected]: (state, action) => {
       console.log(action);
       state.loading = false;
       state.error = "wrong...";
