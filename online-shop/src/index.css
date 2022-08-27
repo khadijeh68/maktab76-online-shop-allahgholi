@@ -24,6 +24,12 @@ body {
     url("./fonts/vazir/Vazir-Light.ttf") format("truetype");
 }
 
+@font-face {
+  font-family: "Vazir-Light";
+  src: local("Vazir-Light"),
+    url("./fonts/vazir/Vazir-Light.woff") format("truetype");
+}
+
 .main {
   display: flex;
   flex-direction: column;
@@ -66,11 +72,11 @@ img {
   margin-right: 180px;
   margin-top: 30px;
 }
-.paging{
+.paging {
   justify-content: center;
-    align-items: center;
-    flex-direction: row-reverse;
+  align-items: center;
+  flex-direction: row-reverse;
 }
-.li{
+.li {
   list-style-type: none;
 }
