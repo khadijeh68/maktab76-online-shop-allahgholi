@@ -19,12 +19,14 @@ import Inventory from "./pages/admin/inventory/Inventory";
 import SingleCategory from "./components/category/SingleCategory";
 import SharedCategoryLayout from "./pages/shared/SharedCategoryLayout";
 import ProductDetails from "./components/product/ProductDetails";
+import PrivateRoute from "./pages/route/PrivateRoute";
 
 
 function App() {
   return (
     <BrowserRouter>
       <Routes>
+      {/* <Route path="/" element={<PrivateRoute><SharedLayout /></PrivateRoute>}> */}
         <Route path="/" element={<SharedLayout />}>
           <Route index element={<Home />} />
           <Route path="categories" element={<SharedCategoryLayout />} >

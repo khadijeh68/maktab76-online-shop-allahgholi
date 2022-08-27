@@ -24,7 +24,7 @@ const useStyles = makeStyles({
   },
 });
 
-function ProductCard() {
+function ProductCard({cat}) {
   const [productsList, setProductsList] = useState([]);
 
   const fetchData = () => {
@@ -32,8 +32,14 @@ function ProductCard() {
       setProductsList(response.data);
     });
   };
+  // const fetchData = (id) => {
+  //   axios.get(`${URL}/products?category=${id}`).then((response) => {
+  //     setProductsList(response.data);
+  //   });
+  // };
   useEffect(() => {
     fetchData();
+    //dispatch
   }, []);
 
   const classes = useStyles();

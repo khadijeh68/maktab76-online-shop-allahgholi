@@ -7,7 +7,7 @@ import { Pagination } from "@mui/material";
 import { makeStyles } from "@material-ui/core";
 import { fetchCategory } from "../../../redux/features/category/categorySlice";
 import ProductEditModal from "../../../components/product/ProductEditModal";
-import axios from "axios";
+
 
 const useStyles = makeStyles({
   page: {
