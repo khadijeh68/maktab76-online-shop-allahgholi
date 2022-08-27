@@ -1,8 +1,11 @@
 import { makeStyles } from "@material-ui/core/styles";
 import { useState } from "react";
 import { Button, Form } from "react-bootstrap";
+import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import "../../index.css";
+import { login } from "../../redux/features/user/usersSlice";
+import { Navigate } from "react-router-dom";
 
 const useStyles = makeStyles({
   form: {
@@ -16,71 +19,47 @@ const useStyles = makeStyles({
 });
 
 function Login() {
-  const initialValues = {
-    username: "",
-    password: "",
-  };
-  const [formValues, setFormValues] = useState(initialValues);
+  // const initialValues = {
+  //   username: "",
+  //   password: "",
+  // };
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  // const [formValues, setFormValues] = useState(initialValues);
   const [formErrors, setFormErrors] = useState({});
+  const dispatch = useDispatch();
+  const { error, isLoggedIn } = useSelector((state) => state.users);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    setFormErrors(validate(formValues));
+    // setFormErrors(validate(formValues));
+    dispatch(login({username,password }));
   };
 
   const validate = (values) => {
     const errors = {};
 
-    if (formValues.username === "admin" && formValues.password === "admin") {
+    if (username === "admin" && password === "admin") {
       navigate("/admin");
-    }
-    //  else {
-    //   errors.username = "نام کاربری صحیح نیست";
-    //   errors.password = "رمز عبور صحیح نیست";
-    // }
-    if (!values.username) {
+    } else if (!values.username) {
       errors.username = "نام کاربری اجباری است";
-    } 
-    // else if (/\d/.test(values.username)) {
-    //   errors.username = "نام نباید شامل اعداد باشد";
-    // }
-    //  else if (values.username.length < 5) {
-    //   errors.username = "نام باید حداکثر 5 کاراکتر باشد";
-    // }
-    if (!values.password) {
+    } else if (!values.password) {
       errors.password = "پسورد اجباری است";
-    } 
-    // else if (!/\d/.test(values.password)) {
-    //   errors.password = "پسورد نباید شامل اعداد باشد";
-    // } else if (values.password.length < 5) {
-    //   errors.password = "پسورد باید حداکثر 5 کاراکتر باشد";
-    // }
+    }
     return errors;
   };
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormValues({ ...formValues, [name]: value });
-  };
 
   const navigate = useNavigate();
   const classes = useStyles();
 
-  // const navigateAdmin = () => {
-  //   if (formValues.username  === "admin" && formValues.password === "admin"){
-  //     navigate("/admin");
-  //   }
-  //   else{
-  //     errors.username
-  //   }
-
-  // };
-
+  if (isLoggedIn) return <Navigate to={"/admin"} />;
   return (
     <div className={classes.form}>
       <h5 className="mt-4">ورود به پنل مدیریت فروشگاه</h5>
 
       <Form className="form_data" onSubmit={handleSubmit}>
+        {error && <h6 className="text-white">{error}</h6>}
         <Form.Group className="mb-3" controlId="username">
           <Form.Label className="mt-2 text-white">نام کاربری :</Form.Label>
           <Form.Control
@@ -88,8 +67,8 @@ function Login() {
             className="w-100"
             autoFocus
             name="username"
-            value={formValues.username}
-            onChange={handleChange}
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
           />
         </Form.Group>
         <p className="text-white">{formErrors.username}</p>
@@ -100,12 +79,12 @@ function Login() {
             type="password"
             className="w-100"
             name="password"
-            value={formValues.password}
-            onChange={handleChange}
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
           />
         </Form.Group>
         <p className="text-white">{formErrors.password}</p>
-        <Button type="submit" className="mt-3">
+        <Button type="submit" className="mt-3" >
           ورود
         </Button>
         <Link to="/" className="mt-3 text-decoration-none text-white ">

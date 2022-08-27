@@ -42,6 +42,7 @@ function Categories() {
                 {category.name}
               </Link>
               <ProductCard  />
+                  {/* {category.name}{category.map(( <ProductCard category={category.id} />))} */}
             </div>
           );
         })}

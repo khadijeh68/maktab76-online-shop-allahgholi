@@ -5,7 +5,7 @@ import Edit from "./Edit";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { addProduct } from "../../redux/features/product/productSlice";
-import Product from "../../pages/admin/product/Product";
+
 
 function ProductEditModal() {
   const [show, setShow] = useState(false);
