@@ -11,7 +11,8 @@ const initialState = {
 
 export const fetchOrders = createAsyncThunk("orders/fetchOrders", async ({delivered,currentPage}) => {
   const res = axois({ url: `${URL}/orders/?delivered=${delivered}&_page=${currentPage}&_limit=5` }).then((response) => {
-    return response.data;
+    return (response.data);
+    // res.header('x-total-count')
   });
   return res;
 });

@@ -66,17 +66,17 @@ function Navbar() {
             </span>
           </NavLink>
 
-          {/* <NavLink to="/" className={classes.span}>
+           {/* <NavLink to="/" className={classes.span}>
             <span>صفحه اصلی </span>
-          </NavLink>
-
+          </NavLink> */}
+{/* 
           <NavLink to="/categories" className={classes.span}>
             <span>دسته بندی کالاها </span>
-          </NavLink> */}
-
-          {/* <NavLink to="/products" className={classes.span}>
+          </NavLink>  */}
+{/* 
+           <NavLink to="/products" className={classes.span}>
             <span>کالاها</span>
-          </NavLink> */}
+          </NavLink>  */}
         </div>
 
         <div className={classes.leftNav}>
