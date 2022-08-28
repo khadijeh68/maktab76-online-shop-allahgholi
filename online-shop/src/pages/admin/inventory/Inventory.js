@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Button, Table } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchInventory } from "../../../redux/features/inventory/inventorySlice";
+import { fetchInventory, headerInventory } from "../../../redux/features/inventory/inventorySlice";
 import { makeStyles } from "@material-ui/core";
 import { Pagination } from "@mui/material";
 import { digitsEnToFa } from "@persian-tools/persian-tools";
@@ -13,32 +13,46 @@ const useStyles = makeStyles({
     alignItems: "center",
     justifyContent: "center",
     marginTop: "20px",
-    marginBottom: "20px"
-  }
-})
+    marginBottom: "20px",
+  },
+});
 
 function Inventory() {
   const classes = useStyles();
-
+  const [total, setTotal] = useState(0);
   const dispatch = useDispatch();
   const inventoriesList = useSelector(
     (state) => state.inventory.inventoriesList
   );
   const [currentPage, setCurrentPage] = useState(1);
-
-  const count = Math.ceil(inventoriesList.length / 3);
-
+  const limit = 5;
+  const count = Math.ceil(total /limit);
+  console.log(total);
+  console.log(count);
   useEffect(() => {
+    dispatch(headerInventory())
+    .unwrap()
+    .then((res) => setTotal(res));
     dispatch(fetchInventory(currentPage));
   }, [currentPage, dispatch]);
 
+  function handleChange(e) {
+    e.preventDefault();
+    // setText(e.target.value);
+  
+  }
+
+  function onSubmit(e) {
+    e.preventDefault();
+    // setTextField();
+  }
   return (
     <div className="orders">
       <div className="d-flex flex-row justify-content-between mx-3">
         <h6>مدیریت موجودی و قیمت ها</h6>
 
         <div>
-          <Button variant="primary" type="submit">
+          <Button variant="primary" type="submit" onClick={onSubmit}>
             ذخیره
           </Button>
         </div>
@@ -58,17 +72,33 @@ function Inventory() {
               return (
                 <tr key={item.id}>
                   <td>{item.name}</td>
-                  <td>{digitsEnToFa(item.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, "،"))}</td>
-                  <td>{digitsEnToFa(item.quantity)}</td>
+                  <td>
+                    <input
+                      value={digitsEnToFa(
+                        item.price
+                          .toString()
+                          .replace(/\B(?=(\d{3})+(?!\d))/g, "،")
+                      )}
+                      onChange={handleChange}
+                    />
+                  </td>
+                  <td>
+                    <input
+                      value={digitsEnToFa(item.quantity)}
+                      onChange={handleChange}
+                    />
+                  </td>
                 </tr>
               );
-              
             })}
         </tbody>
       </Table>
-      <Pagination className={classes.page}
-        count={count} variant="outlined" color="secondary"
-        onClick={(e) => setCurrentPage(e.target.textContent)}
+      <Pagination
+        className={classes.page}
+        count={count}
+        variant="outlined"
+        color="secondary"
+        onChange={(event,value) => setCurrentPage(value)}
       />
     </div>
   );

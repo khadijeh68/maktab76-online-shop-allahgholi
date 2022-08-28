@@ -1,8 +1,11 @@
 import { makeStyles } from "@material-ui/core/styles";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Button, Form } from "react-bootstrap";
+import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import "../../index.css";
+import { login } from "../../redux/features/user/usersSlice";
+import { Navigate } from "react-router-dom";
 
 const useStyles = makeStyles({
   form: {
@@ -16,66 +19,44 @@ const useStyles = makeStyles({
 });
 
 function Login() {
-  const initialValues = {
-    username: "",
-    password: "",
-  };
-  const [formValues, setFormValues] = useState(initialValues);
-  const [formErrors, setFormErrors] = useState({});
-  const [isSubmit, setIsSubmit] = useState(false);
+
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  // const [formValues, setFormValues] = useState(initialValues);
+  // const [formErrors, setFormErrors] = useState({});
+  const dispatch = useDispatch();
+  const { error, isLoggedIn } = useSelector((state) => state.users);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    setFormErrors(validate(formValues));
-    setIsSubmit(true);
-    // navigate("/admin");
+    // setFormErrors(validate(formValues));
+    dispatch(login({username,password }));
   };
 
-  useEffect(() => {
-    console.log(formErrors);
-    if (Object.keys(formErrors).length === 0 && isSubmit) {
-      console.log(formValues);
-    }
-  }, [formErrors, formValues, isSubmit]);
+  // const validate = (values) => {
+  //   const errors = {};
 
-  const validate = (values) => {
-    const errors = {};
+  //   if (username === "admin" && password === "admin") {
+  //     navigate("/admin");
+  //   } else if (!values.username) {
+  //     errors.username = "نام کاربری اجباری است";
+  //   } else if (!values.password) {
+  //     errors.password = "پسورد اجباری است";
+  //   }
+  //   return errors;
+  // };
 
-    if (!values.username) {
-      errors.username = "نام کاربری اجباری است";
-    } else if (/\d/.test(values.username)) {
-      errors.username = "نام نباید شامل اعداد باشد";
-    } else if (values.username.length < 5) {
-      errors.username = "نام باید حداقل 5 کاراکتر باشد";
-    }
-    if (!values.password) {
-      errors.password = "پسورد اجباری است";
-    } else if (!/\d/.test(values.password)) {
-      errors.password = "پسورد نباید شامل حروف باشد";
-    } else if (values.password.length < 5) {
-      errors.password = "پسورد باید حداقل 5 کاراکتر باشد";
-    }
-    return errors;
-  };
-
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormValues({ ...formValues, [name]: value });
-    // console.log(formValues);
-  };
 
   const navigate = useNavigate();
   const classes = useStyles();
 
-  const navigateAdmin = () => {
-    navigate("/admin");
-  };
-
+  if (isLoggedIn) return <Navigate to={"/admin"} />;
   return (
     <div className={classes.form}>
       <h5 className="mt-4">ورود به پنل مدیریت فروشگاه</h5>
-     
+
       <Form className="form_data" onSubmit={handleSubmit}>
+        {error && <h6 className="text-white">{error}</h6>}
         <Form.Group className="mb-3" controlId="username">
           <Form.Label className="mt-2 text-white">نام کاربری :</Form.Label>
           <Form.Control
@@ -83,11 +64,11 @@ function Login() {
             className="w-100"
             autoFocus
             name="username"
-            value={formValues.username}
-            onChange={handleChange}
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
           />
         </Form.Group>
-        <p className="text-white">{formErrors.username}</p>
+        <p className="text-white">{username}</p>
 
         <Form.Group className="mb-3" controlId="password">
           <Form.Label className="mt-3 text-white">رمز عبور :</Form.Label>
@@ -95,20 +76,18 @@ function Login() {
             type="password"
             className="w-100"
             name="password"
-            value={formValues.password}
-            onChange={handleChange}
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
           />
         </Form.Group>
-        <p className="text-white">{formErrors.password}</p>
+        <p className="text-white">{password}</p>
         <Button type="submit" className="mt-3" >
-        {/* onClick={() =>  navigate("/admin")} */}
           ورود
         </Button>
         <Link to="/" className="mt-3 text-decoration-none text-white ">
           <span>بازگشت به سایت </span>
         </Link>
       </Form>
-    
     </div>
   );
 }
