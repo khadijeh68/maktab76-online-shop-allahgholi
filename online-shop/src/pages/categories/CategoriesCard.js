@@ -45,7 +45,7 @@ function CategoriesCard() {
       <div className={classes.sidebar}>
         {categoryList.map((category) => {
           return (
-            <div>
+            <div  key={category.id}>
               <Link to={`/categories/${category.id}`} key={category.id}>
                 {category.name}
               </Link>

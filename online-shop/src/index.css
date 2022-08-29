@@ -80,3 +80,8 @@ img {
 .li {
   list-style-type: none;
 }
+.btn-product{
+  width: 100px;
+  position: absolute;
+  left: 10px;
+}

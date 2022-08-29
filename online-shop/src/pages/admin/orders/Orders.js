@@ -8,6 +8,7 @@ import {
 } from "../../../redux/features/orders/ordersSlice";
 import { makeStyles } from "@material-ui/core";
 import { digitsEnToFa } from "@persian-tools/persian-tools";
+import OrdersDisplayModal from "../../../components/orders/OrdersDisplayModal";
 
 const useStyles = makeStyles({
   page: {
@@ -29,9 +30,16 @@ function Orders() {
   const [delivered, setDelivered] = useState(true);
   const limit = 5;
   const count = Math.ceil(total / limit) - 1;
-  console.log(total);
-  console.log(count);
-  
+  const [info, setInfo] = useState({}, false);
+  const [show, setShow] = useState(false);
+
+  const handleShow = (id) => {
+    setShow(true);
+    setInfo(ordersList.find((order) => order.id === id));
+
+  } 
+
+
   useEffect(() => {
     dispatch(headerOrder())
       .unwrap()
@@ -39,7 +47,6 @@ function Orders() {
     dispatch(fetchOrders({ delivered, currentPage }));
   }, [delivered, currentPage, dispatch]);
 
-  console.log(typeof count);
   return (
     <div className="orders">
       <div className="d-flex flex-row justify-content-between">
@@ -65,6 +72,7 @@ function Orders() {
         </div>
       </div>
 
+      <OrdersDisplayModal  show={show}  order={info}/>
       <Table striped bordered hover className="w-75 text-center order_table">
         <thead>
           <tr>
@@ -93,7 +101,7 @@ function Orders() {
                     {new Date(item.createdAt).toLocaleDateString("fa-IR")}
                   </td>
                   <td>
-                    <Button variant="warning">بررسی سفارش</Button>
+                    <Button variant="warning" onClick={() => handleShow(item.id) } >بررسی سفارش</Button>
                   </td>
                 </tr>
               );

@@ -23,13 +23,14 @@ function Login() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   // const [formValues, setFormValues] = useState(initialValues);
-  // const [formErrors, setFormErrors] = useState({});
+  const [formErrors, setFormErrors] = useState({});
   const dispatch = useDispatch();
   const { error, isLoggedIn } = useSelector((state) => state.users);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // setFormErrors(validate(formValues));
+    // setFormErrors(validate(username));
+    //   setFormErrors(validate(username));
     dispatch(login({username,password }));
   };
 
@@ -68,7 +69,7 @@ function Login() {
             onChange={(e) => setUsername(e.target.value)}
           />
         </Form.Group>
-        <p className="text-white">{username}</p>
+        {/* <p className="text-white">{username}</p> */}
 
         <Form.Group className="mb-3" controlId="password">
           <Form.Label className="mt-3 text-white">رمز عبور :</Form.Label>
@@ -80,7 +81,7 @@ function Login() {
             onChange={(e) => setPassword(e.target.value)}
           />
         </Form.Group>
-        <p className="text-white">{password}</p>
+        {/* <p className="text-white">{password}</p> */}
         <Button type="submit" className="mt-3" >
           ورود
         </Button>

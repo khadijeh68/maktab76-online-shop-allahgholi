@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { Button, Table } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchInventory, headerInventory } from "../../../redux/features/inventory/inventorySlice";
+import { fetchInventory, headerInventory ,updateInventory} from "../../../redux/features/inventory/inventorySlice";
 import { makeStyles } from "@material-ui/core";
 import { Pagination } from "@mui/material";
 import { digitsEnToFa } from "@persian-tools/persian-tools";
-
+import $ from 'jquery';
 const useStyles = makeStyles({
   page: {
     direction: "ltr",
@@ -17,9 +17,17 @@ const useStyles = makeStyles({
   },
 });
 
+// $('td').click(function () {
+//   $(this).replaceWith(function () {
+//       console.log("Text is "+ $(this).text());
+//       return '<input  value="' + $(this).text() + '"> </input>';
+//   });
+// })
+
 function Inventory() {
   const classes = useStyles();
   const [total, setTotal] = useState(0);
+  const [mount,setMount] = useState('');
   const dispatch = useDispatch();
   const inventoriesList = useSelector(
     (state) => state.inventory.inventoriesList
@@ -33,13 +41,14 @@ function Inventory() {
     dispatch(headerInventory())
     .unwrap()
     .then((res) => setTotal(res));
+    dispatch(updateInventory())
+    .unwrap()
+    .then((res) => setMount(res));
     dispatch(fetchInventory(currentPage));
   }, [currentPage, dispatch]);
 
   function handleChange(e) {
-    e.preventDefault();
-    // setText(e.target.value);
-  
+    dispatch(setMount(e.target.value))
   }
 
   function onSubmit(e) {
@@ -72,21 +81,25 @@ function Inventory() {
               return (
                 <tr key={item.id}>
                   <td>{item.name}</td>
-                  <td>
-                    <input
+                  <td>{digitsEnToFa(
+                        item.price
+                          .toString()
+                          .replace(/\B(?=(\d{3})+(?!\d))/g, "،")
+                      )}
+                    {/* <input
                       value={digitsEnToFa(
                         item.price
                           .toString()
                           .replace(/\B(?=(\d{3})+(?!\d))/g, "،")
                       )}
                       onChange={handleChange}
-                    />
+                    /> */}
                   </td>
-                  <td>
-                    <input
-                      value={digitsEnToFa(item.quantity)}
+                  <td>{digitsEnToFa(item.quantity)}
+                    {/* <input
+                      value=
                       onChange={handleChange}
-                    />
+                    /> */}
                   </td>
                 </tr>
               );

@@ -28,7 +28,7 @@ function Categories() {
   const classes = useStyles();
   const dispatch = useDispatch();
   const categoryList = useSelector((state) => state.categories.categoryList);
-  const productsList = useSelector((state) => state.products.productsList);
+
 
   useEffect(() => {
     dispatch(fetchCategory());
@@ -38,12 +38,10 @@ function Categories() {
       <div className={classes.container}>
         {categoryList.map((category) => {
           return (
-            <div className="mt-5">
-              <Link to={`/categories/${category.id}`} key={category.id}>
+            <div className="mt-5" key={category.id}>
+              <Link to={`/categories/${category.id}`}>
                 {category.name}
-                <ProductCard category={category.id} 
-                                
-                             />
+                <ProductCard category={category.id} />
               </Link>
             </div>
           );

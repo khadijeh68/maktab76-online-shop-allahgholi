@@ -4,6 +4,9 @@ import { makeStyles } from "@material-ui/core";
 import { URL } from "../../api/http";
 import axios from "axios";
 import { Link } from "react-router-dom";
+import { fetchData } from "../../redux/features/product/productSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchCategory } from "../../redux/features/category/categorySlice";
 
 const useStyles = makeStyles({
   page: {
@@ -24,32 +27,26 @@ const useStyles = makeStyles({
   },
 });
 
-function ProductCard({cat}) {
-  const [productsList, setProductsList] = useState([]);
-
-  const fetchData = () => {
-    axios.get(`${URL}/products`).then((response) => {
-      setProductsList(response.data);
-    });
-  };
-  // const fetchData = (id) => {
-  //   axios.get(`${URL}/products?category=${id}`).then((response) => {
-  //     setProductsList(response.data);
-  //   });
-  // };
-  useEffect(() => {
-    fetchData();
-    //dispatch
-  }, []);
-
+function ProductCard() {
   const classes = useStyles();
+  const dispatch = useDispatch();
+  const products = useSelector((state) => state.products.products);
+  const categoryList = useSelector((state) => state.categories.categoryList);
+  useEffect(() => {
+    dispatch(fetchData());
+    dispatch(fetchCategory());
+  }, [dispatch]);
+
+
+
 
   return (
     <div>
-      {productsList.map((product) => {
+      {products.filter((product) => product.category === categoryList.id).map((product) => {
         return (
           <Link to={`/products/${product.id}`} className="text-decoration-none">
-            <div className={classes.page}>
+            
+            <div className={classes.page}> 
               <Card className={classes.img} >
                 <Card.Img
                   style={{ width: "100px" }}

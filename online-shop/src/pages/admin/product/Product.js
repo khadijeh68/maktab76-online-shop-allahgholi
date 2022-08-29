@@ -5,6 +5,7 @@ import {
   deleteProduct,
   fetchProducts,
   header,
+  updateProduct,
 } from "../../../redux/features/product/productSlice";
 
 import { URL } from "../../../api/http";
@@ -24,6 +25,7 @@ const useStyles = makeStyles({
   },
 });
 
+
 function Product() {
   const classes = useStyles();
   const [total, setTotal] = useState(0);
@@ -42,9 +44,11 @@ function Product() {
     dispatch(fetchCategory());
   }, [currentPage, dispatch]);
 
+
   const handleEdit = () => {};
-  // const deleteHandler = () => {
-  // dispatch(deleteProduct(productsList.id));
+  // const deleteHandler = (id) => {
+  // dispatch(deleteProduct(id));
+  
   // };
   return (
     <div className="orders">
@@ -91,20 +95,18 @@ function Product() {
                     <Button
                       variant="warning"
                       className="mx-1"
-                      onClick={handleEdit}
+                      onClick={() => dispatch(updateProduct(item))}
                     >
                       ویرایش
                     </Button>
-                    <Button variant="danger">حذف</Button>
+                    <Button variant="danger" onClick={() => dispatch(deleteProduct(item))}>حذف</Button>
                   </td>
                 </tr>
               );
             })}
         </tbody>
       </Table>
-      {/* <button onClick={() => setCurrentPage(currentPage-1)}>صفحه قبل</button>
 
-<button onClick={() => setCurrentPage(currentPage+1)}>صفحه بعد</button> */}
       <Pagination
         className={classes.page}
         count={count}

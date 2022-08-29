@@ -45,4 +45,4 @@ export const injectStore = (_store) => {
 //   }
 // );
 
-export default axios;
+// export default axios;

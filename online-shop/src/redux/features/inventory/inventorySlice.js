@@ -5,6 +5,7 @@ import axois from "axios";
 const initialState = {
   inventoriesList: [],
   total:[],
+  mount:'',
   loading: false,
   error: "",
 };
@@ -13,6 +14,16 @@ export const fetchInventory = createAsyncThunk(
   "inventory/fetchInventory",
   async (page) => {
     const res = axois({ url: `${URL}/inventory/?_page=${page}&_limit=5` }).then((response) => {
+      return response.data;
+    });
+    return res;
+  }
+);
+
+export const updateInventory = createAsyncThunk(
+  "inventory/updateInventory",
+   () => {
+    const res = axois({ url: `${URL}/inventory` }).then((response) => {
       return response.data;
     });
     return res;
@@ -44,6 +55,20 @@ const inventoriesSlice = createSlice({
     },
 
     [fetchInventory.rejected]: (state, action) => {
+      console.log(action);
+      state.loading = false;
+      state.error = "wrong...";
+    },
+    [headerInventory.fulfilled]: (state, action) => {
+      state.loading = false;
+      state.total = action.payload;
+    },
+    [headerInventory.fulfilled]: (state, action) => {
+      state.loading = false;
+      state.inventoriesList = action.payload;
+    },
+
+    [headerInventory.rejected]: (state, action) => {
       console.log(action);
       state.loading = false;
       state.error = "wrong...";
