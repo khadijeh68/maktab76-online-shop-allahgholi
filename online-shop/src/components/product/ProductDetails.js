@@ -1,45 +1,47 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Button, Card } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
-import { fetchProducts } from "../../redux/features/product/productSlice";
+import { getDetails } from "../../redux/features/productDetail/productDetailSlice"
+import "../../index.css"
+import { BASE_URL } from "../../config/api";
 
 function ProductDetails() {
+  const dispatch = useDispatch();
   const { id } = useParams();
   console.log(id);
-  const dispatch = useDispatch();
-  const productsList = useSelector((state) => state.products.productsList);
-  console.log(productsList);
-  const p = productsList.filter((p) => p.id === id);
 
-  const { image, name, os, weight, size, price, description } = p;
+  const [product, setProduct] = useState([]);
+  console.log(product)
+
   useEffect(() => {
-    dispatch(fetchProducts());
-  }, [dispatch]);
+    dispatch(getDetails(id))
+      .unwrap()
+      .then((res) => setProduct(res));
+  }, [dispatch, id]);
 
   return (
-    <div className="product-details mt-5">
+    <div className="product-details">
       <div>
-        {/* {productsList
-          .filter((product) => product.id !== id)
-          .map((product) => ( */}
         <Card>
           <Card.Img
             style={{ width: "100px" }}
             variant="top"
-            src={`${URL}/files/${image}`}
+            src={`${BASE_URL}/files/${product.image}`}
             alt="mobile"
           />
           <Card.Body>
-            <Card.Title>{name}</Card.Title>
-            <Card.Text>{os}</Card.Text>
-            <Card.Text>{weight}</Card.Text>
-            <Card.Text>{size}</Card.Text>
-            <Card.Text>{price}</Card.Text>
-            <Card.Text>{description}</Card.Text>
+            <Card.Title>{product.name}</Card.Title>
+            <Card.Text>{product.os}</Card.Text>
+            <Card.Text>{product.weight}</Card.Text>
+            <Card.Text>{product.size}</Card.Text>
+            <Card.Text>{product.price}</Card.Text>
+            <Card.Text>{product.description}</Card.Text>
             <Button variant="primary">افزودن به سبد خرید</Button>
           </Card.Body>
         </Card>
+     
+
       </div>
     </div>
   );

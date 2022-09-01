@@ -5,6 +5,7 @@ import productSlice from "./product/productSlice";
 import categorySlice from "./category/categorySlice"
 import usersSlice from "./user/usersSlice";
 import { firstPageSlice } from "./fiestPage/firstPage";
+import productDetailSlice from "./productDetail/productDetailSlice";
 
 
 export const store = configureStore({
@@ -15,5 +16,6 @@ export const store = configureStore({
     categories: categorySlice,
     users: usersSlice,
     list:firstPageSlice,
+    product:productDetailSlice
   },
 });

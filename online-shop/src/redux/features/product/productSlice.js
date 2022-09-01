@@ -4,11 +4,8 @@ import {
   createProductRequest,
   deleteProductRequest,
   fetchAllProductsRequest,
-  fetchDataRequest,
   updateProductRequest,
 } from "../../../api/products";
-import { BASE_URL } from "../../../config/api";
-
 
 const initialState = {
   productsList: [],
