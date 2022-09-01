@@ -3,7 +3,7 @@ import {
   ACCESS_TOKEN,
   IS_LOGGGED_IN,
   REFRESH_TOKEN,
-} from "../../../api/constants";
+} from "../../../config/constants";
 
 import { loginRequest, refreshTokenRequest } from "../../../api/users";
 
@@ -38,25 +38,24 @@ export const usersSlice = createSlice({
   name: "users",
   initialState,
   extraReducers:  (builder) => {
-   
+   //login
     builder.addCase(login.fulfilled, (state, action) => {
       console.log("fulfilled", action);
       return { isLoggedIn: true, error: "" };
     });
     builder.addCase(login.rejected, (state, action) => {
       console.log("rejected", action);
-      return { isLoggedIn: false, error: "دسترسی ندارید" };
+      return { isLoggedIn: false, error: action.error.message };
     });
 
-    
+     // refresh token
     builder.addCase(refreshToken.fulfilled, (state, action) => {
       console.log("fulfilled", action);
       return { isLoggedIn: true, error: "" };
     });
     builder.addCase(refreshToken.rejected, (state, action) => {
       console.log("rejected", action);
-      return { isLoggedIn: false, error: "دسترسی ندارید"
-        // action.error.message 
+      return { isLoggedIn: false, error: action.error.message
       };
     });
   },

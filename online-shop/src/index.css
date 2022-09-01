@@ -84,4 +84,11 @@ img {
   width: 100px;
   position: absolute;
   left: 10px;
+  margin-left: 265px;
+  margin-top: 59px;
+}
+.btn-products{
+  width: 100px;
+  position: absolute;
+  left: 10px;
 }

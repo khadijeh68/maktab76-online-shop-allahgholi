@@ -1,4 +1,3 @@
-
 import DatePicker from "react-multi-date-picker";
 import Modal from "react-bootstrap/Modal";
 import { useState } from "react";
@@ -6,19 +5,18 @@ import "../../index.css";
 import persian from "react-date-object/calendars/persian";
 import persian_fa from "react-date-object/locales/persian_fa";
 import CartItem from "../cart/CartItem";
+import { Button, Table } from "react-bootstrap";
 
-function OrdersDisplayModal(props) {
-  const { show, setShow, order } = props;
+function OrdersDisplayModal({ item }) {
+  const [show, setShow] = useState(false);
+  const handleShow = () => setShow(true);
   const handleClose = () => setShow(false);
-  const [name, setName] = useState("");
-  const [address, setAddress] = useState("");
-  const [tel, setTel] = useState("");
-  const [time, setTime] = useState("");
-  const [orderTime, setOrderTime] = useState("");
-  
 
   return (
     <>
+      <Button variant="warning" onClick={handleShow}>
+        بررسی سفارش
+      </Button>
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
           <Modal.Title>نمایش سفارش</Modal.Title>
@@ -27,27 +25,15 @@ function OrdersDisplayModal(props) {
           <form>
             <div className="mt-2">
               <label> نام مشتری:</label>
-              <input
-                type="text"
-                value={order.username + " " + order.lastname}
-                onChange={(e) => setName(e.target.value)}
-              />
+              <input type="text" value={item.username + " " + item.lastname} />
             </div>
             <div className="mt-2">
               <label>آدرس :</label>
-              <input
-                type="address"
-                onChange={(e) => setAddress(e.target.value)}
-                value={order.address}
-              />
+              <input type="address" value={item.address} />
             </div>
             <div className="mt-2">
               <label>تلفن :</label>
-              <input
-                type="tel"
-                onChange={(e) => setTel(e.target.value)}
-                value={order.phone}
-              />
+              <input type="tel" value={item.phone} />
             </div>
             <div className="mt-2">
               <label>زمان تحویل :</label>
@@ -56,8 +42,7 @@ function OrdersDisplayModal(props) {
                   calendar={persian}
                   locale={persian_fa}
                   calendarPosition="bottom-right"
-                  onChange={(e) => setTime(e.target.value)}
-                  value={new Date(order.expectAt).toLocaleDateString("fa-IR")}
+                  value={new Date(item.expectAt).toLocaleDateString("fa-IR")}
                 />
               </div>
             </div>
@@ -68,14 +53,34 @@ function OrdersDisplayModal(props) {
                   calendar={persian}
                   locale={persian_fa}
                   calendarPosition="bottom-right"
-                  onChange={(e) => setOrderTime(e.target.value)}
-                  value={new Date(order.createdAt).toLocaleDateString("fa-IR")}
+                  value={new Date(item.createdAt).toLocaleDateString("fa-IR")}
                 />
               </div>
             </div>
-            <CartItem />
-            <button type="submit" className=" btn btn-primary">
-              ذخیره
+
+            <Table
+              striped
+              bordered
+              hover
+              className="w-50 text-center order_table mx-5"
+            >
+              <thead>
+                <tr>
+                  <th>کالا</th>
+                  <th>قیمت</th>
+                  <th>تعداد</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>{item.products[0].name}</td>
+                  <td>{item.products[0].price}</td>
+                  <td>{item.products[0].count}</td>
+                </tr>
+              </tbody>
+            </Table>
+            <button type="submit" className="btn btn-success">
+              تحویل شد
             </button>
           </form>
         </Modal.Body>

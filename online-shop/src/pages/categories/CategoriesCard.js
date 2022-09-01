@@ -56,17 +56,6 @@ function CategoriesCard() {
       <ProductCard/>
     </div>
 
-    // <div>
-    //   <Link to="/" className={classes.link}>
-    //     گوشی موبایل اپل
-    //   </Link>
-    //   <p>اپل</p>
-    //   <p>اپل</p>
-    //   <p>اپل</p>
-    //   <p>اپل</p>
-    //   <p>اپل</p>
-    //   <p>اپل</p>
-    // </div>
   );
 }
 

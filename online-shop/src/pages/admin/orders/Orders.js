@@ -4,7 +4,6 @@ import { Button, Table } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import {
   fetchOrders,
-  headerOrder,
 } from "../../../redux/features/orders/ordersSlice";
 import { makeStyles } from "@material-ui/core";
 import { digitsEnToFa } from "@persian-tools/persian-tools";
@@ -23,27 +22,17 @@ const useStyles = makeStyles({
 
 function Orders() {
   const classes = useStyles();
-  const [total, setTotal] = useState(0);
+
   const dispatch = useDispatch();
   const ordersList = useSelector((state) => state.orders.ordersList);
+  const total = useSelector((state) => state.orders.total);
   const [currentPage, setCurrentPage] = useState(1);
   const [delivered, setDelivered] = useState(true);
+  
   const limit = 5;
-  const count = Math.ceil(total / limit) - 1;
-  const [info, setInfo] = useState({}, false);
-  const [show, setShow] = useState(false);
-
-  const handleShow = (id) => {
-    setShow(true);
-    setInfo(ordersList.find((order) => order.id === id));
-
-  } 
-
-
+  const count = Math.ceil(total / limit);
+ 
   useEffect(() => {
-    dispatch(headerOrder())
-      .unwrap()
-      .then((res) => setTotal(res));
     dispatch(fetchOrders({ delivered, currentPage }));
   }, [delivered, currentPage, dispatch]);
 
@@ -72,7 +61,7 @@ function Orders() {
         </div>
       </div>
 
-      <OrdersDisplayModal  show={show}  order={info}/>
+    
       <Table striped bordered hover className="w-75 text-center order_table">
         <thead>
           <tr>
@@ -101,7 +90,7 @@ function Orders() {
                     {new Date(item.createdAt).toLocaleDateString("fa-IR")}
                   </td>
                   <td>
-                    <Button variant="warning" onClick={() => handleShow(item.id) } >بررسی سفارش</Button>
+                  <OrdersDisplayModal  item={item} />
                   </td>
                 </tr>
               );

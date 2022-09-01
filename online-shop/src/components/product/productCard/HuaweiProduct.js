@@ -2,11 +2,9 @@ import { useEffect, useState } from "react";
 import { Button, Card } from "react-bootstrap";
 import { makeStyles } from "@material-ui/core";
 import { Link } from "react-router-dom";
-import { fetchData } from "../../redux/features/product/productSlice";
-import { useDispatch, useSelector } from "react-redux";
-import { fetchCategory } from "../../redux/features/category/categorySlice";
-import { BASE_URL } from "../../config/api";
-
+import { useDispatch } from "react-redux";
+import { BASE_URL } from "../../../config/api";
+import { getCategory, getList } from "../../../redux/features/fiestPage/firstPage";
 const useStyles = makeStyles({
   page: {
     display: "inline-flex",
@@ -18,6 +16,11 @@ const useStyles = makeStyles({
     padding: "20px",
     fontFamily: "Vazir-Medium",
   },
+  title:{
+    textDecoration: "none",
+    fontFamily: "Vazir-Medium",
+    fontSize: "20px"
+  },
   img: {
     width: "14rem",
     height: "28rem",
@@ -28,25 +31,27 @@ const useStyles = makeStyles({
   },
 });
 
-function ProductCard() {
+function HuaweiProduct() {
   const classes = useStyles();
+  const [huawei, setHuawei] = useState([]);
   const dispatch = useDispatch();
-  const products = useSelector((state) => state.products.products);
-  const categoryList = useSelector((state) => state.categories.categoryList);
-  // useEffect(() => {
-  //   dispatch(fetchData());
-  //   dispatch(fetchCategory());
-  // }, [dispatch]);
 
-
-
-  // {products.filter((product) => product.category === categoryList.id).map((product) => {
+  useEffect(() => {
+    dispatch(getCategory())
+    dispatch(getList(4))
+    .unwrap()
+      .then((res) => setHuawei(res));
+  }, [dispatch]);
+  
 
   return (
     <div>
-      {products.map((product) => {
+      <div>
+      <Link className={classes.title} to={`/categories/4`}>هوآوی</Link>
+        </div>
+      {huawei.map((product) => {
         return (
-          <Link to={`/products/${product.id}`} className="text-decoration-none">
+          <Link to={`/products/${product.id}`} key={product.id} className="text-decoration-none">
             
             <div className={classes.page}> 
               <Card className={classes.img} >
@@ -73,4 +78,4 @@ function ProductCard() {
   );
 }
 
-export default ProductCard;
+export default HuaweiProduct;

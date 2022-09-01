@@ -1,6 +1,6 @@
 import { makeStyles } from "@material-ui/core/styles";
 import { Outlet } from "react-router-dom";
-import CategoriesCard from "../../pages/categories/CategoriesCard";
+import ProductsCard from "../../components/product/ProductCard";
 
 const useStyles = makeStyles({
   h3: {
@@ -10,14 +10,13 @@ const useStyles = makeStyles({
   },
 });
 
-function SharedLayoutProducts() {
+function SharedCategoryLayout() {
   const classes = useStyles();
   return (
     <div className={classes.h3}>
-     <CategoriesCard />
       <Outlet />
     </div>
   );
 }
 
-export default SharedLayoutProducts;
+export default SharedCategoryLayout;

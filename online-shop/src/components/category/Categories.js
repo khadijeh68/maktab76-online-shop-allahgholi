@@ -1,10 +1,11 @@
 import { useEffect } from "react";
 import { fetchCategory } from "../../redux/features/category/categorySlice";
 import { useDispatch, useSelector } from "react-redux";
-import ProductCard from "../product/ProductCard";
+
 import { Outlet } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
+
 
 const useStyles = makeStyles({
   container: {
@@ -41,7 +42,8 @@ function Categories() {
             <div className="mt-5" key={category.id}>
               <Link to={`/categories/${category.id}`}>
                 {category.name}
-                <ProductCard category={category.id} />
+                {/* <ProductCard category={category.id} /> */}
+                {/* <AppleProduct/> */}
               </Link>
             </div>
           );

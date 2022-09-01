@@ -6,37 +6,40 @@ import { fetchProducts } from "../../redux/features/product/productSlice";
 
 function ProductDetails() {
   const { id } = useParams();
+  console.log(id);
   const dispatch = useDispatch();
   const productsList = useSelector((state) => state.products.productsList);
- 
+  console.log(productsList);
+  const p = productsList.filter((p) => p.id === id);
+
+  const { image, name, os, weight, size, price, description } = p;
   useEffect(() => {
     dispatch(fetchProducts());
   }, [dispatch]);
 
   return (
-    <div className="product-details">
+    <div className="product-details mt-5">
       <div>
-        {productsList
+        {/* {productsList
           .filter((product) => product.id !== id)
-          .map((product) => (
-            <Card  key={product.id}>
-              <Card.Img
-                style={{ width: "100px" }}
-                variant="top"
-                src={`${URL}/files/${product.image}`}
-                alt="mobile"
-              />
-              <Card.Body>
-                <Card.Title>{product.name}</Card.Title>
-                <Card.Text>{product.os}</Card.Text>
-                <Card.Text>{product.weight}</Card.Text>
-                <Card.Text>{product.size}</Card.Text>
-                <Card.Text>{product.price}</Card.Text>
-                <Card.Text>{product.description}</Card.Text>
-                <Button variant="primary">افزودن به سبد خرید</Button>
-              </Card.Body>
-            </Card>
-          ))}
+          .map((product) => ( */}
+        <Card>
+          <Card.Img
+            style={{ width: "100px" }}
+            variant="top"
+            src={`${URL}/files/${image}`}
+            alt="mobile"
+          />
+          <Card.Body>
+            <Card.Title>{name}</Card.Title>
+            <Card.Text>{os}</Card.Text>
+            <Card.Text>{weight}</Card.Text>
+            <Card.Text>{size}</Card.Text>
+            <Card.Text>{price}</Card.Text>
+            <Card.Text>{description}</Card.Text>
+            <Button variant="primary">افزودن به سبد خرید</Button>
+          </Card.Body>
+        </Card>
       </div>
     </div>
   );

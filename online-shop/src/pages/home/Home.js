@@ -1,12 +1,15 @@
 import { makeStyles } from "@material-ui/core/styles";
-import Categories from "../../components/category/Categories";
-
+import SamsungProduct from "../../components/product/productCard/SamsungProduct";
+import AppleProduct from "../../components/product/productCard/AppleProduct";
+import XiaomiProduct from "../../components/product/productCard/XiaomiProduct";
+import HuaweiProduct from "../../components/product/productCard/HuaweiProduct";
+import HonorProduct from "../../components/product/productCard/HonorProduct";
 const useStyles = makeStyles({
   category: {
     display: "flex",
     flexDirection: "column",
     padding: "20px",
-    marginTop: "20px",
+    marginTop: "70px",
   },
   link: {
     marginTop: "20px",
@@ -25,7 +28,12 @@ function Home() {
   const classes = useStyles();
   return (
     <div className={classes.category}>
-      <Categories/>
+      {/* <Categories/> */}
+      <AppleProduct/>
+      <SamsungProduct/>
+      <XiaomiProduct/>
+      <HuaweiProduct/>
+      <HonorProduct/>
     </div>
   );
 }

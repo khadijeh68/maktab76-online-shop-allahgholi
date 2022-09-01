@@ -26,24 +26,18 @@ const useStyles = makeStyles({
 
 function Inventory() {
   const classes = useStyles();
-  const [total, setTotal] = useState(0);
+
   const [mount,setMount] = useState('');
   const dispatch = useDispatch();
   const inventoriesList = useSelector(
     (state) => state.inventory.inventoriesList
   );
+  const total = useSelector((state) => state.inventory.total);
   const [currentPage, setCurrentPage] = useState(1);
   const limit = 5;
   const count = Math.ceil(total /limit);
-  console.log(total);
-  console.log(count);
+ 
   useEffect(() => {
-    dispatch(headerInventory())
-    .unwrap()
-    .then((res) => setTotal(res));
-    dispatch(updateInventory())
-    .unwrap()
-    .then((res) => setMount(res));
     dispatch(fetchInventory(currentPage));
   }, [currentPage, dispatch]);
 
