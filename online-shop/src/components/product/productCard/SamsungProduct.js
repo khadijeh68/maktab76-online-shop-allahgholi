@@ -50,13 +50,13 @@ function SamsungProduct() {
   return (
     <div>
       <div>
-        <Link className={classes.title} to={`/categories/2`}>
+        <Link className={classes.title} to={`/categories/2`} >
           سامسونگ
         </Link>
       </div>
       {samsung.map((product) => {
         return (
-          <Link to={`/products/${product.id}`} className="text-decoration-none">
+          <Link to={`/products/${product.id}`} key={product.id} className="text-decoration-none">
             <div className={classes.page}>
               <Card className={classes.img}>
                 <Card.Img

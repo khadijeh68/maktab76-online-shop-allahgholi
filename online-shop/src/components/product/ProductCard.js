@@ -25,6 +25,7 @@ const useStyles = makeStyles({
     padding: "10px",
     backgroundColor: "#ffffff",
     boxShadow: "0 0 6px rgb(0 0 0 / 20%)",
+  
   },
 });
 
@@ -33,12 +34,7 @@ function ProductCard() {
   const dispatch = useDispatch();
   const products = useSelector((state) => state.products.products);
   const categoryList = useSelector((state) => state.categories.categoryList);
-  // useEffect(() => {
-  //   dispatch(fetchData());
-  //   dispatch(fetchCategory());
-  // }, [dispatch]);
-
-
+ 
 
   // {products.filter((product) => product.category === categoryList.id).map((product) => {
 

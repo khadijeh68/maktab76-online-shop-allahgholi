@@ -4,6 +4,7 @@ import AppleProduct from "../../components/product/productCard/AppleProduct";
 import XiaomiProduct from "../../components/product/productCard/XiaomiProduct";
 import HuaweiProduct from "../../components/product/productCard/HuaweiProduct";
 import HonorProduct from "../../components/product/productCard/HonorProduct";
+import Categories from "../../components/category/Categories";
 const useStyles = makeStyles({
   category: {
     display: "flex",
@@ -28,12 +29,8 @@ function Home() {
   const classes = useStyles();
   return (
     <div className={classes.category}>
-      {/* <Categories/> */}
-      <AppleProduct/>
-      <SamsungProduct/>
-      <XiaomiProduct/>
-      <HuaweiProduct/>
-      <HonorProduct/>
+      <Categories/>
+     
     </div>
   );
 }

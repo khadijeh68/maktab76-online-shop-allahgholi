@@ -10,14 +10,13 @@ const useStyles = makeStyles({
   },
 });
 
-function SharedLayoutProducts() {
+function SharedCategoryLayout() {
   const classes = useStyles();
   return (
     <div className={classes.h3}>
-     <CategoriesCard />
       <Outlet />
     </div>
   );
 }
 
-export default SharedLayoutProducts;
+export default SharedCategoryLayout;

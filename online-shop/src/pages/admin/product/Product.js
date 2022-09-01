@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import { Button, Table } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import {
-  createProduct,
   deleteProduct,
   fetchProducts,
 } from "../../../redux/features/product/productSlice";
@@ -12,10 +11,9 @@ import { Pagination } from "@mui/material";
 import { makeStyles } from "@material-ui/core";
 import { fetchCategory } from "../../../redux/features/category/categorySlice";
 import ProductAddModal from "../../../components/product/ProductAddModal";
-import { unwrapResult } from "@reduxjs/toolkit";
 import { BASE_URL } from "../../../config/api";
 import ProductEditModal from "../../../components/product/ProductEditModal";
-import categoryList from "../../../redux/features/category/categorySlice"
+
 const useStyles = makeStyles({
   page: {
     direction: "ltr",

@@ -10,7 +10,7 @@ const useStyles = makeStyles({
   },
 });
 
-function SharedCategoryLayout() {
+function SharedProductdLayout() {
   const classes = useStyles();
   return (
     <div className={classes.h3}>
@@ -19,4 +19,4 @@ function SharedCategoryLayout() {
   );
 }
 
-export default SharedCategoryLayout;
+export default SharedProductdLayout;

@@ -15,6 +15,5 @@ export const store = configureStore({
     categories: categorySlice,
     users: usersSlice,
     list:firstPageSlice,
-    // allCategory:allCategorySlice
   },
 });
