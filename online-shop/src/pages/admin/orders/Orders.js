@@ -1,6 +1,6 @@
 import { Pagination } from "@mui/material";
 import { useEffect, useState } from "react";
-import { Button, Table } from "react-bootstrap";
+import { Table } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import {
   fetchOrders,
@@ -40,7 +40,6 @@ function Orders() {
     <div className="orders">
       <div className="d-flex flex-row justify-content-between">
         <h6 className="mx-2">مدیریت سفارش ها</h6>
-
         <div className="d-flex flex-row mx-3">
           <span className="px-2">سفارش های تحویل شده </span>
           <input
@@ -49,7 +48,6 @@ function Orders() {
             onClick={() => setDelivered(true)}
             defaultChecked
           />
-
           <span className="px-2" style={{ marginRight: "20px" }}>
             سفارش های در حال انتظار
           </span>
@@ -60,8 +58,6 @@ function Orders() {
           />
         </div>
       </div>
-
-    
       <Table striped bordered hover className="w-75 text-center order_table">
         <thead>
           <tr>

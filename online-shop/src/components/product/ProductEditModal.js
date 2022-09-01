@@ -1,6 +1,6 @@
 import Modal from "react-bootstrap/Modal";
 import { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import "../../index.css";
 import { CKEditor } from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
@@ -17,6 +17,7 @@ function ProductEditModal({ item }) {
   const handleCloseEdit = () => setShowEdit(false);
  
   const dispatch = useDispatch();
+  
   const [description, setDescription] = useState("");
   const [newProduct, setNewProduct] = useState({
     image: item.image,

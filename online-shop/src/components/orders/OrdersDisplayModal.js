@@ -4,7 +4,6 @@ import { useState } from "react";
 import "../../index.css";
 import persian from "react-date-object/calendars/persian";
 import persian_fa from "react-date-object/locales/persian_fa";
-import CartItem from "../cart/CartItem";
 import { Button, Table } from "react-bootstrap";
 
 function OrdersDisplayModal({ item }) {

@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useParams } from "react-router-dom";
-import { fetchCategory } from "../../redux/features/category/categorySlice";
 import { getCategory, getList } from "../../redux/features/fiestPage/firstPage";
 import { Button, Card } from "react-bootstrap";
 import { BASE_URL } from "../../config/api";
@@ -49,13 +48,13 @@ const useStyles = makeStyles({
     boxShadow: "0 0 6px rgb(0 0 0 / 20%)",
   },
 });
+
 const SingleCategory = () => {
   const classes = useStyles();
   const dispatch = useDispatch();
   const categoryList = useSelector((state) => state.categories.categoryList);
   const [category, setCategory] = useState([]);
   const { categoryId } = useParams();
-  console.log(category);
 
   useEffect(() => {
     dispatch(getCategory());
@@ -63,6 +62,7 @@ const SingleCategory = () => {
       .unwrap()
       .then((res) => setCategory(res));
   }, [dispatch, categoryId]);
+
   return (
     <div className={classes.container}>
       <div className={classes.sidebar}>

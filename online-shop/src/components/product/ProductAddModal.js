@@ -5,15 +5,14 @@ import { useDispatch } from "react-redux";
 import {
   createProduct,
   fetchProducts,
-  updateProduct,
 } from "../../redux/features/product/productSlice";
 import "../../index.css";
 import { CKEditor } from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+// import { ToastContainer, toast } from 'react-toastify';
+// import 'react-toastify/dist/ReactToastify.css';
 
-function ProductAddModal({categoryList}) {
+function ProductAddModal() {
   const dispatch = useDispatch();
   const [image, setImage] = useState();
   const [name, setName] = useState();

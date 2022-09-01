@@ -15,21 +15,6 @@ export const fetchAllProductsRequest = async (number = 1) => {
   }
 };
 
-// export const fetchDataRequest = 
-//   async (id) => {
-//     try{
-//       const response = await instance.get(
-//         `${PRODUCTS_URL}?category=${id}&_limit=5`)
-//       return {
-//         data: response.data,
-//         total: response.headers["x-total-count"],
-//       };
-//     }
-//     catch (error) {
-//       return Promise.reject(error);
-//     }
-//   }
-
 export const updateProductRequest = async (id, selectedProduct) => {
   try {
     const response = await instance.put(
@@ -41,7 +26,6 @@ export const updateProductRequest = async (id, selectedProduct) => {
     return Promise.reject(error);
   }
 };
-
 
 export const createProductRequest = async (newProduct) => {
   try {

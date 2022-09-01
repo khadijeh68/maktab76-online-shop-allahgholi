@@ -1,5 +1,4 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import axios from "axios";
 import { BASE_URL } from "../../../config/api";
 
 const initialState = {
@@ -15,7 +14,6 @@ export const getDetails = createAsyncThunk(
       .catch((error) => error.message);
   }
 );
-
 
 export const productDetailSlice = createSlice({
   name: "product",

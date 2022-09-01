@@ -25,6 +25,7 @@ const useStyles = makeStyles({
   },
 });
 
+
 function Product() {
   
   const classes = useStyles();
@@ -47,6 +48,8 @@ function Product() {
   dispatch(deleteProduct(id));
   dispatch(fetchProducts())
   };
+
+
   return (
     <div className="orders">
       <div className="d-flex flex-row justify-content-between mx-3">

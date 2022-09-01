@@ -1,6 +1,5 @@
 import { makeStyles } from "@material-ui/core/styles";
 import { Outlet } from "react-router-dom";
-import CategoriesCard from "../../pages/categories/CategoriesCard";
 
 const useStyles = makeStyles({
   h3: {

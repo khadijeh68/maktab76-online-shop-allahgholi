@@ -49,6 +49,11 @@ function Inventory() {
     e.preventDefault();
     // setTextField();
   }
+  const changeTag = () =>{
+    
+  }
+
+
   return (
     <div className="orders">
       <div className="d-flex flex-row justify-content-between mx-3">
@@ -75,7 +80,7 @@ function Inventory() {
               return (
                 <tr key={item.id}>
                   <td>{item.name}</td>
-                  <td>{digitsEnToFa(
+                  <td onClick={changeTag}>{digitsEnToFa(
                         item.price
                           .toString()
                           .replace(/\B(?=(\d{3})+(?!\d))/g, "،")
@@ -89,7 +94,7 @@ function Inventory() {
                       onChange={handleChange}
                     /> */}
                   </td>
-                  <td>{digitsEnToFa(item.quantity)}
+                  <td onClick={changeTag}>{digitsEnToFa(item.quantity)}
                     {/* <input
                       value=
                       onChange={handleChange}
