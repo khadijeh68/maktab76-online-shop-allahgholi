@@ -1,13 +1,18 @@
 import { useEffect, useState } from "react";
 import { Button, Table } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchProducts } from "../../../redux/features/product/productSlice";
-import { URL } from "../../../api/http";
+import {
+  deleteProduct,
+  fetchProducts,
+} from "../../../redux/features/product/productSlice";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import { Pagination } from "@mui/material";
 import { makeStyles } from "@material-ui/core";
 import { fetchCategory } from "../../../redux/features/category/categorySlice";
+import ProductAddModal from "../../../components/product/ProductAddModal";
+import { BASE_URL } from "../../../config/api";
 import ProductEditModal from "../../../components/product/ProductEditModal";
-
 
 const useStyles = makeStyles({
   page: {
@@ -22,53 +27,39 @@ const useStyles = makeStyles({
 
 function Product() {
   const classes = useStyles();
-
   const dispatch = useDispatch();
   const productsList = useSelector((state) => state.products.productsList);
   const categoryList = useSelector((state) => state.categories.categoryList);
+  const total = useSelector((state) => state.products.total);
+
+  const [showEdit, setShowEdit] = useState(false);
+  const [currentProduct, setCurrentProduct] = useState({});
+  const handleOpenEdit = (id) => {
+    setShowEdit(true);
+    setCurrentProduct(productsList.filter((product) => product.id === id)[0]);
+  };
+
   const [currentPage, setCurrentPage] = useState(1);
-  // const [state, setState] = useState([]);
-  // const [errorMessage, setErrorMessage] = useState("");
+  const limit = 5;
+  const count = Math.ceil(total / limit);
 
   useEffect(() => {
     dispatch(fetchProducts(currentPage));
     dispatch(fetchCategory());
   }, [currentPage, dispatch]);
 
-  // const handleDelete = (id) => {
-  //   axios
-  //     .delete(`${URL}/products/${id}`)
-  //     .then((response) => setState({ productsList: response.filter((f) => f.id !== id)}))
-  //     .catch((error) => {
-  //       setErrorMessage(error.message);
-  //       console.error("There was an error!", error);
-  //     });
-  // };
-  // const handleDelete = async (id) => {
-  //   await fetch(`${URL}/products/${id}`, {
-  //     method: "DELETE",
-  //     headers: {
-  //       "Content-type": "application/json"
-  //     }
-  //   })
+  const handleDelete = (id) => {
+    dispatch(deleteProduct(id));
+    // dispatch(fetchProducts());
+  };
 
-  //   await setState(productsList.filter(p => p.id !== id))
-  // }
-
-  const handleEdit = () => {};
   return (
-    // `${URL}/products?category=3`
     <div className="orders">
       <div className="d-flex flex-row justify-content-between mx-3">
         <h6>مدیریت کالا ها</h6>
-
-        {/* <div>
-          <Button variant="success" type="submit" >
-            افزودن کالا
-          </Button>
-        </div> */}
       </div>
-      <ProductEditModal />
+      <ProductAddModal categoryList={categoryList} />
+
       <Table striped bordered hover className="w-75 text-center order_table ">
         <thead>
           <tr>
@@ -84,25 +75,36 @@ function Product() {
               return (
                 <tr key={item.id}>
                   <td>
-                    <img src={`${URL}/files/${item.image}`} alt="mobile" />
+                    {item.id < 30 ? (
+                      <img
+                        src={`${BASE_URL}/files/${item.image}`}
+                        alt="mobile"
+                      />
+                    ) : (
+                      <img src={item.image} alt="mobile" />
+                    )}
                   </td>
                   <td>{item.name}</td>
                   <td>
-                    {
+                    {/* {
                       categoryList.find(
                         (category) => category.id === item.category
                       ).name
-                    }
+                    } */}
                   </td>
                   <td>
                     <Button
                       variant="warning"
                       className="mx-1"
-                      onClick={handleEdit}
+                      onClick={() => handleOpenEdit(item.id)}
                     >
                       ویرایش
                     </Button>
-                    <Button variant="danger" >
+
+                    <Button
+                      variant="danger"
+                      onClick={() => handleDelete(item.id)}
+                    >
                       حذف
                     </Button>
                   </td>
@@ -111,13 +113,13 @@ function Product() {
             })}
         </tbody>
       </Table>
-
+      <ProductEditModal showEdit={showEdit} item={currentProduct} setShowEdit={setShowEdit}/>
       <Pagination
         className={classes.page}
-        count={7}
+        count={count}
         variant="outlined"
         color="secondary"
-        onClick={(e) => setCurrentPage(e.target.textContent)}
+        onChange={(event, value) => setCurrentPage(value)}
       />
     </div>
   );

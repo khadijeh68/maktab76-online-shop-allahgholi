@@ -2,9 +2,12 @@ import { Pagination } from "@mui/material";
 import { useEffect, useState } from "react";
 import { Button, Table } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchOrders } from "../../../redux/features/orders/ordersSlice";
+import {
+  fetchOrders,
+} from "../../../redux/features/orders/ordersSlice";
 import { makeStyles } from "@material-ui/core";
 import { digitsEnToFa } from "@persian-tools/persian-tools";
+import OrdersDisplayModal from "../../../components/orders/OrdersDisplayModal";
 
 const useStyles = makeStyles({
   page: {
@@ -22,11 +25,13 @@ function Orders() {
 
   const dispatch = useDispatch();
   const ordersList = useSelector((state) => state.orders.ordersList);
+  const total = useSelector((state) => state.orders.total);
   const [currentPage, setCurrentPage] = useState(1);
   const [delivered, setDelivered] = useState(true);
-  // console.log(currentPage);
-  const count = Math.ceil(ordersList.length / 3);
-
+  
+  const limit = 5;
+  const count = Math.ceil(total / limit);
+ 
   useEffect(() => {
     dispatch(fetchOrders({ delivered, currentPage }));
   }, [delivered, currentPage, dispatch]);
@@ -35,7 +40,6 @@ function Orders() {
     <div className="orders">
       <div className="d-flex flex-row justify-content-between">
         <h6 className="mx-2">مدیریت سفارش ها</h6>
-
         <div className="d-flex flex-row mx-3">
           <span className="px-2">سفارش های تحویل شده </span>
           <input
@@ -44,7 +48,6 @@ function Orders() {
             onClick={() => setDelivered(true)}
             defaultChecked
           />
-
           <span className="px-2" style={{ marginRight: "20px" }}>
             سفارش های در حال انتظار
           </span>
@@ -55,7 +58,6 @@ function Orders() {
           />
         </div>
       </div>
-
       <Table striped bordered hover className="w-75 text-center order_table">
         <thead>
           <tr>
@@ -73,12 +75,18 @@ function Orders() {
                   <td>
                     {item.username} {item.lastname}
                   </td>
-                  <td>{digitsEnToFa(item.prices.toString().replace(/\B(?=(\d{3})+(?!\d))/g, "،"))}</td>
+                  <td>
+                    {digitsEnToFa(
+                      item.prices
+                        .toString()
+                        .replace(/\B(?=(\d{3})+(?!\d))/g, "،")
+                    )}
+                  </td>
                   <td>
                     {new Date(item.createdAt).toLocaleDateString("fa-IR")}
                   </td>
                   <td>
-                    <Button variant="warning">بررسی سفارش</Button>
+                  <OrdersDisplayModal  item={item} />
                   </td>
                 </tr>
               );
@@ -90,7 +98,7 @@ function Orders() {
         count={count}
         variant="outlined"
         color="secondary"
-        onChange={(event,value) => setCurrentPage(value)}
+        onChange={(event, value) => setCurrentPage(value)}
       />
     </div>
   );

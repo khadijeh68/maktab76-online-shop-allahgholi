@@ -1,9 +1,13 @@
-import { Button, Card } from "react-bootstrap";
 import { makeStyles } from "@material-ui/core";
+import React, { useEffect, useState } from "react";
+import { Button, Card } from "react-bootstrap";
+import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
-import { useSelector } from "react-redux";
-import { BASE_URL } from "../../config/api";
-
+import { BASE_URL } from "../../../config/api";
+import {
+  getCategory,
+  getList,
+} from "../../../redux/features/fiestPage/firstPage";
 const useStyles = makeStyles({
   page: {
     display: "inline-flex",
@@ -14,6 +18,10 @@ const useStyles = makeStyles({
     margin: "20px",
     padding: "20px",
     fontFamily: "Vazir-Medium",
+  }, title:{
+    textDecoration: "none",
+    fontFamily: "Vazir-Medium",
+    fontSize: "20px"
   },
   img: {
     width: "14rem",
@@ -25,15 +33,29 @@ const useStyles = makeStyles({
   },
 });
 
-function ProductCard() {
+function XiaomiProduct() {
   const classes = useStyles();
-  const products = useSelector((state) => state.products.products);
+  const [xiaomi, setXiaomi] = useState([]);
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getCategory());
+    dispatch(getList(3))
+      .unwrap()
+      .then((res) => setXiaomi(res));
+  }, [dispatch]);
 
   return (
     <div>
-      {products.map((product) => {
+       <div>
+      <Link className={classes.title} to={`/categories/3`}>شیائومی</Link>
+        </div>
+      {xiaomi.map((product) => {
         return (
-          <Link to={`/products/${product.id}`} className="text-decoration-none">
+          <Link
+            to={`/products/${product.id}`}
+            key={product.id}
+            className="text-decoration-none"
+          >
             <div className={classes.page}>
               <Card className={classes.img}>
                 <Card.Img
@@ -59,4 +81,4 @@ function ProductCard() {
   );
 }
 
-export default ProductCard;
+export default XiaomiProduct;

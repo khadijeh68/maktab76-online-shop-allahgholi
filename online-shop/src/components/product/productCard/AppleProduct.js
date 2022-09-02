@@ -1,9 +1,13 @@
+import { useEffect, useState } from "react";
 import { Button, Card } from "react-bootstrap";
 import { makeStyles } from "@material-ui/core";
 import { Link } from "react-router-dom";
-import { useSelector } from "react-redux";
-import { BASE_URL } from "../../config/api";
-
+import { useDispatch } from "react-redux";
+import { BASE_URL } from "../../../config/api";
+import {
+  getCategory,
+  getList,
+} from "../../../redux/features/fiestPage/firstPage";
 const useStyles = makeStyles({
   page: {
     display: "inline-flex",
@@ -15,6 +19,11 @@ const useStyles = makeStyles({
     padding: "20px",
     fontFamily: "Vazir-Medium",
   },
+  title: {
+    textDecoration: "none",
+    fontFamily: "Vazir-Medium",
+    fontSize: "20px",
+  },
   img: {
     width: "14rem",
     height: "28rem",
@@ -25,15 +34,32 @@ const useStyles = makeStyles({
   },
 });
 
-function ProductCard() {
+function AppleProduct() {
   const classes = useStyles();
-  const products = useSelector((state) => state.products.products);
+  const [apple, setApple] = useState([]);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getCategory());
+    dispatch(getList(1))
+      .unwrap()
+      .then((res) => setApple(res));
+  }, [dispatch]);
 
   return (
     <div>
-      {products.map((product) => {
+      <div>
+        <Link className={classes.title} to={`/categories/1`}>
+          اپل
+        </Link>
+      </div>
+      {apple.map((product) => {
         return (
-          <Link to={`/products/${product.id}`} className="text-decoration-none">
+          <Link
+            to={`/products/${product.id}`}
+            key={product.id}
+            className="text-decoration-none"
+          >
             <div className={classes.page}>
               <Card className={classes.img}>
                 <Card.Img
@@ -59,4 +85,4 @@ function ProductCard() {
   );
 }
 
-export default ProductCard;
+export default AppleProduct;
