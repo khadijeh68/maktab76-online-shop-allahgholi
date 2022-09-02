@@ -5,8 +5,8 @@ import {
   deleteProduct,
   fetchProducts,
 } from "../../../redux/features/product/productSlice";
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import { Pagination } from "@mui/material";
 import { makeStyles } from "@material-ui/core";
 import { fetchCategory } from "../../../redux/features/category/categorySlice";
@@ -25,38 +25,41 @@ const useStyles = makeStyles({
   },
 });
 
-
 function Product() {
-  
   const classes = useStyles();
   const dispatch = useDispatch();
   const productsList = useSelector((state) => state.products.productsList);
   const categoryList = useSelector((state) => state.categories.categoryList);
   const total = useSelector((state) => state.products.total);
- 
+
+  const [showEdit, setShowEdit] = useState(false);
+  const [currentProduct, setCurrentProduct] = useState({});
+  const handleOpenEdit = (id) => {
+    setShowEdit(true);
+    setCurrentProduct(productsList.filter((product) => product.id === id)[0]);
+  };
+
   const [currentPage, setCurrentPage] = useState(1);
   const limit = 5;
   const count = Math.ceil(total / limit);
 
   useEffect(() => {
-    dispatch(fetchProducts(currentPage))
-      dispatch(fetchCategory());
+    dispatch(fetchProducts(currentPage));
+    dispatch(fetchCategory());
   }, [currentPage, dispatch]);
 
-
   const handleDelete = (id) => {
-  dispatch(deleteProduct(id));
-  dispatch(fetchProducts())
+    dispatch(deleteProduct(id));
+    // dispatch(fetchProducts());
   };
-
 
   return (
     <div className="orders">
       <div className="d-flex flex-row justify-content-between mx-3">
         <h6>مدیریت کالا ها</h6>
       </div>
-      <ProductAddModal categoryList={categoryList}/>
-    
+      <ProductAddModal categoryList={categoryList} />
+
       <Table striped bordered hover className="w-75 text-center order_table ">
         <thead>
           <tr>
@@ -73,7 +76,10 @@ function Product() {
                 <tr key={item.id}>
                   <td>
                     {item.id < 30 ? (
-                      <img src={`${BASE_URL}/files/${item.image}`} alt="mobile" />
+                      <img
+                        src={`${BASE_URL}/files/${item.image}`}
+                        alt="mobile"
+                      />
                     ) : (
                       <img src={item.image} alt="mobile" />
                     )}
@@ -87,14 +93,14 @@ function Product() {
                     } */}
                   </td>
                   <td>
-                    {/* <Button
+                    <Button
                       variant="warning"
                       className="mx-1"
-                      onClick={handleOpenEdit}
+                      onClick={() => handleOpenEdit(item.id)}
                     >
                       ویرایش
-                    </Button> */}
-                    <ProductEditModal item={item}/>
+                    </Button>
+
                     <Button
                       variant="danger"
                       onClick={() => handleDelete(item.id)}
@@ -102,12 +108,12 @@ function Product() {
                       حذف
                     </Button>
                   </td>
-               
                 </tr>
               );
             })}
         </tbody>
       </Table>
+      <ProductEditModal showEdit={showEdit} item={currentProduct} setShowEdit={setShowEdit}/>
       <Pagination
         className={classes.page}
         count={count}
