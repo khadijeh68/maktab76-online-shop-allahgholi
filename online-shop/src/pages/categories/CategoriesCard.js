@@ -1,9 +1,11 @@
 import { makeStyles } from "@material-ui/core/styles";
-import { useEffect } from "react";
+import { dialogClasses } from "@mui/material";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import ProductCard from "../../components/product/ProductCard";
 import { fetchCategory } from "../../redux/features/category/categorySlice";
+import { getCategory, getList } from "../../redux/features/fiestPage/firstPage";
 
 const useStyles = makeStyles({
   container: {
@@ -35,38 +37,41 @@ function CategoriesCard() {
   const classes = useStyles();
   const dispatch = useDispatch();
   const categoryList = useSelector((state) => state.categories.categoryList);
+  const [category, setCategory] = useState([]);
+  const { categoryId } = useParams();
+  console.log(category)
+
 
   useEffect(() => {
-    dispatch(fetchCategory());
+    dispatch(getCategory());
+    dispatch(getList(categoryId))
+      .unwrap()
+      .then((res) => setCategory(res));
   }, [dispatch]);
-
   return (
     <div className={classes.container}>
       <div className={classes.sidebar}>
         {categoryList.map((category) => {
           return (
-            <div>
+            <div  key={category.id}>
               <Link to={`/categories/${category.id}`} key={category.id}>
                 {category.name}
               </Link>
             </div>
           );
         })}
+       
       </div>
-      <ProductCard/>
+      <div className="mt-3">
+      {category.map((item)=> {
+          return (
+            <div>{item.name}</div>
+          )
+        })}
+      </div>
+ 
     </div>
 
-    // <div>
-    //   <Link to="/" className={classes.link}>
-    //     گوشی موبایل اپل
-    //   </Link>
-    //   <p>اپل</p>
-    //   <p>اپل</p>
-    //   <p>اپل</p>
-    //   <p>اپل</p>
-    //   <p>اپل</p>
-    //   <p>اپل</p>
-    // </div>
   );
 }
 

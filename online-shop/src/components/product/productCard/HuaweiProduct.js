@@ -1,19 +1,25 @@
+import { useEffect, useState } from "react";
 import { Button, Card } from "react-bootstrap";
 import { makeStyles } from "@material-ui/core";
 import { Link } from "react-router-dom";
-import { useSelector } from "react-redux";
-import { BASE_URL } from "../../config/api";
-
+import { useDispatch } from "react-redux";
+import { BASE_URL } from "../../../config/api";
+import { getCategory, getList } from "../../../redux/features/fiestPage/firstPage";
 const useStyles = makeStyles({
   page: {
     display: "inline-flex",
     alignItems: "center",
-    flexWrap: "wrap",
-    flexDirection: "row",
+    flexWrap:"wrap",
+    flexDirection:"row",
     justifyContent: "center",
     margin: "20px",
     padding: "20px",
     fontFamily: "Vazir-Medium",
+  },
+  title:{
+    textDecoration: "none",
+    fontFamily: "Vazir-Medium",
+    fontSize: "20px"
   },
   img: {
     width: "14rem",
@@ -25,17 +31,30 @@ const useStyles = makeStyles({
   },
 });
 
-function ProductCard() {
+function HuaweiProduct() {
   const classes = useStyles();
-  const products = useSelector((state) => state.products.products);
+  const [huawei, setHuawei] = useState([]);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getCategory())
+    dispatch(getList(4))
+    .unwrap()
+      .then((res) => setHuawei(res));
+  }, [dispatch]);
+  
 
   return (
     <div>
-      {products.map((product) => {
+      <div>
+      <Link className={classes.title} to={`/categories/4`}>هوآوی</Link>
+        </div>
+      {huawei.map((product) => {
         return (
-          <Link to={`/products/${product.id}`} className="text-decoration-none">
-            <div className={classes.page}>
-              <Card className={classes.img}>
+          <Link to={`/products/${product.id}`} key={product.id} className="text-decoration-none">
+            
+            <div className={classes.page}> 
+              <Card className={classes.img} >
                 <Card.Img
                   style={{ width: "100px" }}
                   variant="top"
@@ -48,7 +67,7 @@ function ProductCard() {
                   <Card.Text>{product.weight}</Card.Text>
                   <Card.Text>{product.size}</Card.Text>
                   <Card.Text>{product.price}</Card.Text>
-                  <Button variant="primary">افزودن به سبد خرید</Button>
+                  <Button variant="primary" >افزودن به سبد خرید</Button>
                 </Card.Body>
               </Card>
             </div>
@@ -59,4 +78,4 @@ function ProductCard() {
   );
 }
 
-export default ProductCard;
+export default HuaweiProduct;

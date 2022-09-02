@@ -80,3 +80,18 @@ img {
 .li {
   list-style-type: none;
 }
+.btn-product{
+  width: 100px;
+  position: absolute;
+  left: 10px;
+  margin-left: 265px;
+  margin-top: 59px;
+}
+.btn-products{
+  width: 100px;
+  position: absolute;
+  left: 10px;
+}
+.product-details{
+  margin: 70px;
+}

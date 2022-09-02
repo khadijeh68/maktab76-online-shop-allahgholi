@@ -1,6 +1,7 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { URL } from "../../../api/http";
+
 import axois from "axios";
+import { BASE_URL } from "../../../config/api";
 
 const initialState = {
   categoryList: [],
@@ -11,7 +12,7 @@ const initialState = {
 export const fetchCategory = createAsyncThunk(
   "categories/fetchCategory",
   async () => {
-    const res = axois({ url: `${URL}/categories` }).then(
+    const res = axois({ url: `${BASE_URL}/categories` }).then(
       (response) => {
         return response.data;
       }

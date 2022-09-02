@@ -1,10 +1,16 @@
 import { useEffect } from "react";
 import { fetchCategory } from "../../redux/features/category/categorySlice";
 import { useDispatch, useSelector } from "react-redux";
-import ProductCard from "../product/ProductCard";
+
 import { Outlet } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
+import AppleProduct from "../product/productCard/AppleProduct";
+import SamsungProduct from "../product/productCard/SamsungProduct";
+import XiaomiProduct from "../product/productCard/XiaomiProduct";
+import HuaweiProduct from "../product/productCard/HuaweiProduct";
+import HonorProduct from "../product/productCard/HonorProduct";
+
 
 const useStyles = makeStyles({
   container: {
@@ -33,21 +39,28 @@ function Categories() {
     dispatch(fetchCategory());
   }, [dispatch]);
   return (
+    // <>
+    //   <div className={classes.container}>
+    //     {categoryList.map((category) => {
+    //       return (
+    //         <div className="mt-5" key={category.id}>
+    //           <Link to={`/categories/${category.id}`}>
+    //             {category.name}
+    //             {/* <ProductCard category={category.id} /> */}
+    //             {/* <AppleProduct/> */}
+    //           </Link>
+    //         </div>
+    //       );
+    //     })}
+    //     <Outlet />
+    //   </div>
+    // </>
     <>
-      <div className={classes.container}>
-        {categoryList.map((category) => {
-          return (
-            <div className="mt-5" >
-              <Link to={`/categories/${category.id}`} key={category.id}>
-                {category.name}
-              </Link>
-              <ProductCard  />
-                  {/* {category.name}{category.map(( <ProductCard category={category.id} />))} */}
-            </div>
-          );
-        })}
-        <Outlet />
-      </div>
+     <AppleProduct/>
+      <SamsungProduct/>
+      <XiaomiProduct/>
+      <HuaweiProduct/>
+      <HonorProduct/>
     </>
   );
 }

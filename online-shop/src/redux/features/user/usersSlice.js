@@ -3,7 +3,7 @@ import {
   ACCESS_TOKEN,
   IS_LOGGGED_IN,
   REFRESH_TOKEN,
-} from "../../../api/constants";
+} from "../../../config/constants";
 
 import { loginRequest, refreshTokenRequest } from "../../../api/users";
 
@@ -25,8 +25,8 @@ export const login = createAsyncThunk("users/login", (user) => {
     .catch((error) => Promise.reject(error));
 });
 
-export const refreshToken = createAsyncThunk("users/refreshToken", (user) => {
-  return refreshTokenRequest(user)
+export const refreshToken = createAsyncThunk("users/refreshToken", () => {
+  return refreshTokenRequest()
     .then((response) => {
       localStorage.setItem(ACCESS_TOKEN, response.accessToken);
       return response;
@@ -34,34 +34,30 @@ export const refreshToken = createAsyncThunk("users/refreshToken", (user) => {
     .catch((error) => Promise.reject(error));
 });
 
-const usersSlice = createSlice({
+export const usersSlice = createSlice({
   name: "users",
   initialState,
-  extraReducers: {
-    [login.fulfilled]: (state, action) => {
+  extraReducers:  (builder) => {
+   //login
+    builder.addCase(login.fulfilled, (state, action) => {
       console.log("fulfilled", action);
-
-      state.isLoggedIn = true;
-      state.error = "";
-    },
-    [login.rejected]: (state, action) => {
+      return { isLoggedIn: true, error: "" };
+    });
+    builder.addCase(login.rejected, (state, action) => {
       console.log("rejected", action);
-      state.isLoggedIn = false;
-      state.error = "دسترسی ندارید";
-    },
+      return { isLoggedIn: false, error: action.error.message };
+    });
 
-    //refresh token
-    [refreshTokenRequest.fulfilled]: (state, action) => {
+     // refresh token
+    builder.addCase(refreshToken.fulfilled, (state, action) => {
       console.log("fulfilled", action);
-
-      state.isLoggedIn = true;
-      state.error = "";
-    },
-    [refreshTokenRequest.rejected]: (state, action) => {
+      return { isLoggedIn: true, error: "" };
+    });
+    builder.addCase(refreshToken.rejected, (state, action) => {
       console.log("rejected", action);
-      state.isLoggedIn = false;
-      state.error = "دسترسی ندارید";
-    },
+      return { isLoggedIn: false, error: action.error.message
+      };
+    });
   },
 });
 

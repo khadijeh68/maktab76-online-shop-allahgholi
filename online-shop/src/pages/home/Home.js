@@ -6,7 +6,7 @@ const useStyles = makeStyles({
     display: "flex",
     flexDirection: "column",
     padding: "20px",
-    marginTop: "20px",
+    marginTop: "70px",
   },
   link: {
     marginTop: "20px",
@@ -19,7 +19,6 @@ const useStyles = makeStyles({
   },
 });
 
-//Home : <Categories/> , <Products/>
 
 function Home() {
  
@@ -27,34 +26,7 @@ function Home() {
   return (
     <div className={classes.category}>
       <Categories/>
-      {/* <Link to="/categories" className={classes.link}>
-        گوشی موبایل اپل
-      </Link>
-      <img
-        src="http://localhost:3002/files/2318b36a701e3687514700df5927fb66"
-        alt="apple"
-      />
-      نمایش 6 محصول */}
-      {/* <Link to="/categories" className={classes.link}>
-        گوشی سامسونگ
-      </Link>
-      نمایش 6 محصول
-      <Link to="/categories" className={classes.link}>
-        گوشی شیائومی
-      </Link>
-      نمایش 6 محصول
-      <Link to="/categories" className={classes.link}>
-        گوشی هوآوی
-      </Link>
-      نمایش 6 محصول
-      <Link to="/categories" className={classes.link}>
-        گوشی آنر
-      </Link>
-      نمایش 6 محصول
-      <Link to="/categories" className={classes.link}>
-        گوشی نوکیا
-      </Link>
-      نمایش 6 محصول */}
+     
     </div>
   );
 }
