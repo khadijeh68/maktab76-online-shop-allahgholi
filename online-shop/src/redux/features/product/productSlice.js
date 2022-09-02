@@ -1,4 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+<<<<<<< HEAD
 import axios from "axios";
 import {
   createProductRequest,
@@ -6,6 +7,12 @@ import {
   fetchAllProductsRequest,
   updateProductRequest,
 } from "../../../api/products";
+=======
+import { URL } from "../../../api/http";
+import axois from "axios";
+import axios from "axios";
+
+>>>>>>> d3b8961588e4bcd2943b997d70bb10c310e2e16f
 
 const initialState = {
   productsList: [],
@@ -20,6 +27,7 @@ export const fetchProducts = createAsyncThunk(
   fetchAllProductsRequest
 );
 
+<<<<<<< HEAD
 export const createProduct = createAsyncThunk(
   "products/createProduct",
   (newProduct) => createProductRequest(newProduct)
@@ -41,6 +49,18 @@ export const updateProduct = createAsyncThunk(
 //   (id) => fetchDataRequest(id)
 // );
 
+=======
+export const addProduct = createAsyncThunk(
+  "products/addProduct",
+  async (post) => {
+  try {
+    const response = await axios.post(`${URL}/products`, post);
+    return response.data;
+  } catch (error) {
+    return Promise.reject(error);
+  }
+})
+>>>>>>> d3b8961588e4bcd2943b997d70bb10c310e2e16f
 
 const productSlice = createSlice({
   name: "products",
@@ -72,6 +92,7 @@ const productSlice = createSlice({
       state.loadings = false;
       state.error = "wrong...";
     },
+<<<<<<< HEAD
 
 
     //DELETE
@@ -112,6 +133,21 @@ const productSlice = createSlice({
 //       state.loadings = false;
 //       state.error = "wrong... ";
 //     },
+=======
+    [addProduct.pending]: (state) => {
+      state.loading = true;
+    },
+    [addProduct.fulfilled]: (state, action) => {
+      state.loading = false;
+      state.productsList = action.payload;
+    },
+
+    [addProduct.rejected]: (state, action) => {
+      console.log(action);
+      state.loading = false;
+      state.error = "wrong...";
+    },
+>>>>>>> d3b8961588e4bcd2943b997d70bb10c310e2e16f
   },
 });
 

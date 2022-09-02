@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import { useEffect, useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import { useDispatch, useSelector } from "react-redux";
@@ -106,6 +107,28 @@ const SingleCategory = () => {
           );
         })}
       </div>
+=======
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useParams } from "react-router-dom";
+import { fetchCategory } from "../../redux/features/category/categorySlice";
+
+const SingleCategory = () => {
+  const { categoryId } = useParams();
+  const dispatch = useDispatch();
+  const categoryList = useSelector((state) => state.categories.categoryList);
+  const category = categoryList.filter((category) => category.id !== categoryId);
+  const { name } = category;
+
+  useEffect(() => {
+    dispatch(fetchCategory());
+  }, [dispatch]);
+
+
+  return (
+    <div>
+      <h6>{name}</h6>
+>>>>>>> d3b8961588e4bcd2943b997d70bb10c310e2e16f
     </div>
   );
 };

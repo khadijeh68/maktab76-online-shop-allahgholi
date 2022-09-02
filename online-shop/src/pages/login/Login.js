@@ -19,6 +19,7 @@ const useStyles = makeStyles({
 });
 
 function Login() {
+<<<<<<< HEAD
   const classes = useStyles();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -39,6 +40,49 @@ function Login() {
       <h5 className="mt-4">ورود به پنل مدیریت فروشگاه</h5>
       <Form className="form_data" onSubmit={handleSubmit}>
         {error && <h6 className="text-white">نام کاربری و پسورد صحیح نمی باشد</h6>}
+=======
+  // const initialValues = {
+  //   username: "",
+  //   password: "",
+  // };
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  // const [formValues, setFormValues] = useState(initialValues);
+  const [formErrors, setFormErrors] = useState({});
+  const dispatch = useDispatch();
+  const { error, isLoggedIn } = useSelector((state) => state.users);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    // setFormErrors(validate(formValues));
+    dispatch(login({username,password }));
+  };
+
+  const validate = (values) => {
+    const errors = {};
+
+    if (username === "admin" && password === "admin") {
+      navigate("/admin");
+    } else if (!values.username) {
+      errors.username = "نام کاربری اجباری است";
+    } else if (!values.password) {
+      errors.password = "پسورد اجباری است";
+    }
+    return errors;
+  };
+
+
+  const navigate = useNavigate();
+  const classes = useStyles();
+
+  if (isLoggedIn) return <Navigate to={"/admin"} />;
+  return (
+    <div className={classes.form}>
+      <h5 className="mt-4">ورود به پنل مدیریت فروشگاه</h5>
+
+      <Form className="form_data" onSubmit={handleSubmit}>
+        {error && <h6 className="text-white">{error}</h6>}
+>>>>>>> d3b8961588e4bcd2943b997d70bb10c310e2e16f
         <Form.Group className="mb-3" controlId="username">
           <Form.Label className="mt-2 text-white">نام کاربری :</Form.Label>
           <Form.Control

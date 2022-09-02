@@ -32,7 +32,11 @@ class Edit extends React.Component {
           onEditorChange={this.handleChange}
         />
         <br />
+<<<<<<< HEAD
         {/* <input type="submit" value="Submit" /> */}
+=======
+        <input type="submit" value="Submit" />
+>>>>>>> d3b8961588e4bcd2943b997d70bb10c310e2e16f
       </form>
     );
   }
