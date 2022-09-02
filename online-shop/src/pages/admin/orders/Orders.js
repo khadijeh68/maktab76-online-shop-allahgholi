@@ -1,10 +1,6 @@
 import { Pagination } from "@mui/material";
 import { useEffect, useState } from "react";
-<<<<<<< HEAD
-import { Table } from "react-bootstrap";
-=======
 import { Button, Table } from "react-bootstrap";
->>>>>>> d3b8961588e4bcd2943b997d70bb10c310e2e16f
 import { useDispatch, useSelector } from "react-redux";
 import {
   fetchOrders,
@@ -102,11 +98,7 @@ function Orders() {
         count={count}
         variant="outlined"
         color="secondary"
-<<<<<<< HEAD
         onChange={(event, value) => setCurrentPage(value)}
-=======
-        onChange={(event,value) => setCurrentPage(value)}
->>>>>>> d3b8961588e4bcd2943b997d70bb10c310e2e16f
       />
     </div>
   );

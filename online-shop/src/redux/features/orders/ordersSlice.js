@@ -10,7 +10,6 @@ const initialState = {
   error: "",
 };
 
-<<<<<<< HEAD
 export const fetchOrders = createAsyncThunk(
   "orders/fetchOrders",
    ({ delivered, currentPage }) => {
@@ -23,15 +22,6 @@ export const fetchOrders = createAsyncThunk(
     });
   }
 );
-=======
-export const fetchOrders = createAsyncThunk("orders/fetchOrders", async ({delivered,currentPage}) => {
-  const res = axois({ url: `${URL}/orders/?delivered=${delivered}&_page=${currentPage}&_limit=5` }).then((response) => {
-    return (response.data);
-    // res.header('x-total-count')
-  });
-  return res;
-});
->>>>>>> d3b8961588e4bcd2943b997d70bb10c310e2e16f
 
 export const fetchDelivered = createAsyncThunk(
   "orders/fetchDelivered",

@@ -1,15 +1,6 @@
 import { makeStyles } from "@material-ui/core/styles";
-<<<<<<< HEAD
-import SamsungProduct from "../../components/product/productCard/SamsungProduct";
-import AppleProduct from "../../components/product/productCard/AppleProduct";
-import XiaomiProduct from "../../components/product/productCard/XiaomiProduct";
-import HuaweiProduct from "../../components/product/productCard/HuaweiProduct";
-import HonorProduct from "../../components/product/productCard/HonorProduct";
-import Categories from "../../components/category/Categories";
-=======
 import Categories from "../../components/category/Categories";
 
->>>>>>> d3b8961588e4bcd2943b997d70bb10c310e2e16f
 const useStyles = makeStyles({
   category: {
     display: "flex",
@@ -35,38 +26,7 @@ function Home() {
   return (
     <div className={classes.category}>
       <Categories/>
-<<<<<<< HEAD
      
-=======
-      {/* <Link to="/categories" className={classes.link}>
-        گوشی موبایل اپل
-      </Link>
-      <img
-        src="http://localhost:3002/files/2318b36a701e3687514700df5927fb66"
-        alt="apple"
-      />
-      نمایش 6 محصول */}
-      {/* <Link to="/categories" className={classes.link}>
-        گوشی سامسونگ
-      </Link>
-      نمایش 6 محصول
-      <Link to="/categories" className={classes.link}>
-        گوشی شیائومی
-      </Link>
-      نمایش 6 محصول
-      <Link to="/categories" className={classes.link}>
-        گوشی هوآوی
-      </Link>
-      نمایش 6 محصول
-      <Link to="/categories" className={classes.link}>
-        گوشی آنر
-      </Link>
-      نمایش 6 محصول
-      <Link to="/categories" className={classes.link}>
-        گوشی نوکیا
-      </Link>
-      نمایش 6 محصول */}
->>>>>>> d3b8961588e4bcd2943b997d70bb10c310e2e16f
     </div>
   );
 }

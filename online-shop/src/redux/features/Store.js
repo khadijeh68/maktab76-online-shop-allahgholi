@@ -4,11 +4,8 @@ import ordersSlice from "./orders/ordersSlice";
 import productSlice from "./product/productSlice";
 import categorySlice from "./category/categorySlice"
 import usersSlice from "./user/usersSlice";
-<<<<<<< HEAD
 import { firstPageSlice } from "./fiestPage/firstPage";
 import productDetailSlice from "./productDetail/productDetailSlice";
-=======
->>>>>>> d3b8961588e4bcd2943b997d70bb10c310e2e16f
 
 
 export const store = configureStore({
@@ -17,12 +14,8 @@ export const store = configureStore({
     orders: ordersSlice,
     inventory: inventorySlice,
     categories: categorySlice,
-<<<<<<< HEAD
     users: usersSlice,
     list:firstPageSlice,
     product:productDetailSlice
-=======
-    users: usersSlice
->>>>>>> d3b8961588e4bcd2943b997d70bb10c310e2e16f
   },
 });
