@@ -1,6 +1,10 @@
 import { Pagination } from "@mui/material";
 import { useEffect, useState } from "react";
+<<<<<<< HEAD
 import { Table } from "react-bootstrap";
+=======
+import { Button, Table } from "react-bootstrap";
+>>>>>>> origin/develop
 import { useDispatch, useSelector } from "react-redux";
 import {
   fetchOrders,
@@ -11,7 +15,7 @@ import OrdersDisplayModal from "../../../components/orders/OrdersDisplayModal";
 
 const useStyles = makeStyles({
   page: {
-    direction: "ltr",
+    // direction: "ltr",
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
@@ -98,7 +102,11 @@ function Orders() {
         count={count}
         variant="outlined"
         color="secondary"
+<<<<<<< HEAD
         onChange={(event, value) => setCurrentPage(value)}
+=======
+        onChange={(event,value) => setCurrentPage(value)}
+>>>>>>> origin/develop
       />
     </div>
   );

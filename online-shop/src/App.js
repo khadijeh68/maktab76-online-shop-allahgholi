@@ -16,18 +16,28 @@ import PaymentPanel from "./pages/paymant/PaymantPanel";
 import SuccessPaymant from "./pages/paymant/SuccessPaymant";
 import FailPaymant from "./pages/paymant/FailPaymant";
 import Inventory from "./pages/admin/inventory/Inventory";
+
 import SharedCategoryLayout from "./pages/shared/SharedCategoryLayout";
 import ProductDetails from "./components/product/ProductDetails";
 import PrivateRoute from "./pages/route/PrivateRoute";
 import SharedProductdLayout from "./pages/shared/SharedProductdLayout";
 import SingleCategory from "./components/category/SingleCategory"
 import ProductCard from "./components/product/ProductCard";
+
+import SingleCategory from "./components/category/SingleCategory";
+import SharedCategoryLayout from "./pages/shared/SharedCategoryLayout";
+import ProductDetails from "./components/product/ProductDetails";
+import PrivateRoute from "./pages/route/PrivateRoute";
+
+
 function App() {
   return (
     <BrowserRouter>
       <Routes>
+      {/* <Route path="/" element={<PrivateRoute><SharedLayout /></PrivateRoute>}> */}
         <Route path="/" element={<SharedLayout />}>
           <Route index element={<Home />} />
+
           <Route path="categories" element={<SharedCategoryLayout />}>
             <Route path="categories" element={<Categories />} />
             <Route path=":categoryId" element={<SingleCategory/>} />
@@ -36,6 +46,14 @@ function App() {
           <Route index element={<ProductCard />} />
           <Route path=":id" element={<ProductDetails />} />
           </Route>
+
+          <Route path="categories" element={<SharedCategoryLayout />} >
+          <Route index element={<Categories />} />
+          <Route path=":categoryId" element={<SingleCategory />} />
+          </Route>
+          <Route path="products" element={<Products />} />
+          <Route path="products/:id" element={<ProductDetails />} />
+
           <Route path="shoppingCart" element={<ShoppingCart />} />
           <Route path="checkout" element={<Checkout />} />
           <Route path="*" element={<Error />} />

@@ -10,9 +10,14 @@ import 'react-toastify/dist/ReactToastify.css';
 import { Pagination } from "@mui/material";
 import { makeStyles } from "@material-ui/core";
 import { fetchCategory } from "../../../redux/features/category/categorySlice";
+<<<<<<< HEAD
 import ProductAddModal from "../../../components/product/ProductAddModal";
 import { BASE_URL } from "../../../config/api";
 import ProductEditModal from "../../../components/product/ProductEditModal";
+=======
+import ProductEditModal from "../../../components/product/ProductEditModal";
+
+>>>>>>> origin/develop
 
 const useStyles = makeStyles({
   page: {
@@ -35,14 +40,20 @@ function Product() {
   const total = useSelector((state) => state.products.total);
  
   const [currentPage, setCurrentPage] = useState(1);
+<<<<<<< HEAD
   const limit = 5;
   const count = Math.ceil(total / limit);
+=======
+  // const [state, setState] = useState([]);
+  // const [errorMessage, setErrorMessage] = useState("");
+>>>>>>> origin/develop
 
   useEffect(() => {
     dispatch(fetchProducts(currentPage))
       dispatch(fetchCategory());
   }, [currentPage, dispatch]);
 
+<<<<<<< HEAD
 
   const handleDelete = (id) => {
   dispatch(deleteProduct(id));
@@ -57,6 +68,42 @@ function Product() {
       </div>
       <ProductAddModal categoryList={categoryList}/>
     
+=======
+  // const handleDelete = (id) => {
+  //   axios
+  //     .delete(`${URL}/products/${id}`)
+  //     .then((response) => setState({ productsList: response.filter((f) => f.id !== id)}))
+  //     .catch((error) => {
+  //       setErrorMessage(error.message);
+  //       console.error("There was an error!", error);
+  //     });
+  // };
+  // const handleDelete = async (id) => {
+  //   await fetch(`${URL}/products/${id}`, {
+  //     method: "DELETE",
+  //     headers: {
+  //       "Content-type": "application/json"
+  //     }
+  //   })
+
+  //   await setState(productsList.filter(p => p.id !== id))
+  // }
+
+  const handleEdit = () => {};
+  return (
+    // `${URL}/products?category=3`
+    <div className="orders">
+      <div className="d-flex flex-row justify-content-between mx-3">
+        <h6>مدیریت کالا ها</h6>
+
+        {/* <div>
+          <Button variant="success" type="submit" >
+            افزودن کالا
+          </Button>
+        </div> */}
+      </div>
+      <ProductEditModal />
+>>>>>>> origin/develop
       <Table striped bordered hover className="w-75 text-center order_table ">
         <thead>
           <tr>
@@ -80,11 +127,31 @@ function Product() {
                   </td>
                   <td>{item.name}</td>
                   <td>
+<<<<<<< HEAD
                     {/* {
                       categoryList.find(
                         (category) => category.id === item.category
                       ).name
                     } */}
+=======
+                    {
+                      categoryList.find(
+                        (category) => category.id === item.category
+                      ).name
+                    }
+                  </td>
+                  <td>
+                    <Button
+                      variant="warning"
+                      className="mx-1"
+                      onClick={handleEdit}
+                    >
+                      ویرایش
+                    </Button>
+                    <Button variant="danger" >
+                      حذف
+                    </Button>
+>>>>>>> origin/develop
                   </td>
                   <td>
                     {/* <Button
@@ -108,6 +175,7 @@ function Product() {
             })}
         </tbody>
       </Table>
+
       <Pagination
         className={classes.page}
         count={count}

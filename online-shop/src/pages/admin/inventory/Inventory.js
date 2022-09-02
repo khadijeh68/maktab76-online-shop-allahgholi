@@ -8,7 +8,7 @@ import { digitsEnToFa } from "@persian-tools/persian-tools";
 import $ from 'jquery';
 const useStyles = makeStyles({
   page: {
-    direction: "ltr",
+    // direction: "ltr",
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
@@ -16,6 +16,7 @@ const useStyles = makeStyles({
     marginBottom: "20px",
   },
 });
+<<<<<<< HEAD
 
 // $('td').click(function () {
 //   $(this).replaceWith(function () {
@@ -23,6 +24,8 @@ const useStyles = makeStyles({
 //       return '<input  value="' + $(this).text() + '"> </input>';
 //   });
 // })
+=======
+>>>>>>> origin/develop
 
 function Inventory() {
   const classes = useStyles();
@@ -42,18 +45,27 @@ function Inventory() {
   }, [currentPage, dispatch]);
 
   function handleChange(e) {
+<<<<<<< HEAD
     dispatch(setMount(e.target.value))
+=======
+    e.preventDefault();
+    // setText(e.target.value);
+  
+>>>>>>> origin/develop
   }
 
   function onSubmit(e) {
     e.preventDefault();
     // setTextField();
   }
+<<<<<<< HEAD
   const changeTag = () =>{
     
   }
 
 
+=======
+>>>>>>> origin/develop
   return (
     <div className="orders">
       <div className="d-flex flex-row justify-content-between mx-3">
@@ -80,18 +92,24 @@ function Inventory() {
               return (
                 <tr key={item.id}>
                   <td>{item.name}</td>
+<<<<<<< HEAD
                   <td onClick={changeTag}>{digitsEnToFa(
                         item.price
                           .toString()
                           .replace(/\B(?=(\d{3})+(?!\d))/g, "،")
                       )}
                     {/* <input
+=======
+                  <td>
+                    <input
+>>>>>>> origin/develop
                       value={digitsEnToFa(
                         item.price
                           .toString()
                           .replace(/\B(?=(\d{3})+(?!\d))/g, "،")
                       )}
                       onChange={handleChange}
+<<<<<<< HEAD
                     /> */}
                   </td>
                   <td onClick={changeTag}>{digitsEnToFa(item.quantity)}
@@ -99,6 +117,15 @@ function Inventory() {
                       value=
                       onChange={handleChange}
                     /> */}
+=======
+                    />
+                  </td>
+                  <td>
+                    <input
+                      value={digitsEnToFa(item.quantity)}
+                      onChange={handleChange}
+                    />
+>>>>>>> origin/develop
                   </td>
                 </tr>
               );
@@ -110,7 +137,11 @@ function Inventory() {
         count={count}
         variant="outlined"
         color="secondary"
+<<<<<<< HEAD
         onChange={(event,value) => setCurrentPage(value)}
+=======
+        onClick={(e) => setCurrentPage(e.target.textContent)}
+>>>>>>> origin/develop
       />
     </div>
   );

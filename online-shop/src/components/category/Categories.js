@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { fetchCategory } from "../../redux/features/category/categorySlice";
 import { useDispatch, useSelector } from "react-redux";
 
+
 import { Outlet } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
@@ -10,6 +11,11 @@ import SamsungProduct from "../product/productCard/SamsungProduct";
 import XiaomiProduct from "../product/productCard/XiaomiProduct";
 import HuaweiProduct from "../product/productCard/HuaweiProduct";
 import HonorProduct from "../product/productCard/HonorProduct";
+
+import ProductCard from "../product/ProductCard";
+import { Outlet } from "react-router-dom";
+import { Link } from "react-router-dom";
+import { makeStyles } from "@material-ui/core/styles";
 
 
 const useStyles = makeStyles({
@@ -40,28 +46,16 @@ function Categories() {
     dispatch(fetchCategory());
   }, [dispatch]);
   return (
-    // <>
-    //   <div className={classes.container}>
-    //     {categoryList.map((category) => {
-    //       return (
-    //         <div className="mt-5" key={category.id}>
-    //           <Link to={`/categories/${category.id}`}>
-    //             {category.name}
-    //             {/* <ProductCard category={category.id} /> */}
-    //             {/* <AppleProduct/> */}
-    //           </Link>
-    //         </div>
-    //       );
-    //     })}
-    //     <Outlet />
-    //   </div>
-    // </>
     <>
      <AppleProduct/>
       <SamsungProduct/>
       <XiaomiProduct/>
       <HuaweiProduct/>
       <HonorProduct/>
+
+    
+      
+
     </>
   );
 }
