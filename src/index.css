@@ -50,7 +50,10 @@ img {
   width: 100px;
   height: 120px;
 }
-
+.img-product-details{
+  width: 200px;
+  height: 250px;
+}
 .form_data {
   width: 400px;
   height: 450px;
@@ -95,6 +98,11 @@ img {
 }
 .product-details{
   margin: 70px;
+  display: flex;
+  flex-direction: row;
+  padding: 70px;
+  justify-content: center;
+  align-items: center;
 }
 .loading{
   font-family: "Vazir-Light";

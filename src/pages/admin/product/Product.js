@@ -84,13 +84,13 @@ function Product() {
                       <img src={item.image} alt="mobile" />
                     )}
                   </td>
-                  <td>{item.name}</td>
+                  <td>{item?.name ?? "-"}</td>
                   <td>
-                    {/* {
-                      categoryList.find(
-                        (category) => category.id === item.category
-                      ).name
-                    } */}
+                    {
+                      item?.category ? categoryList.find(
+                        (category) => category.id === item?.category
+                      )?.name : "-"
+                    }
                   </td>
                   <td>
                     <Button
