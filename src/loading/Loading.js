@@ -1,8 +1,8 @@
-import React from 'react'
+import '../index.css'
 
 function Loading() {
   return (
-    <div>Loading...</div>
+    <div className='loading'>در حال بارگزاری...</div>
   )
 }
 

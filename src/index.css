@@ -96,3 +96,8 @@ img {
 .product-details{
   margin: 70px;
 }
+.loading{
+  font-family: "Vazir-Light";
+  direction: rtl;
+  margin: 70px;
+}
