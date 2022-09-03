@@ -26,7 +26,6 @@ function AppRouter() {
   return (
     <BrowserRouter>
       <Routes>
-      {/* <Route path="/" element={<PrivateRoute><SharedLayout /></PrivateRoute>}> */}
         <Route path="/" element={<SharedLayout />}>
           <Route index element={<Home />} />
           <Route path="categories" element={<SharedCategoryLayout />}>
@@ -48,7 +47,6 @@ function AppRouter() {
 
         <Route path="login" element={<Login />} />
         <Route path="admin" element={<PrivateRoute><SharedAdminLayout /></PrivateRoute>}>
-        {/* <Route path="admin" element={<SharedAdminLayout />}> */}
           <Route index element={<Orders />} />
           <Route path="product" element={<Product />} />
           <Route path="inventory" element={<Inventory />} />

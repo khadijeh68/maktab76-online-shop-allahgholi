@@ -9,26 +9,27 @@ body {
 @font-face {
   font-family: "Vazir-Bold";
   src: local("Vazir-Bold"),
-    url("./fonts/vazir/Vazir-Bold.ttf") format("truetype");
+    url("./assets/fonts/vazir/Vazir-Bold.ttf") format("truetype");
 }
 
 @font-face {
   font-family: "Vazir-Medium";
   src: local("Vazir-Medium"),
-    url("./fonts/vazir/Vazir-Medium.ttf") format("truetype");
+    url("./assets/fonts/vazir/Vazir-Medium.ttf") format("truetype");
 }
 
 @font-face {
   font-family: "Vazir-Light";
   src: local("Vazir-Light"),
-    url("./fonts/vazir/Vazir-Light.ttf") format("truetype");
+    url("./assets/fonts/vazir/Vazir-Light.ttf") format("truetype");
 }
 
 @font-face {
   font-family: "Vazir-Light";
   src: local("Vazir-Light"),
-    url("./fonts/vazir/Vazir-Light.woff") format("truetype");
+    url("./assets/fonts/vazir/Vazir-Light.woff") format("truetype");
 }
+
 
 .main {
   display: flex;
