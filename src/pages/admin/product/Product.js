@@ -50,7 +50,7 @@ function Product() {
 
   const handleDelete = (id) => {
     dispatch(deleteProduct(id));
-    // dispatch(fetchProducts());
+    dispatch(fetchProducts());
   };
 
   return (

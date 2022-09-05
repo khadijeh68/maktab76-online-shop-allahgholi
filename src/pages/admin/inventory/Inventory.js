@@ -17,12 +17,6 @@ const useStyles = makeStyles({
   },
 });
 
-// $('td').click(function () {
-//   $(this).replaceWith(function () {
-//       console.log("Text is "+ $(this).text());
-//       return '<input  value="' + $(this).text() + '"> </input>';
-//   });
-// })
 
 function Inventory() {
   const classes = useStyles();
@@ -52,6 +46,12 @@ function Inventory() {
     // setTextField();
   }
   const changeTag = () =>{
+    // $('td').click(function () {
+    //   $(this).replaceWith(function () {
+    //       console.log("Text is "+ $(this).text());
+    //       return '<input  value="' + $(this).text() + '"> </input>';
+    //   });
+    // })
     
   }
 

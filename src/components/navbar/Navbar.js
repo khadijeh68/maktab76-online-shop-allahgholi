@@ -26,6 +26,7 @@ const useStyles = makeStyles({
   basket: {
     display: "flex",
     justifyContent: "center",
+    alignItems: "center",
   },
   leftNav: {
     display: "flex",
@@ -65,18 +66,6 @@ function Navbar() {
               فروشگاه آنلاین موبایل و لوازم جانبی
             </span>
           </NavLink>
-
-           {/* <NavLink to="/" className={classes.span}>
-            <span>صفحه اصلی </span>
-          </NavLink> */}
-{/* 
-          <NavLink to="/categories" className={classes.span}>
-            <span>دسته بندی کالاها </span>
-          </NavLink>  */}
-{/* 
-           <NavLink to="/products" className={classes.span}>
-            <span>کالاها</span>
-          </NavLink>  */}
         </div>
 
         <div className={classes.leftNav}>
@@ -91,7 +80,8 @@ function Navbar() {
           >
             <div className={classes.basket}>
               <ShoppingCartSharpIcon />
-              <span>سبد خرید </span>
+              {/* <span>سبد خرید </span> */}
+              <span className="bag-quantity">0</span>
             </div>
           </NavLink>
         </div>

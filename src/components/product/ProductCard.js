@@ -1,8 +1,9 @@
 import { Button, Card } from "react-bootstrap";
 import { makeStyles } from "@material-ui/core";
 import { Link } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { BASE_URL } from "../../config/api";
+import { addToCart } from "../../redux/features/cart/cartSlice";
 
 const useStyles = makeStyles({
   page: {

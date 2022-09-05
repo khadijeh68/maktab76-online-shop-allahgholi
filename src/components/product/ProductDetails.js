@@ -1,29 +1,38 @@
 import React, { useEffect, useState } from "react";
 import { Button, Card } from "react-bootstrap";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { getDetails } from "../../redux/features/productDetail/productDetailSlice";
 import "../../index.css";
 import { BASE_URL } from "../../config/api";
+import { getProduct } from "../../redux/features/cart/cartSlice";
 
 function ProductDetails() {
   const dispatch = useDispatch();
   const { id } = useParams();
-
+  const cartItems = useSelector((state) => state.cart.cartItems);
+  console.log(cartItems)
   const [product, setProduct] = useState([]);
-  console.log(product);
 
   useEffect(() => {
     dispatch(getDetails(id))
       .unwrap()
       .then((res) => setProduct(res));
+      dispatch(getProduct(id))
   }, [dispatch, id]);
 
+  const addToCart = (id) => {
+    console.log(cartItems);
+    const clickedItem = cartItems.filter((product) => product.id === id);
+    console.log(clickedItem);
+    const Basket = JSON.parse(localStorage.getItem("basket")) ?? []; //
+    localStorage.setItem("basket", JSON.stringify([...Basket, ...clickedItem]));
+  };
   return (
     <div className="product-details">
-      <div >
+      <div>
         <img
-         className="mx-5 img-product-details"
+          className="mx-5 img-product-details"
           variant="top"
           src={`${BASE_URL}/files/${product.image}`}
           alt="mobile"
@@ -40,7 +49,9 @@ function ProductDetails() {
           <input type="number" />
         </div>
         <div dangerouslySetInnerHTML={{ __html: product.description }} />
-        <Button variant="primary">افزودن به سبد خرید</Button>
+        <Button variant="primary" onClick={() => addToCart(product.id)}>
+          افزودن به سبد خرید
+        </Button>
       </div>
     </div>
   );

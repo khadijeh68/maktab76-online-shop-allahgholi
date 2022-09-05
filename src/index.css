@@ -109,3 +109,17 @@ img {
   direction: rtl;
   margin: 70px;
 }
+.bag-quantity{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 25px;
+  width: 25px;
+  background: rgb(0, 0, 0);
+  border-radius: 50%;
+  color: white;
+  font-weight: 700;
+  font-size: 14px;
+  margin-right: 5px;
+  margin-bottom: 7px;
+}

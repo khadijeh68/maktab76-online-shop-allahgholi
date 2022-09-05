@@ -2,6 +2,9 @@ import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Loading from "../../loading/Loading";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 const PrivateRoute = React.lazy(() => import("./PrivateRoute"));
 
 const Home = React.lazy(() => import("../../pages/home/Home"));
@@ -53,6 +56,7 @@ const ProductCard = React.lazy(() =>
 function AppRouter() {
   return (
     <BrowserRouter>
+    <ToastContainer/>
       <Routes>
         <Route
           path="/"
