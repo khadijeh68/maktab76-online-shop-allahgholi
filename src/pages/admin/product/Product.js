@@ -13,7 +13,7 @@ import { fetchCategory } from "../../../redux/features/category/categorySlice";
 import ProductAddModal from "../../../components/product/ProductAddModal";
 import { BASE_URL } from "../../../config/api";
 import ProductEditModal from "../../../components/product/ProductEditModal";
-
+import { unwrapResult } from "@reduxjs/toolkit";
 const useStyles = makeStyles({
   page: {
     direction: "ltr",
@@ -31,7 +31,7 @@ function Product() {
   const productsList = useSelector((state) => state.products.productsList);
   const categoryList = useSelector((state) => state.categories.categoryList);
   const total = useSelector((state) => state.products.total);
-
+  // const [loading, setLoading] = useState(false);
   const [showEdit, setShowEdit] = useState(false);
   const [currentProduct, setCurrentProduct] = useState({});
   const handleOpenEdit = (id) => {
@@ -49,8 +49,9 @@ function Product() {
   }, [currentPage, dispatch]);
 
   const handleDelete = (id) => {
-    dispatch(deleteProduct(id));
-    dispatch(fetchProducts());
+    dispatch(deleteProduct(id)).then(unwrapResult).then(()=>dispatch(fetchProducts()))
+    // dispatch(fetchProducts());
+    // setLoading(!loading);
   };
 
   return (
@@ -75,14 +76,13 @@ function Product() {
               return (
                 <tr key={item.id}>
                   <td>
-                    {item.id < 30 ? (
+                    {
                       <img
                         src={`${BASE_URL}/files/${item.image}`}
                         alt="mobile"
                       />
-                    ) : (
-                      <img src={item.image} alt="mobile" />
-                    )}
+                    
+                    }
                   </td>
                   <td>{item?.name ?? "-"}</td>
                   <td>

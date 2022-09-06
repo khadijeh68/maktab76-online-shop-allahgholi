@@ -53,7 +53,7 @@ const ordersSlice = createSlice({
     },
     [fetchDelivered.fulfilled]: (state, action) => {
       state.loadings = false;
-      state.orders = action.payload;
+      state.ordersList = action.payload;
     },
     [fetchDelivered.rejected]: (state) => {
       state.loadings = false;

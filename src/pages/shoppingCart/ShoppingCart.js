@@ -3,36 +3,54 @@ import { digitsEnToFa } from "@persian-tools/persian-tools";
 import { useEffect } from "react";
 import { useState } from "react";
 import { Button, Table } from "react-bootstrap";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { BASE_URL } from "../../config/api";
+import {
+  calculateTotals,
+  decrease,
+  increase,
+  removeItem,
+} from "../../redux/features/cart/cartSlice";
 
 const useStyles = makeStyles({
   title: {
     fontFamily: "Vazir-Medium",
     margin: "70px 20px",
     display: "flex",
-    justifyContent:"center",
+    justifyContent: "center",
     flexDirection: "column",
-    alignItems:"center"
+    alignItems: "center",
   },
   total: {
     display: "flex",
     flexDirection: "row",
   },
-  btn:{
-    marginRight:"625px"
-  }
+  btn: {
+    marginRight: "625px",
+  },
 });
 
 function Basket() {
+  const dispatch = useDispatch();
   const [basket, setBasket] = useState([]);
+  const total = useSelector((state) => state.cart.total);
+
+  console.log(total);
+  useEffect(() => {
+    setBasket(JSON.parse(localStorage.getItem("basket")));
+  }, []);
 
   useEffect(() => {
-    setBasket(
-      JSON.parse(localStorage.getItem("basket")) //
-    );
-  }, []);
-  console.log(basket);
+    dispatch(calculateTotals());
+  }, [dispatch]);
+  const removeItem = (id) => {
+    const arr = basket.filter((item) => item.id !== id);
+    console.log(arr)
+    setBasket(arr);
+    // handlePrice();
+  };
+
   const classes = useStyles();
   return (
     <div className={classes.title}>
@@ -49,7 +67,7 @@ function Basket() {
         </thead>
         <tbody>
           {basket.map((item) => (
-            <tr>
+            <tr key={item.id}>
               <td>
                 <img src={`${BASE_URL}/files/${item.image}`} alt="mobile" />
               </td>
@@ -57,14 +75,43 @@ function Basket() {
                 <h6>{item.name}</h6>
               </td>
               <td>
-                <p>{digitsEnToFa(item.price.toString()
-                        .replace(/\B(?=(\d{3})+(?!\d))/g, "،"))}</p>
+                <p>
+                  {digitsEnToFa(
+                    item.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, "،")
+                  )}
+                </p>
               </td>
               <td>
-                <p>{digitsEnToFa(item.quantity)}</p>
+                {/* <p>{digitsEnToFa(item.quantity)}</p> */}
+                <div>
+                  <button
+                    onClick={() => {
+                      dispatch(increase(item.id));
+                    }}
+                  >
+                    +
+                  </button>
+                  <button>{item.quantity}</button>
+                  <button
+                    onClick={() => {
+                      if (item.quantity === 1) {
+                        dispatch(removeItem(item.id));
+                        return;
+                      }
+                      dispatch(decrease(item.id));
+                    }}
+                  >
+                    -
+                  </button>
+                </div>
               </td>
               <td>
-                <Button variant="danger">حذف</Button>
+                <Button
+                  variant="danger"
+                  onClick={() => dispatch(removeItem(item.id))}
+                >
+                  حذف
+                </Button>
               </td>
             </tr>
           ))}
@@ -72,7 +119,7 @@ function Basket() {
       </Table>
       <div className={classes.total}>
         <div>
-          <h5>جمع: </h5>
+          <h5>جمع:{total} </h5>
         </div>
         <div className={classes.btn}>
           <Button variant="success">

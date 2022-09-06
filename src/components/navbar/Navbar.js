@@ -2,6 +2,7 @@ import { NavLink } from "react-router-dom";
 import { makeStyles } from "@material-ui/core";
 import ShoppingCartSharpIcon from "@mui/icons-material/ShoppingCartSharp";
 import "../../index.css";
+import { useSelector } from "react-redux";
 
 const useStyles = makeStyles({
   nav: {
@@ -47,6 +48,7 @@ const useStyles = makeStyles({
 
 function Navbar() {
   const classes = useStyles();
+  const  amount  = useSelector((state) => state.cart.amount);
   const navLinkStyles = ({ isActive }) => {
     return {
       color: isActive ? "#C14795" : "black",
@@ -81,7 +83,7 @@ function Navbar() {
             <div className={classes.basket}>
               <ShoppingCartSharpIcon />
               {/* <span>سبد خرید </span> */}
-              <span className="bag-quantity">0</span>
+              <span className="bag-quantity">{amount}</span>
             </div>
           </NavLink>
         </div>

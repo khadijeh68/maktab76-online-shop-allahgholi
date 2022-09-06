@@ -11,23 +11,31 @@ function ProductDetails() {
   const dispatch = useDispatch();
   const { id } = useParams();
   const cartItems = useSelector((state) => state.cart.cartItems);
-  console.log(cartItems)
   const [product, setProduct] = useState([]);
 
   useEffect(() => {
     dispatch(getDetails(id))
       .unwrap()
       .then((res) => setProduct(res));
-      dispatch(getProduct(id))
+    dispatch(getProduct(id));
   }, [dispatch, id]);
 
-  const addToCart = (id) => {
-    console.log(cartItems);
-    const clickedItem = cartItems.filter((product) => product.id === id);
-    console.log(clickedItem);
+
+
+  const addToCart = (item) => {
+    const clickedItem = cartItems.filter((product) => product.id === item);
     const Basket = JSON.parse(localStorage.getItem("basket")) ?? []; //
+    // if (clickedItem.indexOf(item) !== -1) return;
     localStorage.setItem("basket", JSON.stringify([...Basket, ...clickedItem]));
   };
+
+  
+  const handleChange = (item) => {
+    console.log(cartItems.indexOf(item))
+    // if (basket.indexOf(item) !== -1) return;
+    // setBasket([...basket, item]);
+  }
+
   return (
     <div className="product-details">
       <div>
@@ -44,10 +52,10 @@ function ProductDetails() {
         <p>{`وزن: ${product.weight}`}</p>
         <p>{`اندازه: ${product.size}`}</p>
         <p>{`قیمت: ${product.price}`}</p>
-        <div>
+        {/* <div>
           <label>تعداد: </label>
           <input type="number" />
-        </div>
+        </div> */}
         <div dangerouslySetInnerHTML={{ __html: product.description }} />
         <Button variant="primary" onClick={() => addToCart(product.id)}>
           افزودن به سبد خرید

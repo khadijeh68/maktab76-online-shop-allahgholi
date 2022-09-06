@@ -23,7 +23,7 @@ function ProductEditModal({ showEdit, item, setShowEdit }) {
   // }, [setShowEdit, showEdit]);
 
   const [newProduct, setNewProduct] = useState({
-    // image: item.image,
+    image: item.image,
     name: item.name,
     category: item.category,
     os: item.os,
@@ -41,7 +41,8 @@ function ProductEditModal({ showEdit, item, setShowEdit }) {
   const handleSubmit = (e) => {
     e.preventDefault();
     const productId = item.id;
-    dispatch(updateProduct(productId, newProduct));
+  //  const data = {...newProduct,{thu}}
+    dispatch(updateProduct({id: productId, product:newProduct}));
     dispatch(fetchProducts());
   };
 
