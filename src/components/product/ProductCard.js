@@ -45,9 +45,6 @@ function ProductCard() {
                 />
                 <Card.Body>
                   <Card.Title>{product.name}</Card.Title>
-                  <Card.Text>{product.os}</Card.Text>
-                  <Card.Text>{product.weight}</Card.Text>
-                  <Card.Text>{product.size}</Card.Text>
                   <Card.Text>{product.price}</Card.Text>
                   <Button variant="primary">افزودن به سبد خرید</Button>
                 </Card.Body>

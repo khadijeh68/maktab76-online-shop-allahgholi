@@ -8,65 +8,52 @@ import {
   fetchProducts,
   updateProduct,
 } from "../../redux/features/product/productSlice";
+import instance from "../../api/http";
 
 function ProductEditModal({ showEdit, item, setShowEdit }) {
+  const [image, setImage] = useState([]);
+  const [description, setDescription] = useState([]);
   const dispatch = useDispatch();
   const handleClose = () => setShowEdit(false);
-  console.log(item);
-  // const [show, setShow] = useState(false);
-  // const handleClose = () => setShow(false);
-  console.log("showEdit", showEdit);
 
-  // useEffect(() => {
-  //   setShowEdit(showEdit);
-  //   console.log(showEdit)
-  // }, [setShowEdit, showEdit]);
+  const handlePicture = (e) => {
+    let file = e.target.files[0];
+    const form = new FormData();
+    form.append("image",file);
+    instance.post("/upload", form).then((res) => setImage([res.data.filename]));
+    let pic = URL.createObjectURL(file);
+  };
 
   const [newProduct, setNewProduct] = useState({
-    image: item.image,
     name: item.name,
     category: item.category,
-    os: item.os,
+    colors: item.colors,
     price: item.price,
   });
-  const [description, setDescription] = useState([]);
-  console.log(newProduct);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setNewProduct({ ...newProduct, [name]: value });
   };
-
-  const { name, category, os, price } = newProduct;
+ 
+  const { name, category, colors,price } = newProduct;
   const handleSubmit = (e) => {
     e.preventDefault();
     const productId = item.id;
-  //  const data = {...newProduct,{thu}}
-    dispatch(updateProduct({id: productId, product:newProduct}));
+   const data = {...newProduct,image,description}
+    dispatch(updateProduct({id: productId, product:data}));
     dispatch(fetchProducts());
   };
 
   return (
     <>
-      {/* <Button
-        variant="warning"
-        onClick={handleOpenEdit}
-        className="btn-product"
-      >
-        ویرایش
-      </Button> */}
       <Modal show={showEdit}>
         <Modal.Header closeButton onClick={handleClose}>
           <Modal.Title>افزودن/ ویرایش کالا</Modal.Title>
         </Modal.Header>
         <div className="mt-2">
-          {/* <label>تصویر کالا:</label>
-              <input
-                type="file"
-                name="image"
-                value={image}
-                src={`${BASE_URL}/files/${item.image}`}
-              /> */}
+        <label>تصویر کالا:</label>
+              <input type="file"  onChange={(e) => handlePicture(e)} />
         </div>
         <Modal.Body>
           <form onSubmit={(e) => handleSubmit(e)}>
@@ -99,15 +86,6 @@ function ProductEditModal({ showEdit, item, setShowEdit }) {
               />
             </div>
             <div className="mt-2">
-              <label>سیستم عامل :</label>
-              <input
-                type="text"
-                name="os"
-                value={os}
-                onChange={(e) => handleChange(e)}
-              />
-            </div>
-            <div className="mt-2">
               <label>قیمت کالا:</label>
               <input
                 type="text"
@@ -116,7 +94,26 @@ function ProductEditModal({ showEdit, item, setShowEdit }) {
                 onChange={(e) => handleChange(e)}
               />
             </div>
-
+            <div className="mt-2">
+              <label>رنگ :</label>
+              <select
+                name="color"
+                value={colors}
+                onChange={(e) => handleChange(e)}
+                defaultValue={"DEFAULT"}
+              >
+                <option value="DEFAULT" disabled>
+                  انتخاب کنید
+                </option>
+                <option>طلایی</option>
+                <option>نقره ای</option>
+                <option>آبی</option>
+                <option>مشکی</option>
+                <option>سبز</option>
+                <option>صورتی</option>
+                <option>سفید</option>
+              </select>
+            </div>
             <label> توضیحات:</label>
             <CKEditor
               editor={ClassicEditor}

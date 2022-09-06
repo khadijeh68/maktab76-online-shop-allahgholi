@@ -25,8 +25,8 @@ const useStyles = makeStyles({
     fontSize: "20px",
   },
   img: {
-    width: "14rem",
-    height: "28rem",
+    width: "28rem",
+    height: "20rem",
     alignItems: "center",
     padding: "10px",
     backgroundColor: "#ffffff",
@@ -70,9 +70,6 @@ function AppleProduct() {
                 />
                 <Card.Body>
                   <Card.Title>{product.name}</Card.Title>
-                  <Card.Text>{product.os}</Card.Text>
-                  <Card.Text>{product.weight}</Card.Text>
-                  <Card.Text>{product.size}</Card.Text>
                   <Card.Text>{product.price}</Card.Text>
                   <Button variant="primary">افزودن به سبد خرید</Button>
                 </Card.Body>

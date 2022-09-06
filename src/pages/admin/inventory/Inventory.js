@@ -8,7 +8,7 @@ import { digitsEnToFa } from "@persian-tools/persian-tools";
 import $ from 'jquery';
 const useStyles = makeStyles({
   page: {
-    // direction: "ltr",
+    direction: "ltr",
     display: "flex",
     alignItems: "center",
     justifyContent: "center",

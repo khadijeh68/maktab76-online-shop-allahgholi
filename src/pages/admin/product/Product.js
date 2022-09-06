@@ -5,7 +5,6 @@ import {
   deleteProduct,
   fetchProducts,
 } from "../../../redux/features/product/productSlice";
-import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { Pagination } from "@mui/material";
 import { makeStyles } from "@material-ui/core";
@@ -14,6 +13,8 @@ import ProductAddModal from "../../../components/product/ProductAddModal";
 import { BASE_URL } from "../../../config/api";
 import ProductEditModal from "../../../components/product/ProductEditModal";
 import { unwrapResult } from "@reduxjs/toolkit";
+import ProductDeleteModal from "../../../components/product/ProductDeleteModal";
+
 const useStyles = makeStyles({
   page: {
     direction: "ltr",
@@ -31,7 +32,7 @@ function Product() {
   const productsList = useSelector((state) => state.products.productsList);
   const categoryList = useSelector((state) => state.categories.categoryList);
   const total = useSelector((state) => state.products.total);
-  // const [loading, setLoading] = useState(false);
+
   const [showEdit, setShowEdit] = useState(false);
   const [currentProduct, setCurrentProduct] = useState({});
   const handleOpenEdit = (id) => {
@@ -43,16 +44,15 @@ function Product() {
   const limit = 5;
   const count = Math.ceil(total / limit);
 
+  //tosify delete
+  const [openDelete, setOpenDelete] = useState(false);
+  const handleOpenDelete = () => setOpenDelete(true);
+  const handleCloseDelete = () => setOpenDelete(false);
+
   useEffect(() => {
     dispatch(fetchProducts(currentPage));
     dispatch(fetchCategory());
   }, [currentPage, dispatch]);
-
-  const handleDelete = (id) => {
-    dispatch(deleteProduct(id)).then(unwrapResult).then(()=>dispatch(fetchProducts()))
-    // dispatch(fetchProducts());
-    // setLoading(!loading);
-  };
 
   return (
     <div className="orders">
@@ -81,16 +81,15 @@ function Product() {
                         src={`${BASE_URL}/files/${item.image}`}
                         alt="mobile"
                       />
-                    
                     }
                   </td>
                   <td>{item?.name ?? "-"}</td>
                   <td>
-                    {
-                      item?.category ? categoryList.find(
-                        (category) => category.id === item?.category
-                      )?.name : "-"
-                    }
+                    {item?.category
+                      ? categoryList.find(
+                          (category) => category.id === item?.category
+                        )?.name
+                      : "-"}
                   </td>
                   <td>
                     <Button
@@ -100,20 +99,30 @@ function Product() {
                     >
                       ویرایش
                     </Button>
-
                     <Button
                       variant="danger"
-                      onClick={() => handleDelete(item.id)}
+                      // onClick={() => handleDelete(item.id)}
+                      onClick={handleOpenDelete}
                     >
                       حذف
                     </Button>
+                    <ProductDeleteModal
+                      openDelete={openDelete}
+                      handleCloseDelete={handleCloseDelete}
+                      itemId={item.id}
+                      setOpenDelete={setOpenDelete}
+                    />
                   </td>
                 </tr>
               );
             })}
         </tbody>
       </Table>
-      <ProductEditModal showEdit={showEdit} item={currentProduct} setShowEdit={setShowEdit}/>
+      <ProductEditModal
+        showEdit={showEdit}
+        item={currentProduct}
+        setShowEdit={setShowEdit}
+      />
       <Pagination
         className={classes.page}
         count={count}

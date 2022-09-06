@@ -20,7 +20,7 @@ function ProductDetails() {
     dispatch(getProduct(id));
   }, [dispatch, id]);
 
-
+console.log(product)
 
   const addToCart = (item) => {
     const clickedItem = cartItems.filter((product) => product.id === item);
@@ -48,9 +48,7 @@ function ProductDetails() {
       </div>
       <div>
         <h5>{product.name}</h5>
-        <p>{`سیستم عامل: ${product.os}`}</p>
-        <p>{`وزن: ${product.weight}`}</p>
-        <p>{`اندازه: ${product.size}`}</p>
+        <p>{`رنگ: ${product.colors}`}</p>
         <p>{`قیمت: ${product.price}`}</p>
         {/* <div>
           <label>تعداد: </label>

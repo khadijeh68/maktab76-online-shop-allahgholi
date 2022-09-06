@@ -1,7 +1,7 @@
 import { PRODUCTS_URL } from "../config/api";
 import instance from "./http";
 
-export const fetchAllProductsRequest = async (currentPage=1) => {
+export const fetchAllProductsRequest = async (currentPage = 1) => {
   try {
     const response = await instance.get(
       `${PRODUCTS_URL}?_page=${currentPage}&_limit=5`
