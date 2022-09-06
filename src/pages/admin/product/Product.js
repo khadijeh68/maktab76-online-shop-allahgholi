@@ -17,7 +17,7 @@ import ProductDeleteModal from "../../../components/product/ProductDeleteModal";
 
 const useStyles = makeStyles({
   page: {
-    direction: "ltr",
+    // direction: "ltr",
     display: "flex",
     alignItems: "center",
     justifyContent: "center",

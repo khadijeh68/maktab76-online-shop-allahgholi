@@ -10,8 +10,16 @@ import "../../index.css";
 import { CKEditor } from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import { instance } from "../../api/http";
+import { makeStyles } from "@material-ui/core";
+
+const useStyles = makeStyles({
+  body: {
+    fontFamily: "Vazir-Medium",
+  },
+});
 
 function ProductAddModal() {
+  const classes = useStyles();
   const dispatch = useDispatch();
   const [image, setImage] = useState();
   const [name, setName] = useState();
@@ -58,17 +66,17 @@ function ProductAddModal() {
       <Button variant="success" onClick={handleOpen} className="btn-products">
         افزودن کالا
       </Button>
-      <Modal show={show}>
+      <Modal show={show} className={classes.body}>
         <Modal.Header closeButton onClick={handleClose}>
           <Modal.Title>افزودن/ ویرایش کالا</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <form onSubmit={(e) => handleSubmit(e)}>
-            <div className="mt-2">
+            <div className="m-2">
               <label>تصویر کالا:</label>
               <input type="file" onChange={(e) => handlePicture(e)} />
             </div>
-            <div className="mt-2">
+            <div className="m-2">
               <label>نام کالا:</label>
               <input
                 type="text"
@@ -77,7 +85,7 @@ function ProductAddModal() {
                 onChange={(e) => setName(e.target.value)}
               />
             </div>
-            <div className="mt-2">
+            <div className="m-2">
               <label>دسته بندی:</label>
               <select
                 defaultValue={"DEFAULT"}
@@ -95,7 +103,7 @@ function ProductAddModal() {
                 <option>نوکیا</option>
               </select>
             </div>
-            <div className="mt-2">
+            <div className="m-2">
               <label>رنگ :</label>
               <select
                 name="color"
@@ -115,7 +123,7 @@ function ProductAddModal() {
                 <option>سفید</option>
               </select>
             </div>
-            <div className="mt-2">
+            <div className="m-2">
               <label>تعداد کالا:</label>
               <input
                 type="number"
@@ -124,7 +132,7 @@ function ProductAddModal() {
                 onChange={(e) => setQuantity(Number(e.target.value))}
               />
             </div>
-            <div className="mt-2">
+            <div className="m-2">
               <label>قیمت کالا:</label>
               <input
                 type="text"
@@ -133,19 +141,19 @@ function ProductAddModal() {
                 onChange={(e) => setPrice(Number(e.target.value))}
               />
             </div>
-            <label> توضیحات:</label>
+            <label className="m-2"> توضیحات:</label>
             <CKEditor
               editor={ClassicEditor}
               sx={{ height: 50 }}
               initData="<p>Hello from CKEditor 4!</p>"
               onChange={(e, editor) => setDescription(editor.getData())}
             />
-            <button type="submit" className=" btn btn-primary">
+            <button type="submit" className="btn btn-success m-2">
               ذخیره
             </button>
             <button
               type="submit"
-              className=" btn btn-primary"
+              className="btn btn-secondary"
               onClick={handleClose}
             >
               بستن
