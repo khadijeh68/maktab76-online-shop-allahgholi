@@ -11,6 +11,7 @@ import { CKEditor } from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 // import { ToastContainer, toast } from 'react-toastify';
 // import 'react-toastify/dist/ReactToastify.css';
+import { instance } from "../../api/http";
 
 function ProductAddModal() {
   const dispatch = useDispatch();
@@ -21,12 +22,21 @@ function ProductAddModal() {
   const [show, setShow] = useState(false);
   const handleOpen = () => setShow(true);
   const handleClose = () => setShow(false);
- 
+
+
+  const handlePicture = (e) => {
+    let file = e.target.files[0];
+    const form = new FormData();
+    form.append("image",file);
+    instance.post("/upload", form).then((res) => setImage([res.data.filename]));
+    let pic = URL.createObjectURL(file);
+  };
+  
   const handleSubmit = (e) => {
     e.preventDefault();
     const data = newProduct();
     dispatch(createProduct(data));
-    console.log(data)
+    console.log(data);
     dispatch(fetchProducts());
     setShow(false);
   };
@@ -40,17 +50,13 @@ function ProductAddModal() {
     return product;
   };
 
-  const handlePicture = (e) => {
-    let file = e.target.files[0];
-    let pic = URL.createObjectURL(file);
-    setImage(pic);
-  };
+ 
   return (
     <>
       <Button variant="success" onClick={handleOpen} className="btn-products">
         افزودن کالا
       </Button>
-      <Modal show={show} >
+      <Modal show={show}>
         <Modal.Header closeButton onClick={handleClose}>
           <Modal.Title>افزودن/ ویرایش کالا</Modal.Title>
         </Modal.Header>
@@ -93,8 +99,8 @@ function ProductAddModal() {
               initData="<p>Hello from CKEditor 4!</p>"
               onChange={(e, editor) => setDescription(editor.getData())}
             />
-            <button type="submit" className=" btn btn-primary" >
-              ذخیره 
+            <button type="submit" className=" btn btn-primary">
+              ذخیره
             </button>
             <button
               type="submit"

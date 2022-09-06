@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import axios from "axios";
+
 import {
   createProductRequest,
   deleteProductRequest,
@@ -10,7 +10,7 @@ import {
 const initialState = {
   productsList: [],
   total:0,
-  products:[],
+  products:[],       
   loading: false,
   error: "",
 };
@@ -33,7 +33,7 @@ export const deleteProduct = createAsyncThunk(
 
 export const updateProduct = createAsyncThunk(
   "products/updateProduct",
-  (id, product) => updateProductRequest(id, product)
+  ({id, product}) => updateProductRequest(id, product)
 );
 
 // export const fetchData = createAsyncThunk(
