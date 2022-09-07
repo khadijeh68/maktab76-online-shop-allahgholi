@@ -1,5 +1,5 @@
 import Modal from "react-bootstrap/Modal";
-import {  useState } from "react";
+import { useState } from "react";
 import { useDispatch } from "react-redux";
 import "../../index.css";
 import { CKEditor } from "@ckeditor/ckeditor5-react";
@@ -39,7 +39,7 @@ function ProductEditModal({ showEdit, item, setShowEdit }) {
     price: item.price,
     quantity: item.quantity,
     category: item.category,
-    description:item.description
+    // description:item.description
   });
 
   const handleChange = (e) => {
@@ -51,8 +51,8 @@ function ProductEditModal({ showEdit, item, setShowEdit }) {
   const handleSubmit = (e) => {
     e.preventDefault();
     const productId = item.id;
-    const data = { ...newProduct,image};
-    console.log(data)
+    const data = { ...newProduct, image, description };
+    console.log(data);
     dispatch(updateProduct({ id: productId, product: data }));
     dispatch(fetchProducts());
   };
@@ -66,6 +66,11 @@ function ProductEditModal({ showEdit, item, setShowEdit }) {
         <Modal.Body>
           <form onSubmit={(e) => handleSubmit(e)}>
             <div className="m-2">
+              <label>تصویر کالا:</label>
+              <input type="file" onChange={(e) => handlePicture(e)} />
+              {/* <img src={item.image} alt="" /> */}
+            </div>
+            <div className="m-2">
               <label>نام کالا:</label>
               <input
                 type="text"
@@ -76,9 +81,23 @@ function ProductEditModal({ showEdit, item, setShowEdit }) {
               />
             </div>
             <div className="m-2">
-              <label>تصویر کالا:</label>
-              <input type="file" onChange={(e) => handlePicture(e)} />
-              <img src={item.image} alt="" />
+              <label>دسته بندی:</label>
+              <select
+                name="category"
+                required
+                value={item.category}
+                onChange={(e) => handleChange(e)}
+              >
+                <option value="DEFAULT" disabled>
+                  انتخاب کنید
+                </option>
+                <option>اپل</option>
+                <option>سامسونگ</option>
+                <option>شیائومی</option>
+                <option>هوآوی</option>
+                <option>آنر</option>
+                <option>نوکیا</option>
+              </select>
             </div>
             <div className="m-2">
               <label>رنگ :</label>
@@ -87,7 +106,6 @@ function ProductEditModal({ showEdit, item, setShowEdit }) {
                 required
                 value={item.color}
                 onChange={(e) => handleChange(e)}
-                defaultValue={"DEFAULT"}
               >
                 <option value="DEFAULT" disabled>
                   انتخاب کنید
@@ -102,16 +120,6 @@ function ProductEditModal({ showEdit, item, setShowEdit }) {
               </select>
             </div>
             <div className="m-2">
-              <label>قیمت کالا:</label>
-              <input
-                type="text"
-                required
-                name="price"
-                value={item.price}
-                onChange={(e) => handleChange(e)}
-              />
-            </div>
-            <div className="m-2">
               <label>تعداد:</label>
               <input
                 type="number"
@@ -122,24 +130,14 @@ function ProductEditModal({ showEdit, item, setShowEdit }) {
               />
             </div>
             <div className="m-2">
-              <label>دسته بندی:</label>
-              <select
-                name="category"
+              <label>قیمت کالا:</label>
+              <input
+                type="text"
                 required
-                value={item.category}
+                name="price"
+                value={item.price}
                 onChange={(e) => handleChange(e)}
-                defaultValue={"DEFAULT"}
-              >
-                <option value="DEFAULT" disabled>
-                  انتخاب کنید
-                </option>
-                <option>اپل</option>
-                <option>سامسونگ</option>
-                <option>شیائومی</option>
-                <option>هوآوی</option>
-                <option>آنر</option>
-                <option>نوکیا</option>
-              </select>
+              />
             </div>
 
             <label className="m-2"> توضیحات:</label>

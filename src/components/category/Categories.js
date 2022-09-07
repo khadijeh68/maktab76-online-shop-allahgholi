@@ -27,6 +27,7 @@ const useStyles = makeStyles({
   Categories: {
     marginRight: "15px",
     marginTop: "70px",
+  
   },
 });
 

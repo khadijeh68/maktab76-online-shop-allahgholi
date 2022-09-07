@@ -25,8 +25,8 @@ const useStyles = makeStyles({
     fontSize: "20px",
   },
   img: {
-    width: "28rem",
-    height: "20rem",
+    width: "14rem",
+    height: "28rem",
     alignItems: "center",
     padding: "10px",
     backgroundColor: "#ffffff",
@@ -41,7 +41,7 @@ function AppleProduct() {
 
   useEffect(() => {
     dispatch(getCategory());
-    dispatch(getList(1))
+    dispatch(getList("اپل"))
       .unwrap()
       .then((res) => setApple(res));
   }, [dispatch]);
@@ -49,7 +49,7 @@ function AppleProduct() {
   return (
     <div>
       <div>
-        <Link className={classes.title} to={`/categories/1`}>
+        <Link className={classes.title} to={`/categories/اپل`}>
           اپل
         </Link>
       </div>

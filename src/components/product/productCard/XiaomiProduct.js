@@ -39,7 +39,7 @@ function XiaomiProduct() {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getCategory());
-    dispatch(getList(3))
+    dispatch(getList("شیائومی"))
       .unwrap()
       .then((res) => setXiaomi(res));
   }, [dispatch]);
@@ -47,7 +47,7 @@ function XiaomiProduct() {
   return (
     <div>
        <div>
-      <Link className={classes.title} to={`/categories/3`}>شیائومی</Link>
+      <Link className={classes.title} to={`/categories/شیائومی`}>شیائومی</Link>
         </div>
       {xiaomi.map((product) => {
         return (

@@ -42,7 +42,7 @@ function SamsungProduct() {
 
   useEffect(() => {
     dispatch(getCategory());
-    dispatch(getList(2))
+    dispatch(getList("سامسونگ"))
       .unwrap()
       .then((res) => setSamsung(res));
   }, [dispatch]);
@@ -50,7 +50,7 @@ function SamsungProduct() {
   return (
     <div>
       <div>
-        <Link className={classes.title} to={`/categories/2`} >
+        <Link className={classes.title} to={`/categories/سامسونگ`} >
           سامسونگ
         </Link>
       </div>

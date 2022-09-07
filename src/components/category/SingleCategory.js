@@ -70,7 +70,7 @@ const SingleCategory = () => {
           return (
             <div key={category.id}>
               <Link
-                to={`/categories/${category.id}`}
+                to={"/categories/" + category.name}
                 key={category.id}
                 className="text-decoration-none mt-5"
               >
