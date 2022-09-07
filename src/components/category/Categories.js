@@ -34,7 +34,7 @@ function Categories() {
   const classes = useStyles();
   const dispatch = useDispatch();
   const categoryList = useSelector((state) => state.categories.categoryList);
-
+console.log(categoryList)
   useEffect(() => {
     dispatch(fetchCategory());
   }, [dispatch]);

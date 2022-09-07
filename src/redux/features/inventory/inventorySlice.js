@@ -17,7 +17,7 @@ export const fetchInventory = createAsyncThunk(
     const res = axois({ url: `${BASE_URL}/inventory/?_page=${page}&_limit=5` }).then((response) => {
       return {
         data: response.data,
-        total: response.headers["x-total-count"],
+        total: Number(response.headers["x-total-count"]),
       }
     });
     return res;

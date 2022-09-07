@@ -17,7 +17,7 @@ import ProductDeleteModal from "../../../components/product/ProductDeleteModal";
 
 const useStyles = makeStyles({
   page: {
-    // direction: "ltr",
+    direction: "rtl",
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
@@ -32,7 +32,7 @@ function Product() {
   const productsList = useSelector((state) => state.products.productsList);
   const categoryList = useSelector((state) => state.categories.categoryList);
   const total = useSelector((state) => state.products.total);
-
+  // console.log(typeof(total))
   const [showEdit, setShowEdit] = useState(false);
   const [currentProduct, setCurrentProduct] = useState({});
   const handleOpenEdit = (id) => {
@@ -84,12 +84,13 @@ function Product() {
                     }
                   </td>
                   <td>{item?.name ?? "-"}</td>
-                  <td>
-                    {item?.category
+                  <td>{item.category}
+                    {/* {item?.category
                       ? categoryList.find(
                           (category) => category.id === item?.category
                         )?.name
-                      : "-"}
+                      : "-"} */}
+
                   </td>
                   <td>
                     <Button

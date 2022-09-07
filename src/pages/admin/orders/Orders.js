@@ -11,7 +11,7 @@ import OrdersDisplayModal from "../../../components/orders/OrdersDisplayModal";
 
 const useStyles = makeStyles({
   page: {
-    direction: "ltr",
+    direction: "rtl",
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
@@ -31,7 +31,7 @@ function Orders() {
   
   const limit = 5;
   const count = Math.ceil(total / limit);
-  console.log(typeof(total))
+  // console.log(typeof(total))
  
   useEffect(() => {
     dispatch(fetchOrders({ delivered, currentPage }));

@@ -74,7 +74,7 @@ function ProductAddModal() {
           <form onSubmit={(e) => handleSubmit(e)}>
             <div className="m-2">
               <label>تصویر کالا:</label>
-              <input type="file" onChange={(e) => handlePicture(e)} />
+              <input type="file" required onChange={(e) => handlePicture(e)} />
             </div>
             <div className="m-2">
               <label>نام کالا:</label>
@@ -83,6 +83,7 @@ function ProductAddModal() {
                 value={name}
                 name="name"
                 onChange={(e) => setName(e.target.value)}
+                required
               />
             </div>
             <div className="m-2">
@@ -91,6 +92,7 @@ function ProductAddModal() {
                 defaultValue={"DEFAULT"}
                 value={category}
                 onChange={(e) => setCategory(e.target.value)}
+                required
               >
                 <option value="DEFAULT" disabled>
                   انتخاب کنید
@@ -110,6 +112,7 @@ function ProductAddModal() {
                 value={colors}
                 onChange={(e) => setColors(e.target.value)}
                 defaultValue={"DEFAULT"}
+                required
               >
                 <option value="DEFAULT" disabled>
                   انتخاب کنید
@@ -130,6 +133,7 @@ function ProductAddModal() {
                 value={quantity}
                 name="quantity"
                 onChange={(e) => setQuantity(Number(e.target.value))}
+                required
               />
             </div>
             <div className="m-2">
@@ -139,6 +143,7 @@ function ProductAddModal() {
                 value={price}
                 name="price"
                 onChange={(e) => setPrice(Number(e.target.value))}
+                required
               />
             </div>
             <label className="m-2"> توضیحات:</label>
@@ -147,6 +152,7 @@ function ProductAddModal() {
               sx={{ height: 50 }}
               initData="<p>Hello from CKEditor 4!</p>"
               onChange={(e, editor) => setDescription(editor.getData())}
+              
             />
             <button type="submit" className="btn btn-success m-2">
               ذخیره
