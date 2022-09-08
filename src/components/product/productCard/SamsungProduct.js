@@ -8,6 +8,7 @@ import {
   getCategory,
   getList,
 } from "../../../redux/features/fiestPage/firstPage";
+import { digitsEnToFa } from "@persian-tools/persian-tools";
 
 const useStyles = makeStyles({
   page: {
@@ -16,18 +17,19 @@ const useStyles = makeStyles({
     flexWrap: "wrap",
     flexDirection: "row",
     justifyContent: "center",
-    margin: "20px",
     padding: "20px",
     fontFamily: "Vazir-Medium",
+    color: "black"
   },
   title: {
     textDecoration: "none",
     fontFamily: "Vazir-Medium",
     fontSize: "20px",
+
   },
   img: {
     width: "14rem",
-    height: "28rem",
+    height: "20rem",
     alignItems: "center",
     padding: "10px",
     backgroundColor: "#ffffff",
@@ -66,11 +68,11 @@ function SamsungProduct() {
                   alt="mobile"
                 />
                 <Card.Body>
-                  <Card.Title>{product.name}</Card.Title>
+                  <Card.Text>{product.name}</Card.Text>
                   <Card.Text>{product.os}</Card.Text>
                   <Card.Text>{product.weight}</Card.Text>
                   <Card.Text>{product.size}</Card.Text>
-                  <Card.Text>{product.price}</Card.Text>
+                  <Card.Text>{digitsEnToFa(product.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, "،"))} تومان </Card.Text>
                   <Button variant="primary">افزودن به سبد خرید</Button>
                 </Card.Body>
               </Card>
