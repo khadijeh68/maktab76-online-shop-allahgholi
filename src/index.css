@@ -46,10 +46,6 @@ a {
   margin-right: 20px;
 }
 
-img {
-  width: 100px;
-  height: 120px;
-}
 
 .form_data {
   width: 400px;
@@ -95,9 +91,36 @@ img {
 }
 .product-details{
   margin: 70px;
+  display: flex;
+  flex-direction: row;
+  padding: 70px;
+  justify-content: center;
+  align-items: center;
 }
 .loading{
   font-family: "Vazir-Light";
   direction: rtl;
   margin: 70px;
+}
+.bag-quantity{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 25px;
+  width: 25px;
+  background: rgb(0, 0, 0);
+  border-radius: 50%;
+  color: white;
+  font-weight: 700;
+  font-size: 14px;
+  margin-right: 5px;
+  margin-bottom: 7px;
+}
+img {
+  width: 100px;
+  height: 120px;
+}
+.img-product-details{
+  width: 200px;
+  height: 250px;
 }

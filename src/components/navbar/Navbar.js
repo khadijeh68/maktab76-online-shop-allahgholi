@@ -2,6 +2,7 @@ import { NavLink } from "react-router-dom";
 import { makeStyles } from "@material-ui/core";
 import ShoppingCartSharpIcon from "@mui/icons-material/ShoppingCartSharp";
 import "../../index.css";
+import { useSelector } from "react-redux";
 
 const useStyles = makeStyles({
   nav: {
@@ -26,6 +27,7 @@ const useStyles = makeStyles({
   basket: {
     display: "flex",
     justifyContent: "center",
+    alignItems: "center",
   },
   leftNav: {
     display: "flex",
@@ -46,6 +48,7 @@ const useStyles = makeStyles({
 
 function Navbar() {
   const classes = useStyles();
+  const  quantity  = useSelector((state) => state.cart.quantity);
   const navLinkStyles = ({ isActive }) => {
     return {
       color: isActive ? "#C14795" : "black",
@@ -65,18 +68,6 @@ function Navbar() {
               فروشگاه آنلاین موبایل و لوازم جانبی
             </span>
           </NavLink>
-
-           {/* <NavLink to="/" className={classes.span}>
-            <span>صفحه اصلی </span>
-          </NavLink> */}
-{/* 
-          <NavLink to="/categories" className={classes.span}>
-            <span>دسته بندی کالاها </span>
-          </NavLink>  */}
-{/* 
-           <NavLink to="/products" className={classes.span}>
-            <span>کالاها</span>
-          </NavLink>  */}
         </div>
 
         <div className={classes.leftNav}>
@@ -91,7 +82,8 @@ function Navbar() {
           >
             <div className={classes.basket}>
               <ShoppingCartSharpIcon />
-              <span>سبد خرید </span>
+              {/* <span>سبد خرید </span> */}
+              <span className="bag-quantity">{quantity}</span>
             </div>
           </NavLink>
         </div>

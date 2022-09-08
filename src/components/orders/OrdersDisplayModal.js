@@ -4,9 +4,18 @@ import { useState } from "react";
 import "../../index.css";
 import persian from "react-date-object/calendars/persian";
 import persian_fa from "react-date-object/locales/persian_fa";
-import { Button, Table } from "react-bootstrap";
+import { Button, Form, Table } from "react-bootstrap";
+import { makeStyles } from "@material-ui/core";
+import { digitsEnToFa } from "@persian-tools/persian-tools";
+
+const useStyles = makeStyles({
+  body: {
+    fontFamily: "Vazir-Medium",
+  },
+});
 
 function OrdersDisplayModal({ item }) {
+  const classes = useStyles();
   const [show, setShow] = useState(false);
   const handleShow = () => setShow(true);
   const handleClose = () => setShow(false);
@@ -16,26 +25,26 @@ function OrdersDisplayModal({ item }) {
       <Button variant="warning" onClick={handleShow}>
         بررسی سفارش
       </Button>
-      <Modal show={show} onHide={handleClose}>
+      <Modal show={show} onHide={handleClose} className={classes.body}>
         <Modal.Header closeButton>
           <Modal.Title>نمایش سفارش</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <form>
-            <div className="mt-2">
-              <label> نام مشتری:</label>
-              <input type="text" value={item.username + " " + item.lastname} />
-            </div>
-            <div className="mt-2">
-              <label>آدرس :</label>
-              <input type="address" value={item.address} />
-            </div>
-            <div className="mt-2">
-              <label>تلفن :</label>
-              <input type="tel" value={item.phone} />
-            </div>
-            <div className="mt-2">
-              <label>زمان تحویل :</label>
+          <Form>
+            <Form.Group  className="mt-2">
+              <Form.Label> نام مشتری:</Form.Label>
+              <Form.Control type="text" value={item.username + " " + item.lastname} />
+            </Form.Group >
+            <Form.Group  className="mt-2">
+              <Form.Label>آدرس :</Form.Label>
+              <Form.Control type="address" value={item.address} />
+            </Form.Group >
+            <Form.Group  className="mt-2">
+              <Form.Label>تلفن :</Form.Label>
+              <Form.Control type="tel" value={item.phone} />
+            </Form.Group >
+            <Form.Group  className="mt-2">
+              <Form.Label>زمان تحویل :</Form.Label>
               <div style={{ direction: "rtl" }}>
                 <DatePicker
                   calendar={persian}
@@ -44,9 +53,9 @@ function OrdersDisplayModal({ item }) {
                   value={new Date(item.expectAt).toLocaleDateString("fa-IR")}
                 />
               </div>
-            </div>
-            <div className="mt-2">
-              <label>زمان سفارش :</label>
+            </Form.Group >
+            <Form.Group  className="mt-2">
+              <Form.Label>زمان سفارش :</Form.Label>
               <div style={{ direction: "rtl" }}>
                 <DatePicker
                   calendar={persian}
@@ -55,13 +64,13 @@ function OrdersDisplayModal({ item }) {
                   value={new Date(item.createdAt).toLocaleDateString("fa-IR")}
                 />
               </div>
-            </div>
+            </Form.Group >
 
             <Table
               striped
               bordered
               hover
-              className="w-50 text-center order_table mx-5"
+              className="w-75 text-center order_table mx-5"
             >
               <thead>
                 <tr>
@@ -73,15 +82,15 @@ function OrdersDisplayModal({ item }) {
               <tbody>
                 <tr>
                   <td>{item.products[0].name}</td>
-                  <td>{item.products[0].price}</td>
-                  <td>{item.products[0].count}</td>
+                  <td>{digitsEnToFa(item.products[0].pricetoString().replace(/\B(?=(\d{3})+(?!\d))/g, "،"))}</td>
+                  <td>{digitsEnToFa(item.products[0].count)}</td>
                 </tr>
               </tbody>
             </Table>
             <button type="submit" className="btn btn-success">
               تحویل شد
             </button>
-          </form>
+          </Form>
         </Modal.Body>
       </Modal>
     </>

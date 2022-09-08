@@ -1,8 +1,10 @@
 import { Button, Card } from "react-bootstrap";
 import { makeStyles } from "@material-ui/core";
 import { Link } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { BASE_URL } from "../../config/api";
+import { addToCart } from "../../redux/features/cart/cartSlice";
+import { digitsEnToFa } from "@persian-tools/persian-tools";
 
 const useStyles = makeStyles({
   page: {
@@ -44,10 +46,7 @@ function ProductCard() {
                 />
                 <Card.Body>
                   <Card.Title>{product.name}</Card.Title>
-                  <Card.Text>{product.os}</Card.Text>
-                  <Card.Text>{product.weight}</Card.Text>
-                  <Card.Text>{product.size}</Card.Text>
-                  <Card.Text>{product.price}</Card.Text>
+                  <Card.Text>{digitsEnToFa(product.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, "،"))}</Card.Text>
                   <Button variant="primary">افزودن به سبد خرید</Button>
                 </Card.Body>
               </Card>

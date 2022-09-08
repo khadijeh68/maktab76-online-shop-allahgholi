@@ -8,6 +8,7 @@ import {
   getCategory,
   getList,
 } from "../../../redux/features/fiestPage/firstPage";
+import { digitsEnToFa } from "@persian-tools/persian-tools";
 const useStyles = makeStyles({
   page: {
     display: "inline-flex",
@@ -15,23 +16,28 @@ const useStyles = makeStyles({
     flexWrap: "wrap",
     flexDirection: "row",
     justifyContent: "center",
-    margin: "20px",
+    // margin: "20px",
     padding: "20px",
     fontFamily: "Vazir-Medium",
+    color: "black"
   },
   title: {
     textDecoration: "none",
     fontFamily: "Vazir-Medium",
-    fontSize: "20px",
+    fontSize: "18px",
   },
   img: {
     width: "14rem",
-    height: "28rem",
+    height: "20rem",
     alignItems: "center",
     padding: "10px",
     backgroundColor: "#ffffff",
     boxShadow: "0 0 6px rgb(0 0 0 / 20%)",
   },
+  // btn:{
+  //   background: "#C14795",
+  //   border:  "#C14795"
+  // }
 });
 
 function HonorProduct() {
@@ -41,7 +47,7 @@ function HonorProduct() {
 
   useEffect(() => {
     dispatch(getCategory());
-    dispatch(getList(5))
+    dispatch(getList("آنر"))
       .unwrap()
       .then((res) => setHonor(res));
   }, [dispatch]);
@@ -49,7 +55,7 @@ function HonorProduct() {
   return (
     <div>
       <div>
-        <Link className={classes.title} to={`/categories/5`}>
+        <Link className={classes.title} to={`/categories/آنر`}>
          آنر
         </Link>
       </div>
@@ -69,12 +75,12 @@ function HonorProduct() {
                   alt="mobile"
                 />
                 <Card.Body>
-                  <Card.Title>{product.name}</Card.Title>
+                  <Card.Text>{product.name}</Card.Text>
                   <Card.Text>{product.os}</Card.Text>
                   <Card.Text>{product.weight}</Card.Text>
                   <Card.Text>{product.size}</Card.Text>
-                  <Card.Text>{product.price}</Card.Text>
-                  <Button variant="primary">افزودن به سبد خرید</Button>
+                  <Card.Text>{digitsEnToFa(product.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, "،"))} تومان </Card.Text>
+                  <Button className={classes.btn}>افزودن به سبد خرید</Button>
                 </Card.Body>
               </Card>
             </div>

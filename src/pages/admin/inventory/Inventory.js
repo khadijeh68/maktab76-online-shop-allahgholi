@@ -8,7 +8,7 @@ import { digitsEnToFa } from "@persian-tools/persian-tools";
 import $ from 'jquery';
 const useStyles = makeStyles({
   page: {
-    // direction: "ltr",
+    direction: "rtl",
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
@@ -17,12 +17,6 @@ const useStyles = makeStyles({
   },
 });
 
-// $('td').click(function () {
-//   $(this).replaceWith(function () {
-//       console.log("Text is "+ $(this).text());
-//       return '<input  value="' + $(this).text() + '"> </input>';
-//   });
-// })
 
 function Inventory() {
   const classes = useStyles();
@@ -36,7 +30,7 @@ function Inventory() {
   const [currentPage, setCurrentPage] = useState(1);
   const limit = 5;
   const count = Math.ceil(total /limit);
- 
+  console.log(typeof(total))
   useEffect(() => {
     dispatch(fetchInventory(currentPage));
   }, [currentPage, dispatch]);
@@ -52,6 +46,12 @@ function Inventory() {
     // setTextField();
   }
   const changeTag = () =>{
+    // $('td').click(function () {
+    //   $(this).replaceWith(function () {
+    //       console.log("Text is "+ $(this).text());
+    //       return '<input  value="' + $(this).text() + '"> </input>';
+    //   });
+    // })
     
   }
 
