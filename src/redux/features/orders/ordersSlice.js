@@ -23,14 +23,14 @@ export const fetchOrders = createAsyncThunk(
   }
 );
 
-export const fetchDelivered = createAsyncThunk(
-  "orders/fetchDelivered",
-  (id) => {
-    return axios
-      .patch(`${BASE_URL}/orders/${id}`, { delivered: true })
-      .then((res) => res.data);
-  }
-);
+// export const fetchDelivered = createAsyncThunk(
+//   "orders/fetchDelivered",
+//   (id) => {
+//     return axios
+//       .patch(`${BASE_URL}/orders/${id}`, { delivered: true })
+//       .then((res) => res.data);
+//   }
+// );
 const ordersSlice = createSlice({
   name: "orders",
   initialState,
@@ -48,17 +48,17 @@ const ordersSlice = createSlice({
       state.loading = false;
       state.error = "wrong...";
     },
-    [fetchDelivered.pending]: (state) => {
-      state.loadings = true;
-    },
-    [fetchDelivered.fulfilled]: (state, action) => {
-      state.loadings = false;
-      state.ordersList = action.payload;
-    },
-    [fetchDelivered.rejected]: (state) => {
-      state.loadings = false;
-      state.error = "wrong...";
-    },
+    // [fetchDelivered.pending]: (state) => {
+    //   state.loadings = true;
+    // },
+    // [fetchDelivered.fulfilled]: (state, action) => {
+    //   state.loadings = false;
+    //   state.ordersList = action.payload;
+    // },
+    // [fetchDelivered.rejected]: (state) => {
+    //   state.loadings = false;
+    //   state.error = "wrong...";
+    // },
   },
 });
 

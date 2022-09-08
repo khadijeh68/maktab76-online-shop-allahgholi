@@ -5,7 +5,7 @@ import { BASE_URL } from "../../../config/api";
 
 const initialState = {
   cartItems: [],
-  quantity: 0,
+  quantity: 4,
   total: 0,
   isLoading: true,
   // caerTotalQuantity: 0,
@@ -26,9 +26,9 @@ const cartSlice = createSlice({
   name: "cart",
   initialState,
   reducers: {
-    clearCart: (state) => {
-      state.cartItems = [];
-    },
+    // clearCart: (state) => {
+    //   state.cartItems = [];
+    // },
     // removeItem: (state, action) => {
     //   const itemId = action.payload;
     //   console.log(itemId);

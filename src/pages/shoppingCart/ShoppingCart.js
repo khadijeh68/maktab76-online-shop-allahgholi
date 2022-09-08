@@ -27,7 +27,7 @@ const useStyles = makeStyles({
     flexDirection: "row",
   },
   btn: {
-    marginRight: "625px",
+    marginRight: "750px",
   },
 });
 
@@ -75,7 +75,7 @@ function Basket() {
   return (
     <div className={classes.title}>
       <h4 className="m-3">سبد خرید</h4>
-      <Table striped bordered hover className="w-50 ">
+      <Table striped bordered hover className="w-75 text-center">
         <thead>
           <tr>
             <th>تصویر کالا</th>
