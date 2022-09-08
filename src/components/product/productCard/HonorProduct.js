@@ -41,7 +41,7 @@ function HonorProduct() {
 
   useEffect(() => {
     dispatch(getCategory());
-    dispatch(getList(5))
+    dispatch(getList("آنر"))
       .unwrap()
       .then((res) => setHonor(res));
   }, [dispatch]);
@@ -49,7 +49,7 @@ function HonorProduct() {
   return (
     <div>
       <div>
-        <Link className={classes.title} to={`/categories/5`}>
+        <Link className={classes.title} to={`/categories/آنر`}>
          آنر
         </Link>
       </div>

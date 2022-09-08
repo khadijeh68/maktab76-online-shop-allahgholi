@@ -38,7 +38,7 @@ function HuaweiProduct() {
 
   useEffect(() => {
     dispatch(getCategory())
-    dispatch(getList(4))
+    dispatch(getList("هوآوی"))
     .unwrap()
       .then((res) => setHuawei(res));
   }, [dispatch]);
@@ -47,7 +47,7 @@ function HuaweiProduct() {
   return (
     <div>
       <div>
-      <Link className={classes.title} to={`/categories/4`}>هوآوی</Link>
+      <Link className={classes.title} to={`/categories/هوآوی`}>هوآوی</Link>
         </div>
       {huawei.map((product) => {
         return (

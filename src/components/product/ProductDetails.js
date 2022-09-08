@@ -20,7 +20,7 @@ function ProductDetails() {
     dispatch(getProduct(id));
   }, [dispatch, id]);
 
-
+console.log(product)
 
   const addToCart = (item) => {
     const clickedItem = cartItems.filter((product) => product.id === item);
@@ -48,14 +48,12 @@ function ProductDetails() {
       </div>
       <div>
         <h5>{product.name}</h5>
-        <p>{`سیستم عامل: ${product.os}`}</p>
-        <p>{`وزن: ${product.weight}`}</p>
-        <p>{`اندازه: ${product.size}`}</p>
+        <p>{`رنگ: ${product.color}`}</p>
         <p>{`قیمت: ${product.price}`}</p>
-        {/* <div>
+        <div>
           <label>تعداد: </label>
           <input type="number" />
-        </div> */}
+        </div>
         <div dangerouslySetInnerHTML={{ __html: product.description }} />
         <Button variant="primary" onClick={() => addToCart(product.id)}>
           افزودن به سبد خرید

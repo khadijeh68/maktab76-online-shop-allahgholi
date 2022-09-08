@@ -1,14 +1,14 @@
 import { PRODUCTS_URL } from "../config/api";
 import instance from "./http";
 
-export const fetchAllProductsRequest = async (currentPage=1) => {
+export const fetchAllProductsRequest = async (currentPage = 1) => {
   try {
     const response = await instance.get(
       `${PRODUCTS_URL}?_page=${currentPage}&_limit=5`
     );
     return {
       data: response.data,
-      total: response.headers["x-total-count"],
+      total: Number(response.headers["x-total-count"]),
     };
   } catch (error) {
     return Promise.reject(error);

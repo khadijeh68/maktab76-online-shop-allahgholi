@@ -41,7 +41,7 @@ function AppleProduct() {
 
   useEffect(() => {
     dispatch(getCategory());
-    dispatch(getList(1))
+    dispatch(getList("اپل"))
       .unwrap()
       .then((res) => setApple(res));
   }, [dispatch]);
@@ -49,7 +49,7 @@ function AppleProduct() {
   return (
     <div>
       <div>
-        <Link className={classes.title} to={`/categories/1`}>
+        <Link className={classes.title} to={`/categories/اپل`}>
           اپل
         </Link>
       </div>
@@ -70,9 +70,6 @@ function AppleProduct() {
                 />
                 <Card.Body>
                   <Card.Title>{product.name}</Card.Title>
-                  <Card.Text>{product.os}</Card.Text>
-                  <Card.Text>{product.weight}</Card.Text>
-                  <Card.Text>{product.size}</Card.Text>
                   <Card.Text>{product.price}</Card.Text>
                   <Button variant="primary">افزودن به سبد خرید</Button>
                 </Card.Body>

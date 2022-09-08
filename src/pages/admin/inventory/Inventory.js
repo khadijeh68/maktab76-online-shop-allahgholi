@@ -8,7 +8,7 @@ import { digitsEnToFa } from "@persian-tools/persian-tools";
 import $ from 'jquery';
 const useStyles = makeStyles({
   page: {
-    // direction: "ltr",
+    direction: "rtl",
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
@@ -30,7 +30,7 @@ function Inventory() {
   const [currentPage, setCurrentPage] = useState(1);
   const limit = 5;
   const count = Math.ceil(total /limit);
- 
+  console.log(typeof(total))
   useEffect(() => {
     dispatch(fetchInventory(currentPage));
   }, [currentPage, dispatch]);

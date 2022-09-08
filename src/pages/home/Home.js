@@ -7,6 +7,7 @@ const useStyles = makeStyles({
     flexDirection: "column",
     padding: "20px",
     marginTop: "70px",
+    alignItems:"center"
   },
   link: {
     marginTop: "20px",
