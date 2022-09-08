@@ -12,7 +12,6 @@ import { fetchCategory } from "../../../redux/features/category/categorySlice";
 import ProductAddModal from "../../../components/product/ProductAddModal";
 import { BASE_URL } from "../../../config/api";
 import ProductEditModal from "../../../components/product/ProductEditModal";
-import { unwrapResult } from "@reduxjs/toolkit";
 import ProductDeleteModal from "../../../components/product/ProductDeleteModal";
 
 const useStyles = makeStyles({

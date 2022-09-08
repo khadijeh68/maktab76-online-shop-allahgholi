@@ -11,6 +11,7 @@ import { CKEditor } from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import { instance } from "../../api/http";
 import { makeStyles } from "@material-ui/core";
+import { Form } from "react-bootstrap";
 
 const useStyles = makeStyles({
   body: {
@@ -20,13 +21,14 @@ const useStyles = makeStyles({
 
 function ProductAddModal() {
   const classes = useStyles();
+  const [validated, setValidated] = useState(false);
   const dispatch = useDispatch();
   const [image, setImage] = useState();
   const [name, setName] = useState();
   const [category, setCategory] = useState();
   const [price, setPrice] = useState();
   const [quantity, setQuantity] = useState();
-  const [colors, setColors] = useState();
+  const [color, setColor] = useState();
   const [description, setDescription] = useState();
   const [show, setShow] = useState(false);
   const handleOpen = () => setShow(true);
@@ -41,12 +43,27 @@ function ProductAddModal() {
   };
 
   const handleSubmit = (e) => {
+    const form = e.currentTarget;
+    console.log(form);
+    if (form.checkValidity() === false) {
+      e.preventDefault();
+      e.stopPropagation();
+    }
+    setValidated(true);
+
     e.preventDefault();
     const data = newProduct();
     dispatch(createProduct(data));
     console.log(data);
     dispatch(fetchProducts());
     setShow(false);
+    setImage("");
+    setName("");
+    setCategory("");
+    setPrice("");
+    setQuantity("");
+    setColor("");
+    setDescription("");
   };
   const newProduct = () => {
     const product = {
@@ -55,7 +72,7 @@ function ProductAddModal() {
       category,
       price,
       quantity,
-      colors,
+      color,
       description,
     };
     return product;
@@ -71,24 +88,34 @@ function ProductAddModal() {
           <Modal.Title>افزودن/ ویرایش کالا</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <form onSubmit={(e) => handleSubmit(e)}>
-            <div className="m-2">
-              <label>تصویر کالا:</label>
-              <input type="file" required onChange={(e) => handlePicture(e)} />
-            </div>
-            <div className="m-2">
-              <label>نام کالا:</label>
-              <input
+          <Form onSubmit={(e) => handleSubmit(e)} validated={validated}>
+            <Form.Group className="m-2" controlId="validationCustom01">
+              <Form.Label>تصویر کالا:</Form.Label>
+              <Form.Control
+                type="file"
+                required
+                onChange={(e) => handlePicture(e)}
+              />
+            </Form.Group>
+            <Form.Control.Feedback type="invalid">
+              تصویر کالا ا وارد کنید
+            </Form.Control.Feedback>
+            <Form.Group className="m-2" controlId="validationCustom02">
+              <Form.Label>نام کالا:</Form.Label>
+              <Form.Control
                 type="text"
                 value={name}
                 name="name"
                 onChange={(e) => setName(e.target.value)}
                 required
               />
-            </div>
-            <div className="m-2">
-              <label>دسته بندی:</label>
-              <select
+            </Form.Group>
+            <Form.Control.Feedback type="invalid">
+              نام کالا را وارد کنید
+            </Form.Control.Feedback>
+            <Form.Group className="m-2" controlId="validationCustom03">
+              <Form.Label>دسته بندی:</Form.Label>
+              <Form.Select
                 defaultValue={"DEFAULT"}
                 value={category}
                 onChange={(e) => setCategory(e.target.value)}
@@ -103,14 +130,17 @@ function ProductAddModal() {
                 <option>هوآوی</option>
                 <option>آنر</option>
                 <option>نوکیا</option>
-              </select>
-            </div>
-            <div className="m-2">
-              <label>رنگ :</label>
-              <select
+              </Form.Select>
+            </Form.Group>
+            <Form.Control.Feedback type="invalid">
+              دسته بندی کالا را انتخاب کنید
+            </Form.Control.Feedback>
+            <Form.Group className="m-2" controlId="validationCustom04">
+              <Form.Label>رنگ :</Form.Label>
+              <Form.Select
                 name="color"
-                value={colors}
-                onChange={(e) => setColors(e.target.value)}
+                value={color}
+                onChange={(e) => setColor (e.target.value)}
                 defaultValue={"DEFAULT"}
                 required
               >
@@ -124,47 +154,55 @@ function ProductAddModal() {
                 <option>سبز</option>
                 <option>صورتی</option>
                 <option>سفید</option>
-              </select>
-            </div>
-            <div className="m-2">
-              <label>تعداد کالا:</label>
-              <input
+              </Form.Select>
+            </Form.Group>
+            <Form.Control.Feedback type="invalid">
+              رنگ کالا را وارد کنید
+            </Form.Control.Feedback>
+            <Form.Group className="m-2" controlId="validationCustom05">
+              <Form.Label>تعداد کالا:</Form.Label>
+              <Form.Control
                 type="number"
                 value={quantity}
                 name="quantity"
                 onChange={(e) => setQuantity(Number(e.target.value))}
                 required
               />
-            </div>
-            <div className="m-2">
-              <label>قیمت کالا:</label>
-              <input
+            </Form.Group>
+            <Form.Control.Feedback type="invalid">
+              تعداد کالا را وارد کنید
+            </Form.Control.Feedback>
+            <Form.Group className="m-2" controlId="validationCustom06">
+              <Form.Label>قیمت کالا:</Form.Label>
+              <Form.Control
                 type="text"
                 value={price}
                 name="price"
                 onChange={(e) => setPrice(Number(e.target.value))}
                 required
               />
-            </div>
-            <label className="m-2"> توضیحات:</label>
+            </Form.Group>
+            <Form.Control.Feedback type="invalid">
+              قیمت کالا را وارد کنید
+            </Form.Control.Feedback>
+            <Form.Label className="m-2"> توضیحات:</Form.Label>
             <CKEditor
               editor={ClassicEditor}
               sx={{ height: 50 }}
               initData="<p>Hello from CKEditor 4!</p>"
               onChange={(e, editor) => setDescription(editor.getData())}
-              
             />
-            <button type="submit" className="btn btn-success m-2">
+            <Button type="submit" className="m-2"  variant="success">
               ذخیره
-            </button>
-            <button
+            </Button>
+            <Button
               type="submit"
-              className="btn btn-secondary"
+              variant="secondary"
               onClick={handleClose}
             >
               بستن
-            </button>
-          </form>
+            </Button>
+          </Form>
         </Modal.Body>
       </Modal>
     </>

@@ -10,6 +10,7 @@ import {
 } from "../../redux/features/product/productSlice";
 import instance from "../../api/http";
 import { makeStyles } from "@material-ui/core";
+import { Button, Form } from "react-bootstrap";
 
 const useStyles = makeStyles({
   body: {
@@ -21,6 +22,7 @@ function ProductEditModal({ showEdit, item, setShowEdit }) {
   const classes = useStyles();
   const [image, setImage] = useState([]);
   const [description, setDescription] = useState();
+
   const dispatch = useDispatch();
   const handleClose = () => setShowEdit(false);
 
@@ -64,25 +66,26 @@ function ProductEditModal({ showEdit, item, setShowEdit }) {
           <Modal.Title>افزودن/ ویرایش کالا</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <form onSubmit={(e) => handleSubmit(e)}>
-            <div className="m-2">
-              <label>تصویر کالا:</label>
-              <input type="file" onChange={(e) => handlePicture(e)} />
+          <Form onSubmit={(e) => handleSubmit(e)}>
+            <Form.Group className="m-2">
+              <Form.Label>تصویر کالا:</Form.Label>
+              <Form.Control type="file" onChange={(e) => handlePicture(e)} />
               {/* <img src={item.image} alt="" /> */}
-            </div>
-            <div className="m-2">
-              <label>نام کالا:</label>
-              <input
+            </Form.Group>
+
+            <Form.Group className="m-2">
+              <Form.Label>نام کالا:</Form.Label>
+              <Form.Control
                 type="text"
                 required
                 name="name"
                 value={item.name}
                 onChange={(e) => handleChange(e)}
               />
-            </div>
-            <div className="m-2">
-              <label>دسته بندی:</label>
-              <select
+            </Form.Group>
+            <Form.Group className="m-2">
+              <Form.Label>دسته بندی:</Form.Label>
+              <Form.Select
                 name="category"
                 required
                 value={item.category}
@@ -97,11 +100,11 @@ function ProductEditModal({ showEdit, item, setShowEdit }) {
                 <option>هوآوی</option>
                 <option>آنر</option>
                 <option>نوکیا</option>
-              </select>
-            </div>
-            <div className="m-2">
-              <label>رنگ :</label>
-              <select
+              </Form.Select>
+            </Form.Group>
+            <Form.Group className="m-2">
+              <Form.Label>رنگ :</Form.Label>
+              <Form.Select
                 name="color"
                 required
                 value={item.color}
@@ -117,30 +120,30 @@ function ProductEditModal({ showEdit, item, setShowEdit }) {
                 <option>سبز</option>
                 <option>صورتی</option>
                 <option>سفید</option>
-              </select>
-            </div>
-            <div className="m-2">
-              <label>تعداد:</label>
-              <input
+              </Form.Select>
+            </Form.Group>
+            <Form.Group className="m-2">
+              <Form.Label>تعداد:</Form.Label>
+              <Form.Control
                 type="number"
                 required
                 name="name"
                 value={item.quantity}
                 onChange={(e) => handleChange(e)}
               />
-            </div>
-            <div className="m-2">
-              <label>قیمت کالا:</label>
-              <input
+            </Form.Group>
+            <Form.Group className="m-2">
+              <Form.Label>قیمت کالا:</Form.Label>
+              <Form.Control
                 type="text"
                 required
                 name="price"
                 value={item.price}
                 onChange={(e) => handleChange(e)}
               />
-            </div>
+            </Form.Group>
 
-            <label className="m-2"> توضیحات:</label>
+            <Form.Label className="m-2"> توضیحات:</Form.Label>
             <CKEditor
               editor={ClassicEditor}
               data={item.description}
@@ -149,17 +152,13 @@ function ProductEditModal({ showEdit, item, setShowEdit }) {
               initData="<p>Hello from CKEditor 4!</p>"
               onChange={(e, editor) => setDescription(editor.getData())}
             />
-            <button type="submit" className=" btn btn-success m-2">
+            <Button type="submit" className="m-2" variant="success">
               ذخیره
-            </button>
-            <button
-              type="submit"
-              className="btn btn-secondary"
-              onClick={handleClose}
-            >
+            </Button>
+            <Button type="submit" variant="secondary" onClick={handleClose}>
               بستن
-            </button>
-          </form>
+            </Button>
+          </Form>
         </Modal.Body>
       </Modal>
     </div>
