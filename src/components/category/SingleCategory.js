@@ -5,6 +5,7 @@ import { Link, useParams } from "react-router-dom";
 import { getCategory, getList } from "../../redux/features/fiestPage/firstPage";
 import { Button, Card } from "react-bootstrap";
 import { BASE_URL } from "../../config/api";
+import { digitsEnToFa } from "@persian-tools/persian-tools";
 
 const useStyles = makeStyles({
   container: {
@@ -28,6 +29,7 @@ const useStyles = makeStyles({
   },
   body: {
     margin: "50px",
+    
   },
   page: {
     display: "inline-flex",
@@ -35,13 +37,13 @@ const useStyles = makeStyles({
     flexWrap: "wrap",
     flexDirection: "row",
     justifyContent: "center",
-    margin: "20px",
     padding: "20px",
     fontFamily: "Vazir-Medium",
+    color: "black"
   },
   img: {
     width: "14rem",
-    height: "28rem",
+    height: "20rem",
     alignItems: "center",
     padding: "10px",
     backgroundColor: "#ffffff",
@@ -93,11 +95,11 @@ const SingleCategory = () => {
                     alt="mobile"
                   />
                   <Card.Body>
-                    <Card.Title>{item.name}</Card.Title>
+                    <Card.Text>{item.name}</Card.Text>
                     <Card.Text>{item.os}</Card.Text>
                     <Card.Text>{item.weight}</Card.Text>
                     <Card.Text>{item.size}</Card.Text>
-                    <Card.Text>{item.price}</Card.Text>
+                    <Card.Text>{digitsEnToFa(item.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, "،"))} تومان </Card.Text>
                     <Button variant="primary">افزودن به سبد خرید</Button>
                   </Card.Body>
                 </Card>

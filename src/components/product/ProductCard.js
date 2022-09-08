@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { BASE_URL } from "../../config/api";
 import { addToCart } from "../../redux/features/cart/cartSlice";
+import { digitsEnToFa } from "@persian-tools/persian-tools";
 
 const useStyles = makeStyles({
   page: {
@@ -45,7 +46,7 @@ function ProductCard() {
                 />
                 <Card.Body>
                   <Card.Title>{product.name}</Card.Title>
-                  <Card.Text>{product.price}</Card.Text>
+                  <Card.Text>{digitsEnToFa(product.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, "،"))}</Card.Text>
                   <Button variant="primary">افزودن به سبد خرید</Button>
                 </Card.Body>
               </Card>

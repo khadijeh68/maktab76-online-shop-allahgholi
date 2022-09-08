@@ -27,7 +27,7 @@ const useStyles = makeStyles({
     flexDirection: "row",
   },
   btn: {
-    marginRight: "625px",
+    marginRight: "750px",
   },
 });
 
@@ -36,26 +36,46 @@ function Basket() {
   const [basket, setBasket] = useState([]);
   const total = useSelector((state) => state.cart.total);
 
-  console.log(total);
-  useEffect(() => {
-    setBasket(JSON.parse(localStorage.getItem("basket")));
-  }, []);
+  const calculateTotals = () => {
+    basket.map((item) => console.log(item.price * item.quantity)
+    )
+  }
+
 
   useEffect(() => {
-    dispatch(calculateTotals());
-  }, [dispatch]);
+    setBasket(JSON.parse(localStorage.getItem("basket")));
+    calculateTotals()
+  }, []);
+
+
   const removeItem = (id) => {
     const arr = basket.filter((item) => item.id !== id);
-    console.log(arr)
+    console.log(arr);
     setBasket(arr);
-    // handlePrice();
-  };
+  }
+
+  const increase = (id) => {
+    const items = basket.find((item) => item.id === id);
+      console.log(items);
+      items.quantity = items.quantity + 1;
+      console.log(items.quantity);
+  }
+
+
+  const decrease = (id) => {
+    const items = basket.find((item) => item.id === id);
+      console.log(items);
+      items.quantity = items.quantity - 1;
+      console.log(items.quantity);
+  }
+
+ 
 
   const classes = useStyles();
   return (
     <div className={classes.title}>
       <h4 className="m-3">سبد خرید</h4>
-      <Table striped bordered hover className="w-50 ">
+      <Table striped bordered hover className="w-75 text-center">
         <thead>
           <tr>
             <th>تصویر کالا</th>
@@ -75,40 +95,40 @@ function Basket() {
                 <h6>{item.name}</h6>
               </td>
               <td>
-                <p>
-                  {digitsEnToFa(
-                    item.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, "،")
-                  )}
-                </p>
+                {digitsEnToFa(
+                  item.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, "،")
+                )}
               </td>
               <td>
                 {/* <p>{digitsEnToFa(item.quantity)}</p> */}
-                <div>
-                  <button
+                <div className="d-flex flex-direction-row">
+                  <Button variant="success"
                     onClick={() => {
-                      dispatch(increase(item.id));
+                      // dispatch(increase(item.id));
+                 increase(item.id);
                     }}
                   >
                     +
-                  </button>
-                  <button>{item.quantity}</button>
-                  <button
+                  </Button>
+                  <td><p>{digitsEnToFa(item.quantity)}</p></td>
+                  <Button variant="warning"
                     onClick={() => {
                       if (item.quantity === 1) {
-                        dispatch(removeItem(item.id));
+                       removeItem(item.id);
+                       localStorage.removeItem("basket")
                         return;
                       }
-                      dispatch(decrease(item.id));
+                    decrease(item.id);
                     }}
                   >
                     -
-                  </button>
+                  </Button>
                 </div>
               </td>
               <td>
                 <Button
                   variant="danger"
-                  onClick={() => dispatch(removeItem(item.id))}
+                  onClick={() => removeItem(item.id)}
                 >
                   حذف
                 </Button>
@@ -120,6 +140,7 @@ function Basket() {
       <div className={classes.total}>
         <div>
           <h5>جمع:{total} </h5>
+      
         </div>
         <div className={classes.btn}>
           <Button variant="success">
