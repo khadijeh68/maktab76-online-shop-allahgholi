@@ -26,7 +26,9 @@ console.log(product)
     const clickedItem = cartItems.filter((product) => product.id === item);
     const Basket = JSON.parse(localStorage.getItem("basket")) ?? []; //
     // if (clickedItem.indexOf(item) !== -1) return;
+    // Basket.amount = 0
     localStorage.setItem("basket", JSON.stringify([...Basket, ...clickedItem]));
+    console.log(clickedItem)
   };
 
   

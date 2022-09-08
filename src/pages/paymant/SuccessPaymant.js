@@ -58,6 +58,8 @@ function SuccessPaymant() {
     };
   };
   const classes = useStyles();
+
+  
   return (
     <div className={classes.container}>
       <div className={classes.nav}>
@@ -72,18 +74,6 @@ function SuccessPaymant() {
               فروشگاه آنلاین موبایل و لوازم جانبی
             </span>
           </NavLink>
-          {/* 
-          <NavLink to="/" className={classes.span} style={navLinkStyles}>
-            <span>صفحه اصلی </span>
-          </NavLink>
-
-          <NavLink to="/categories" className={classes.span} style={navLinkStyles}>
-            <span>دسته بندی کالاها </span>
-          </NavLink>
-
-          <NavLink to="/products" className={classes.span}>
-            <span>کالاها</span>
-          </NavLink> */}
         </div>
 
         <div className={classes.leftNav}>
@@ -94,7 +84,7 @@ function SuccessPaymant() {
       </div>
 
       <div className={classes.h4}>
-        <h4>نتیجه پرداخت</h4>
+        <h4>نتیجه پرداخت </h4>
         <p>پرداخت با موفقیت انجام شد</p>
       </div>
     </div>

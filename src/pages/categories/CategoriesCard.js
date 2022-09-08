@@ -34,12 +34,14 @@ const useStyles = makeStyles({
 //Categories : <Sidebar/> , <Products/>
 
 function CategoriesCard() {
+  const [validated, setValidated] = useState(false);
   const classes = useStyles();
   const dispatch = useDispatch();
   const categoryList = useSelector((state) => state.categories.categoryList);
   const [category, setCategory] = useState([]);
   const { categoryId } = useParams();
   console.log(category)
+
 
 
   useEffect(() => {
