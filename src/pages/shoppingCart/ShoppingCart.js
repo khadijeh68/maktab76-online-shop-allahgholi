@@ -34,6 +34,7 @@ const useStyles = makeStyles({
 function Basket() {
   const dispatch = useDispatch();
   const [basket, setBasket] = useState([]);
+  const total = useSelector((state) => state.cart.total);
 
   const calculateTotals = () => {
     basket.map((item) => console.log(item.price * item.quantity)
@@ -114,6 +115,7 @@ function Basket() {
                     onClick={() => {
                       if (item.quantity === 1) {
                        removeItem(item.id);
+                       localStorage.removeItem("basket")
                         return;
                       }
                     decrease(item.id);
@@ -137,7 +139,7 @@ function Basket() {
       </Table>
       <div className={classes.total}>
         <div>
-          <h5>جمع:{calculateTotals} </h5>
+          <h5>جمع:{total} </h5>
       
         </div>
         <div className={classes.btn}>

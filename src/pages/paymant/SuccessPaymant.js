@@ -1,6 +1,8 @@
 import { makeStyles } from "@material-ui/core";
 import { NavLink } from "react-router-dom";
 import "../../index.css";
+import { Button } from "react-bootstrap";
+import { useDispatch } from "react-redux";
 
 const useStyles = makeStyles({
   nav: {
@@ -52,13 +54,16 @@ const useStyles = makeStyles({
 });
 
 function SuccessPaymant() {
+  const dispatch = useDispatch()
   const navLinkStyles = ({ isActive }) => {
     return {
       color: isActive ? "#C14795" : "black",
     };
   };
   const classes = useStyles();
-
+const clearCart = () => {
+  localStorage.removeItem("basket")
+}
   
   return (
     <div className={classes.container}>
@@ -86,6 +91,7 @@ function SuccessPaymant() {
       <div className={classes.h4}>
         <h4>نتیجه پرداخت </h4>
         <p>پرداخت با موفقیت انجام شد</p>
+        <Button onClick={clearCart}>پاک کردن سبد خرید</Button>
       </div>
     </div>
   );

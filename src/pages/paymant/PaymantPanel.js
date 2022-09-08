@@ -1,4 +1,5 @@
 import { makeStyles } from "@material-ui/core/styles";
+import { useEffect } from "react";
 import { Button } from "react-bootstrap";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
@@ -8,23 +9,34 @@ const useStyles = makeStyles({
   title: {
     fontFamily: "Vazir-Medium",
     margin: "30px 20px",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    flexDirection: "column",
   },
- img: {
-  backgroundImage: "url('logo.png')"
- }
+  img: {
+    width: "650px",
+    height: "500px",
+  },
+  btn: {
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    margin: "10px",
+  },
 });
 
 function PaymantPanel() {
   const classes = useStyles();
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const navigateSuccessPaymant = () => {
     navigate("/successPaymant");
-    dispatch(clearCart())
+    //  localStorage.removeItem("basket")
   };
   // useEffect(() => {
-  //   dispatch(calculateTotals());
+  //   dispatch(clearCart())
   // }, [dispatch]);
 
   const navigateFailPaymant = () => {
@@ -33,14 +45,24 @@ function PaymantPanel() {
 
   return (
     <div className={classes.title}>
-      <p className={classes.img}>درگاه اینترنتی</p>
-      {/* <img className={classes.img} src={`../../../image/sepehr.png`} alt="dargah" /> */}
-      <Button variant="success" type="submit" onClick={navigateSuccessPaymant}>
-        پرداخت
-      </Button>
-      <Button variant="danger" type="submit" onClick={navigateFailPaymant}>
-        انصراف
-      </Button>
+      <img
+        className={classes.img}
+        src={`../../../image/sepehr3.png`}
+        alt="dargah"
+      />
+      <div className={classes.btn}>
+        <Button
+          variant="success"
+          type="submit"
+          className="mx-3"
+          onClick={navigateSuccessPaymant}
+        >
+          پرداخت
+        </Button>
+        <Button variant="danger" className="mx-3"  type="submit" onClick={navigateFailPaymant}>
+          انصراف
+        </Button>
+      </div>
     </div>
   );
 }
