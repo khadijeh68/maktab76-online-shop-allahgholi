@@ -22,16 +22,15 @@ const cartSlice = createSlice({
           ...state.cartItems[existingIndex],
           cartQuantity: state.cartItems[existingIndex].cartQuantity + 1,
         };
-        // toast.info("Increased product quantity", {
-        //   position: "bottom-left",
-        // }
-        // );
+        toast.info("به تعداد کالای مورد نظر اضافه شد", {
+          position: "bottom-right",
+        });
       } else {
         let tempProductItem = { ...action.payload, cartQuantity: 1 };
         state.cartItems.push(tempProductItem);
-        // toast.success("Product added to cart", {
-        //   position: "bottom-left",
-        // });
+        toast.success("کالای مورد نظر به سبد خرید اضافه شد", {
+          position: "bottom-right",
+        });
       }
       localStorage.setItem("cartItems", JSON.stringify(state.cartItems));
     },
@@ -52,6 +51,21 @@ const cartSlice = createSlice({
       total = parseFloat(total.toFixed(2));
       state.cartTotalQuantity = quantity;
       state.cartTotalAmount = total;
+    },
+    removeItem(state, action) {
+      state.cartItems.map((cartItem) => {
+        if (cartItem.id === action.payload) {
+          const nextCartItems = state.cartItems.filter(
+            (item) => item.id !== cartItem.id
+          );
+          state.cartItems = nextCartItems;
+          toast.error("کالای مورد نظر از سبد خرید حذف شد", {
+            position: "bottom-right",
+          });
+        }
+        localStorage.setItem("cartItems", JSON.stringify(state.cartItems));
+        return state;
+      });
     },
     // clearCart: (state) => {
     //   state.cartItems = [];
@@ -83,6 +97,6 @@ const cartSlice = createSlice({
   },
 });
 
-export const { addToCart, getTotals } = cartSlice.actions;
+export const { addToCart, getTotals, removeItem } = cartSlice.actions;
 
 export default cartSlice.reducer;

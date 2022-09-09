@@ -19,24 +19,6 @@ function ProductDetails() {
       .then((res) => setProduct(res));
   }, [dispatch, id]);
 
-
-
-  // const addToCart = (item) => {
-  //   const clickedItem = cartItems.filter((product) => product.id === item);
-  //   const Basket = JSON.parse(localStorage.getItem("basket")) ?? []; //
-  //   // if (clickedItem.indexOf(item) !== -1) return;
-  //   // Basket.amount = 0
-  //   localStorage.setItem("basket", JSON.stringify([...Basket, ...clickedItem]));
-  //   console.log(clickedItem)
-  // };
-
-  
-  const handleChange = (item) => {
-    console.log(cartItems.indexOf(item))
-    // if (basket.indexOf(item) !== -1) return;
-    // setBasket([...basket, item]);
-  }
-
   return (
     <div className="product-details">
       <div>
@@ -51,9 +33,15 @@ function ProductDetails() {
         <h5>{product.name}</h5>
         <p>{`رنگ: ${product.color}`}</p>
         <p>{`قیمت: ${product.price}`}</p>
-        <div>
-          <label>تعداد: </label>
-          <input type="number" />
+        <div className="d-flex flex-direction-row align-items-center">
+          <div>تعداد: </div>
+          <Button variant="success" size="sm" className="mx-2">
+            +
+          </Button>
+          <div>{product.quantity}</div>
+          <Button variant="warning" size="sm" className="mx-2">
+            -
+          </Button>
         </div>
         <div dangerouslySetInnerHTML={{ __html: product.description }} />
         <Button variant="primary" onClick={() => dispatch(addToCart(product))}>

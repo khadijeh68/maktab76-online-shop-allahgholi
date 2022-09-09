@@ -6,13 +6,8 @@ import { Button, Table } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { BASE_URL } from "../../config/api";
-import {
-  calculateTotals,
-  decrease,
-  getTotals,
-  increase,
-  removeItem,
-} from "../../redux/features/cart/cartSlice";
+import { getTotals } from "../../redux/features/cart/cartSlice";
+import {removeItem} from "../../redux/features/cart/cartSlice"
 
 const useStyles = makeStyles({
   title: {
@@ -36,11 +31,12 @@ function Basket() {
   const dispatch = useDispatch();
   const cartItems = useSelector((state) => state.cart.cartItems);
   const cartTotalAmount = useSelector((state) => state.cart.cartTotalAmount);
+  
 
   useEffect(() => {
     dispatch(getTotals());
   }, [dispatch, cartItems]);
-  console.log(cartItems);
+
   // const calculateTotals = () => {
   //   basket.map((item) => console.log(item.price * item.quantity)
   //   )
@@ -51,11 +47,7 @@ function Basket() {
   //   calculateTotals()
   // }, []);
 
-  const removeItem = (id) => {
-    // const arr = basket.filter((item) => item.id !== id);
-    // console.log(arr);
-    // setBasket(arr);
-  };
+
 
   const increase = (id) => {
     // const items = basket.find((item) => item.id === id);
@@ -75,7 +67,7 @@ function Basket() {
   return (
     <div className={classes.title}>
       <h4 className="m-3">سبد خرید</h4>
-      <Table striped bordered hover className="w-75 text-center">
+      <Table bordered className="w-75 text-center">
         <thead>
           <tr>
             <th>تصویر کالا</th>
@@ -89,44 +81,48 @@ function Basket() {
           {cartItems.map((item) => (
             <tr key={item.id}>
               <td>
-                <img src={`${BASE_URL}/files/${item.image}`} alt="mobile" />
+                <Link to={`products/${item.id}`}>
+                  <img src={`${BASE_URL}/files/${item.image}`} alt="mobile" />
+                </Link>
               </td>
               <td>
-                <h6>{item.name}</h6>
+                <Link to={`products/${item.id}`}>{item.name}</Link>
               </td>
-              <td>{item.price}</td>
+              <td>{digitsEnToFa(item.price)}</td>
               <td>
-                {/* <p>{digitsEnToFa(item.quantity)}</p> */}
-                <div className="d-flex flex-direction-row">
-                  <Button
-                    variant="success"
-                    onClick={() => {
-                      // dispatch(increase(item.id));
-                      increase(item.id);
-                    }}
-                  >
-                    +
-                  </Button>
-                  <td>
-                    <p>{item.quantity}</p>
-                  </td>
-                  <Button
-                    variant="warning"
-                    onClick={() => {
-                      if (item.quantity === 1) {
-                        removeItem(item.id);
-                        localStorage.removeItem("basket");
-                        return;
-                      }
-                      decrease(item.id);
-                    }}
-                  >
-                    -
-                  </Button>
-                </div>
+                <Button
+                  variant="success"
+                  onClick={() => {
+                    // dispatch(increase(item.id));
+                    increase(item.id);
+                  }}
+                >
+                  +
+                </Button>
               </td>
               <td>
-                <Button variant="danger" onClick={() => removeItem(item.id)}>
+                <p>{digitsEnToFa(item.quantity)}</p>
+              </td>
+              <td>
+                <Button
+                  variant="warning"
+                  onClick={() => {
+                    if (item.quantity === 1) {
+                      dispatch(removeItem(item.id));
+                      localStorage.removeItem("cartItems");
+                      return;
+                    }
+                    decrease(item.id);
+                  }}
+                >
+                  -
+                </Button>
+              </td>
+              <td>
+                <Button
+                  variant="danger"
+                  onClick={() => dispatch(removeItem(item.id))}
+                >
                   حذف
                 </Button>
               </td>
@@ -137,9 +133,11 @@ function Basket() {
       <div className={classes.total}>
         <div>
           <h5>
-            جمع:
-            {cartTotalAmount &&
-              cartTotalAmount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
+            جمع :
+            {digitsEnToFa(
+              cartTotalAmount &&
+                cartTotalAmount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+            )}
           </h5>
         </div>
         <div className={classes.btn}>
