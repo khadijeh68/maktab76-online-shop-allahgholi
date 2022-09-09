@@ -1,31 +1,58 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import axios from "axios";
+import { createSlice } from "@reduxjs/toolkit";
 import { toast } from "react-toastify";
-import { BASE_URL } from "../../../config/api";
 
 const initialState = {
-  cartItems: [],
-  quantity: 4,
-  total: 0,
-  isLoading: true,
-  // caerTotalQuantity: 0,
-  // cartTotalAmount: 0,
+  cartItems: localStorage.getItem("cartItems")
+    ? JSON.parse(localStorage.getItem("cartItems"))
+    : [],
+  cartTotalQuantity: 0,
+  cartTotalAmount: 0,
 };
-
-export const getProduct = createAsyncThunk("cart/getProduct", async () => {
-  return axios.get(`${BASE_URL}/products`).then((res) => res.data);
-  // try {
-  // const resp = await axios.get(`${BASE_URL}/products`);
-  // return resp.data;
-  // } catch (error) {
-  // return thunkAPI.rejectWithValue("something went wrong");
-  // }
-});
 
 const cartSlice = createSlice({
   name: "cart",
   initialState,
   reducers: {
+    addToCart(state, action) {
+      const existingIndex = state.cartItems.findIndex(
+        (item) => item.id === action.payload.id
+      );
+      if (existingIndex >= 0) {
+        state.cartItems[existingIndex] = {
+          ...state.cartItems[existingIndex],
+          cartQuantity: state.cartItems[existingIndex].cartQuantity + 1,
+        };
+        // toast.info("Increased product quantity", {
+        //   position: "bottom-left",
+        // }
+        // );
+      } else {
+        let tempProductItem = { ...action.payload, cartQuantity: 1 };
+        state.cartItems.push(tempProductItem);
+        // toast.success("Product added to cart", {
+        //   position: "bottom-left",
+        // });
+      }
+      localStorage.setItem("cartItems", JSON.stringify(state.cartItems));
+    },
+    getTotals(state, action) {
+      let { total, quantity } = state.cartItems.reduce(
+        (cartTotal, cartItem) => {
+          const { price, cartQuantity } = cartItem;
+          const itemTotal = price * cartQuantity;
+          cartTotal.total += itemTotal;
+          cartTotal.quantity += cartQuantity;
+          return cartTotal;
+        },
+        {
+          total: 0,
+          quantity: 0,
+        }
+      );
+      total = parseFloat(total.toFixed(2));
+      state.cartTotalQuantity = quantity;
+      state.cartTotalAmount = total;
+    },
     // clearCart: (state) => {
     //   state.cartItems = [];
     // },
@@ -54,45 +81,8 @@ const cartSlice = createSlice({
     //   state.total = total;
     // },
   },
-  extraReducers: (builder) => {
-    builder.addCase(getProduct.pending, (state) => {
-      state.isLoading = true;
-    });
-    builder.addCase(getProduct.fulfilled, (state, action) => {
-      state.isLoading = false;
-      state.cartItems = action.payload;
-    });
-    builder.addCase(getProduct.rejected, (state, action) => {
-      state.isLoading = false;
-    });
-  },
 });
 
-export const { clearCart, removeItem, increase, decrease, calculateTotals } =
-  cartSlice.actions;
+export const { addToCart, getTotals } = cartSlice.actions;
 
 export default cartSlice.reducer;
-//   reducers: {
-//     addToCart(state, action) {
-//       const itemIndex = state.cartItems.findIndex(
-//         (item) => item.id === action.payload.id
-//       );
-//       if (itemIndex >= 0) {
-//         state.cartItems[itemIndex].cartQuantity += 1;
-//         toast.info(`تعداد کالای ${state.cartItems[itemIndex].name} افزایش یافت`, {
-//           position: "bottom-left",
-//         });
-//       } else {
-//         const tempProduct = { ...action.payload, cartQuantity: 1 };
-//         state.cartItems.push(tempProduct);
-//         toast.success(`به سبد خرید اضافه شد${action.payload.name}`, {
-//           position: "bottom-left",
-//         });
-//       }
-//       localStorage.setItem("cartItems",JSON.stringify(state.cartItems));
-
-//     },
-//   },
-// });
-// export const { addToCart } = cartSlice.actions;
-// export default cartSlice.reducer;

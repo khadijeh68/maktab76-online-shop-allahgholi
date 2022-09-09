@@ -9,6 +9,7 @@ import { BASE_URL } from "../../config/api";
 import {
   calculateTotals,
   decrease,
+  getTotals,
   increase,
   removeItem,
 } from "../../redux/features/cart/cartSlice";
@@ -33,43 +34,42 @@ const useStyles = makeStyles({
 
 function Basket() {
   const dispatch = useDispatch();
-  const [basket, setBasket] = useState([]);
-  const total = useSelector((state) => state.cart.total);
-
-  const calculateTotals = () => {
-    basket.map((item) => console.log(item.price * item.quantity)
-    )
-  }
-
+  const cartItems = useSelector((state) => state.cart.cartItems);
+  const cartTotalAmount = useSelector((state) => state.cart.cartTotalAmount);
 
   useEffect(() => {
-    setBasket(JSON.parse(localStorage.getItem("basket")));
-    calculateTotals()
-  }, []);
+    dispatch(getTotals());
+  }, [dispatch, cartItems]);
+  console.log(cartItems);
+  // const calculateTotals = () => {
+  //   basket.map((item) => console.log(item.price * item.quantity)
+  //   )
+  // }
 
+  // useEffect(() => {
+  //   setBasket(JSON.parse(localStorage.getItem("basket")));
+  //   calculateTotals()
+  // }, []);
 
   const removeItem = (id) => {
-    const arr = basket.filter((item) => item.id !== id);
-    console.log(arr);
-    setBasket(arr);
-  }
+    // const arr = basket.filter((item) => item.id !== id);
+    // console.log(arr);
+    // setBasket(arr);
+  };
 
   const increase = (id) => {
-    const items = basket.find((item) => item.id === id);
-      console.log(items);
-      items.quantity = items.quantity + 1;
-      console.log(items.quantity);
-  }
-
+    // const items = basket.find((item) => item.id === id);
+    //   console.log(items);
+    //   items.quantity = items.quantity + 1;
+    //   console.log(items.quantity);
+  };
 
   const decrease = (id) => {
-    const items = basket.find((item) => item.id === id);
-      console.log(items);
-      items.quantity = items.quantity - 1;
-      console.log(items.quantity);
-  }
-
- 
+    // const items = basket.find((item) => item.id === id);
+    //   console.log(items);
+    //   items.quantity = items.quantity - 1;
+    //   console.log(items.quantity);
+  };
 
   const classes = useStyles();
   return (
@@ -86,7 +86,7 @@ function Basket() {
           </tr>
         </thead>
         <tbody>
-          {basket.map((item) => (
+          {cartItems.map((item) => (
             <tr key={item.id}>
               <td>
                 <img src={`${BASE_URL}/files/${item.image}`} alt="mobile" />
@@ -94,31 +94,31 @@ function Basket() {
               <td>
                 <h6>{item.name}</h6>
               </td>
-              <td>
-                {digitsEnToFa(
-                  item.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, "،")
-                )}
-              </td>
+              <td>{item.price}</td>
               <td>
                 {/* <p>{digitsEnToFa(item.quantity)}</p> */}
                 <div className="d-flex flex-direction-row">
-                  <Button variant="success"
+                  <Button
+                    variant="success"
                     onClick={() => {
                       // dispatch(increase(item.id));
-                 increase(item.id);
+                      increase(item.id);
                     }}
                   >
                     +
                   </Button>
-                  <td><p>{digitsEnToFa(item.quantity)}</p></td>
-                  <Button variant="warning"
+                  <td>
+                    <p>{item.quantity}</p>
+                  </td>
+                  <Button
+                    variant="warning"
                     onClick={() => {
                       if (item.quantity === 1) {
-                       removeItem(item.id);
-                       localStorage.removeItem("basket")
+                        removeItem(item.id);
+                        localStorage.removeItem("basket");
                         return;
                       }
-                    decrease(item.id);
+                      decrease(item.id);
                     }}
                   >
                     -
@@ -126,10 +126,7 @@ function Basket() {
                 </div>
               </td>
               <td>
-                <Button
-                  variant="danger"
-                  onClick={() => removeItem(item.id)}
-                >
+                <Button variant="danger" onClick={() => removeItem(item.id)}>
                   حذف
                 </Button>
               </td>
@@ -139,8 +136,11 @@ function Basket() {
       </Table>
       <div className={classes.total}>
         <div>
-          <h5>جمع:{total} </h5>
-      
+          <h5>
+            جمع:
+            {cartTotalAmount &&
+              cartTotalAmount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
+          </h5>
         </div>
         <div className={classes.btn}>
           <Button variant="success">

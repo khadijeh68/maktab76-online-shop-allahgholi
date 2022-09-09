@@ -5,7 +5,7 @@ import { useParams } from "react-router-dom";
 import { getDetails } from "../../redux/features/productDetail/productDetailSlice";
 import "../../index.css";
 import { BASE_URL } from "../../config/api";
-import { getProduct } from "../../redux/features/cart/cartSlice";
+import { addToCart } from "../../redux/features/cart/cartSlice";
 
 function ProductDetails() {
   const dispatch = useDispatch();
@@ -17,19 +17,18 @@ function ProductDetails() {
     dispatch(getDetails(id))
       .unwrap()
       .then((res) => setProduct(res));
-    dispatch(getProduct(id));
   }, [dispatch, id]);
 
-console.log(product)
 
-  const addToCart = (item) => {
-    const clickedItem = cartItems.filter((product) => product.id === item);
-    const Basket = JSON.parse(localStorage.getItem("basket")) ?? []; //
-    // if (clickedItem.indexOf(item) !== -1) return;
-    // Basket.amount = 0
-    localStorage.setItem("basket", JSON.stringify([...Basket, ...clickedItem]));
-    console.log(clickedItem)
-  };
+
+  // const addToCart = (item) => {
+  //   const clickedItem = cartItems.filter((product) => product.id === item);
+  //   const Basket = JSON.parse(localStorage.getItem("basket")) ?? []; //
+  //   // if (clickedItem.indexOf(item) !== -1) return;
+  //   // Basket.amount = 0
+  //   localStorage.setItem("basket", JSON.stringify([...Basket, ...clickedItem]));
+  //   console.log(clickedItem)
+  // };
 
   
   const handleChange = (item) => {
@@ -57,7 +56,7 @@ console.log(product)
           <input type="number" />
         </div>
         <div dangerouslySetInnerHTML={{ __html: product.description }} />
-        <Button variant="primary" onClick={() => addToCart(product.id)}>
+        <Button variant="primary" onClick={() => dispatch(addToCart(product))}>
           افزودن به سبد خرید
         </Button>
       </div>
