@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
-import axois from "axios";
+import instance from "../../../api/http";
 import { BASE_URL } from "../../../config/api";
 
 const initialState = {
@@ -13,7 +13,7 @@ const initialState = {
 export const fetchOrders = createAsyncThunk(
   "orders/fetchOrders",
    ({ delivered, currentPage }) => {
-   return axois.get(`${BASE_URL}/orders/?delivered=${delivered}&_page=${currentPage}&_limit=5`)
+   return instance.get(`${BASE_URL}/orders/?delivered=${delivered}&_page=${currentPage}&_limit=5`)
     .then((response) => {
       return {
         data: response.data,

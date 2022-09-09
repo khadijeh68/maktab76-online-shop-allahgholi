@@ -20,8 +20,6 @@ const useStyles = makeStyles({
 
 function Inventory() {
   const classes = useStyles();
-
-  const [mount,setMount] = useState('');
   const dispatch = useDispatch();
   const inventoriesList = useSelector(
     (state) => state.inventory.inventoriesList
@@ -30,7 +28,7 @@ function Inventory() {
   const [currentPage, setCurrentPage] = useState(1);
   const limit = 5;
   const count = Math.ceil(total /limit);
-  console.log(typeof(total))
+  console.log(total)
   useEffect(() => {
     dispatch(fetchInventory(currentPage));
   }, [currentPage, dispatch]);

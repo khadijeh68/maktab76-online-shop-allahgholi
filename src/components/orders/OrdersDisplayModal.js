@@ -82,7 +82,7 @@ function OrdersDisplayModal({ item }) {
               <tbody>
                 <tr>
                   <td>{item.products[0].name}</td>
-                  <td>{digitsEnToFa(item.products[0].pricetoString().replace(/\B(?=(\d{3})+(?!\d))/g, "،"))}</td>
+                  <td>{digitsEnToFa(item.products[0].price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, "،"))}</td>
                   <td>{digitsEnToFa(item.products[0].count)}</td>
                 </tr>
               </tbody>
