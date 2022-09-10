@@ -48,7 +48,7 @@ const useStyles = makeStyles({
 
 function Navbar() {
   const classes = useStyles();
-  const  quantity  = useSelector((state) => state.cart.quantity);
+  const { cartTotalQuantity } = useSelector((state) => state.cart);
   const navLinkStyles = ({ isActive }) => {
     return {
       color: isActive ? "#C14795" : "black",
@@ -83,7 +83,7 @@ function Navbar() {
             <div className={classes.basket}>
               <ShoppingCartSharpIcon />
               {/* <span>سبد خرید </span> */}
-              <span className="bag-quantity">{quantity}</span>
+              <span className="bag-quantity">{cartTotalQuantity}</span>
             </div>
           </NavLink>
         </div>

@@ -1,17 +1,17 @@
 import React, { useEffect, useState } from "react";
 import { Button, Card } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
-import { Navigate, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { getDetails } from "../../redux/features/productDetail/productDetailSlice";
 import "../../index.css";
 import { BASE_URL } from "../../config/api";
 import { addToCart, decrease } from "../../redux/features/cart/cartSlice";
 
-
 function ProductDetails() {
   const dispatch = useDispatch();
   const { id } = useParams();
   const cartItems = useSelector((state) => state.cart.cartItems);
+  const [orderCount, setOrderCount] = useState(0);
   const [product, setProduct] = useState([]);
 
   useEffect(() => {
@@ -22,6 +22,12 @@ function ProductDetails() {
 
   const handleAddToCart = (product) => {
     dispatch(addToCart(product));
+    setOrderCount(orderCount + 1);
+  };
+
+  const handleDecreaseCart = (product) => {
+    dispatch(decrease(product));
+    setOrderCount(orderCount - 1);
   };
 
   return (
@@ -40,23 +46,30 @@ function ProductDetails() {
         <p>{`قیمت: ${product.price}`}</p>
         <div className="d-flex flex-direction-row align-items-center">
           <div>تعداد: </div>
-          <Button variant="success" size="sm" className="mx-2">
+          <Button
+            variant="success"
+            size="sm"
+            className="mx-2"
+            onClick={() => {handleAddToCart(product)}}
+            disabled={orderCount > product.quantity ? "disabled" : ""}
+          >
             +
           </Button>
-          <div>{product.cartQuantity}</div>
+          <div>{orderCount}</div>
           <Button
             variant="warning"
             size="sm"
             className="mx-2"
             onClick={() => {
-              dispatch(decrease(product.id));
+              dispatch(handleDecreaseCart(product));
             }}
+            disabled={orderCount < 0 ? "disabled" : ""}
           >
             -
           </Button>
         </div>
         <div dangerouslySetInnerHTML={{ __html: product.description }} />
-        <Button variant="primary" onClick={() => handleAddToCart(product)}>
+        <Button variant="primary" onClick={() => handleAddToCart(product)}  disabled={orderCount > product.quantity || orderCount < 0 ? "disabled" : ""}>
           افزودن به سبد خرید
         </Button>
       </div>
