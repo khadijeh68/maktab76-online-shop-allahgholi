@@ -33,7 +33,7 @@ function PaymantPanel() {
 
   const navigateSuccessPaymant = () => {
     navigate("/successPaymant");
-    //  localStorage.removeItem("basket")
+     localStorage.removeItem("cartItems")
   };
   // useEffect(() => {
   //   dispatch(clearCart())

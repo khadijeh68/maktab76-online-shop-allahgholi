@@ -1,7 +1,9 @@
 import { makeStyles } from "@material-ui/core/styles";
 import { Formik, Form, Field } from "formik";
+import { useDispatch } from "react-redux";
 import { Navigate, useNavigate } from "react-router-dom";
 import * as Yup from "yup";
+import { userOrder } from "../../redux/features/cart/cartSlice";
 
 const useStyles = makeStyles({
   title: {
@@ -21,7 +23,7 @@ const useStyles = makeStyles({
     width: "500px",
     height: "600px",
     marginTop: "20px",
-    borderRadius: "5px"
+    borderRadius: "5px",
   },
 });
 
@@ -44,10 +46,30 @@ const SignupSchema = Yup.object().shape({
 function Checkout() {
   const classes = useStyles();
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    window.location.href = 'http://localhost:3001/'
+  let order = {
+    id: null,
+    firstName: "",
+    lastName: "",
+    address: "",
+    tel: "",
+    date: "",
+  };
+  const handleSubmit = (value) => {
+    // e.preventDefault();
+    const { firstName, lastName, address, tel, date } = value;
+    order = {
+      ...order,
+      id: Math.floor(Math.random() * 100),
+      firstName: firstName,
+      lastName: lastName,
+      address: address,
+      tel:tel,
+
+    };
+    dispatch(userOrder())
+    // window.location.href = 'http://localhost:3001/'
   };
 
   return (
@@ -65,12 +87,12 @@ function Checkout() {
           validationSchema={SignupSchema}
           onSubmit={(values) => {
             localStorage.setItem("userData", JSON.stringify(values));
-            // handleSubmit(values)
+            window.location.href = "http://localhost:3001/";
             console.log(values);
           }}
         >
           {({ errors, touched }) => (
-            <Form className={classes.form}  onSubmit={handleSubmit}>
+            <Form className={classes.form}>
               <div>
                 <div>
                   <label>نام:</label>
@@ -100,9 +122,7 @@ function Checkout() {
               </div>
               <div>
                 <div>
-                  <label className="mt-3">
-                    شماره همراه:
-                  </label>
+                  <label className="mt-3">شماره همراه:</label>
                 </div>
                 <Field name="tel" type="tel" />
                 {errors.tel && touched.tel ? (

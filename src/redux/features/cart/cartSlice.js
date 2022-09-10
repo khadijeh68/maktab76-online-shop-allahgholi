@@ -5,9 +5,15 @@ const initialState = {
   cartItems: localStorage.getItem("cartItems")
     ? JSON.parse(localStorage.getItem("cartItems"))
     : [],
-  cartTotalQuantity: 0,
-  cartTotalAmount: 0,
-  
+  cartTotalQuantity: localStorage.getItem("cartTotalQuantity")
+    ? JSON.parse(localStorage.getItem("cartTotalQuantity"))
+    : 0,
+  cartTotalAmount: localStorage.getItem("cartTotalAmount")
+    ? JSON.parse(localStorage.getItem("cartTotalAmount"))
+    : 0,
+  finalCartItem: localStorage.getItem("finalCartItem")
+    ? JSON.parse(localStorage.getItem("finalCartItem"))
+    : [],
 };
 
 const cartSlice = createSlice({
@@ -94,10 +100,26 @@ const cartSlice = createSlice({
       localStorage.setItem("cartItems", JSON.stringify(state.cartItems));
       toast.error("سبد خرید خالی شد", { position: "bottom-right" });
     },
+    clearLocalStorage(state, action) {
+      state.cartItems = [];
+      localStorage.setItem("cartItems", JSON.stringify(state.cartItems));
+    },
+    userOrder(state, action) {
+      state.finalCartItem = action.payload;
+      localStorage.setItem("finalCartItem", JSON.stringify(state.finalCartItem));
+    },
   },
 });
 
-export const { addToCart, getTotals, removeItem, decrease, clearCart ,increase} =
-  cartSlice.actions;
+export const {
+  addToCart,
+  getTotals,
+  removeItem,
+  decrease,
+  clearCart,
+  increase,
+  clearLocalStorage,
+  userOrder
+} = cartSlice.actions;
 
 export default cartSlice.reducer;

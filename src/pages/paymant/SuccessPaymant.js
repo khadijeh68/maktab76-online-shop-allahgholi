@@ -1,8 +1,10 @@
 import { makeStyles } from "@material-ui/core";
-import { NavLink } from "react-router-dom";
+import { Link, NavLink, useParams } from "react-router-dom";
 import "../../index.css";
 import { Button } from "react-bootstrap";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
+import { clearLocalStorage } from "../../redux/features/cart/cartSlice";
 
 const useStyles = makeStyles({
   nav: {
@@ -41,7 +43,13 @@ const useStyles = makeStyles({
   h4: {
     marginTop: "100px",
     fontFamily: "Vazir-Medium",
-    margin: "10px",
+    margin: "20px",
+  },
+  body: {
+    display: "flex",
+    justifyContent: "center",
+    flexDirection: "row",
+    alignItems: "center",
   },
   container: {
     display: "flex",
@@ -51,20 +59,40 @@ const useStyles = makeStyles({
     width: "50px",
     height: "52px",
   },
+  success: {
+    width: "100px",
+    height: "90px",
+  },
 });
 
 function SuccessPaymant() {
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
+  const params = useParams();
+  const query = params.query;
+  const cartItems = useSelector((state) => state.cart.cartItems);
+
   const navLinkStyles = ({ isActive }) => {
     return {
       color: isActive ? "#C14795" : "black",
     };
   };
   const classes = useStyles();
-const clearCart = () => {
-  localStorage.removeItem("basket")
-}
-  
+  const clearCart = () => {
+    fetch(`http://localhost:3002/orders`, {
+      method: "POST",
+      body: JSON.stringify(cartItems),
+    })
+      .then((res) => res.json())
+      .then((data) => console.log(data));
+    dispatch(clearLocalStorage());
+  };
+
+  useEffect(() => {
+    if (query === ":successPaymant") {
+      dispatch(clearCart());
+    }
+  }, []);
+
   return (
     <div className={classes.container}>
       <div className={classes.nav}>
@@ -89,9 +117,20 @@ const clearCart = () => {
       </div>
 
       <div className={classes.h4}>
-        <h4>نتیجه پرداخت </h4>
-        <p>پرداخت با موفقیت انجام شد</p>
-        <Button onClick={clearCart}>پاک کردن سبد خرید</Button>
+      <h4>نتیجه پرداخت </h4>
+      <div className={classes.body}>
+          <img
+            className={classes.success}
+            src={`../../../image/success.png`}
+            alt="success"
+          />
+           <p className="mt-3">
+            با تشکر از پرداخت شما، سفارش شما ثبت شده و <br /> جهت هماهنگی ارسال
+            با شما تماس گرفته خواهد شد
+          </p>
+          <Button onClick={clearCart}>پاک کردن سبد خرید</Button>
+          <Link to="/admin/orders">صفحه سفارش</Link>
+          </div>
       </div>
     </div>
   );
