@@ -36,7 +36,7 @@ const SignupSchema = Yup.object().shape({
     .required("نام خانوادگی اجباری است"),
   address: Yup.string().required("آدرس اجباری است"),
   tel: Yup.number().required("شماره تماس اجباری است"),
-  data: Yup.date().default(function () {
+  date: Yup.date().default(function () {
     return new Date();
   }),
 });
@@ -46,8 +46,8 @@ function Checkout() {
   const navigate = useNavigate();
 
   const handleSubmit = (e) => {
-    // e.preventDefault();
-    //   navigate("http://localhost:3001/paymentPanel");
+    e.preventDefault();
+    window.location.href = 'http://localhost:3001/'
   };
 
   return (
@@ -65,6 +65,7 @@ function Checkout() {
           validationSchema={SignupSchema}
           onSubmit={(values) => {
             localStorage.setItem("userData", JSON.stringify(values));
+            // handleSubmit(values)
             console.log(values);
           }}
         >
