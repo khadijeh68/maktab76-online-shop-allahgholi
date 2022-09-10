@@ -79,14 +79,17 @@ function Basket() {
       ) : (
         <div>
           <h4 className="m-3">سبد خرید</h4>
-          <Table bordered className="w-75 text-center">
+          <Table bordered className="w-100 text-center">
             <thead>
               <tr>
                 <th>تصویر کالا</th>
                 <th>نام کالا</th>
                 <th>قیمت کالا</th>
+                <th>افزودن تعداد</th>
                 <th>تعداد</th>
-                <th></th>
+                <th>کاستن تعداد</th>
+                <th>مبلغ قابل پرداخت</th>
+                <th>حذف کالا</th>
               </tr>
             </thead>
             <tbody>
@@ -158,7 +161,7 @@ function Basket() {
               </h5>
             </div>
             <div className={classes.btn}>
-              <Button variant="success">
+              <Button variant="success" size="sm">
                 <Link
                   to="/checkout"
                   className="text-white text-decoration-none"
@@ -168,7 +171,8 @@ function Basket() {
               </Button>
               <Button
                 variant="warning"
-                className="text-white text-decoration-none"
+                size="sm"
+                className="text-white text-decoration-none mx-1"
                 onClick={() => dispatch(clearCart())}
               >
                 پاک کردن سبد خرید
