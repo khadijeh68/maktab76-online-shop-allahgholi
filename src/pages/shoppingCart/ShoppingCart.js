@@ -5,9 +5,11 @@ import { useState } from "react";
 import { Button, Table } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+
 import { BASE_URL } from "../../config/api";
 import { getTotals } from "../../redux/features/cart/cartSlice";
 import {removeItem} from "../../redux/features/cart/cartSlice"
+import DeleteModal from "./DeleteModal";
 
 const useStyles = makeStyles({
   title: {
@@ -31,6 +33,9 @@ function Basket() {
   const dispatch = useDispatch();
   const cartItems = useSelector((state) => state.cart.cartItems);
   const cartTotalAmount = useSelector((state) => state.cart.cartTotalAmount);
+  const [openDelete, setOpenDelete] = useState(false);
+  const handleOpenDelete = () => setOpenDelete(true);
+  const handleCloseDelete = () => setOpenDelete(false);
   
 
   useEffect(() => {
@@ -121,10 +126,17 @@ function Basket() {
               <td>
                 <Button
                   variant="danger"
-                  onClick={() => dispatch(removeItem(item.id))}
+                  // onClick={() => dispatch(removeItem(item.id))}
+                  onClick={handleOpenDelete}
                 >
                   حذف
                 </Button>
+                <DeleteModal
+                      openDelete={openDelete}
+                      handleCloseDelete={handleCloseDelete}
+                      itemId={item.id}
+                      setOpenDelete={setOpenDelete}
+                    />
               </td>
             </tr>
           ))}
