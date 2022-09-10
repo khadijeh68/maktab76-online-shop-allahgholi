@@ -1,91 +1,132 @@
 import { makeStyles } from "@material-ui/core/styles";
-import { Button, Form } from "react-bootstrap";
-import DatePicker from "react-multi-date-picker";
-import { useNavigate } from "react-router-dom";
-import persian from "react-date-object/calendars/persian";
-import persian_fa from "react-date-object/locales/persian_fa";
-import { useState } from "react";
+import { Formik, Form, Field } from "formik";
+import { Navigate, useNavigate } from "react-router-dom";
+import * as Yup from "yup";
 
 const useStyles = makeStyles({
   title: {
     fontFamily: "Vazir-Medium",
-    margin: "70px 20px",
+    marginTop: "80px",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    flexDirection: "column",
+  },
+  form: {
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    flexDirection: "column",
+    backgroundColor: "#efdada",
+    width: "500px",
+    height: "600px",
+    marginTop: "20px",
+    borderRadius: "5px"
   },
 });
 
+const SignupSchema = Yup.object().shape({
+  firstName: Yup.string()
+    .min(2, "تعداد کاراکتر کمتر از حد مجاز است")
+    .max(50, "تعداد کاراکتر بیشتر از حد مجاز است")
+    .required("نام اجباری است"),
+  lastName: Yup.string()
+    .min(2, "تعداد کاراکتر کمتر از حد مجاز است")
+    .max(50, "تعداد کاراکتر بیشتر از حد مجاز است")
+    .required("نام خانوادگی اجباری است"),
+  address: Yup.string().required("آدرس اجباری است"),
+  tel: Yup.number().required("شماره تماس اجباری است"),
+  data: Yup.date().default(function () {
+    return new Date();
+  }),
+});
+
 function Checkout() {
-  const [validated, setValidated] = useState(false);
   const classes = useStyles();
   const navigate = useNavigate();
 
-  const handleSubmit = (event) => {
-    const form = event.currentTarget;
-    if (form.checkValidity() === false) {
-      event.preventDefault();
-      event.stopPropagation();
-    }
-    setValidated(true);
-    navigate("/paymantPanel");
-  };
-
-  const navigatePaymantPanel = () => {
-    navigate("/paymantPanel");
+  const handleSubmit = (e) => {
+    // e.preventDefault();
+    //   navigate("http://localhost:3001/paymentPanel");
   };
 
   return (
     <div className={classes.title}>
       <h3>نهایی کردن خرید</h3>
+      <div>
+        <Formik
+          initialValues={{
+            firstName: "",
+            lastName: "",
+            address: "",
+            tel: "",
+            date: "",
+          }}
+          validationSchema={SignupSchema}
+          onSubmit={(values) => {
+            localStorage.setItem("userData", JSON.stringify(values));
+            console.log(values);
+          }}
+        >
+          {({ errors, touched }) => (
+            <Form className={classes.form}  onSubmit={handleSubmit}>
+              <div>
+                <div>
+                  <label>نام:</label>
+                </div>
+                <Field name="firstName" type="text" />
+                {errors.firstName && touched.firstName ? (
+                  <div className="text-danger mt-2">{errors.firstName}</div>
+                ) : null}
+              </div>
+              <div>
+                <div>
+                  <label className="mt-3">نام خانوادگی:</label>
+                </div>
+                <Field name="lastName" type="text" />
+                {errors.lastName && touched.lastName ? (
+                  <div className="text-danger mt-2">{errors.lastName}</div>
+                ) : null}
+              </div>
+              <div>
+                <div>
+                  <label className="mt-3">آدرس:</label>
+                </div>
+                <Field name="address" type="address" />
+                {errors.address && touched.address ? (
+                  <div className="text-danger mt-2">{errors.address}</div>
+                ) : null}
+              </div>
+              <div>
+                <div>
+                  <label className="mt-3">
+                    شماره همراه:
+                  </label>
+                </div>
+                <Field name="tel" type="tel" />
+                {errors.tel && touched.tel ? (
+                  <div className="text-danger mt-2">{errors.tel}</div>
+                ) : null}
+              </div>
+              <div>
+                <div>
+                  <label className="mt-3">تاریخ تحویل :</label>
+                </div>
+                <Field name="date" type="date" />
+                {errors.date && touched.date ? (
+                  <div className="text-danger mt-2">{errors.date}</div>
+                ) : null}
+              </div>
+              {/* <Link to="http://localhost:3001/paymentPanel"> */}
 
-      <Form
-        noValidate
-        validated={validated}
-        className="w-25"
-        onSubmit={handleSubmit}
-      >
-        <Form.Group className="mb-3" controlId="validationCustom01">
-          <Form.Label>نام</Form.Label>
-          <Form.Control type="text" required />
-        </Form.Group>
-        <Form.Control.Feedback type="invalid">
-          نام اجباری است
-        </Form.Control.Feedback>
-        <Form.Group className="mb-3" controlId="validationCustom02">
-          <Form.Label>نام و نام خانوادگی</Form.Label>
-          <Form.Control type="text" required />
-        </Form.Group>
-        <Form.Control.Feedback type="invalid">
-          نام خانوادگی اجباری است
-        </Form.Control.Feedback>
-        <Form.Group className="mb-3" controlId="validationCustom03">
-          <Form.Label>آدرس</Form.Label>
-          <Form.Control type="address" as="textarea" required />
-        </Form.Group>
-        <Form.Control.Feedback type="invalid">
-          آدرس اجباری است
-        </Form.Control.Feedback>
-        <Form.Group className="mb-3" controlId="validationCustom04">
-          <Form.Label>تلفن همراه</Form.Label>
-          <Form.Control type="tel" required />
-        </Form.Group>
-        <Form.Control.Feedback type="invalid">
-          شماره تماس اجباری است
-        </Form.Control.Feedback>
-        <Form.Group className="mb-3" controlId="validationCustom05">
-          <Form.Label>تاریخ تحویل</Form.Label>
-          <DatePicker
-            required
-            calendar={persian}
-            locale={persian_fa}
-            calendarPosition="bottom-right"
-          />
-        </Form.Group>
-        <Form.Control.Feedback type="invalid">
-          تاریخ تحویل اجباری است
-        </Form.Control.Feedback>
-        <Button variant="primary" type="submit">
-          پرداخت
-        </Button>
-      </Form>
+              <button type="submit" className="btn btn-primary m-3">
+                پرداخت
+              </button>
+              {/* </Link> */}
+            </Form>
+          )}
+        </Formik>
+      </div>
     </div>
   );
 }
