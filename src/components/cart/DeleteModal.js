@@ -1,6 +1,4 @@
 import { useDispatch } from "react-redux";
-import { unwrapResult } from "@reduxjs/toolkit";
-import { toast } from "react-toastify";
 import { Button, Modal } from "react-bootstrap";
 import { makeStyles } from "@material-ui/core";
 import { removeItem } from "../../redux/features/cart/cartSlice";

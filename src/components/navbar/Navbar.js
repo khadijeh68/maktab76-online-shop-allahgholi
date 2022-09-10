@@ -82,7 +82,6 @@ function Navbar() {
           >
             <div className={classes.basket}>
               <ShoppingCartSharpIcon />
-              {/* <span>سبد خرید </span> */}
               <span className="bag-quantity">{cartTotalQuantity}</span>
             </div>
           </NavLink>

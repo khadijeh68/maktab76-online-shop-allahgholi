@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { Button, Card } from "react-bootstrap";
-import { useDispatch, useSelector } from "react-redux";
+import { Button } from "react-bootstrap";
+import { useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
 import { getDetails } from "../../redux/features/productDetail/productDetailSlice";
 import "../../index.css";
@@ -10,7 +10,6 @@ import { addToCart, decrease } from "../../redux/features/cart/cartSlice";
 function ProductDetails() {
   const dispatch = useDispatch();
   const { id } = useParams();
-  const cartItems = useSelector((state) => state.cart.cartItems);
   const [orderCount, setOrderCount] = useState(0);
   const [product, setProduct] = useState([]);
 

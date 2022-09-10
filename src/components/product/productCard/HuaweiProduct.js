@@ -13,7 +13,7 @@ const useStyles = makeStyles({
     flexWrap:"wrap",
     flexDirection:"row",
     justifyContent: "center",
-    // margin: "20px",
+    textAlign:"center",
     padding: "20px",
     fontFamily: "Vazir-Medium",
     fontSize: "16px",
@@ -70,7 +70,7 @@ function HuaweiProduct() {
                   <Card.Text>{product.weight}</Card.Text>
                   <Card.Text>{product.size}</Card.Text>
                   <Card.Text>{digitsEnToFa(product.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, "،"))} تومان </Card.Text>
-                  <Button variant="primary" >افزودن به سبد خرید</Button>
+                  <Button  variant="outline-primary" size="sm">توضیحات بیشتر...</Button>
                 </Card.Body>
               </Card>
             </div>
