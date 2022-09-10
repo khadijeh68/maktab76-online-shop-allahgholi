@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { Button, Card } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
+import { Navigate, useParams } from "react-router-dom";
 import { getDetails } from "../../redux/features/productDetail/productDetailSlice";
 import "../../index.css";
 import { BASE_URL } from "../../config/api";
-import { addToCart } from "../../redux/features/cart/cartSlice";
+import { addToCart, decrease } from "../../redux/features/cart/cartSlice";
+
 
 function ProductDetails() {
   const dispatch = useDispatch();
@@ -18,6 +19,10 @@ function ProductDetails() {
       .unwrap()
       .then((res) => setProduct(res));
   }, [dispatch, id]);
+
+  const handleAddToCart = (product) => {
+    dispatch(addToCart(product));
+  };
 
   return (
     <div className="product-details">
@@ -38,13 +43,20 @@ function ProductDetails() {
           <Button variant="success" size="sm" className="mx-2">
             +
           </Button>
-          <div>{product.quantity}</div>
-          <Button variant="warning" size="sm" className="mx-2">
+          <div>{product.cartQuantity}</div>
+          <Button
+            variant="warning"
+            size="sm"
+            className="mx-2"
+            onClick={() => {
+              dispatch(decrease(product.id));
+            }}
+          >
             -
           </Button>
         </div>
         <div dangerouslySetInnerHTML={{ __html: product.description }} />
-        <Button variant="primary" onClick={() => dispatch(addToCart(product))}>
+        <Button variant="primary" onClick={() => handleAddToCart(product)}>
           افزودن به سبد خرید
         </Button>
       </div>

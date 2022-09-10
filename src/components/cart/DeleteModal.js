@@ -5,6 +5,7 @@ import { Button, Modal } from "react-bootstrap";
 import { makeStyles } from "@material-ui/core";
 import { removeItem } from "../../redux/features/cart/cartSlice";
 
+
 const useStyles = makeStyles({
   body: {
     fontFamily: "Vazir-Medium",
@@ -17,14 +18,9 @@ function DeleteModal({ openDelete, handleCloseDelete, itemId, setOpenDelete }) {
 
   const handleDelete = (id) => {
     dispatch(removeItem(id))
-      .then(unwrapResult)
-      .then(() => {
-        toast.success("حذف کالا با موفقیت انجام شد", {
-          position: toast.POSITION.TOP_CENTER,
-        });
-      });
     setOpenDelete(false);
   };
+
 
   return (
     <Modal show={openDelete} animation={true} className={classes.body}>
