@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { Button, Table } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import {
+  fetchDelivered,
   fetchOrders,
 } from "../../../redux/features/orders/ordersSlice";
 import { makeStyles } from "@material-ui/core";
@@ -28,14 +29,20 @@ function Orders() {
   const total = useSelector((state) => state.orders.total);
   const [currentPage, setCurrentPage] = useState(1);
   const [delivered, setDelivered] = useState(true);
-  
   const limit = 5;
   const count = Math.ceil(total / limit);
-  // console.log(typeof(total))
- 
+
   useEffect(() => {
     dispatch(fetchOrders({ delivered, currentPage }));
   }, [delivered, currentPage, dispatch]);
+
+  const handleChange = (e) => {
+    if (e.target.value === "true") {
+      dispatch(fetchDelivered());
+    } else if (e.target.value === "false") {
+      dispatch(fetchDelivered());
+    }
+  };
 
   return (
     <div className="orders">
@@ -48,6 +55,7 @@ function Orders() {
             name="group1"
             onClick={() => setDelivered(true)}
             defaultChecked
+            onChange={handleChange}
           />
           <span className="px-2" style={{ marginRight: "20px" }}>
             سفارش های در حال انتظار
@@ -56,6 +64,7 @@ function Orders() {
             type="radio"
             name="group1"
             onClick={() => setDelivered(false)}
+            onChange={handleChange}
           />
         </div>
       </div>
@@ -65,6 +74,7 @@ function Orders() {
             <th>نام کاربر</th>
             <th>مجموع مبلغ به تومان</th>
             <th>زمان ثبت سفارش</th>
+            <th>وضعیت سفارش</th>
             <th></th>
           </tr>
         </thead>
@@ -86,8 +96,9 @@ function Orders() {
                   <td>
                     {new Date(item.createdAt).toLocaleDateString("fa-IR")}
                   </td>
+                  <td>{item.delivered === "true" ? "تحویل شد" : "در حال انتظار"}</td>
                   <td>
-                  <OrdersDisplayModal  item={item} />
+                    <OrdersDisplayModal item={item} />
                   </td>
                 </tr>
               );

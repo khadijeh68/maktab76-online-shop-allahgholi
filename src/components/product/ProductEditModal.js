@@ -1,6 +1,6 @@
 import Modal from "react-bootstrap/Modal";
 import { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import "../../index.css";
 import { CKEditor } from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
@@ -11,8 +11,6 @@ import {
 import instance from "../../api/http";
 import { makeStyles } from "@material-ui/core";
 import { Button, Form } from "react-bootstrap";
-import { useEffect } from "react";
-import { fetchCategory } from "../../redux/features/category/categorySlice";
 import { unwrapResult } from "@reduxjs/toolkit";
 import { toast } from "react-toastify";
 
@@ -32,12 +30,8 @@ function ProductEditModal({ showEdit, item, setShowEdit }) {
   const [color, setColor] = useState(item.color);
   const [category, setCategory] = useState(item.category);
   const [description, setDescription] = useState(item.description);
-  const categoryList = useSelector((state) => state.categories.categoryList);
   const handleClose = () => setShowEdit(false);
 
-  // useEffect(() => {
-  //   dispatch(fetchCategory());
-  // }, [dispatch]);
 
   const handlePicture = (e) => {
     let file = e.target.files[0];

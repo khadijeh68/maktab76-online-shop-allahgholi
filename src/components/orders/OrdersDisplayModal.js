@@ -31,19 +31,22 @@ function OrdersDisplayModal({ item }) {
         </Modal.Header>
         <Modal.Body>
           <Form>
-            <Form.Group  className="mt-2">
+            <Form.Group className="mt-2">
               <Form.Label> نام مشتری:</Form.Label>
-              <Form.Control type="text" value={item.username + " " + item.lastname} />
-            </Form.Group >
-            <Form.Group  className="mt-2">
+              <Form.Control
+                type="text"
+                value={item.username + " " + item.lastname}
+              />
+            </Form.Group>
+            <Form.Group className="mt-2">
               <Form.Label>آدرس :</Form.Label>
               <Form.Control type="address" value={item.address} />
-            </Form.Group >
-            <Form.Group  className="mt-2">
+            </Form.Group>
+            <Form.Group className="mt-2">
               <Form.Label>تلفن :</Form.Label>
               <Form.Control type="tel" value={item.phone} />
-            </Form.Group >
-            <Form.Group  className="mt-2">
+            </Form.Group>
+            <Form.Group className="mt-2">
               <Form.Label>زمان تحویل :</Form.Label>
               <div style={{ direction: "rtl" }}>
                 <DatePicker
@@ -53,8 +56,8 @@ function OrdersDisplayModal({ item }) {
                   value={new Date(item.expectAt).toLocaleDateString("fa-IR")}
                 />
               </div>
-            </Form.Group >
-            <Form.Group  className="mt-2">
+            </Form.Group>
+            <Form.Group className="mt-2">
               <Form.Label>زمان سفارش :</Form.Label>
               <div style={{ direction: "rtl" }}>
                 <DatePicker
@@ -64,7 +67,7 @@ function OrdersDisplayModal({ item }) {
                   value={new Date(item.createdAt).toLocaleDateString("fa-IR")}
                 />
               </div>
-            </Form.Group >
+            </Form.Group>
 
             <Table
               striped
@@ -82,14 +85,24 @@ function OrdersDisplayModal({ item }) {
               <tbody>
                 <tr>
                   <td>{item.products[0].name}</td>
-                  <td>{digitsEnToFa(item.products[0].price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, "،"))}</td>
+                  <td>
+                    {digitsEnToFa(
+                      item.products[0].price
+                        .toString()
+                        .replace(/\B(?=(\d{3})+(?!\d))/g, "،")
+                    )}
+                  </td>
                   <td>{digitsEnToFa(item.products[0].count)}</td>
                 </tr>
               </tbody>
             </Table>
-            <button type="submit" className="btn btn-success">
-              تحویل شد
-            </button>
+            {item.delivered === "false" ? (
+              <button type="submit" className="btn btn-success">
+                تحویل شد
+              </button>
+            ) : (
+              <p>زمان تحویل : {new Date(item.expectAt).toLocaleDateString("fa-IR") }</p>
+            )}
           </Form>
         </Modal.Body>
       </Modal>

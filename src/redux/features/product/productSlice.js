@@ -9,8 +9,8 @@ import {
 
 const initialState = {
   productsList: [],
-  total:0,
-  products:[],       
+  total: 0,
+  products: [],
   loading: false,
   error: "",
 };
@@ -25,21 +25,19 @@ export const createProduct = createAsyncThunk(
   (newProduct) => createProductRequest(newProduct)
 );
 
-
-export const deleteProduct = createAsyncThunk(
-  "products/deleteProduct",
-   (id) =>   deleteProductRequest(id)
+export const deleteProduct = createAsyncThunk("products/deleteProduct", (id) =>
+  deleteProductRequest(id)
 );
 
 export const updateProduct = createAsyncThunk(
   "products/updateProduct",
-  ({id, selectedProduct}) => updateProductRequest(id, selectedProduct)
+  ({ id, selectedProduct }) => updateProductRequest(id, selectedProduct)
 );
 
-export const updateOrder = createAsyncThunk(
-  "products/updateOrder",
-  ({id, order}) => updateProductRequest(id, order)
-);
+// export const updateOrder = createAsyncThunk(
+//   "products/updateOrder",
+//   ({ id, order }) => updateProductRequest(id, order)
+// );
 
 const productSlice = createSlice({
   name: "products",
@@ -50,7 +48,12 @@ const productSlice = createSlice({
       return { ...state, loading: true };
     });
     builder.addCase(fetchProducts.fulfilled, (state, action) => {
-      return { ...state, loading: false, productsList: action.payload.data,total:action.payload.total };
+      return {
+        ...state,
+        loading: false,
+        productsList: action.payload.data,
+        total: action.payload.total,
+      };
     });
     builder.addCase(fetchProducts.rejected, (state, action) => {
       return { productsList: [], loading: false, error: action.payload };
@@ -66,7 +69,6 @@ const productSlice = createSlice({
     builder.addCase(createProduct.rejected, (state, action) => {
       return { ...state, loading: false, error: action.payload };
     });
-
 
     //DELETE
     builder.addCase(deleteProduct.pending, (state) => {
@@ -89,19 +91,17 @@ const productSlice = createSlice({
     builder.addCase(updateProduct.rejected, (state, action) => {
       return { productsList: [], loading: false, error: action.payload };
     });
-// ,
-//     [fetchData.pending]: (state) => {
-//       state.loadings = true;
-//     },
-//     [fetchData.fulfilled]: (state, action) => {
-//       state.loadings = false;
-//       state.products = action.payload.data;
-//       state.total = action.payload.total;
-//     },
-//     [fetchData.rejected]: (state) => {
-//       state.loadings = false;
-//       state.error = "wrong... ";
-//     },
+
+    //UPDATE ORDER
+    // builder.addCase(updateOrder.pending, (state) => {
+    //   return { ...state, loading: true };
+    // });
+    // builder.addCase(updateOrder.fulfilled, (state, action) => {
+    //   return { ...state, loading: false };
+    // });
+    // builder.addCase(updateOrder.rejected, (state, action) => {
+    //   return { loading: false, error: action.payload };
+    // });
   },
 });
 
