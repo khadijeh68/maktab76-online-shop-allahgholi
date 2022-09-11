@@ -48,12 +48,22 @@ const useStyles = makeStyles({
 
 function Navbar() {
   const classes = useStyles();
-  const { cartTotalQuantity } = useSelector((state) => state.cart);
+  const cartItems = useSelector((state) => state.cart.cartItems);
+
+  const getTotalQuantity = () => {
+    let total = 0;
+    cartItems.forEach((item) => {
+      total += item.cartQuantity;
+    });
+    return total;
+  };
+
   const navLinkStyles = ({ isActive }) => {
     return {
       color: isActive ? "#C14795" : "black",
     };
   };
+
   return (
     <div>
       <div className={classes.nav}>
@@ -82,7 +92,7 @@ function Navbar() {
           >
             <div className={classes.basket}>
               <ShoppingCartSharpIcon />
-              <span className="bag-quantity">{cartTotalQuantity}</span>
+              <span className="bag-quantity">{getTotalQuantity()}</span>
             </div>
           </NavLink>
         </div>

@@ -96,7 +96,7 @@ function Basket() {
               {cartItems.map((item) => (
                 <tr key={item.id}>
                   <td>
-                    <Link to={`products/${item.id}`}>
+                    <Link to={`/products/${item.id}`}>
                       <img
                         src={`${BASE_URL}/files/${item.image}`}
                         alt="mobile"
@@ -104,12 +104,12 @@ function Basket() {
                     </Link>
                   </td>
                   <td>
-                    <Link to={`products/${item.id}`}>{item.name}</Link>
+                    <Link to={`/products/${item.id}`}  className="text-decoration-none text-black">{item.name}</Link>
                   </td>
                   <td>{digitsEnToFa((item.price).toString().replace(/\B(?=(\d{3})+(?!\d))/g, "،"))}</td>
                   <td>
                     <Button
-                      variant="success"
+                      variant="success" size="sm"
                       onClick={() => handleAddToCart(item)}
                     >
                       +
@@ -120,7 +120,7 @@ function Basket() {
                   </td>
                   <td>
                     <Button
-                      variant="warning"
+                      variant="warning" size="sm"
                       onClick={() => {
                         dispatch(handleDecreaseCart(item));
                       }}
@@ -134,7 +134,7 @@ function Basket() {
                     </div>
                   </td>
                   <td>
-                    <Button variant="danger" onClick={handleOpenDelete}>
+                    <Button variant="danger" onClick={handleOpenDelete} size="sm">
                       حذف
                     </Button>
                     <DeleteModal

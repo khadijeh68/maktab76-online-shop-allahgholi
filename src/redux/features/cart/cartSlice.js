@@ -29,7 +29,7 @@ const cartSlice = createSlice({
           ...state.cartItems[existingIndex],
           cartQuantity: state.cartItems[existingIndex].cartQuantity + 1,
         };
-        toast.info("به تعداد کالای مورد نظر اضافه شد", {
+        toast.success("به تعداد کالای مورد نظر اضافه شد", {
           position: "bottom-right",
         });
       } else {
@@ -48,7 +48,7 @@ const cartSlice = createSlice({
 
       if (state.cartItems[itemIndex].cartQuantity > 1) {
         state.cartItems[itemIndex].cartQuantity -= 1;
-        toast.info(" تعداد کالای مورد نظر کاهش یافت", {
+        toast.warning(" تعداد کالای مورد نظر کاهش یافت", {
           position: "bottom-right",
         });
       } else if (state.cartItems[itemIndex].cartQuantity === 1) {

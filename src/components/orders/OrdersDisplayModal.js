@@ -20,6 +20,10 @@ function OrdersDisplayModal({ item }) {
   const handleShow = () => setShow(true);
   const handleClose = () => setShow(false);
 
+  const handleDeliverd = () => {
+   item.delivered = "true"
+  }
+
   return (
     <>
       <Button variant="warning" onClick={handleShow}>
@@ -97,7 +101,7 @@ function OrdersDisplayModal({ item }) {
               </tbody>
             </Table>
             {item.delivered === "false" ? (
-              <button type="submit" className="btn btn-success">
+              <button type="submit" className="btn btn-success" onClick={() => handleDeliverd}>
                 تحویل شد
               </button>
             ) : (

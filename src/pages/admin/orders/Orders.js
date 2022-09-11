@@ -12,7 +12,7 @@ import OrdersDisplayModal from "../../../components/orders/OrdersDisplayModal";
 
 const useStyles = makeStyles({
   page: {
-    direction: "rtl",
+    direction: "ltr",
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
@@ -96,7 +96,9 @@ function Orders() {
                   <td>
                     {new Date(item.createdAt).toLocaleDateString("fa-IR")}
                   </td>
-                  <td>{item.delivered === "true" ? "تحویل شد" : "در حال انتظار"}</td>
+                  <td>
+                    {item.delivered === "true" ? "تحویل شد" : "در حال انتظار"}
+                  </td>
                   <td>
                     <OrdersDisplayModal item={item} />
                   </td>
@@ -107,6 +109,7 @@ function Orders() {
       </Table>
       <Pagination
         className={classes.page}
+        // sx={{ direction:"ltr" }}
         count={count}
         variant="outlined"
         color="secondary"

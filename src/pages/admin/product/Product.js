@@ -13,7 +13,7 @@ import ProductDeleteModal from "../../../components/product/ProductDeleteModal";
 
 const useStyles = makeStyles({
   page: {
-    direction: "rtl",
+    // direction: "rtl",
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
@@ -124,6 +124,7 @@ function Product() {
         count={count}
         variant="outlined"
         color="secondary"
+        sx={{ direction:"ltr" }}
         onChange={(event, value) => setCurrentPage(value)}
       />
     </div>
