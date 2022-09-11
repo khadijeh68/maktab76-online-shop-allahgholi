@@ -17,7 +17,7 @@ export const fetchAllProductsRequest = async (currentPage = 1) => {
 
 export const updateProductRequest = async (id, selectedProduct) => {
   try {
-    const response = await instance.put(
+    const response = await instance.patch(
       `${PRODUCTS_URL}/${id}`,
       selectedProduct
     );

@@ -1,6 +1,6 @@
 import Modal from "react-bootstrap/Modal";
 import { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import "../../index.css";
 import { CKEditor } from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
@@ -11,6 +11,10 @@ import {
 import instance from "../../api/http";
 import { makeStyles } from "@material-ui/core";
 import { Button, Form } from "react-bootstrap";
+import { useEffect } from "react";
+import { fetchCategory } from "../../redux/features/category/categorySlice";
+import { unwrapResult } from "@reduxjs/toolkit";
+import { toast } from "react-toastify";
 
 const useStyles = makeStyles({
   body: {
@@ -20,11 +24,20 @@ const useStyles = makeStyles({
 
 function ProductEditModal({ showEdit, item, setShowEdit }) {
   const classes = useStyles();
-  const [image, setImage] = useState([]);
-  const [description, setDescription] = useState();
-
   const dispatch = useDispatch();
+  const [image, setImage] = useState([]);
+  const [name, setName] = useState(item.name);
+  const [price, setPrice] = useState(item.price);
+  const [quantity, setQuantity] = useState(item.quantity);
+  const [color, setColor] = useState(item.color);
+  const [category, setCategory] = useState(item.category);
+  const [description, setDescription] = useState(item.description);
+  const categoryList = useSelector((state) => state.categories.categoryList);
   const handleClose = () => setShowEdit(false);
+
+  // useEffect(() => {
+  //   dispatch(fetchCategory());
+  // }, [dispatch]);
 
   const handlePicture = (e) => {
     let file = e.target.files[0];
@@ -34,30 +47,20 @@ function ProductEditModal({ showEdit, item, setShowEdit }) {
     let pic = URL.createObjectURL(file);
   };
 
-  const [newProduct, setNewProduct] = useState({
-    name: item.name,
-    // image:item.image,
-    color: item.color,
-    price: item.price,
-    quantity: item.quantity,
-    category: item.category,
-    // description:item.description
-  });
-
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setNewProduct({ ...newProduct, [name]: value });
-  };
-
-  // const { name, category, colors, price } = newProduct;
   const handleSubmit = (e) => {
+    const newProduct = { name, price, quantity, color, category, description };
+    console.log(newProduct);
     e.preventDefault();
-    const productId = item.id;
-    const data = { ...newProduct, image, description };
-    console.log(data);
-    dispatch(updateProduct({ id: productId, product: data }));
-    dispatch(fetchProducts());
-  };
+    dispatch(updateProduct({ id: item.id, selectedProduct: newProduct }))
+    .then(unwrapResult)
+    .then(() => {
+      toast.success("ویرایش کالا با موفقیت انجام شد", {
+        position: toast.POSITION.BOTTOM_RIGHT,
+      });
+        dispatch(fetchProducts());
+  });
+  setShowEdit(false);
+}
 
   return (
     <div>
@@ -79,8 +82,8 @@ function ProductEditModal({ showEdit, item, setShowEdit }) {
                 type="text"
                 required
                 name="name"
-                value={item.name}
-                onChange={(e) => handleChange(e)}
+                value={name}
+                onChange={(e) => setName(e.target.value)}
               />
             </Form.Group>
             <Form.Group className="m-2">
@@ -88,8 +91,8 @@ function ProductEditModal({ showEdit, item, setShowEdit }) {
               <Form.Select
                 name="category"
                 required
-                value={item.category}
-                onChange={(e) => handleChange(e)}
+                value={category}
+                onChange={(e) => setCategory(e.target.value)}
               >
                 <option value="DEFAULT" disabled>
                   انتخاب کنید
@@ -107,8 +110,8 @@ function ProductEditModal({ showEdit, item, setShowEdit }) {
               <Form.Select
                 name="color"
                 required
-                value={item.color}
-                onChange={(e) => handleChange(e)}
+                value={color}
+                onChange={(e) => setColor(e.target.value)}
               >
                 <option value="DEFAULT" disabled>
                   انتخاب کنید
@@ -128,8 +131,8 @@ function ProductEditModal({ showEdit, item, setShowEdit }) {
                 type="number"
                 required
                 name="name"
-                value={item.quantity}
-                onChange={(e) => handleChange(e)}
+                value={quantity}
+                onChange={(e) => setQuantity(Number(e.target.value))}
               />
             </Form.Group>
             <Form.Group className="m-2">
@@ -138,8 +141,8 @@ function ProductEditModal({ showEdit, item, setShowEdit }) {
                 type="text"
                 required
                 name="price"
-                value={item.price}
-                onChange={(e) => handleChange(e)}
+                value={price}
+                onChange={(e) => setPrice(Number(e.target.value))}
               />
             </Form.Group>
 

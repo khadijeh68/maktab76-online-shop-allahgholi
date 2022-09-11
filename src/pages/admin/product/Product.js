@@ -1,10 +1,7 @@
 import { useEffect, useState } from "react";
 import { Button, Table } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  deleteProduct,
-  fetchProducts,
-} from "../../../redux/features/product/productSlice";
+import { fetchProducts } from "../../../redux/features/product/productSlice";
 import "react-toastify/dist/ReactToastify.css";
 import { Pagination } from "@mui/material";
 import { makeStyles } from "@material-ui/core";
@@ -31,19 +28,17 @@ function Product() {
   const productsList = useSelector((state) => state.products.productsList);
   const categoryList = useSelector((state) => state.categories.categoryList);
   const total = useSelector((state) => state.products.total);
-  // console.log(typeof(total))
   const [showEdit, setShowEdit] = useState(false);
   const [currentProduct, setCurrentProduct] = useState({});
+  const [currentPage, setCurrentPage] = useState(1);
+  const limit = 5;
+  const count = Math.ceil(total / limit);
+
   const handleOpenEdit = (id) => {
     setShowEdit(true);
     setCurrentProduct(productsList.filter((product) => product.id === id)[0]);
   };
 
-  const [currentPage, setCurrentPage] = useState(1);
-  const limit = 5;
-  const count = Math.ceil(total / limit);
-
-  //tosify delete
   const [openDelete, setOpenDelete] = useState(false);
   const handleOpenDelete = () => setOpenDelete(true);
   const handleCloseDelete = () => setOpenDelete(false);
@@ -77,19 +72,19 @@ function Product() {
                   <td>
                     {
                       <img
-                        src={`${BASE_URL}/files/${item.image}`}
+                        src={`${BASE_URL}/files/${item?.image ?? "-"}`}
                         alt="mobile"
                       />
                     }
                   </td>
                   <td>{item?.name ?? "-"}</td>
-                  <td>{item.category}
+                  <td>
+                    {item?.category ?? "-"}
                     {/* {item?.category
                       ? categoryList.find(
                           (category) => category.id === item?.category
                         )?.name
                       : "-"} */}
-
                   </td>
                   <td>
                     <Button
@@ -99,6 +94,11 @@ function Product() {
                     >
                       ویرایش
                     </Button>
+                    <ProductEditModal
+                      showEdit={showEdit}
+                      item={item}
+                      setShowEdit={setShowEdit}
+                    />
                     <Button
                       variant="danger"
                       // onClick={() => handleDelete(item.id)}
@@ -118,11 +118,7 @@ function Product() {
             })}
         </tbody>
       </Table>
-      <ProductEditModal
-        showEdit={showEdit}
-        item={currentProduct}
-        setShowEdit={setShowEdit}
-      />
+
       <Pagination
         className={classes.page}
         count={count}

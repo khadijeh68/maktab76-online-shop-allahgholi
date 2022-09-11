@@ -27,8 +27,8 @@ function ProductDeleteModal({
     dispatch(deleteProduct(id))
       .then(unwrapResult)
       .then(() => {
-        toast.success("حذف کالا با موفقیت انجام شد", {
-          position: toast.POSITION.TOP_CENTER,
+        toast.error("حذف کالا با موفقیت انجام شد", {
+          position: toast.POSITION.BOTTOM_RIGHT,
         });
         dispatch(fetchProducts());
       });

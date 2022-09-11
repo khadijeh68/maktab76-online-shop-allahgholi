@@ -17,7 +17,7 @@ export const getCategory = createAsyncThunk(
 
 export const getList = createAsyncThunk("list/getList", (id) => {
   return axios
-    .get(`http://localhost:3002/products?category=${id}&_limit=6`)
+    .get(`http://localhost:3002/products?category=${id}&_limit=10`)
     .then((res) => res.data);
 });
 

@@ -12,6 +12,8 @@ import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import { instance } from "../../api/http";
 import { makeStyles } from "@material-ui/core";
 import { Form } from "react-bootstrap";
+import { unwrapResult } from "@reduxjs/toolkit";
+import { toast } from "react-toastify";
 
 const useStyles = makeStyles({
   body: {
@@ -44,7 +46,6 @@ function ProductAddModal() {
 
   const handleSubmit = (e) => {
     const form = e.currentTarget;
-    console.log(form);
     if (form.checkValidity() === false) {
       e.preventDefault();
       e.stopPropagation();
@@ -53,9 +54,14 @@ function ProductAddModal() {
 
     e.preventDefault();
     const data = newProduct();
-    dispatch(createProduct(data));
-    console.log(data);
+    dispatch(createProduct(data))
+    .then(unwrapResult)
+    .then(() => {
+      toast.success("کالا با موفقیت اضافه شد", {
+        position: toast.POSITION.BOTTOM_RIGHT,
+      })
     dispatch(fetchProducts());
+    })
     setShow(false);
     setImage("");
     setName("");

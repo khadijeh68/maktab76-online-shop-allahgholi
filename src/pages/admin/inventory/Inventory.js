@@ -1,11 +1,17 @@
 import React, { useEffect, useState } from "react";
 import { Button, Table } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchInventory, headerInventory ,updateInventory} from "../../../redux/features/inventory/inventorySlice";
+import {
+  fetchInventory,
+  headerInventory,
+  updateInventory,
+} from "../../../redux/features/inventory/inventorySlice";
 import { makeStyles } from "@material-ui/core";
 import { Pagination } from "@mui/material";
 import { digitsEnToFa } from "@persian-tools/persian-tools";
-import $ from 'jquery';
+import { useCallback } from "react";
+import { updateProduct } from "../../../redux/features/product/productSlice";
+
 const useStyles = makeStyles({
   page: {
     direction: "rtl",
@@ -17,42 +23,54 @@ const useStyles = makeStyles({
   },
 });
 
-
 function Inventory() {
   const classes = useStyles();
   const dispatch = useDispatch();
+  const total = useSelector((state) => state.inventory.total);
+  const [currentPage, setCurrentPage] = useState(1);
+  const initialState = [
+    { id: 1, price: 1000, quantity: 5 },
+    { id: 2, price: 2000, quantity: 6 },
+  ];
+  const [product, setProduct] = useState(initialState);
+  const [id, setId] = useState();
+
+  const limit = 5;
+  const count = Math.ceil(total / limit);
   const inventoriesList = useSelector(
     (state) => state.inventory.inventoriesList
   );
-  const total = useSelector((state) => state.inventory.total);
-  const [currentPage, setCurrentPage] = useState(1);
-  const limit = 5;
-  const count = Math.ceil(total /limit);
-  console.log(total)
+
   useEffect(() => {
-    dispatch(fetchInventory(currentPage));
+    dispatch(fetchInventory(currentPage))
+      .unwrap()
+      .then((res) => setProduct(res));
   }, [currentPage, dispatch]);
 
-  function handleChange(e) {
-    e.preventDefault();
-    // setText(e.target.value);
-  
-  }
+  const handleChange = (price, quantity, id) => {
+    setId(id);
+    setProduct((item) => 
+    item.map((obj) => {
+        if (obj.id === id) {
+          return { ...obj, price: price, quantity: quantity };
+        }
+        return obj;
+      })
+    );
+  };
 
-  function onSubmit(e) {
-    e.preventDefault();
-    // setTextField();
-  }
-  const changeTag = () =>{
-    // $('td').click(function () {
-    //   $(this).replaceWith(function () {
-    //       console.log("Text is "+ $(this).text());
-    //       return '<input  value="' + $(this).text() + '"> </input>';
-    //   });
-    // })
-    
-  }
-
+  const onSubmit = useCallback(() => {
+    const item = product.find((item) => item.id === id);
+    if (id) {
+      const updatedProduct = {
+        price: item.price,
+        quantity: item.quantity,
+      };
+      dispatch(updateProduct({ id, updatedProduct }))
+        .unwrap()
+        .then(() => fetchInventory());
+    }
+  }, [dispatch, id, product]);
 
   return (
     <div className="orders">
@@ -60,7 +78,12 @@ function Inventory() {
         <h6>مدیریت موجودی و قیمت ها</h6>
 
         <div>
-          <Button variant="primary" type="submit" onClick={onSubmit}>
+          <Button
+            variant="primary"
+            type="submit"
+            disabled={!id}
+            onClick={onSubmit}
+          >
             ذخیره
           </Button>
         </div>
@@ -80,25 +103,31 @@ function Inventory() {
               return (
                 <tr key={item.id}>
                   <td>{item.name}</td>
-                  <td onClick={changeTag}>{digitsEnToFa(
-                        item.price
-                          .toString()
-                          .replace(/\B(?=(\d{3})+(?!\d))/g, "،")
-                      )}
-                    {/* <input
+                  <td>
+                    <input
+                      name="price"
                       value={digitsEnToFa(
                         item.price
                           .toString()
                           .replace(/\B(?=(\d{3})+(?!\d))/g, "،")
                       )}
-                      onChange={handleChange}
-                    /> */}
+                      onChange={(e) =>
+                        handleChange(e.target.value, item.quantity, item.id)
+                      }
+                    />
                   </td>
-                  <td onClick={changeTag}>{digitsEnToFa(item.quantity)}
-                    {/* <input
-                      value=
-                      onChange={handleChange}
-                    /> */}
+                  <td>
+                    <input
+                      name="quantity"
+                      value={digitsEnToFa(
+                        item.quantity
+                          .toString()
+                          .replace(/\B(?=(\d{3})+(?!\d))/g, "،")
+                      )}
+                      onChange={(e) =>
+                        handleChange(e.target.value, item.quantity, item.id)
+                      }
+                    />
                   </td>
                 </tr>
               );
@@ -110,7 +139,7 @@ function Inventory() {
         count={count}
         variant="outlined"
         color="secondary"
-        onChange={(event,value) => setCurrentPage(value)}
+        onChange={(event, value) => setCurrentPage(value)}
       />
     </div>
   );
