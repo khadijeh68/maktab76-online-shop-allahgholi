@@ -48,29 +48,49 @@ function Checkout() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  let order = {
-    id: null,
-    firstName: "",
-    lastName: "",
-    address: "",
-    tel: "",
-    date: "",
-  };
-  const handleSubmit = (value) => {
-    // e.preventDefault();
-    const { firstName, lastName, address, tel, date } = value;
-    order = {
-      ...order,
-      id: Math.floor(Math.random() * 100),
-      firstName: firstName,
-      lastName: lastName,
-      address: address,
-      tel:tel,
+  // let order = {
+  //   username: "",
+  //   lastName: "",
+  //   address: "",
+  //   tel: "",
+  //   expectAt: "",
+  //   product: [],
+  //   prices: "",
+  //   delivered: "",
+  //   createdAt: "",
+  //   id: null,
+  // };
+  // const handleSubmit = (value) => {
+  //   // e.preventDefault();
+  //   const {
+  //     id,
+  //     username,
+  //     lastName,
+  //     address,
+  //     tel,
+  //     expectAt,
+  //     product,
+  //     prices,
+  //     delivered,
+  //     createdAt,
+  //   } = value;
 
-    };
-    dispatch(userOrder())
-    // window.location.href = 'http://localhost:3001/'
-  };
+  //   order = {
+  //     ...order,
+  //     id: id,
+  //     firstName: username,
+  //     lastName: lastName,
+  //     address: address,
+  //     tel: tel,
+  //     expectAt: expectAt,
+  //     product: product,
+  //     prices: prices,
+  //     delivered: delivered,
+  //     createdAt: createdAt,
+  //   };
+  //   // dispatch(userOrder());
+  //   // window.location.href = 'http://localhost:3001/'
+  // };
 
   return (
     <div className={classes.title}>
@@ -92,7 +112,7 @@ function Checkout() {
           }}
         >
           {({ errors, touched }) => (
-            <Form className={classes.form}>
+            <Form className={classes.form} >
               <div>
                 <div>
                   <label>نام:</label>

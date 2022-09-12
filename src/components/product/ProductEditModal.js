@@ -1,6 +1,6 @@
 import Modal from "react-bootstrap/Modal";
 import { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import "../../index.css";
 import { CKEditor } from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
@@ -32,7 +32,6 @@ function ProductEditModal({ showEdit, item, setShowEdit }) {
   const [description, setDescription] = useState(item.description);
   const handleClose = () => setShowEdit(false);
 
-
   const handlePicture = (e) => {
     let file = e.target.files[0];
     const form = new FormData();
@@ -46,21 +45,27 @@ function ProductEditModal({ showEdit, item, setShowEdit }) {
     console.log(newProduct);
     e.preventDefault();
     dispatch(updateProduct({ id: item.id, selectedProduct: newProduct }))
-    .then(unwrapResult)
-    .then(() => {
-      toast.success("ویرایش کالا با موفقیت انجام شد", {
-        position: toast.POSITION.BOTTOM_RIGHT,
-      });
+      .then(unwrapResult)
+      .then(() => {
+        toast.success("ویرایش کالا با موفقیت انجام شد", {
+          position: toast.POSITION.BOTTOM_RIGHT,
+        });
         dispatch(fetchProducts());
-  });
-  setShowEdit(false);
-}
+      });
+    setShowEdit(false);
+  };
 
   return (
     <div>
       <Modal show={showEdit} className={classes.body}>
-        <Modal.Header closeButton onClick={handleClose}>
+        <Modal.Header onClick={handleClose}>
           <Modal.Title>افزودن/ ویرایش کالا</Modal.Title>
+          <button
+            type="button"
+            className="btn-close"
+            aria-label="Close"
+            style={{ marginRight: "230px" }}
+          ></button>
         </Modal.Header>
         <Modal.Body>
           <Form onSubmit={(e) => handleSubmit(e)}>

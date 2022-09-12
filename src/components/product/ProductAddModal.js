@@ -55,13 +55,13 @@ function ProductAddModal() {
     e.preventDefault();
     const data = newProduct();
     dispatch(createProduct(data))
-    .then(unwrapResult)
-    .then(() => {
-      toast.success("کالا با موفقیت اضافه شد", {
-        position: toast.POSITION.BOTTOM_RIGHT,
-      })
-    dispatch(fetchProducts());
-    })
+      .then(unwrapResult)
+      .then(() => {
+        toast.success("کالا با موفقیت اضافه شد", {
+          position: toast.POSITION.BOTTOM_RIGHT,
+        });
+        dispatch(fetchProducts());
+      });
     setShow(false);
     setImage("");
     setName("");
@@ -90,8 +90,14 @@ function ProductAddModal() {
         افزودن کالا
       </Button>
       <Modal show={show} className={classes.body}>
-        <Modal.Header closeButton onClick={handleClose}>
+        <Modal.Header onClick={handleClose}>
           <Modal.Title>افزودن/ ویرایش کالا</Modal.Title>
+          <button
+            type="button"
+            className="btn-close"
+            aria-label="Close"
+            style={{ marginRight: "230px" }}
+          ></button>
         </Modal.Header>
         <Modal.Body>
           <Form onSubmit={(e) => handleSubmit(e)} validated={validated}>
@@ -146,7 +152,7 @@ function ProductAddModal() {
               <Form.Select
                 name="color"
                 value={color}
-                onChange={(e) => setColor (e.target.value)}
+                onChange={(e) => setColor(e.target.value)}
                 defaultValue={"DEFAULT"}
                 required
               >
@@ -198,14 +204,10 @@ function ProductAddModal() {
               initData="<p>Hello from CKEditor 4!</p>"
               onChange={(e, editor) => setDescription(editor.getData())}
             />
-            <Button type="submit" className="m-2"  variant="success">
+            <Button type="submit" className="m-2" variant="success">
               ذخیره
             </Button>
-            <Button
-              type="submit"
-              variant="secondary"
-              onClick={handleClose}
-            >
+            <Button type="submit" variant="secondary" onClick={handleClose}>
               بستن
             </Button>
           </Form>

@@ -3,6 +3,7 @@ import { useState } from "react";
 import { Button, Form } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
+import { IS_LOGGGED_IN } from "../../config/constants";
 import "../../index.css";
 import { login } from "../../redux/features/user/usersSlice";
 
@@ -29,7 +30,6 @@ function Login() {
     e.preventDefault();
     dispatch(login({ username, password }));
     if (isLoggedIn) {
-      console.log(isLoggedIn)
       navigate("/admin/orders");
     } else navigate("/login");
   };
@@ -38,7 +38,9 @@ function Login() {
     <div className={classes.form}>
       <h5 className="mt-4">ورود به پنل مدیریت فروشگاه</h5>
       <Form className="form_data" onSubmit={handleSubmit}>
-        {error && <h6 className="text-white">نام کاربری و رمز عبور صحیح نمی باشد</h6>}
+        {error && (
+          <h6 className="text-white">نام کاربری و رمز عبور صحیح نمی باشد</h6>
+        )}
         <Form.Group className="mb-3" controlId="username">
           <Form.Label className="mt-2 text-white">نام کاربری :</Form.Label>
           <Form.Control
@@ -62,7 +64,7 @@ function Login() {
           />
         </Form.Group>
 
-        <Button type="submit" className="mt-3" >
+        <Button type="submit" className="mt-3">
           ورود
         </Button>
         <Link to="/" className="mt-3 text-decoration-none text-white ">

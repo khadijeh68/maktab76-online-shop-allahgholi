@@ -14,7 +14,7 @@ import { updateProduct } from "../../../redux/features/product/productSlice";
 
 const useStyles = makeStyles({
   page: {
-    direction: "rtl",
+    direction: "ltr",
     display: "flex",
     alignItems: "center",
     justifyContent: "center",

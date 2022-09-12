@@ -11,9 +11,9 @@ const initialState = {
   cartTotalAmount: localStorage.getItem("cartTotalAmount")
     ? JSON.parse(localStorage.getItem("cartTotalAmount"))
     : 0,
-  finalCartItem: localStorage.getItem("finalCartItem")
-    ? JSON.parse(localStorage.getItem("finalCartItem"))
-    : [],
+  // finalCartItem: localStorage.getItem("finalCartItem")
+  //   ? JSON.parse(localStorage.getItem("finalCartItem"))
+  //   : [],
 };
 
 const cartSlice = createSlice({
@@ -104,10 +104,10 @@ const cartSlice = createSlice({
       state.cartItems = [];
       localStorage.setItem("cartItems", JSON.stringify(state.cartItems));
     },
-    userOrder(state, action) {
-      state.finalCartItem = action.payload;
-      localStorage.setItem("finalCartItem", JSON.stringify(state.finalCartItem));
-    },
+    // userOrder(state, action) {
+    //   state.cartItems = action.payload;
+    //   localStorage.setItem("cartItems", JSON.stringify(state.cartItems));
+    // },
   },
 });
 

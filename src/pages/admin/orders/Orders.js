@@ -37,11 +37,11 @@ function Orders() {
   }, [delivered, currentPage, dispatch]);
 
   const handleChange = (e) => {
-    if (e.target.value === "true") {
-      dispatch(fetchDelivered());
-    } else if (e.target.value === "false") {
-      dispatch(fetchDelivered());
-    }
+    // if (e.target.value === "true") {
+    //   dispatch(fetchDelivered());
+    // } else if (e.target.value === "false") {
+    //   dispatch(fetchDelivered());
+    // }
   };
 
   return (

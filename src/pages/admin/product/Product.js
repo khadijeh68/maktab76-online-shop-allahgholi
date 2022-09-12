@@ -13,7 +13,7 @@ import ProductDeleteModal from "../../../components/product/ProductDeleteModal";
 
 const useStyles = makeStyles({
   page: {
-    // direction: "rtl",
+    direction: "ltr",
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
@@ -77,20 +77,18 @@ function Product() {
                       />
                     }
                   </td>
-                  <td>{item?.name ?? "-"}</td>
-                  <td>
-                    {item?.category ?? "-"}
-                    {/* {item?.category
-                      ? categoryList.find(
-                          (category) => category.id === item?.category
-                        )?.name
-                      : "-"} */}
+                  <td style={{ verticalAlign: "middle" }}>
+                    {item?.name ?? "-"}
                   </td>
-                  <td>
+                  <td style={{ verticalAlign: "middle" }}>
+                    {item?.category ?? "-"}
+                  </td>
+                  <td style={{ verticalAlign: "middle" }}>
                     <Button
                       variant="warning"
-                      className="mx-1"
+                      className="m-2"
                       onClick={() => handleOpenEdit(item.id)}
+                      size="sm"
                     >
                       ویرایش
                     </Button>
@@ -101,8 +99,9 @@ function Product() {
                     />
                     <Button
                       variant="danger"
-                      // onClick={() => handleDelete(item.id)}
                       onClick={handleOpenDelete}
+                      size="sm"
+                      className="m-2"
                     >
                       حذف
                     </Button>
@@ -124,7 +123,6 @@ function Product() {
         count={count}
         variant="outlined"
         color="secondary"
-        sx={{ direction:"ltr" }}
         onChange={(event, value) => setCurrentPage(value)}
       />
     </div>

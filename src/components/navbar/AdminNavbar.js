@@ -1,5 +1,7 @@
 import { makeStyles } from "@material-ui/core/styles";
-import { NavLink } from "react-router-dom";
+import { Button } from "react-bootstrap";
+import { Navigate, NavLink, useNavigate } from "react-router-dom";
+import { IS_LOGGGED_IN } from "../../config/constants";
 import "../../index.css";
 
 const useStyles = makeStyles({
@@ -24,12 +26,20 @@ const useStyles = makeStyles({
 });
 
 const AdminNavbar = () => {
+  const classes = useStyles();
+  const navigate = useNavigate();
+
+  const logOut = () => {
+    localStorage.setItem(IS_LOGGGED_IN, false);
+    navigate("/login");
+  }
+
   const navLinkStyles = ({ isActive }) => {
     return {
       color: isActive ? "#C14795" : "black",
     };
   };
-  const classes = useStyles();
+
 
   return (
     <div className={classes.nav}>
@@ -61,6 +71,7 @@ const AdminNavbar = () => {
         <NavLink to="/" className={classes.nav_link} style={navLinkStyles}>
           <span>بازگشت به سایت</span>
         </NavLink>
+        <Button onClick={logOut} variant="link" className="mx-2 text-decoration-none text-black">خروج</Button>
       </div>
     </div>
   );

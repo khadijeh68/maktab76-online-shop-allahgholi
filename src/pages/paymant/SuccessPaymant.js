@@ -84,14 +84,12 @@ function SuccessPaymant() {
     })
       .then((res) => res.json())
       .then((data) => console.log(data));
-    dispatch(clearLocalStorage());
+  
   };
 
-  useEffect(() => {
-    if (query === ":successPaymant") {
-      dispatch(clearCart());
-    }
-  }, []);
+  // useEffect(() => {
+  //     dispatch(clearLocalStorage());
+  // }, [dispatch]);
 
   return (
     <div className={classes.container}>
@@ -124,12 +122,15 @@ function SuccessPaymant() {
             src={`../../../image/success.png`}
             alt="success"
           />
-           <p className="mt-3">
+          <div>
+          <p className="mt-3">
             با تشکر از پرداخت شما، سفارش شما ثبت شده و <br /> جهت هماهنگی ارسال
             با شما تماس گرفته خواهد شد
           </p>
           <Button onClick={clearCart}>پاک کردن سبد خرید</Button>
-          <Link to="/admin/orders">صفحه سفارش</Link>
+          <Link to="/admin/orders" className="text-decoration-none">صفحه سفارشات</Link>
+          </div>
+          
           </div>
       </div>
     </div>
