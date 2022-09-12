@@ -54,7 +54,6 @@ function Product() {
         <h6>مدیریت کالا ها</h6>
       </div>
       <ProductAddModal categoryList={categoryList} />
-
       <Table striped bordered hover className="w-75 text-center order_table ">
         <thead>
           <tr>
@@ -92,11 +91,7 @@ function Product() {
                     >
                       ویرایش
                     </Button>
-                    <ProductEditModal
-                      showEdit={showEdit}
-                      item={item}
-                      setShowEdit={setShowEdit}
-                    />
+
                     <Button
                       variant="danger"
                       onClick={handleOpenDelete}
@@ -117,7 +112,11 @@ function Product() {
             })}
         </tbody>
       </Table>
-
+      <ProductEditModal
+        showEdit={showEdit}
+        item={currentProduct}
+        setShowEdit={setShowEdit}
+      />
       <Pagination
         className={classes.page}
         count={count}

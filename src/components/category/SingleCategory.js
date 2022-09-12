@@ -2,7 +2,10 @@ import { useEffect, useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useParams } from "react-router-dom";
-import { getCategory, getList } from "../../redux/features/fiestPage/firstPage";
+import {
+  getCategory,
+  getLists,
+} from "../../redux/features/fiestPage/firstPage";
 import { Button, Card } from "react-bootstrap";
 import { BASE_URL } from "../../config/api";
 import { digitsEnToFa } from "@persian-tools/persian-tools";
@@ -29,7 +32,6 @@ const useStyles = makeStyles({
   },
   body: {
     margin: "50px",
-    
   },
   page: {
     display: "inline-flex",
@@ -39,7 +41,7 @@ const useStyles = makeStyles({
     justifyContent: "center",
     padding: "20px",
     fontFamily: "Vazir-Medium",
-    color: "black"
+    color: "black",
   },
   img: {
     width: "14rem",
@@ -60,7 +62,7 @@ const SingleCategory = () => {
 
   useEffect(() => {
     dispatch(getCategory());
-    dispatch(getList(categoryId))
+    dispatch(getLists(categoryId))
       .unwrap()
       .then((res) => setCategory(res));
   }, [dispatch, categoryId]);
@@ -96,10 +98,14 @@ const SingleCategory = () => {
                   />
                   <Card.Body>
                     <Card.Text>{item.name}</Card.Text>
-                    <Card.Text>{item.os}</Card.Text>
-                    <Card.Text>{item.weight}</Card.Text>
-                    <Card.Text>{item.size}</Card.Text>
-                    <Card.Text>{digitsEnToFa(item.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, "،"))} تومان </Card.Text>
+                    <Card.Text>
+                      {digitsEnToFa(
+                        item.price
+                          .toString()
+                          .replace(/\B(?=(\d{3})+(?!\d))/g, "،")
+                      )}
+                      تومان
+                    </Card.Text>
                     <Button variant="primary">افزودن به سبد خرید</Button>
                   </Card.Body>
                 </Card>

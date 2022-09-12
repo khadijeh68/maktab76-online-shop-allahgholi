@@ -5,7 +5,7 @@ import { useState } from "react";
 import { Button, Table } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-
+import { FaArrowUp,FaArrowDown } from 'react-icons/fa';
 import { BASE_URL } from "../../config/api";
 import {
   addToCart,
@@ -41,6 +41,9 @@ const useStyles = makeStyles({
     color: "rgb(68, 68, 68)",
     fontFamily: "Vazir-Medium",
     marginTop: "200px",
+  },
+  align: {
+    verticalAlign: "middle",
   },
 });
 
@@ -79,15 +82,15 @@ function Basket() {
       ) : (
         <div>
           <h4 className="m-3">سبد خرید</h4>
-          <Table bordered className="w-100 text-center">
+          <Table striped bordered hover className="w-100 text-center">
             <thead>
               <tr>
                 <th>تصویر کالا</th>
                 <th>نام کالا</th>
                 <th>قیمت کالا</th>
-                <th>افزودن تعداد</th>
+                <th><FaArrowUp/></th>
                 <th>تعداد</th>
-                <th>کاستن تعداد</th>
+                <th><FaArrowDown/></th>
                 <th>مبلغ قابل پرداخت</th>
                 <th>حذف کالا</th>
               </tr>
@@ -103,24 +106,37 @@ function Basket() {
                       />
                     </Link>
                   </td>
-                  <td>
-                    <Link to={`/products/${item.id}`}  className="text-decoration-none text-black">{item.name}</Link>
+                  <td className={classes.align}>
+                    <Link
+                      to={`/products/${item.id}`}
+                      className="text-decoration-none text-black"
+                    >
+                      {item.name}
+                    </Link>
                   </td>
-                  <td>{digitsEnToFa((item.price).toString().replace(/\B(?=(\d{3})+(?!\d))/g, "،"))}</td>
-                  <td>
+                  <td className={classes.align}>
+                    {digitsEnToFa(
+                      item.price
+                        .toString()
+                        .replace(/\B(?=(\d{3})+(?!\d))/g, "،")
+                    )}
+                  </td>
+                  <td className={classes.align}>
                     <Button
-                      variant="success" size="sm"
+                      variant="success"
+                      size="sm"
                       onClick={() => handleAddToCart(item)}
                     >
                       +
                     </Button>
                   </td>
-                  <td>
+                  <td className={classes.align}>
                     <p>{digitsEnToFa(item.cartQuantity)}</p>
                   </td>
-                  <td>
+                  <td className={classes.align}>
                     <Button
-                      variant="warning" size="sm"
+                      variant="warning"
+                      size="sm"
                       onClick={() => {
                         dispatch(handleDecreaseCart(item));
                       }}
@@ -128,13 +144,22 @@ function Basket() {
                       -
                     </Button>
                   </td>
-                  <td>
+                  <td className={classes.align}>
                     <div className="cart-product-total-price">
-                      {digitsEnToFa((item.price * item.cartQuantity).toString().replace(/\B(?=(\d{3})+(?!\d))/g, "،"))} تومان
+                      {digitsEnToFa(
+                        (item.price * item.cartQuantity)
+                          .toString()
+                          .replace(/\B(?=(\d{3})+(?!\d))/g, "،")
+                      )}{" "}
+                      تومان
                     </div>
                   </td>
-                  <td>
-                    <Button variant="danger" onClick={handleOpenDelete} size="sm">
+                  <td className={classes.align}>
+                    <Button
+                      variant="danger"
+                      onClick={handleOpenDelete}
+                      size="sm"
+                    >
                       حذف
                     </Button>
                     <DeleteModal

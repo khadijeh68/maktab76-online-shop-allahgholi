@@ -1,6 +1,6 @@
 import { makeStyles } from "@material-ui/core/styles";
 import { Button } from "react-bootstrap";
-import { Navigate, NavLink, useNavigate } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { IS_LOGGGED_IN } from "../../config/constants";
 import "../../index.css";
 

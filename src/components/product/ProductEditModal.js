@@ -25,6 +25,7 @@ function ProductEditModal({ showEdit, item, setShowEdit }) {
   const dispatch = useDispatch();
   const [image, setImage] = useState([]);
   const [name, setName] = useState(item.name);
+  console.log(item.name)
   const [price, setPrice] = useState(item.price);
   const [quantity, setQuantity] = useState(item.quantity);
   const [color, setColor] = useState(item.color);
@@ -40,11 +41,11 @@ function ProductEditModal({ showEdit, item, setShowEdit }) {
     let pic = URL.createObjectURL(file);
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e,id) => {
     const newProduct = { name, price, quantity, color, category, description };
     console.log(newProduct);
     e.preventDefault();
-    dispatch(updateProduct({ id: item.id, selectedProduct: newProduct }))
+    dispatch(updateProduct({id,newProduct}))
       .then(unwrapResult)
       .then(() => {
         toast.success("ویرایش کالا با موفقیت انجام شد", {
@@ -68,11 +69,10 @@ function ProductEditModal({ showEdit, item, setShowEdit }) {
           ></button>
         </Modal.Header>
         <Modal.Body>
-          <Form onSubmit={(e) => handleSubmit(e)}>
+          <Form onSubmit={(e) => handleSubmit(e,item.id)}>
             <Form.Group className="m-2">
               <Form.Label>تصویر کالا:</Form.Label>
               <Form.Control type="file" onChange={(e) => handlePicture(e)} />
-              {/* <img src={item.image} alt="" /> */}
             </Form.Group>
 
             <Form.Group className="m-2">
@@ -81,7 +81,7 @@ function ProductEditModal({ showEdit, item, setShowEdit }) {
                 type="text"
                 required
                 name="name"
-                value={name}
+                value={item.name}
                 onChange={(e) => setName(e.target.value)}
               />
             </Form.Group>
@@ -90,10 +90,10 @@ function ProductEditModal({ showEdit, item, setShowEdit }) {
               <Form.Select
                 name="category"
                 required
-                value={category}
+                value={item.category}
                 onChange={(e) => setCategory(e.target.value)}
               >
-                <option value="DEFAULT" disabled>
+                <option selected disabled>
                   انتخاب کنید
                 </option>
                 <option>اپل</option>
@@ -109,10 +109,10 @@ function ProductEditModal({ showEdit, item, setShowEdit }) {
               <Form.Select
                 name="color"
                 required
-                value={color}
+                value={item.color}
                 onChange={(e) => setColor(e.target.value)}
               >
-                <option value="DEFAULT" disabled>
+                <option selected disabled >
                   انتخاب کنید
                 </option>
                 <option>طلایی</option>
@@ -130,7 +130,7 @@ function ProductEditModal({ showEdit, item, setShowEdit }) {
                 type="number"
                 required
                 name="name"
-                value={quantity}
+                value={item.quantity}
                 onChange={(e) => setQuantity(Number(e.target.value))}
               />
             </Form.Group>
@@ -140,7 +140,7 @@ function ProductEditModal({ showEdit, item, setShowEdit }) {
                 type="text"
                 required
                 name="price"
-                value={price}
+                value={item.price}
                 onChange={(e) => setPrice(Number(e.target.value))}
               />
             </Form.Group>
