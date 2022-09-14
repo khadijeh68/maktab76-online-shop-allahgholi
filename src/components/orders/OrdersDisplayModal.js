@@ -22,6 +22,7 @@ function OrdersDisplayModal({ item }) {
   const [show, setShow] = useState(false);
   const handleShow = () => setShow(true);
   const handleClose = () => setShow(false);
+  
   const handleDeliverd = (id) => {
     dispatch(fetchDelivered(id));
     dispatch(fetchOrders());

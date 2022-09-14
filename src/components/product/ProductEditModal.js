@@ -1,6 +1,6 @@
 import Modal from "react-bootstrap/Modal";
 import { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import "../../index.css";
 import { CKEditor } from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
@@ -20,7 +20,7 @@ const useStyles = makeStyles({
   },
 });
 
-function ProductEditModal({ showEdit, item, setShowEdit,currentPage }) {
+function ProductEditModal({ showEdit, item, setShowEdit, currentPage }) {
   const classes = useStyles();
   const dispatch = useDispatch();
   const [image, setImage] = useState([]);
@@ -37,13 +37,12 @@ function ProductEditModal({ showEdit, item, setShowEdit,currentPage }) {
     const form = new FormData();
     form.append("image", file);
     instance.post("/upload", form).then((res) => setImage([res.data.filename]));
-    let pic = URL.createObjectURL(file);
   };
 
-  const handleSubmit = (e,id) => {
+  const handleSubmit = (e, id) => {
     const newProduct = { name, price, quantity, color, category, description };
     e.preventDefault();
-    dispatch(updateProduct({id,newProduct}))
+    dispatch(updateProduct({ id, newProduct }))
       .then(unwrapResult)
       .then(() => {
         toast.success("ویرایش کالا با موفقیت انجام شد", {
@@ -67,12 +66,11 @@ function ProductEditModal({ showEdit, item, setShowEdit,currentPage }) {
           ></button>
         </Modal.Header>
         <Modal.Body>
-          <Form onSubmit={(e) => handleSubmit(e,item.id)}>
+          <Form onSubmit={(e) => handleSubmit(e, item.id)}>
             <Form.Group className="m-2">
               <Form.Label>تصویر کالا:</Form.Label>
               <Form.Control type="file" onChange={(e) => handlePicture(e)} />
             </Form.Group>
-
             <Form.Group className="m-2">
               <Form.Label>نام کالا:</Form.Label>
               <Form.Control
@@ -110,7 +108,7 @@ function ProductEditModal({ showEdit, item, setShowEdit,currentPage }) {
                 defaultValue={item.color}
                 onChange={(e) => setColor(e.target.value)}
               >
-                <option selected disabled >
+                <option selected disabled>
                   انتخاب کنید
                 </option>
                 <option>طلایی</option>

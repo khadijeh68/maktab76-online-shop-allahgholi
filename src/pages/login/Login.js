@@ -3,7 +3,6 @@ import { useState } from "react";
 import { Button, Form } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
-import { IS_LOGGGED_IN } from "../../config/constants";
 import "../../index.css";
 import { login } from "../../redux/features/user/usersSlice";
 
@@ -30,7 +29,6 @@ function Login() {
   const handleSubmit = (e) => {
     e.preventDefault();
     dispatch(login({ username, password })).unwrap().then(() => navigate("/admin/orders"))
-
   };
 
 

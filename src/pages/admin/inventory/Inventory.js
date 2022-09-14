@@ -3,14 +3,10 @@ import { Button, Table } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import {
   fetchInventory,
-  headerInventory,
-  updateInventory,
 } from "../../../redux/features/inventory/inventorySlice";
 import { makeStyles } from "@material-ui/core";
 import { Pagination } from "@mui/material";
 import { digitsEnToFa } from "@persian-tools/persian-tools";
-import { useCallback } from "react";
-import { updateProduct } from "../../../redux/features/product/productSlice";
 
 const useStyles = makeStyles({
   page: {
@@ -28,12 +24,11 @@ function Inventory() {
   const dispatch = useDispatch();
   const total = useSelector((state) => state.inventory.total);
   const [currentPage, setCurrentPage] = useState(1);
-
-  const limit = 5;
-  const count = Math.ceil(total / limit);
   const inventoriesList = useSelector(
     (state) => state.inventory.inventoriesList
   );
+  const limit = 5;
+  const count = Math.ceil(total / limit);
 
   useEffect(() => {
     dispatch(fetchInventory(currentPage))

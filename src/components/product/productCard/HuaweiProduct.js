@@ -6,6 +6,7 @@ import { useDispatch } from "react-redux";
 import { BASE_URL } from "../../../config/api";
 import { getCategory, getList } from "../../../redux/features/fiestPage/firstPage";
 import { digitsEnToFa } from "@persian-tools/persian-tools";
+
 const useStyles = makeStyles({
   page: {
     display: "inline-flex",

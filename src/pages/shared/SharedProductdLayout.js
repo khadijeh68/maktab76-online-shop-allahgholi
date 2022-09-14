@@ -1,6 +1,5 @@
 import { makeStyles } from "@material-ui/core/styles";
 import { Outlet } from "react-router-dom";
-import ProductsCard from "../../components/product/ProductCard";
 
 const useStyles = makeStyles({
   h3: {

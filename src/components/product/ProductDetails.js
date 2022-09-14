@@ -42,7 +42,7 @@ function ProductDetails() {
       <div>
         <h5>{product.name}</h5>
         <p>{`رنگ: ${product.color}`}</p>
-        <p>{`قیمت: ${product.price}`}</p>
+        <p>{`قیمت: ${(product.price)}`}</p>
         <div className="d-flex flex-direction-row align-items-center">
           <div>تعداد: </div>
           <Button

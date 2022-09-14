@@ -110,7 +110,7 @@ const SingleCategory = () => {
                           .replace(/\B(?=(\d{3})+(?!\d))/g, "،")
                       )} تومان 
                     </Card.Text>
-                    <Button style={{marginRight: "22px"}} variant="primary" size="sm">توضیحات بیشتر...  </Button>
+                    <Button style={{marginRight: "22px"}} variant="outline-primary" size="sm">توضیحات بیشتر...  </Button>
                   </Card.Body>
                 </Card>
               </div>

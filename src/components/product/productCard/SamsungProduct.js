@@ -26,7 +26,6 @@ const useStyles = makeStyles({
     textDecoration: "none",
     fontFamily: "Vazir-Medium",
     fontSize: "20px",
-
   },
   img: {
     width: "14rem",

@@ -1,6 +1,6 @@
 import { Pagination } from "@mui/material";
 import { useEffect, useState } from "react";
-import { Button, Table } from "react-bootstrap";
+import { Table } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchOrders } from "../../../redux/features/orders/ordersSlice";
 import { makeStyles } from "@material-ui/core";
@@ -33,13 +33,6 @@ function Orders() {
     dispatch(fetchOrders({ delivered, currentPage }));
   }, [delivered, currentPage, dispatch]);
 
-  const handleChange = (e) => {
-    // if (e.target.value === "true") {
-    //   dispatch(fetchDelivered());
-    // } else if (e.target.value === "false") {
-    //   dispatch(fetchDelivered());
-    // }
-  };
 
   return (
     <div className="orders">
@@ -52,7 +45,6 @@ function Orders() {
             name="group1"
             onClick={() => setDelivered(true)}
             defaultChecked
-            onChange={handleChange}
           />
           <span className="px-2" style={{ marginRight: "20px" }}>
             سفارش های در حال انتظار
@@ -61,7 +53,6 @@ function Orders() {
             type="radio"
             name="group1"
             onClick={() => setDelivered(false)}
-            onChange={handleChange}
           />
         </div>
       </div>

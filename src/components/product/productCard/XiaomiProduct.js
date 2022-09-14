@@ -9,6 +9,7 @@ import {
   getCategory,
   getList,
 } from "../../../redux/features/fiestPage/firstPage";
+
 const useStyles = makeStyles({
   page: {
     display: "inline-flex",

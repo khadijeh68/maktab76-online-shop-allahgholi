@@ -23,7 +23,6 @@ const useStyles = makeStyles({
 
 function ProductAddModal() {
   const classes = useStyles();
-  const [validated, setValidated] = useState(false);
   const dispatch = useDispatch();
   const [image, setImage] = useState();
   const [name, setName] = useState();
@@ -41,17 +40,9 @@ function ProductAddModal() {
     const form = new FormData();
     form.append("image", file);
     instance.post("/upload", form).then((res) => setImage([res.data.filename]));
-    let pic = URL.createObjectURL(file);
   };
 
   const handleSubmit = (e) => {
-    const form = e.currentTarget;
-    if (form.checkValidity() === false) {
-      e.preventDefault();
-      e.stopPropagation();
-    }
-    setValidated(true);
-
     e.preventDefault();
     const data = newProduct();
     dispatch(createProduct(data))
@@ -100,7 +91,7 @@ function ProductAddModal() {
           ></button>
         </Modal.Header>
         <Modal.Body>
-          <Form onSubmit={(e) => handleSubmit(e)} validated={validated}>
+          <Form onSubmit={(e) => handleSubmit(e)}>
             <Form.Group className="m-2" controlId="validationCustom01">
               <Form.Label>تصویر کالا:</Form.Label>
               <Form.Control

@@ -1,5 +1,4 @@
 import { makeStyles } from "@material-ui/core/styles";
-import { Button } from "react-bootstrap";
 import { NavLink, useNavigate } from "react-router-dom";
 import { IS_LOGGGED_IN } from "../../config/constants";
 import "../../index.css";
@@ -27,12 +26,6 @@ const useStyles = makeStyles({
 
 const AdminNavbar = () => {
   const classes = useStyles();
-  const navigate = useNavigate();
-
-  const logOut = () => {
-    localStorage.setItem(IS_LOGGGED_IN, false);
-    navigate("/login");
-  }
 
   const navLinkStyles = ({ isActive }) => {
     return {

@@ -1,16 +1,8 @@
 import { makeStyles } from "@material-ui/core/styles";
 import { Formik, Form, Field } from "formik";
 import { useDispatch, useSelector } from "react-redux";
-import { Navigate, useNavigate } from "react-router-dom";
 import * as Yup from "yup";
-import { getTotals, userOrder } from "../../redux/features/cart/cartSlice";
-import persian from "react-date-object/calendars/persian";
-import persian_fa from "react-date-object/locales/persian_fa";
-import DatePicker from "react-multi-date-picker";
-import ordersSlice, {
-  createOrder,
-  fetchOrders,
-} from "../../redux/features/orders/ordersSlice";
+import { getTotals } from "../../redux/features/cart/cartSlice";
 
 const useStyles = makeStyles({
   title: {
@@ -52,7 +44,6 @@ const SignupSchema = Yup.object().shape({
 
 function Checkout() {
   const classes = useStyles();
-  const navigate = useNavigate();
   const dispatch = useDispatch();
   const cartTotalAmount = useSelector((state) => state.cart.cartTotalAmount);
 
@@ -67,7 +58,6 @@ function Checkout() {
       prices: data.prices,
       delivered: data.delivered
     };
-   
     localStorage.setItem("userInfo", JSON.stringify(userInfo));
   };
 
@@ -166,14 +156,6 @@ function Checkout() {
                   value={values.date}
                   onChange={handleChange}
                 />
-                {/* <div style={{ direction: "rtl" }}>
-                <DatePicker
-                  calendar={persian}
-                  locale={persian_fa}
-                  calendarPosition="bottom-right"
-                  value={new Date(Yup.date).toLocaleDateString("fa-IR")}
-                />
-              </div> */}
                 {errors.expectAt && touched.expectAt ? (
                   <div className="text-danger">{errors.expectAt}</div>
                 ) : null}

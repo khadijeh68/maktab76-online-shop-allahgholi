@@ -1,5 +1,4 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-
 import {
   createProductRequest,
   deleteProductRequest,
@@ -33,11 +32,6 @@ export const updateProduct = createAsyncThunk(
   "products/updateProduct",
   ({ id, newProduct }) => updateProductRequest({id, newProduct})
 );
-
-// export const updateOrder = createAsyncThunk(
-//   "products/updateOrder",
-//   ({ id, order }) => updateProductRequest(id, order)
-// );
 
 const productSlice = createSlice({
   name: "products",
@@ -91,17 +85,6 @@ const productSlice = createSlice({
     builder.addCase(updateProduct.rejected, (state, action) => {
       return { productsList: [], loading: false, error: action.payload };
     });
-
-    //UPDATE ORDER
-    // builder.addCase(updateOrder.pending, (state) => {
-    //   return { ...state, loading: true };
-    // });
-    // builder.addCase(updateOrder.fulfilled, (state, action) => {
-    //   return { ...state, loading: false };
-    // });
-    // builder.addCase(updateOrder.rejected, (state, action) => {
-    //   return { loading: false, error: action.payload };
-    // });
   },
 });
 
