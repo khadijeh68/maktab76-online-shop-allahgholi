@@ -68,7 +68,7 @@ function ProductDetails() {
           </Button>
         </div>
         <div  className="mt-2" dangerouslySetInnerHTML={{ __html: product.description }} />
-        <Button variant="primary" onClick={() => handleAddToCart(product)}  disabled={orderCount > product.quantity || orderCount < 0 ? "disabled" : ""}>
+        <Button variant="primary" onClick={() => handleAddToCart(product)}  disabled={orderCount >= product.quantity || orderCount < 0 ? "disabled" : ""}>
           افزودن به سبد خرید
         </Button>
       </div>

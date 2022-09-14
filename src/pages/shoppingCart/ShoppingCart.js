@@ -12,9 +12,7 @@ import {
   clearCart,
   decrease,
   getTotals,
-  increase,
 } from "../../redux/features/cart/cartSlice";
-import { removeItem } from "../../redux/features/cart/cartSlice";
 import DeleteModal from "../../components/cart/DeleteModal";
 
 const useStyles = makeStyles({
