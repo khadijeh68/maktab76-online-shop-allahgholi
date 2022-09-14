@@ -10,7 +10,6 @@ import {
 import { useState } from "react";
 import { digitsEnToFa } from "@persian-tools/persian-tools";
 
-
 const useStyles = makeStyles({
   body: {
     fontFamily: "Vazir-Medium",

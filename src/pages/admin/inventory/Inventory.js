@@ -28,12 +28,6 @@ function Inventory() {
   const dispatch = useDispatch();
   const total = useSelector((state) => state.inventory.total);
   const [currentPage, setCurrentPage] = useState(1);
-  const initialState = [
-    { id: 1, price: 1000, quantity: 5 },
-    { id: 2, price: 2000, quantity: 6 },
-  ];
-  const [product, setProduct] = useState(initialState);
-  const [id, setId] = useState();
 
   const limit = 5;
   const count = Math.ceil(total / limit);
@@ -43,46 +37,14 @@ function Inventory() {
 
   useEffect(() => {
     dispatch(fetchInventory(currentPage))
-      .unwrap()
-      .then((res) => setProduct(res));
   }, [currentPage, dispatch]);
-
-  const handleChange = (price, quantity, id) => {
-    setId(id);
-    setProduct((item) => 
-    item.map((obj) => {
-        if (obj.id === id) {
-          return { ...obj, price: price, quantity: quantity };
-        }
-        return obj;
-      })
-    );
-  };
-
-  const onSubmit = useCallback(() => {
-    const item = product.find((item) => item.id === id);
-    if (id) {
-      const updatedProduct = {
-        price: item.price,
-        quantity: item.quantity,
-      };
-      dispatch(updateProduct({ id, updatedProduct }))
-        .unwrap()
-        .then(() => fetchInventory());
-    }
-  }, [dispatch, id, product]);
 
   return (
     <div className="orders">
       <div className="d-flex flex-row justify-content-between mx-3">
         <h6>مدیریت موجودی و قیمت ها</h6>
         <div>
-          <Button
-            variant="primary"
-            type="submit"
-            disabled={!id}
-            onClick={onSubmit}
-          >
+          <Button variant="primary" type="submit" disabled>
             ذخیره
           </Button>
         </div>
@@ -109,9 +71,6 @@ function Inventory() {
                           .toString()
                           .replace(/\B(?=(\d{3})+(?!\d))/g, "،")
                       )}
-                      onChange={(e) =>
-                        handleChange(e.target.value, item.quantity, item.id)
-                      }
                     />
                   </td>
                   <td>
@@ -122,9 +81,6 @@ function Inventory() {
                           .toString()
                           .replace(/\B(?=(\d{3})+(?!\d))/g, "،")
                       )}
-                      onChange={(e) =>
-                        handleChange(e.target.value, item.quantity, item.id)
-                      }
                     />
                   </td>
                 </tr>

@@ -71,7 +71,7 @@ const AdminNavbar = () => {
         <NavLink to="/" className={classes.nav_link} style={navLinkStyles}>
           <span>بازگشت به سایت</span>
         </NavLink>
-        <Button onClick={logOut} variant="link" className="mx-2 text-decoration-none text-black">خروج</Button>
+      
       </div>
     </div>
   );
