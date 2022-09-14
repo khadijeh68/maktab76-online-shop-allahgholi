@@ -5,7 +5,7 @@ import { useState } from "react";
 import { Button, Table } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { FaArrowUp,FaArrowDown } from 'react-icons/fa';
+import { FaArrowUp, FaArrowDown } from "react-icons/fa";
 import { BASE_URL } from "../../config/api";
 import {
   addToCart,
@@ -29,9 +29,8 @@ const useStyles = makeStyles({
   total: {
     display: "flex",
     flexDirection: "row",
-  },
-  btn: {
-    marginRight: "750px",
+    justifyContent: "space-between",
+    alignItems: "center",
   },
   cart: {
     display: "flex",
@@ -88,9 +87,13 @@ function Basket() {
                 <th>تصویر کالا</th>
                 <th>نام کالا</th>
                 <th>قیمت کالا</th>
-                <th><FaArrowUp/></th>
+                <th>
+                  <FaArrowUp />
+                </th>
                 <th>تعداد</th>
-                <th><FaArrowDown/></th>
+                <th>
+                  <FaArrowDown />
+                </th>
                 <th>مبلغ قابل پرداخت</th>
                 <th>حذف کالا</th>
               </tr>
@@ -119,13 +122,15 @@ function Basket() {
                       item.price
                         .toString()
                         .replace(/\B(?=(\d{3})+(?!\d))/g, "،")
-                    )}
+                    )}{" "}
+                    تومان
                   </td>
                   <td className={classes.align}>
                     <Button
                       variant="success"
                       size="sm"
                       onClick={() => handleAddToCart(item)}
+                      disabled={item.cartQuantity  >= item.quantity ? "disabled" : ""}
                     >
                       +
                     </Button>
@@ -140,6 +145,7 @@ function Basket() {
                       onClick={() => {
                         dispatch(handleDecreaseCart(item));
                       }}
+                     
                     >
                       -
                     </Button>

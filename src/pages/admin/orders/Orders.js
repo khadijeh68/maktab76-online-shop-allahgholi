@@ -23,7 +23,9 @@ const useStyles = makeStyles({
 
 function Orders() {
   const classes = useStyles();
-
+  const [show, setShow] = useState(false);
+  const handleShow = () => setShow(true);
+  const handleClose = () => setShow(false);
   const dispatch = useDispatch();
   const ordersList = useSelector((state) => state.orders.ordersList);
   const total = useSelector((state) => state.orders.total);
@@ -93,20 +95,28 @@ function Orders() {
                         .replace(/\B(?=(\d{3})+(?!\d))/g, "،")
                     )}
                   </td>
+                  <td>{new Date(item.expectAt).toLocaleDateString("fa-IR")}</td>
                   <td>
-                    {new Date(item.createdAt).toLocaleDateString("fa-IR")}
+                    {item.delivered === true ? "تحویل شد" : "در حال انتظار"}
                   </td>
                   <td>
-                    {item.delivered === "true" ? "تحویل شد" : "در حال انتظار"}
+                    <Button variant="warning" onClick={handleShow} size="sm">
+                      بررسی سفارش
+                    </Button>
                   </td>
                   <td>
-                    <OrdersDisplayModal item={item} />
+                    <OrdersDisplayModal
+                      item={item}
+                      show={show}
+                      handleClose={handleClose}
+                    />
                   </td>
                 </tr>
               );
             })}
         </tbody>
       </Table>
+
       <Pagination
         className={classes.page}
         // sx={{ direction:"ltr" }}

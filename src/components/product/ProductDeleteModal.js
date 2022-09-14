@@ -19,6 +19,7 @@ function ProductDeleteModal({
   handleCloseDelete,
   itemId,
   setOpenDelete,
+  currentPage
 }) {
   const dispatch = useDispatch();
   const classes = useStyles();
@@ -30,7 +31,7 @@ function ProductDeleteModal({
         toast.error("حذف کالا با موفقیت انجام شد", {
           position: toast.POSITION.BOTTOM_RIGHT,
         });
-        dispatch(fetchProducts());
+        dispatch(fetchProducts(currentPage));
       });
     setOpenDelete(false);
   };

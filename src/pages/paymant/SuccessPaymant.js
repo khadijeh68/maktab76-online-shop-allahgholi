@@ -1,10 +1,12 @@
 import { makeStyles } from "@material-ui/core";
-import { Link, NavLink, useParams } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import "../../index.css";
-import { Button } from "react-bootstrap";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { useEffect } from "react";
-import { clearLocalStorage } from "../../redux/features/cart/cartSlice";
+import {
+  createOrder,
+} from "../../redux/features/orders/ordersSlice";
+
 
 const useStyles = makeStyles({
   nav: {
@@ -67,9 +69,6 @@ const useStyles = makeStyles({
 
 function SuccessPaymant() {
   const dispatch = useDispatch();
-  const params = useParams();
-  const query = params.query;
-  const cartItems = useSelector((state) => state.cart.cartItems);
 
   const navLinkStyles = ({ isActive }) => {
     return {
@@ -77,19 +76,13 @@ function SuccessPaymant() {
     };
   };
   const classes = useStyles();
-  const clearCart = () => {
-    fetch(`http://localhost:3002/orders`, {
-      method: "POST",
-      body: JSON.stringify(cartItems),
-    })
-      .then((res) => res.json())
-      .then((data) => console.log(data));
-  
-  };
 
-  // useEffect(() => {
-  //     dispatch(clearLocalStorage());
-  // }, [dispatch]);
+  useEffect(() => {
+    const data = JSON.parse(localStorage.getItem("cartItems"));
+    const newOrder = JSON.parse(localStorage.getItem("userInfo"));
+    newOrder.products = data;
+    dispatch(createOrder(newOrder));
+  }, [dispatch]);
 
   return (
     <div className={classes.container}>
@@ -115,23 +108,20 @@ function SuccessPaymant() {
       </div>
 
       <div className={classes.h4}>
-      <h4>نتیجه پرداخت </h4>
-      <div className={classes.body}>
+        <h4>نتیجه پرداخت </h4>
+        <div className={classes.body}>
           <img
             className={classes.success}
             src={`../../../image/success.png`}
             alt="success"
           />
           <div>
-          <p className="mt-3">
-            با تشکر از پرداخت شما، سفارش شما ثبت شده و <br /> جهت هماهنگی ارسال
-            با شما تماس گرفته خواهد شد
-          </p>
-          <Button onClick={clearCart}>پاک کردن سبد خرید</Button>
-          <Link to="/admin/orders" className="text-decoration-none">صفحه سفارشات</Link>
+            <p className="mt-3">
+              با تشکر از پرداخت شما، سفارش شما ثبت شده و <br /> جهت هماهنگی
+              ارسال با شما تماس گرفته خواهد شد
+            </p>
           </div>
-          
-          </div>
+        </div>
       </div>
     </div>
   );

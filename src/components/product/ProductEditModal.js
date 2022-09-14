@@ -20,12 +20,11 @@ const useStyles = makeStyles({
   },
 });
 
-function ProductEditModal({ showEdit, item, setShowEdit }) {
+function ProductEditModal({ showEdit, item, setShowEdit,currentPage }) {
   const classes = useStyles();
   const dispatch = useDispatch();
   const [image, setImage] = useState([]);
   const [name, setName] = useState(item.name);
-  console.log(item.name)
   const [price, setPrice] = useState(item.price);
   const [quantity, setQuantity] = useState(item.quantity);
   const [color, setColor] = useState(item.color);
@@ -43,7 +42,6 @@ function ProductEditModal({ showEdit, item, setShowEdit }) {
 
   const handleSubmit = (e,id) => {
     const newProduct = { name, price, quantity, color, category, description };
-    console.log(newProduct);
     e.preventDefault();
     dispatch(updateProduct({id,newProduct}))
       .then(unwrapResult)
@@ -51,7 +49,7 @@ function ProductEditModal({ showEdit, item, setShowEdit }) {
         toast.success("ویرایش کالا با موفقیت انجام شد", {
           position: toast.POSITION.BOTTOM_RIGHT,
         });
-        dispatch(fetchProducts());
+        dispatch(fetchProducts(currentPage));
       });
     setShowEdit(false);
   };
@@ -81,7 +79,7 @@ function ProductEditModal({ showEdit, item, setShowEdit }) {
                 type="text"
                 required
                 name="name"
-                value={item.name}
+                defaultValue={item.name}
                 onChange={(e) => setName(e.target.value)}
               />
             </Form.Group>
@@ -90,7 +88,7 @@ function ProductEditModal({ showEdit, item, setShowEdit }) {
               <Form.Select
                 name="category"
                 required
-                value={item.category}
+                defaultValue={item.category}
                 onChange={(e) => setCategory(e.target.value)}
               >
                 <option selected disabled>
@@ -109,7 +107,7 @@ function ProductEditModal({ showEdit, item, setShowEdit }) {
               <Form.Select
                 name="color"
                 required
-                value={item.color}
+                defaultValue={item.color}
                 onChange={(e) => setColor(e.target.value)}
               >
                 <option selected disabled >
@@ -130,7 +128,7 @@ function ProductEditModal({ showEdit, item, setShowEdit }) {
                 type="number"
                 required
                 name="name"
-                value={item.quantity}
+                defaultValue={item.quantity}
                 onChange={(e) => setQuantity(Number(e.target.value))}
               />
             </Form.Group>
@@ -140,7 +138,7 @@ function ProductEditModal({ showEdit, item, setShowEdit }) {
                 type="text"
                 required
                 name="price"
-                value={item.price}
+                defaultValue={item.price}
                 onChange={(e) => setPrice(Number(e.target.value))}
               />
             </Form.Group>

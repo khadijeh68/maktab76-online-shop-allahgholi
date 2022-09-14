@@ -15,11 +15,9 @@ const Error = React.lazy(() => import("../../pages/error/Error"));
 const ShoppingCart = React.lazy(() =>
   import("../../pages/shoppingCart/ShoppingCart")
 );
-// const Footer = React.lazy(() => import ("./components/footer/Footer") ) ;
 const Categories = React.lazy(() =>
   import("../../components/category/Categories")
 );
-// const Products = React.lazy(() => import("../../pages/admin/product/Products"));
 const SharedAdminLayout = React.lazy(() =>
   import("../../pages/shared/SharedAdminLayout")
 );
@@ -56,12 +54,12 @@ const ProductCard = React.lazy(() =>
 function AppRouter() {
   return (
     <BrowserRouter>
-    <ToastContainer/>
+      <ToastContainer />
       <Routes>
         <Route
           path="/"
           element={
-            <React.Suspense fallback={<Loading/>}>
+            <React.Suspense fallback={<Loading />}>
               <SharedLayout />
             </React.Suspense>
           }
@@ -69,7 +67,7 @@ function AppRouter() {
           <Route
             index
             element={
-              <React.Suspense fallback={<Loading/>}>
+              <React.Suspense fallback={<Loading />}>
                 <Home />
               </React.Suspense>
             }
@@ -77,7 +75,7 @@ function AppRouter() {
           <Route
             path="categories"
             element={
-              <React.Suspense fallback={<Loading/>}>
+              <React.Suspense fallback={<Loading />}>
                 <SharedCategoryLayout />
               </React.Suspense>
             }
@@ -85,7 +83,7 @@ function AppRouter() {
             <Route
               path="categories"
               element={
-                <React.Suspense fallback={<Loading/>}>
+                <React.Suspense fallback={<Loading />}>
                   <Categories />
                 </React.Suspense>
               }
@@ -93,7 +91,7 @@ function AppRouter() {
             <Route
               path=":categoryId"
               element={
-                <React.Suspense fallback={<Loading/>}>
+                <React.Suspense fallback={<Loading />}>
                   <SingleCategory />
                 </React.Suspense>
               }
@@ -102,7 +100,7 @@ function AppRouter() {
           <Route
             path="products"
             element={
-              <React.Suspense fallback={<Loading/>}>
+              <React.Suspense fallback={<Loading />}>
                 <SharedProductdLayout />
               </React.Suspense>
             }
@@ -110,7 +108,7 @@ function AppRouter() {
             <Route
               index
               element={
-                <React.Suspense fallback={<Loading/>}>
+                <React.Suspense fallback={<Loading />}>
                   <ProductCard />
                 </React.Suspense>
               }
@@ -118,7 +116,7 @@ function AppRouter() {
             <Route
               path=":id"
               element={
-                <React.Suspense fallback={<Loading/>}>
+                <React.Suspense fallback={<Loading />}>
                   <ProductDetails />
                 </React.Suspense>
               }
@@ -127,7 +125,7 @@ function AppRouter() {
           <Route
             path="shoppingCart"
             element={
-              <React.Suspense fallback={<Loading/>}>
+              <React.Suspense fallback={<Loading />}>
                 <ShoppingCart />
               </React.Suspense>
             }
@@ -135,7 +133,7 @@ function AppRouter() {
           <Route
             path="checkout"
             element={
-              <React.Suspense fallback={<Loading/>}>
+              <React.Suspense fallback={<Loading />}>
                 <Checkout />
               </React.Suspense>
             }
@@ -145,7 +143,7 @@ function AppRouter() {
         <Route
           path="paymantPanel"
           element={
-            <React.Suspense fallback={<Loading/>}>
+            <React.Suspense fallback={<Loading />}>
               <PaymentPanel />
             </React.Suspense>
           }
@@ -153,7 +151,7 @@ function AppRouter() {
         <Route
           path="successPaymant"
           element={
-            <React.Suspense fallback={<Loading/>}>
+            <React.Suspense fallback={<Loading />}>
               <SuccessPaymant />
             </React.Suspense>
           }
@@ -161,7 +159,7 @@ function AppRouter() {
         <Route
           path="failPaymant"
           element={
-            <React.Suspense fallback={<Loading/>}>
+            <React.Suspense fallback={<Loading />}>
               <FailPaymant />
             </React.Suspense>
           }
@@ -170,7 +168,7 @@ function AppRouter() {
         <Route
           path="login"
           element={
-            <React.Suspense fallback={<Loading/>}>
+            <React.Suspense fallback={<Loading />}>
               <Login />
             </React.Suspense>
           }
@@ -178,7 +176,7 @@ function AppRouter() {
         <Route
           path="admin"
           element={
-            <React.Suspense fallback={<Loading/>}>
+            <React.Suspense fallback={<Loading />}>
               <PrivateRoute>
                 <SharedAdminLayout />
               </PrivateRoute>
@@ -188,15 +186,15 @@ function AppRouter() {
           <Route
             index
             element={
-              <React.Suspense fallback={<Loading/>}>
-                <Orders />
+              <React.Suspense fallback={<Loading />}>
+                  <Orders />
               </React.Suspense>
             }
           />
           <Route
             path="product"
             element={
-              <React.Suspense fallback={<Loading/>}>
+              <React.Suspense fallback={<Loading />}>
                 <Product />
               </React.Suspense>
             }
@@ -204,7 +202,7 @@ function AppRouter() {
           <Route
             path="inventory"
             element={
-              <React.Suspense fallback={<Loading/>}>
+              <React.Suspense fallback={<Loading />}>
                 <Inventory />
               </React.Suspense>
             }
@@ -212,14 +210,13 @@ function AppRouter() {
           <Route
             path="orders"
             element={
-              <React.Suspense fallback={<Loading/>}>
+              <React.Suspense fallback={<Loading />}>
                 <Orders />
               </React.Suspense>
             }
           />
         </Route>
         <Route path="*" element={<Error />} />
-        {/* <Footer /> */}
       </Routes>
     </BrowserRouter>
   );

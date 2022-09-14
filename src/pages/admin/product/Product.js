@@ -105,6 +105,7 @@ function Product() {
                       handleCloseDelete={handleCloseDelete}
                       itemId={item.id}
                       setOpenDelete={setOpenDelete}
+                      currentPage={currentPage}
                     />
                   </td>
                 </tr>
@@ -116,6 +117,7 @@ function Product() {
         showEdit={showEdit}
         item={currentProduct}
         setShowEdit={setShowEdit}
+        currentPage={currentPage}
       />
       <Pagination
         className={classes.page}

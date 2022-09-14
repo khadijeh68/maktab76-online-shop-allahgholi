@@ -1,9 +1,16 @@
 import { makeStyles } from "@material-ui/core/styles";
 import { Formik, Form, Field } from "formik";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Navigate, useNavigate } from "react-router-dom";
 import * as Yup from "yup";
-import { userOrder } from "../../redux/features/cart/cartSlice";
+import { getTotals, userOrder } from "../../redux/features/cart/cartSlice";
+import persian from "react-date-object/calendars/persian";
+import persian_fa from "react-date-object/locales/persian_fa";
+import DatePicker from "react-multi-date-picker";
+import ordersSlice, {
+  createOrder,
+  fetchOrders,
+} from "../../redux/features/orders/ordersSlice";
 
 const useStyles = makeStyles({
   title: {
@@ -28,7 +35,7 @@ const useStyles = makeStyles({
 });
 
 const SignupSchema = Yup.object().shape({
-  firstName: Yup.string()
+  username: Yup.string()
     .min(2, "تعداد کاراکتر کمتر از حد مجاز است")
     .max(50, "تعداد کاراکتر بیشتر از حد مجاز است")
     .required("نام اجباری است"),
@@ -38,7 +45,7 @@ const SignupSchema = Yup.object().shape({
     .required("نام خانوادگی اجباری است"),
   address: Yup.string().required("آدرس اجباری است"),
   tel: Yup.number().required("شماره تماس اجباری است"),
-  date: Yup.date().default(function () {
+  expectAt: Yup.date().default(function () {
     return new Date();
   }),
 });
@@ -47,50 +54,22 @@ function Checkout() {
   const classes = useStyles();
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const cartTotalAmount = useSelector((state) => state.cart.cartTotalAmount);
 
-  // let order = {
-  //   username: "",
-  //   lastName: "",
-  //   address: "",
-  //   tel: "",
-  //   expectAt: "",
-  //   product: [],
-  //   prices: "",
-  //   delivered: "",
-  //   createdAt: "",
-  //   id: null,
-  // };
-  // const handleSubmit = (value) => {
-  //   // e.preventDefault();
-  //   const {
-  //     id,
-  //     username,
-  //     lastName,
-  //     address,
-  //     tel,
-  //     expectAt,
-  //     product,
-  //     prices,
-  //     delivered,
-  //     createdAt,
-  //   } = value;
-
-  //   order = {
-  //     ...order,
-  //     id: id,
-  //     firstName: username,
-  //     lastName: lastName,
-  //     address: address,
-  //     tel: tel,
-  //     expectAt: expectAt,
-  //     product: product,
-  //     prices: prices,
-  //     delivered: delivered,
-  //     createdAt: createdAt,
-  //   };
-  //   // dispatch(userOrder());
-  //   // window.location.href = 'http://localhost:3001/'
-  // };
+  const handle = (data) => {
+    dispatch(getTotals());
+    const userInfo = {
+      username: data.username,
+      lastName: data.lastName,
+      address: data.address,
+      tel: data.tel,
+      expectAt: Date.now(data.expectAt),
+      prices: data.prices,
+      delivered: data.delivered
+    };
+   
+    localStorage.setItem("userInfo", JSON.stringify(userInfo));
+  };
 
   return (
     <div className={classes.title}>
@@ -98,72 +77,110 @@ function Checkout() {
       <div>
         <Formik
           initialValues={{
-            firstName: "",
+            username: "",
             lastName: "",
             address: "",
             tel: "",
-            date: "",
+            expectAt: "",
+            delivered: false,
+            products: [],
+            prices: cartTotalAmount,
           }}
           validationSchema={SignupSchema}
           onSubmit={(values) => {
-            localStorage.setItem("userData", JSON.stringify(values));
             window.location.href = "http://localhost:3001/";
-            console.log(values);
+            handle(values);
           }}
         >
-          {({ errors, touched }) => (
-            <Form className={classes.form} >
+          {({ errors, touched, values, handleChange }) => (
+            <Form className={classes.form}>
               <div>
                 <div>
                   <label>نام:</label>
                 </div>
-                <Field name="firstName" type="text" />
-                {errors.firstName && touched.firstName ? (
-                  <div className="text-danger mt-2">{errors.firstName}</div>
+                <Field
+                  name="username"
+                  type="text"
+                  className={classes.input}
+                  value={values.username}
+                  onChange={handleChange}
+                />
+                {errors.username && touched.username ? (
+                  <div className="text-danger">{errors.username}</div>
                 ) : null}
+    
               </div>
               <div>
                 <div>
                   <label className="mt-3">نام خانوادگی:</label>
                 </div>
-                <Field name="lastName" type="text" />
+                <Field
+                  name="lastName"
+                  type="text"
+                  className={classes.input}
+                  value={values.lastName}
+                  onChange={handleChange}
+                />
                 {errors.lastName && touched.lastName ? (
-                  <div className="text-danger mt-2">{errors.lastName}</div>
+                  <div className="text-danger">{errors.lastName}</div>
                 ) : null}
               </div>
               <div>
                 <div>
                   <label className="mt-3">آدرس:</label>
                 </div>
-                <Field name="address" type="address" />
+                <Field
+                  name="address"
+                  type="address"
+                  value={values.address}
+                  onChange={handleChange}
+                  className={classes.input}
+                />
                 {errors.address && touched.address ? (
-                  <div className="text-danger mt-2">{errors.address}</div>
+                  <div className="text-danger">{errors.address}</div>
                 ) : null}
               </div>
               <div>
                 <div>
                   <label className="mt-3">شماره همراه:</label>
                 </div>
-                <Field name="tel" type="tel" />
+                <Field
+                  name="tel"
+                  type="tel"
+                  className={classes.input}
+                  value={values.tel}
+                  onChange={handleChange}
+                />
                 {errors.tel && touched.tel ? (
-                  <div className="text-danger mt-2">{errors.tel}</div>
+                  <div className="text-danger">{errors.tel}</div>
                 ) : null}
               </div>
               <div>
                 <div>
                   <label className="mt-3">تاریخ تحویل :</label>
                 </div>
-                <Field name="date" type="date" />
-                {errors.date && touched.date ? (
-                  <div className="text-danger mt-2">{errors.date}</div>
+                <Field
+                  name="expectAt"
+                  type="date"
+                  className={classes.input}
+                  value={values.date}
+                  onChange={handleChange}
+                />
+                {/* <div style={{ direction: "rtl" }}>
+                <DatePicker
+                  calendar={persian}
+                  locale={persian_fa}
+                  calendarPosition="bottom-right"
+                  value={new Date(Yup.date).toLocaleDateString("fa-IR")}
+                />
+              </div> */}
+                {errors.expectAt && touched.expectAt ? (
+                  <div className="text-danger">{errors.expectAt}</div>
                 ) : null}
               </div>
-              {/* <Link to="http://localhost:3001/paymentPanel"> */}
-
               <button type="submit" className="btn btn-primary m-3">
                 پرداخت
               </button>
-              {/* </Link> */}
             </Form>
           )}
         </Formik>

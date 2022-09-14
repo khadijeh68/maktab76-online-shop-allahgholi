@@ -31,7 +31,7 @@ export const deleteProduct = createAsyncThunk("products/deleteProduct", (id) =>
 
 export const updateProduct = createAsyncThunk(
   "products/updateProduct",
-  ({ id, selectedProduct }) => updateProductRequest(id, selectedProduct)
+  ({ id, newProduct }) => updateProductRequest({id, newProduct})
 );
 
 // export const updateOrder = createAsyncThunk(

@@ -76,7 +76,6 @@ function Inventory() {
     <div className="orders">
       <div className="d-flex flex-row justify-content-between mx-3">
         <h6>مدیریت موجودی و قیمت ها</h6>
-
         <div>
           <Button
             variant="primary"
@@ -88,7 +87,6 @@ function Inventory() {
           </Button>
         </div>
       </div>
-
       <Table striped bordered hover className="w-75 text-center order_table">
         <thead>
           <tr>

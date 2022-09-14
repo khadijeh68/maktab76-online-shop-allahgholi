@@ -7,6 +7,11 @@ import persian_fa from "react-date-object/locales/persian_fa";
 import { Button, Form, Table } from "react-bootstrap";
 import { makeStyles } from "@material-ui/core";
 import { digitsEnToFa } from "@persian-tools/persian-tools";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  fetchDelivered,
+  fetchOrders,
+} from "../../redux/features/orders/ordersSlice";
 
 const useStyles = makeStyles({
   body: {
@@ -14,21 +19,17 @@ const useStyles = makeStyles({
   },
 });
 
-function OrdersDisplayModal({ item }) {
+function OrdersDisplayModal({ item, show, handleClose }) {
+  const dispatch = useDispatch();
   const classes = useStyles();
-  const [show, setShow] = useState(false);
-  const handleShow = () => setShow(true);
-  const handleClose = () => setShow(false);
-
-  const handleDeliverd = (item) => {
-    item.delivered = "true";
+  console.log(item);
+  const handleDeliverd = (id) => {
+    dispatch(fetchDelivered(id));
+    dispatch(fetchOrders());
   };
 
   return (
     <>
-      <Button variant="warning" onClick={handleShow} size="sm">
-        بررسی سفارش
-      </Button>
       <Modal show={show} className={classes.body}>
         <Modal.Header onClick={handleClose}>
           <Modal.Title>نمایش سفارش</Modal.Title>
@@ -43,18 +44,18 @@ function OrdersDisplayModal({ item }) {
           <Form>
             <Form.Group className="mt-2">
               <Form.Label> نام مشتری:</Form.Label>
-              <Form.Control
-                type="text"
-                value={item.username + " " + item.lastname}
-              />
+              <div>
+              {item.username}
+              </div>
+              
             </Form.Group>
             <Form.Group className="mt-2">
               <Form.Label>آدرس :</Form.Label>
-              <Form.Control type="address" value={item.address} />
+              <Form.Control type="address" defaultvalue={item.address} />
             </Form.Group>
             <Form.Group className="mt-2">
               <Form.Label>تلفن :</Form.Label>
-              <Form.Control type="tel" value={item.tel} />
+              <Form.Control type="tel" defaultvalue={item.tel} />
             </Form.Group>
             <Form.Group className="mt-2">
               <Form.Label>زمان تحویل :</Form.Label>
@@ -96,21 +97,19 @@ function OrdersDisplayModal({ item }) {
                 <tr>
                   <td>{item.products[0].name}</td>
                   <td>
-                    {digitsEnToFa(
-                      item.products[0].price
-                        .toString()
-                        .replace(/\B(?=(\d{3})+(?!\d))/g, "،")
-                    )}
+                    {item.products[0].price
+                      .toString()
+                      .replace(/\B(?=(\d{3})+(?!\d))/g, "،")}
                   </td>
-                  <td>{digitsEnToFa(item.products[0].count)}</td>
+                  <td>{item.products[0].count}</td>
                 </tr>
               </tbody>
             </Table>
-            {item.delivered === "false" ? (
+            {item.delivered === false ? (
               <button
                 type="submit"
                 className="btn btn-success"
-                onClick={() => handleDeliverd(item)}
+                onClick={() => handleDeliverd(item.id)}
               >
                 تحویل شد
               </button>
