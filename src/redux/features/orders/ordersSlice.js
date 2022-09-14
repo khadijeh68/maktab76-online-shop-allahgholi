@@ -50,7 +50,7 @@ export const fetchDelivered = createAsyncThunk(
   "orders/fetchDelivered",
   async (id) => {
     return axios
-      .patch(`${BASE_URL}/orders/${id}`, { delivered: "true" })
+      .patch(`${BASE_URL}/orders/${id}`, { delivered: true })
       .then((res) => res.data);
   }
 );
