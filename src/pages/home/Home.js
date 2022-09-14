@@ -7,7 +7,7 @@ const useStyles = makeStyles({
     flexDirection: "column",
     padding: "20px",
     marginTop: "70px",
-    alignItems:"center"
+    alignItems: "center",
   },
   link: {
     marginTop: "20px",
@@ -20,14 +20,12 @@ const useStyles = makeStyles({
   },
 });
 
-
 function Home() {
- 
   const classes = useStyles();
+
   return (
     <div className={classes.category}>
-      <Categories/>
-     
+      <Categories />
     </div>
   );
 }

@@ -1,12 +1,7 @@
 import { useDispatch } from "react-redux";
-import { unwrapResult } from "@reduxjs/toolkit";
-import { toast } from "react-toastify";
-import {
-  deleteProduct,
-  fetchProducts,
-} from "../../redux/features/product/productSlice";
 import { Button, Modal } from "react-bootstrap";
 import { makeStyles } from "@material-ui/core";
+import { removeItem } from "../../redux/features/cart/cartSlice";
 
 const useStyles = makeStyles({
   body: {
@@ -14,25 +9,12 @@ const useStyles = makeStyles({
   },
 });
 
-function ProductDeleteModal({
-  openDelete,
-  handleCloseDelete,
-  itemId,
-  setOpenDelete,
-  currentPage,
-}) {
+function DeleteModal({ openDelete, handleCloseDelete, itemId, setOpenDelete }) {
   const dispatch = useDispatch();
   const classes = useStyles();
 
   const handleDelete = (id) => {
-    dispatch(deleteProduct(id))
-      .then(unwrapResult)
-      .then(() => {
-        toast.error("حذف کالا با موفقیت انجام شد", {
-          position: toast.POSITION.BOTTOM_RIGHT,
-        });
-        dispatch(fetchProducts(currentPage));
-      });
+    dispatch(removeItem(id));
     setOpenDelete(false);
   };
 
@@ -44,7 +26,7 @@ function ProductDeleteModal({
           type="button"
           className="btn-close"
           aria-label="Close"
-          style={{ marginRight: "345px" }}
+          style={{ marginRight: "380px" }}
         ></button>
       </Modal.Header>
       <Modal.Body>
@@ -62,4 +44,4 @@ function ProductDeleteModal({
   );
 }
 
-export default ProductDeleteModal;
+export default DeleteModal;

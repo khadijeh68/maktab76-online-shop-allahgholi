@@ -15,11 +15,11 @@ export const fetchAllProductsRequest = async (currentPage = 1) => {
   }
 };
 
-export const updateProductRequest = async (id, selectedProduct) => {
+export const updateProductRequest = async ({id, newProduct}) => {
   try {
-    const response = await instance.put(
+    const response = await instance.patch(
       `${PRODUCTS_URL}/${id}`,
-      selectedProduct
+      newProduct
     );
     return response.data;
   } catch (error) {

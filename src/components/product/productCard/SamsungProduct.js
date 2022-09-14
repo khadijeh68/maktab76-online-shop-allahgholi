@@ -19,13 +19,13 @@ const useStyles = makeStyles({
     justifyContent: "center",
     padding: "20px",
     fontFamily: "Vazir-Medium",
-    color: "black"
+    color: "black",
+    textAlign:"center"
   },
   title: {
     textDecoration: "none",
     fontFamily: "Vazir-Medium",
     fontSize: "20px",
-
   },
   img: {
     width: "14rem",
@@ -73,7 +73,7 @@ function SamsungProduct() {
                   <Card.Text>{product.weight}</Card.Text>
                   <Card.Text>{product.size}</Card.Text>
                   <Card.Text>{digitsEnToFa(product.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, "،"))} تومان </Card.Text>
-                  <Button variant="primary">افزودن به سبد خرید</Button>
+                  <Button  variant="outline-primary" size="sm">توضیحات بیشتر...</Button>
                 </Card.Body>
               </Card>
             </div>

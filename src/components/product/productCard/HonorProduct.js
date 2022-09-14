@@ -9,6 +9,7 @@ import {
   getList,
 } from "../../../redux/features/fiestPage/firstPage";
 import { digitsEnToFa } from "@persian-tools/persian-tools";
+
 const useStyles = makeStyles({
   page: {
     display: "inline-flex",
@@ -16,7 +17,7 @@ const useStyles = makeStyles({
     flexWrap: "wrap",
     flexDirection: "row",
     justifyContent: "center",
-    // margin: "20px",
+    textAlign:"center",
     padding: "20px",
     fontFamily: "Vazir-Medium",
     color: "black"
@@ -33,11 +34,7 @@ const useStyles = makeStyles({
     padding: "10px",
     backgroundColor: "#ffffff",
     boxShadow: "0 0 6px rgb(0 0 0 / 20%)",
-  },
-  // btn:{
-  //   background: "#C14795",
-  //   border:  "#C14795"
-  // }
+  }
 });
 
 function HonorProduct() {
@@ -80,7 +77,7 @@ function HonorProduct() {
                   <Card.Text>{product.weight}</Card.Text>
                   <Card.Text>{product.size}</Card.Text>
                   <Card.Text>{digitsEnToFa(product.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, "،"))} تومان </Card.Text>
-                  <Button className={classes.btn}>افزودن به سبد خرید</Button>
+                  <Button  variant="outline-primary" size="sm">توضیحات بیشتر...</Button>
                 </Card.Body>
               </Card>
             </div>

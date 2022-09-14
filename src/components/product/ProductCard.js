@@ -1,9 +1,8 @@
 import { Button, Card } from "react-bootstrap";
 import { makeStyles } from "@material-ui/core";
 import { Link } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { BASE_URL } from "../../config/api";
-import { addToCart } from "../../redux/features/cart/cartSlice";
 import { digitsEnToFa } from "@persian-tools/persian-tools";
 
 const useStyles = makeStyles({

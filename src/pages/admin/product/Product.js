@@ -1,10 +1,7 @@
 import { useEffect, useState } from "react";
 import { Button, Table } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  deleteProduct,
-  fetchProducts,
-} from "../../../redux/features/product/productSlice";
+import { fetchProducts } from "../../../redux/features/product/productSlice";
 import "react-toastify/dist/ReactToastify.css";
 import { Pagination } from "@mui/material";
 import { makeStyles } from "@material-ui/core";
@@ -16,7 +13,7 @@ import ProductDeleteModal from "../../../components/product/ProductDeleteModal";
 
 const useStyles = makeStyles({
   page: {
-    direction: "rtl",
+    direction: "ltr",
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
@@ -31,19 +28,17 @@ function Product() {
   const productsList = useSelector((state) => state.products.productsList);
   const categoryList = useSelector((state) => state.categories.categoryList);
   const total = useSelector((state) => state.products.total);
-  // console.log(typeof(total))
   const [showEdit, setShowEdit] = useState(false);
   const [currentProduct, setCurrentProduct] = useState({});
+  const [currentPage, setCurrentPage] = useState(1);
+  const limit = 5;
+  const count = Math.ceil(total / limit);
+
   const handleOpenEdit = (id) => {
     setShowEdit(true);
     setCurrentProduct(productsList.filter((product) => product.id === id)[0]);
   };
 
-  const [currentPage, setCurrentPage] = useState(1);
-  const limit = 5;
-  const count = Math.ceil(total / limit);
-
-  //tosify delete
   const [openDelete, setOpenDelete] = useState(false);
   const handleOpenDelete = () => setOpenDelete(true);
   const handleCloseDelete = () => setOpenDelete(false);
@@ -59,7 +54,6 @@ function Product() {
         <h6>مدیریت کالا ها</h6>
       </div>
       <ProductAddModal categoryList={categoryList} />
-
       <Table striped bordered hover className="w-75 text-center order_table ">
         <thead>
           <tr>
@@ -77,32 +71,32 @@ function Product() {
                   <td>
                     {
                       <img
-                        src={`${BASE_URL}/files/${item.image}`}
+                        src={`${BASE_URL}/files/${item?.image ?? "-"}`}
                         alt="mobile"
                       />
                     }
                   </td>
-                  <td>{item?.name ?? "-"}</td>
-                  <td>{item.category}
-                    {/* {item?.category
-                      ? categoryList.find(
-                          (category) => category.id === item?.category
-                        )?.name
-                      : "-"} */}
-
+                  <td style={{ verticalAlign: "middle" }}>
+                    {item?.name ?? "-"}
                   </td>
-                  <td>
+                  <td style={{ verticalAlign: "middle" }}>
+                    {item?.category ?? "-"}
+                  </td>
+                  <td style={{ verticalAlign: "middle" }}>
                     <Button
                       variant="warning"
-                      className="mx-1"
+                      className="m-2"
                       onClick={() => handleOpenEdit(item.id)}
+                      size="sm"
                     >
                       ویرایش
                     </Button>
+
                     <Button
                       variant="danger"
-                      // onClick={() => handleDelete(item.id)}
                       onClick={handleOpenDelete}
+                      size="sm"
+                      className="m-2"
                     >
                       حذف
                     </Button>
@@ -111,6 +105,7 @@ function Product() {
                       handleCloseDelete={handleCloseDelete}
                       itemId={item.id}
                       setOpenDelete={setOpenDelete}
+                      currentPage={currentPage}
                     />
                   </td>
                 </tr>
@@ -122,6 +117,7 @@ function Product() {
         showEdit={showEdit}
         item={currentProduct}
         setShowEdit={setShowEdit}
+        currentPage={currentPage}
       />
       <Pagination
         className={classes.page}

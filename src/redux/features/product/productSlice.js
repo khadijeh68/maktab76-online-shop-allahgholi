@@ -1,5 +1,4 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-
 import {
   createProductRequest,
   deleteProductRequest,
@@ -9,8 +8,8 @@ import {
 
 const initialState = {
   productsList: [],
-  total:0,
-  products:[],       
+  total: 0,
+  products: [],
   loading: false,
   error: "",
 };
@@ -25,22 +24,14 @@ export const createProduct = createAsyncThunk(
   (newProduct) => createProductRequest(newProduct)
 );
 
-
-export const deleteProduct = createAsyncThunk(
-  "products/deleteProduct",
-   (id) =>   deleteProductRequest(id)
+export const deleteProduct = createAsyncThunk("products/deleteProduct", (id) =>
+  deleteProductRequest(id)
 );
 
 export const updateProduct = createAsyncThunk(
   "products/updateProduct",
-  ({id, product}) => updateProductRequest(id, product)
+  ({ id, newProduct }) => updateProductRequest({id, newProduct})
 );
-
-// export const fetchData = createAsyncThunk(
-//   "products/fetchData",
-//   (id) => fetchDataRequest(id)
-// );
-
 
 const productSlice = createSlice({
   name: "products",
@@ -51,7 +42,12 @@ const productSlice = createSlice({
       return { ...state, loading: true };
     });
     builder.addCase(fetchProducts.fulfilled, (state, action) => {
-      return { ...state, loading: false, productsList: action.payload.data,total:action.payload.total };
+      return {
+        ...state,
+        loading: false,
+        productsList: action.payload.data,
+        total: action.payload.total,
+      };
     });
     builder.addCase(fetchProducts.rejected, (state, action) => {
       return { productsList: [], loading: false, error: action.payload };
@@ -67,7 +63,6 @@ const productSlice = createSlice({
     builder.addCase(createProduct.rejected, (state, action) => {
       return { ...state, loading: false, error: action.payload };
     });
-
 
     //DELETE
     builder.addCase(deleteProduct.pending, (state) => {
@@ -90,19 +85,6 @@ const productSlice = createSlice({
     builder.addCase(updateProduct.rejected, (state, action) => {
       return { productsList: [], loading: false, error: action.payload };
     });
-// ,
-//     [fetchData.pending]: (state) => {
-//       state.loadings = true;
-//     },
-//     [fetchData.fulfilled]: (state, action) => {
-//       state.loadings = false;
-//       state.products = action.payload.data;
-//       state.total = action.payload.total;
-//     },
-//     [fetchData.rejected]: (state) => {
-//       state.loadings = false;
-//       state.error = "wrong... ";
-//     },
   },
 });
 

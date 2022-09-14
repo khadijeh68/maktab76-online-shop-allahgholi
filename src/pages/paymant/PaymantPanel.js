@@ -1,9 +1,7 @@
 import { makeStyles } from "@material-ui/core/styles";
-import { useEffect } from "react";
 import { Button } from "react-bootstrap";
-import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { clearCart } from "../../redux/features/cart/cartSlice";
+
 
 const useStyles = makeStyles({
   title: {
@@ -28,16 +26,12 @@ const useStyles = makeStyles({
 
 function PaymantPanel() {
   const classes = useStyles();
-  const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const navigateSuccessPaymant = () => {
     navigate("/successPaymant");
-    //  localStorage.removeItem("basket")
+     localStorage.removeItem("cartItems")
   };
-  // useEffect(() => {
-  //   dispatch(clearCart())
-  // }, [dispatch]);
 
   const navigateFailPaymant = () => {
     navigate("/failPaymant");

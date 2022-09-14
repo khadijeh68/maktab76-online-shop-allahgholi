@@ -4,7 +4,6 @@ import {
   IS_LOGGGED_IN,
   REFRESH_TOKEN,
 } from "../../../config/constants";
-
 import { loginRequest, refreshTokenRequest } from "../../../api/users";
 
 const initialState = {

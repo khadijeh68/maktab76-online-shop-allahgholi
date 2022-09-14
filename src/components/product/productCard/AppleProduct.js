@@ -9,6 +9,7 @@ import {
   getList,
 } from "../../../redux/features/fiestPage/firstPage";
 import { digitsEnToFa } from "@persian-tools/persian-tools";
+
 const useStyles = makeStyles({
   page: {
     display: "inline-flex",
@@ -18,7 +19,8 @@ const useStyles = makeStyles({
     justifyContent: "center",
     padding: "20px",
     fontFamily: "Vazir-Medium",
-    color: "black"
+    color: "black",
+    textAlign:"center"
   },
   title: {
     textDecoration: "none",
@@ -73,7 +75,7 @@ function AppleProduct() {
                 <Card.Body>
                   <Card.Text>{product.name}</Card.Text>
                   <Card.Text>{digitsEnToFa(product.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, "،"))} تومان </Card.Text>
-                  <Button variant="primary">افزودن به سبد خرید</Button>
+                  <Button  variant="outline-primary" size="sm">توضیحات بیشتر...</Button>
                 </Card.Body>
               </Card>
             </div>
