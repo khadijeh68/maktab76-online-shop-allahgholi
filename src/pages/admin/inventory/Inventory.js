@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { Button, Table } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  fetchInventory,
-} from "../../../redux/features/inventory/inventorySlice";
+import { fetchInventory } from "../../../redux/features/inventory/inventorySlice";
 import { makeStyles } from "@material-ui/core";
 import { Pagination } from "@mui/material";
 import { digitsEnToFa } from "@persian-tools/persian-tools";
+import { EditText } from "react-edit-text";
+import "react-edit-text/dist/index.css";
 
 const useStyles = makeStyles({
   page: {
@@ -31,7 +31,7 @@ function Inventory() {
   const count = Math.ceil(total / limit);
 
   useEffect(() => {
-    dispatch(fetchInventory(currentPage))
+    dispatch(fetchInventory(currentPage));
   }, [currentPage, dispatch]);
 
   return (
@@ -39,7 +39,7 @@ function Inventory() {
       <div className="d-flex flex-row justify-content-between mx-3">
         <h6>مدیریت موجودی و قیمت ها</h6>
         <div>
-          <Button variant="primary" type="submit" disabled>
+          <Button variant="primary" type="submit">
             ذخیره
           </Button>
         </div>
@@ -57,10 +57,11 @@ function Inventory() {
             inventoriesList.map((item) => {
               return (
                 <tr key={item.id}>
-                  <td>{item.name}</td>
-                  <td>
-                    <input
-                      name="price"
+                  <td style={{ verticalAlign: "middle", maxWidth: "100px" }}>
+                    {item.name}
+                  </td>
+                  <td style={{ maxWidth: "70px" }}>
+                    <EditText
                       value={digitsEnToFa(
                         item.price
                           .toString()
@@ -68,8 +69,8 @@ function Inventory() {
                       )}
                     />
                   </td>
-                  <td>
-                    <input
+                  <td style={{ maxWidth: "50px" }}>
+                    <EditText
                       name="quantity"
                       value={digitsEnToFa(
                         item.quantity
