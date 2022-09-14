@@ -2,10 +2,7 @@ import { Pagination } from "@mui/material";
 import { useEffect, useState } from "react";
 import { Button, Table } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  fetchDelivered,
-  fetchOrders,
-} from "../../../redux/features/orders/ordersSlice";
+import { fetchOrders } from "../../../redux/features/orders/ordersSlice";
 import { makeStyles } from "@material-ui/core";
 import { digitsEnToFa } from "@persian-tools/persian-tools";
 import OrdersDisplayModal from "../../../components/orders/OrdersDisplayModal";
@@ -23,9 +20,7 @@ const useStyles = makeStyles({
 
 function Orders() {
   const classes = useStyles();
-  const [show, setShow] = useState(false);
-  const handleShow = () => setShow(true);
-  const handleClose = () => setShow(false);
+
   const dispatch = useDispatch();
   const ordersList = useSelector((state) => state.orders.ordersList);
   const total = useSelector((state) => state.orders.total);
@@ -100,15 +95,7 @@ function Orders() {
                     {item.delivered === true ? "تحویل شد" : "در حال انتظار"}
                   </td>
                   <td>
-                    <Button variant="warning" onClick={handleShow} size="sm">
-                      بررسی سفارش
-                    </Button>
-                  </td>
-                  <td>
-                    <OrdersDisplayModal
-                      item={item}
-                      show={show}
-                      handleClose={handleClose}
+                    <OrdersDisplayModal item={item}
                     />
                   </td>
                 </tr>

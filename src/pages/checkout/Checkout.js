@@ -39,7 +39,7 @@ const SignupSchema = Yup.object().shape({
     .min(2, "تعداد کاراکتر کمتر از حد مجاز است")
     .max(50, "تعداد کاراکتر بیشتر از حد مجاز است")
     .required("نام اجباری است"),
-  lastName: Yup.string()
+  lastname: Yup.string()
     .min(2, "تعداد کاراکتر کمتر از حد مجاز است")
     .max(50, "تعداد کاراکتر بیشتر از حد مجاز است")
     .required("نام خانوادگی اجباری است"),
@@ -60,7 +60,7 @@ function Checkout() {
     dispatch(getTotals());
     const userInfo = {
       username: data.username,
-      lastName: data.lastName,
+      lastname: data.lastname,
       address: data.address,
       tel: data.tel,
       expectAt: Date.now(data.expectAt),
@@ -78,7 +78,7 @@ function Checkout() {
         <Formik
           initialValues={{
             username: "",
-            lastName: "",
+            lastname: "",
             address: "",
             tel: "",
             expectAt: "",
@@ -115,14 +115,14 @@ function Checkout() {
                   <label className="mt-3">نام خانوادگی:</label>
                 </div>
                 <Field
-                  name="lastName"
+                  name="lastname"
                   type="text"
                   className={classes.input}
-                  value={values.lastName}
+                  value={values.lastname}
                   onChange={handleChange}
                 />
-                {errors.lastName && touched.lastName ? (
-                  <div className="text-danger">{errors.lastName}</div>
+                {errors.lastname && touched.lastname ? (
+                  <div className="text-danger">{errors.lastname}</div>
                 ) : null}
               </div>
               <div>

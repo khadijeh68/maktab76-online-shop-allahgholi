@@ -1,17 +1,15 @@
-import DatePicker from "react-multi-date-picker";
 import Modal from "react-bootstrap/Modal";
-import { useState } from "react";
 import "../../index.css";
-import persian from "react-date-object/calendars/persian";
-import persian_fa from "react-date-object/locales/persian_fa";
-import { Button, Form, Table } from "react-bootstrap";
+import { Button, Table } from "react-bootstrap";
 import { makeStyles } from "@material-ui/core";
-import { digitsEnToFa } from "@persian-tools/persian-tools";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import {
   fetchDelivered,
   fetchOrders,
 } from "../../redux/features/orders/ordersSlice";
+import { useState } from "react";
+import { digitsEnToFa } from "@persian-tools/persian-tools";
+
 
 const useStyles = makeStyles({
   body: {
@@ -19,10 +17,12 @@ const useStyles = makeStyles({
   },
 });
 
-function OrdersDisplayModal({ item, show, handleClose }) {
+function OrdersDisplayModal({ item }) {
   const dispatch = useDispatch();
   const classes = useStyles();
-  console.log(item);
+  const [show, setShow] = useState(false);
+  const handleShow = () => setShow(true);
+  const handleClose = () => setShow(false);
   const handleDeliverd = (id) => {
     dispatch(fetchDelivered(id));
     dispatch(fetchOrders());
@@ -30,6 +30,9 @@ function OrdersDisplayModal({ item, show, handleClose }) {
 
   return (
     <>
+      <Button variant="warning" onClick={handleShow} size="sm">
+        بررسی سفارش
+      </Button>
       <Modal show={show} className={classes.body}>
         <Modal.Header onClick={handleClose}>
           <Modal.Title>نمایش سفارش</Modal.Title>
@@ -41,44 +44,22 @@ function OrdersDisplayModal({ item, show, handleClose }) {
           ></button>
         </Modal.Header>
         <Modal.Body>
-          <Form>
-            <Form.Group className="mt-2">
-              <Form.Label> نام مشتری:</Form.Label>
-              <div>
-              {item.username}
-              </div>
-              
-            </Form.Group>
-            <Form.Group className="mt-2">
-              <Form.Label>آدرس :</Form.Label>
-              <Form.Control type="address" defaultvalue={item.address} />
-            </Form.Group>
-            <Form.Group className="mt-2">
-              <Form.Label>تلفن :</Form.Label>
-              <Form.Control type="tel" defaultvalue={item.tel} />
-            </Form.Group>
-            <Form.Group className="mt-2">
-              <Form.Label>زمان تحویل :</Form.Label>
-              <div style={{ direction: "rtl" }}>
-                <DatePicker
-                  calendar={persian}
-                  locale={persian_fa}
-                  calendarPosition="bottom-right"
-                  value={new Date(item.expectAt).toLocaleDateString("fa-IR")}
-                />
-              </div>
-            </Form.Group>
-            <Form.Group className="mt-2">
-              <Form.Label>زمان سفارش :</Form.Label>
-              <div style={{ direction: "rtl" }}>
-                <DatePicker
-                  calendar={persian}
-                  locale={persian_fa}
-                  calendarPosition="bottom-right"
-                  value={new Date(item.createdAt).toLocaleDateString("fa-IR")}
-                />
-              </div>
-            </Form.Group>
+          <div>
+            <div>
+              <p>
+                نام مشتری: {item.username} {item.lastname}
+              </p>
+              <p>آدرس : {item.address}</p>
+              <p>تلفن : {item.tel}</p>
+              <p>
+                زمان تحویل :
+                {new Date(item.expectAt).toLocaleDateString("fa-IR")}
+              </p>
+              <p>
+                زمان سفارش :
+                {new Date(item.createdAt).toLocaleDateString("fa-IR")}
+              </p>
+            </div>
 
             <Table
               striped
@@ -101,7 +82,7 @@ function OrdersDisplayModal({ item, show, handleClose }) {
                       .toString()
                       .replace(/\B(?=(\d{3})+(?!\d))/g, "،")}
                   </td>
-                  <td>{item.products[0].count}</td>
+                  <td>{digitsEnToFa(item.products[0].count)}</td>
                 </tr>
               </tbody>
             </Table>
@@ -115,11 +96,11 @@ function OrdersDisplayModal({ item, show, handleClose }) {
               </button>
             ) : (
               <p>
-                زمان تحویل :{" "}
+                زمان تحویل :
                 {new Date(item.expectAt).toLocaleDateString("fa-IR")}
               </p>
             )}
-          </Form>
+          </div>
         </Modal.Body>
       </Modal>
     </>
