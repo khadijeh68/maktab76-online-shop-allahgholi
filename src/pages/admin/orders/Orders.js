@@ -1,17 +1,15 @@
 import { Pagination } from "@mui/material";
 import { useEffect, useState } from "react";
-import { Button, Table } from "react-bootstrap";
+import { Table } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  fetchOrders,
-} from "../../../redux/features/orders/ordersSlice";
+import { fetchOrders } from "../../../redux/features/orders/ordersSlice";
 import { makeStyles } from "@material-ui/core";
 import { digitsEnToFa } from "@persian-tools/persian-tools";
 import OrdersDisplayModal from "../../../components/orders/OrdersDisplayModal";
 
 const useStyles = makeStyles({
   page: {
-    direction: "rtl",
+    direction: "ltr",
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
@@ -28,14 +26,13 @@ function Orders() {
   const total = useSelector((state) => state.orders.total);
   const [currentPage, setCurrentPage] = useState(1);
   const [delivered, setDelivered] = useState(true);
-  
   const limit = 5;
   const count = Math.ceil(total / limit);
-  // console.log(typeof(total))
- 
+
   useEffect(() => {
     dispatch(fetchOrders({ delivered, currentPage }));
   }, [delivered, currentPage, dispatch]);
+
 
   return (
     <div className="orders">
@@ -65,6 +62,7 @@ function Orders() {
             <th>نام کاربر</th>
             <th>مجموع مبلغ به تومان</th>
             <th>زمان ثبت سفارش</th>
+            <th>وضعیت سفارش</th>
             <th></th>
           </tr>
         </thead>
@@ -83,19 +81,23 @@ function Orders() {
                         .replace(/\B(?=(\d{3})+(?!\d))/g, "،")
                     )}
                   </td>
+                  <td>{new Date(item.expectAt).toLocaleDateString("fa-IR")}</td>
                   <td>
-                    {new Date(item.createdAt).toLocaleDateString("fa-IR")}
+                    {item.delivered === true ? "تحویل شد" : "در حال انتظار"}
                   </td>
                   <td>
-                  <OrdersDisplayModal  item={item} />
+                    <OrdersDisplayModal item={item}
+                    />
                   </td>
                 </tr>
               );
             })}
         </tbody>
       </Table>
+
       <Pagination
         className={classes.page}
+        // sx={{ direction:"ltr" }}
         count={count}
         variant="outlined"
         color="secondary"

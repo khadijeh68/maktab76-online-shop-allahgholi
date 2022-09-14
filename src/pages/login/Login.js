@@ -22,23 +22,24 @@ function Login() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const dispatch = useDispatch();
-  const { error, isLoggedIn } = useSelector((state) => state.users);
+  const { error } = useSelector((state) => state.users);
   const navigate = useNavigate();
+  
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(login({ username, password }));
-    if (isLoggedIn) {
-      console.log(isLoggedIn)
-      navigate("/admin/orders");
-    } else navigate("/login");
+    dispatch(login({ username, password })).unwrap().then(() => navigate("/admin/orders"))
   };
+
 
   return (
     <div className={classes.form}>
       <h5 className="mt-4">ورود به پنل مدیریت فروشگاه</h5>
+     
       <Form className="form_data" onSubmit={handleSubmit}>
-        {error && <h6 className="text-white">نام کاربری و رمز عبور صحیح نمی باشد</h6>}
+        {error && (
+          <h6 className="text-white">نام کاربری و رمز عبور صحیح نمی باشد</h6>
+        )}
         <Form.Group className="mb-3" controlId="username">
           <Form.Label className="mt-2 text-white">نام کاربری :</Form.Label>
           <Form.Control
@@ -62,7 +63,7 @@ function Login() {
           />
         </Form.Group>
 
-        <Button type="submit" className="mt-3" >
+        <Button type="submit" className="mt-3">
           ورود
         </Button>
         <Link to="/" className="mt-3 text-decoration-none text-white ">

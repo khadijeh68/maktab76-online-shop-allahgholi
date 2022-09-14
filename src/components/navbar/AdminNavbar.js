@@ -1,5 +1,6 @@
 import { makeStyles } from "@material-ui/core/styles";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
+import { IS_LOGGGED_IN } from "../../config/constants";
 import "../../index.css";
 
 const useStyles = makeStyles({
@@ -24,12 +25,14 @@ const useStyles = makeStyles({
 });
 
 const AdminNavbar = () => {
+  const classes = useStyles();
+
   const navLinkStyles = ({ isActive }) => {
     return {
       color: isActive ? "#C14795" : "black",
     };
   };
-  const classes = useStyles();
+
 
   return (
     <div className={classes.nav}>
@@ -61,6 +64,7 @@ const AdminNavbar = () => {
         <NavLink to="/" className={classes.nav_link} style={navLinkStyles}>
           <span>بازگشت به سایت</span>
         </NavLink>
+      
       </div>
     </div>
   );

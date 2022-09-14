@@ -1,6 +1,7 @@
 import { makeStyles } from "@material-ui/core";
 import { NavLink } from "react-router-dom";
 import ShoppingCartSharpIcon from "@mui/icons-material/ShoppingCartSharp";
+import { useSelector } from "react-redux";
 
 const useStyles = makeStyles({
   nav: {
@@ -39,7 +40,13 @@ const useStyles = makeStyles({
   h4: {
     marginTop: "100px",
     fontFamily: "Vazir-Medium",
-    margin: "10px",
+    margin: "20px",
+  },
+  body: {
+    display: "flex",
+    justifyContent: "center",
+    flexDirection: "row",
+    alignItems: "center",
   },
   container: {
     display: "flex",
@@ -49,21 +56,28 @@ const useStyles = makeStyles({
     width: "50px",
     height: "52px",
   },
+  fail: {
+    width: "100px",
+    height: "90px",
+  },
 });
 
 function FailPaymant() {
+  const classes = useStyles();
+  const { cartTotalQuantity } = useSelector((state) => state.cart);
+
   const navLinkStyles = ({ isActive }) => {
     return {
       color: isActive ? "#C14795" : "black",
     };
   };
-  const classes = useStyles();
+
   return (
     <div className={classes.container}>
       <div className={classes.nav}>
         <div className={classes.rightNav}>
           <NavLink to="/" className={classes.span} style={navLinkStyles}>
-          <img
+            <img
               className={classes.img}
               src={`../../../image/logo.png`}
               alt="logo"
@@ -72,29 +86,21 @@ function FailPaymant() {
               فروشگاه آنلاین موبایل و لوازم جانبی
             </span>
           </NavLink>
-{/* 
-          <NavLink to="/" className={classes.span}>
-            <span>صفحه اصلی </span>
-          </NavLink>
-
-          <NavLink to="/categories" className={classes.span}>
-            <span>دسته بندی کالاها </span>
-          </NavLink>
-
-          <NavLink to="/products" className={classes.span}>
-            <span>کالاها</span>
-          </NavLink> */}
         </div>
 
-        <div className={classes.leftNav} >
+        <div className={classes.leftNav}>
           <NavLink to="/login" className={classes.span} style={navLinkStyles}>
             <span>مدیریت </span>
           </NavLink>
 
-          <NavLink to="/shoppingCart" className={classes.span} style={navLinkStyles}>
+          <NavLink
+            to="/shoppingCart"
+            className={classes.span}
+            style={navLinkStyles}
+          >
             <div className={classes.basket}>
               <ShoppingCartSharpIcon />
-              <span>سبد خرید </span>
+              <span className="bag-quantity">{cartTotalQuantity}</span>
             </div>
           </NavLink>
         </div>
@@ -102,7 +108,17 @@ function FailPaymant() {
 
       <div className={classes.h4}>
         <h4>نتیجه پرداخت</h4>
-        <p>پرداخت موفقیت آمیز نبود </p>
+        <div className={classes.body}>
+          <img
+            className={classes.fail}
+            src={`../../../image/fail.png`}
+            alt="fail"
+          />
+          <p className="mt-3">
+            پرداخت موفقیت آمیز نبود، سفارش شما <br />
+            در انتظار پرداخت است
+          </p>
+        </div>
       </div>
     </div>
   );

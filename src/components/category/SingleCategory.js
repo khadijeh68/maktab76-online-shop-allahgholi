@@ -2,10 +2,13 @@ import { useEffect, useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useParams } from "react-router-dom";
-import { getCategory, getList } from "../../redux/features/fiestPage/firstPage";
+import {
+  fetchCategory,
+} from "../../redux/features/category/categorySlice";
 import { Button, Card } from "react-bootstrap";
 import { BASE_URL } from "../../config/api";
 import { digitsEnToFa } from "@persian-tools/persian-tools";
+import { getLists } from "../../redux/features/fiestPage/firstPage";
 
 const useStyles = makeStyles({
   container: {
@@ -13,11 +16,12 @@ const useStyles = makeStyles({
     display: "flex",
     flexDirection: "row",
     marginTop: "20px",
+   
   },
   sidebar: {
     width: "200px",
-    height: "1210px",
-    marginTop: "30px",
+    height: "1100px",
+    marginTop: "40px",
     padding: "20px",
     backgroundColor: "#ffffff",
     boxShadow: "0 0 6px rgb(0 0 0 / 30%)",
@@ -29,7 +33,6 @@ const useStyles = makeStyles({
   },
   body: {
     margin: "50px",
-    
   },
   page: {
     display: "inline-flex",
@@ -39,7 +42,7 @@ const useStyles = makeStyles({
     justifyContent: "center",
     padding: "20px",
     fontFamily: "Vazir-Medium",
-    color: "black"
+    color: "black",
   },
   img: {
     width: "14rem",
@@ -59,8 +62,8 @@ const SingleCategory = () => {
   const { categoryId } = useParams();
 
   useEffect(() => {
-    dispatch(getCategory());
-    dispatch(getList(categoryId))
+    dispatch(fetchCategory());
+    dispatch(getLists(categoryId))
       .unwrap()
       .then((res) => setCategory(res));
   }, [dispatch, categoryId]);
@@ -68,15 +71,15 @@ const SingleCategory = () => {
   return (
     <div className={classes.container}>
       <div className={classes.sidebar}>
-        {categoryList.map((category) => {
+        {categoryList.map((item) => {
           return (
-            <div key={category.id}>
+            <div key={item.id}>
               <Link
-                to={"/categories/" + category.name}
-                key={category.id}
+                to={"/categories/" + item.name}
+                key={item.id}
                 className="text-decoration-none mt-5"
               >
-                {category.name}
+               {item.name}
               </Link>
             </div>
           );
@@ -85,7 +88,11 @@ const SingleCategory = () => {
       <div className={classes.body}>
         {category.map((item) => {
           return (
-            <Link to={`/products/${item.id}`} className="text-decoration-none">
+            <Link
+              to={`/products/${item.id}`}
+              className="text-decoration-none"
+              key={item.id}
+            >
               <div className={classes.page}>
                 <Card className={classes.img}>
                   <Card.Img
@@ -95,12 +102,15 @@ const SingleCategory = () => {
                     alt="mobile"
                   />
                   <Card.Body>
-                    <Card.Text>{item.name}</Card.Text>
-                    <Card.Text>{item.os}</Card.Text>
-                    <Card.Text>{item.weight}</Card.Text>
-                    <Card.Text>{item.size}</Card.Text>
-                    <Card.Text>{digitsEnToFa(item.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, "،"))} تومان </Card.Text>
-                    <Button variant="primary">افزودن به سبد خرید</Button>
+                    <Card.Text style={{textAlign: "center"}}>{item.name}</Card.Text>
+                    <Card.Text style={{textAlign: "center"}}>
+                      {digitsEnToFa(
+                        item.price
+                          .toString()
+                          .replace(/\B(?=(\d{3})+(?!\d))/g, "،")
+                      )} تومان 
+                    </Card.Text>
+                    <Button style={{marginRight: "22px"}} variant="outline-primary" size="sm">توضیحات بیشتر...  </Button>
                   </Card.Body>
                 </Card>
               </div>

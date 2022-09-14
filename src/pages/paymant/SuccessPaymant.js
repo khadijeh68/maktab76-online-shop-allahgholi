@@ -1,8 +1,12 @@
 import { makeStyles } from "@material-ui/core";
 import { NavLink } from "react-router-dom";
 import "../../index.css";
-import { Button } from "react-bootstrap";
 import { useDispatch } from "react-redux";
+import { useEffect } from "react";
+import {
+  createOrder,
+} from "../../redux/features/orders/ordersSlice";
+
 
 const useStyles = makeStyles({
   nav: {
@@ -41,7 +45,13 @@ const useStyles = makeStyles({
   h4: {
     marginTop: "100px",
     fontFamily: "Vazir-Medium",
-    margin: "10px",
+    margin: "20px",
+  },
+  body: {
+    display: "flex",
+    justifyContent: "center",
+    flexDirection: "row",
+    alignItems: "center",
   },
   container: {
     display: "flex",
@@ -51,20 +61,29 @@ const useStyles = makeStyles({
     width: "50px",
     height: "52px",
   },
+  success: {
+    width: "100px",
+    height: "90px",
+  },
 });
 
 function SuccessPaymant() {
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
+
   const navLinkStyles = ({ isActive }) => {
     return {
       color: isActive ? "#C14795" : "black",
     };
   };
   const classes = useStyles();
-const clearCart = () => {
-  localStorage.removeItem("basket")
-}
-  
+
+  useEffect(() => {
+    const data = JSON.parse(localStorage.getItem("cartItems"));
+    const newOrder = JSON.parse(localStorage.getItem("userInfo"));
+    newOrder.products = data;
+    dispatch(createOrder(newOrder));
+  }, [dispatch]);
+
   return (
     <div className={classes.container}>
       <div className={classes.nav}>
@@ -90,8 +109,19 @@ const clearCart = () => {
 
       <div className={classes.h4}>
         <h4>نتیجه پرداخت </h4>
-        <p>پرداخت با موفقیت انجام شد</p>
-        <Button onClick={clearCart}>پاک کردن سبد خرید</Button>
+        <div className={classes.body}>
+          <img
+            className={classes.success}
+            src={`../../../image/success.png`}
+            alt="success"
+          />
+          <div>
+            <p className="mt-3">
+              با تشکر از پرداخت شما، سفارش شما ثبت شده و <br /> جهت هماهنگی
+              ارسال با شما تماس گرفته خواهد شد
+            </p>
+          </div>
+        </div>
       </div>
     </div>
   );
