@@ -19,7 +19,7 @@ function ProductDeleteModal({
   handleCloseDelete,
   itemId,
   setOpenDelete,
-  currentPage
+  currentPage,
 }) {
   const dispatch = useDispatch();
   const classes = useStyles();
@@ -37,9 +37,15 @@ function ProductDeleteModal({
   };
 
   return (
-    <Modal show={openDelete} animation={true}  className={classes.body}>
-      <Modal.Header closeButton onClick={handleCloseDelete}>
+    <Modal show={openDelete} animation={true} className={classes.body}>
+      <Modal.Header onClick={handleCloseDelete}>
         <Modal.Title>حذف کالا</Modal.Title>
+        <button
+          type="button"
+          className="btn-close"
+          aria-label="Close"
+          style={{ marginRight: "345px" }}
+        ></button>
       </Modal.Header>
       <Modal.Body>
         <p>کالای مورد نظر از لیست کالا حذف شود؟</p>
