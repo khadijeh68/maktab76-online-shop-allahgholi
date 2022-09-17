@@ -80,7 +80,11 @@ function Product() {
                     {item?.name ?? "-"}
                   </td>
                   <td style={{ verticalAlign: "middle" }}>
-                    {item?.category ?? "-"}
+                  {item?.category
+                      ? categoryList.find(
+                          (category) => category.id === item?.category
+                        )?.name
+                      : "-"}
                   </td>
                   <td style={{ verticalAlign: "middle" }}>
                     <Button

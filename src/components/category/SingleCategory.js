@@ -75,7 +75,7 @@ const SingleCategory = () => {
           return (
             <div key={item.id}>
               <Link
-                to={"/categories/" + item.name}
+                to={`/categories/${item.id}`}
                 key={item.id}
                 className="text-decoration-none mt-5"
               >

@@ -1,6 +1,6 @@
 import { PRODUCTS_URL } from "../config/api";
 import instance from "./http";
-
+import axios from "axios"
 export const fetchAllProductsRequest = async (currentPage = 1) => {
   try {
     const response = await instance.get(
@@ -44,3 +44,14 @@ export const deleteProductRequest = async (id) => {
     return Promise.reject(error);
   }
 };
+
+
+export const getfirstPage = async () => {
+  try {
+    const response = await axios.get(`${PRODUCTS_URL}`);
+    return response.data;
+  } catch (error) {
+    return Promise.reject(error);
+
+  }
+}
