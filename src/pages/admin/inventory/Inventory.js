@@ -1,16 +1,13 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Button, Table } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
-
 import { makeStyles } from "@material-ui/core";
 import { Pagination } from "@mui/material";
 import { digitsEnToFa } from "@persian-tools/persian-tools";
-import { EditText } from "react-edit-text";
-import "react-edit-text/dist/index.css";
 import { fetchProducts } from "../../../redux/features/product/productSlice";
-import { useParams } from "react-router-dom";
-import axios from "axios";
 import instance from "../../../api/http";
+import { unwrapResult } from "@reduxjs/toolkit";
+import { toast } from "react-toastify";
 
 const useStyles = makeStyles({
   page: {
@@ -35,11 +32,11 @@ function Inventory() {
   const [newPrice, setNewPrice] = useState([]);
   const [editPrice, setEditPrice] = useState(false);
   const [editQuantity, setEditQuantity] = useState(false);
-  const [displayButton, setDisplayButton] = useState('false')
+  const [displayButton, setDisplayButton] = useState("false");
 
   // price
   const handleChange = (e, id) => {
-    setDisplayButton('true')
+    setDisplayButton("true");
     const idx = state.findIndex((item) => item.id === id);
     const newPost = [...state];
     newPost[idx] = { ...newPost[idx], price: e.target.value };
@@ -61,7 +58,7 @@ function Inventory() {
 
   // // Stock
   const handleChangeStock = (e, id) => {
-    setDisplayButton('true')
+    setDisplayButton("true");
     const idx = state.findIndex((item) => item.id === id);
     const newPost = [...state];
     newPost[idx] = { ...newPost[idx], quantity: e.target.value };
@@ -81,25 +78,24 @@ function Inventory() {
     setNewPrice(newStockList);
   };
 
-
-const cancelEdit = () => {
-  document.addEventListener("keydown", (e) => {
-    if (e.key === "Escape") {
-      setDisplayButton('false')
-      setState([]);
-      setEditQuantity(false);
-      setEditPrice(false);  
-    }
-  });
-};
+  const cancelEdit = () => {
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape") {
+        setDisplayButton("false");
+        setState([]);
+        setEditQuantity(false);
+        setEditPrice(false);
+      }
+    });
+  };
 
   useEffect(() => {
     dispatch(fetchProducts(currentPage))
       .unwrap()
       .then((res) => setState(res.data));
-      cancelEdit();
-      setState([]);
-  }, [currentPage, dispatch,displayButton]);
+    cancelEdit();
+    setState([]);
+  }, [currentPage, dispatch, displayButton]);
 
   const saveEdit = (e) => {
     e.preventDefault();
@@ -113,10 +109,16 @@ const cancelEdit = () => {
         instance
           .patch(`http://localhost:3002/products/${element.id}`, entiresData)
           .then(() => {
-            dispatch(fetchProducts(currentPage));
+            dispatch(fetchProducts(currentPage))
+              .then(unwrapResult)
+              .then(() => {
+                toast.success("تغییرات با موفقیت اعمال شد", {
+                  position: toast.POSITION.BOTTOM_RIGHT,
+                });
+              });
             setEditPrice(false);
             setEditQuantity(false);
-            setDisplayButton('false')
+            setDisplayButton("false");
           });
       } catch (error) {
         console.log("error!");
@@ -135,7 +137,7 @@ const cancelEdit = () => {
             onClick={(e) => {
               saveEdit(e);
             }}
-            disabled={displayButton === 'false'}
+            disabled={displayButton === "false"}
           >
             ذخیره
           </Button>
@@ -168,8 +170,11 @@ const cancelEdit = () => {
                     </td>
                   ) : (
                     <td onClick={() => setEditPrice(true)}>
-                      {digitsEnToFa(item.price.toString()
-                          .replace(/\B(?=(\d{3})+(?!\d))/g, "،"))}
+                      {digitsEnToFa(
+                        item.price
+                          .toString()
+                          .replace(/\B(?=(\d{3})+(?!\d))/g, "،")
+                      )}
                     </td>
                   )}
                   {editQuantity ? (
