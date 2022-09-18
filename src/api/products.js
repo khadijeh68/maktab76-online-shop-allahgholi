@@ -46,9 +46,9 @@ export const deleteProductRequest = async (id) => {
 };
 
 
-export const getfirstPage = async () => {
+export const getfirstPage = async (id) => {
   try {
-    const response = await axios.get(`${PRODUCTS_URL}`);
+    const response = await axios.get(`${PRODUCTS_URL}?category=${id}&_page=1&_limit=6`);
     return response.data;
   } catch (error) {
     return Promise.reject(error);
