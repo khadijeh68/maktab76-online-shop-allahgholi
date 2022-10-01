@@ -22,17 +22,25 @@ const useStyles = makeStyles({
     textDecoration: "none",
     color: "black",
   },
+  btn:{
+    border: "none",
+    backgroundColor: "#fff7fd",
+  }
 });
 
 const AdminNavbar = () => {
   const classes = useStyles();
-
+  const navigate = useNavigate();
   const navLinkStyles = ({ isActive }) => {
     return {
       color: isActive ? "#C14795" : "black",
     };
   };
 
+  const login = () => {
+   localStorage.setItem(IS_LOGGGED_IN, false);
+   navigate('/login')
+  };
 
   return (
     <div className={classes.nav}>
@@ -61,10 +69,11 @@ const AdminNavbar = () => {
           <span>سفارش ها</span>
         </NavLink>
 
+        <button onClick={login} className={classes.btn}>خروج </button>
+       
         <NavLink to="/" className={classes.nav_link} style={navLinkStyles}>
           <span>بازگشت به سایت</span>
         </NavLink>
-      
       </div>
     </div>
   );

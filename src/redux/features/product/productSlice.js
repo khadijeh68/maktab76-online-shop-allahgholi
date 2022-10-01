@@ -34,7 +34,7 @@ export const updateProduct = createAsyncThunk(
   ({ id, newProduct }) => updateProductRequest({ id, newProduct })
 );
 
-export const getList = createAsyncThunk("list/getList", () => getfirstPage());
+export const getList = createAsyncThunk("list/getList", getfirstPage);
 
 const productSlice = createSlice({
   name: "products",

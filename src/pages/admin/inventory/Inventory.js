@@ -30,9 +30,10 @@ function Inventory() {
   const count = Math.ceil(total / limit);
   const [state, setState] = useState([]);
   const [newPrice, setNewPrice] = useState([]);
-  const [editPrice, setEditPrice] = useState(false);
-  const [editQuantity, setEditQuantity] = useState(false);
+  const [editPrice, setEditPrice] = useState(null);
+  const [editQuantity, setEditQuantity] = useState(null);
   const [displayButton, setDisplayButton] = useState("false");
+
 
   // price
   const handleChange = (e, id) => {
@@ -116,8 +117,8 @@ function Inventory() {
                   position: toast.POSITION.BOTTOM_RIGHT,
                 });
               });
-            setEditPrice(false);
-            setEditQuantity(false);
+            setEditPrice(null);
+            setEditQuantity(null);
             setDisplayButton("false");
           });
       } catch (error) {
@@ -159,7 +160,7 @@ function Inventory() {
                   <td style={{ verticalAlign: "middle", maxWidth: "100px" }}>
                     {item.name}
                   </td>
-                  {editPrice ? (
+                  {editPrice===item.id ? (
                     <td style={{ maxWidth: "70px" }}>
                       <input
                         defaultValue={item.price}
@@ -169,7 +170,7 @@ function Inventory() {
                       />
                     </td>
                   ) : (
-                    <td onClick={() => setEditPrice(true)}>
+                    <td onClick={() => setEditPrice(item.id)}>
                       {digitsEnToFa(
                         item.price
                           .toString()
@@ -177,7 +178,7 @@ function Inventory() {
                       )}
                     </td>
                   )}
-                  {editQuantity ? (
+                  {editQuantity===item.id ? (
                     <td style={{ maxWidth: "50px" }}>
                       <input
                         name="quantity"
@@ -188,7 +189,7 @@ function Inventory() {
                       />
                     </td>
                   ) : (
-                    <td onClick={() => setEditQuantity(true)}>
+                    <td onClick={() => setEditQuantity(item.id)}>
                       {digitsEnToFa(item.quantity)}
                     </td>
                   )}

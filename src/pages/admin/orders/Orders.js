@@ -81,7 +81,7 @@ function Orders() {
                         .replace(/\B(?=(\d{3})+(?!\d))/g, "،")
                     )}
                   </td>
-                  <td>{new Date(item.expectAt).toLocaleDateString("fa-IR")}</td>
+                  <td>{new Date(item.createdAt).toLocaleDateString("fa-IR")}</td>
                   <td>
                     {item.delivered === true ? "تحویل شد" : "در حال انتظار"}
                   </td>

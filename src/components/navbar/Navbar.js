@@ -49,7 +49,8 @@ const useStyles = makeStyles({
 function Navbar() {
   const classes = useStyles();
   const cartItems = useSelector((state) => state.cart.cartItems);
-
+  const isLoggedIn = useSelector((state) => state.users.isLoggedIn);
+  
   const navLinkStyles = ({ isActive }) => {
     return {
       color: isActive ? "#C14795" : "black",
@@ -73,10 +74,19 @@ function Navbar() {
         </div>
 
         <div className={classes.leftNav}>
-          <NavLink to="/login" className={classes.span} style={navLinkStyles}>
-            <span>مدیریت </span>
-          </NavLink>
-
+          {isLoggedIn ? (
+            <NavLink
+              to="/admin/orders"
+              className={classes.span}
+              style={navLinkStyles}
+            >
+              <span>مدیریت </span>
+            </NavLink>
+          ) : (
+            <NavLink to="/login" className={classes.span} style={navLinkStyles}>
+              <span>مدیریت </span>
+            </NavLink>
+          )}
           <NavLink
             to="/shoppingCart"
             className={classes.span}

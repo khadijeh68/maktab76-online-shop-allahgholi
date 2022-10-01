@@ -1,17 +1,12 @@
 import { useEffect } from "react";
 import { fetchCategory } from "../../redux/features/category/categorySlice";
 import { useDispatch, useSelector } from "react-redux";
-import AppleProduct from "../product/productCard/AppleProduct";
-import SamsungProduct from "../product/productCard/SamsungProduct";
-import XiaomiProduct from "../product/productCard/XiaomiProduct";
-import HuaweiProduct from "../product/productCard/HuaweiProduct";
-import HonorProduct from "../product/productCard/HonorProduct";
 import { makeStyles } from "@material-ui/core/styles";
-import { Link, useParams } from "react-router-dom";
-import { fetchProducts } from "../../redux/features/product/productSlice";
+import { Link } from "react-router-dom";
 import ProductCard from "../product/ProductCard";
-import { getList } from "../../redux/features/fiestPage/firstPage";
-import { useState } from "react";
+import { getList } from "../../redux/features/product/productSlice";
+
+
 
 const useStyles = makeStyles({
   container: {
