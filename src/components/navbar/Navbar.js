@@ -1,56 +1,14 @@
 import { NavLink } from "react-router-dom";
-import { makeStyles } from "@material-ui/core";
 import ShoppingCartSharpIcon from "@mui/icons-material/ShoppingCartSharp";
 import "../../index.css";
 import { useSelector } from "react-redux";
-
-const useStyles = makeStyles({
-  nav: {
-    direction: "rtl",
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "space-between",
-    backgroundColor: "#fff7fd",
-    width: "100vw",
-    height: "60px",
-    boxShadow: "0 0 6px rgb(0 0 0 / 30%)",
-    position: "fixed",
-    zIndex: "100",
-  },
-  span: {
-    textDecoration: "none",
-    margin: "30px",
-    fontFamily: "Vazir-Medium",
-    color: "inherit",
-  },
-
-  basket: {
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  leftNav: {
-    display: "flex",
-    justifyContent: "center",
-    flexDirection: "row",
-  },
-  form: {
-    backgroundColor: "whitesmoke",
-  },
-  logo: {
-    color: "#C14795",
-  },
-  img: {
-    width: "50px",
-    height: "52px",
-  },
-});
+import style from "./Navbar.module.css";
 
 function Navbar() {
-  const classes = useStyles();
+  // const classes = useStyles();
   const cartItems = useSelector((state) => state.cart.cartItems);
   const isLoggedIn = useSelector((state) => state.users.isLoggedIn);
-  
+
   const navLinkStyles = ({ isActive }) => {
     return {
       color: isActive ? "#C14795" : "black",
@@ -59,40 +17,42 @@ function Navbar() {
 
   return (
     <div>
-      <div className={classes.nav}>
-        <div className={classes.rightNav}>
-          <NavLink to="/" className={classes.span} style={navLinkStyles}>
-            <span className={classes.logo}>
+      <div className={style.nav}>
+        <div>
+          <NavLink to="/" className={style.span} style={navLinkStyles}>
+            <span className={style.logo}>
               <img
-                className={classes.img}
+                className={style.img}
                 src={`../../../image/logo.png`}
                 alt="logo"
               />
-              فروشگاه آنلاین موبایل و لوازم جانبی
+              <span className={style.name}>
+                فروشگاه آنلاین موبایل و لوازم جانبی
+              </span>
             </span>
           </NavLink>
         </div>
 
-        <div className={classes.leftNav}>
+        <div className={style.leftNav}>
           {isLoggedIn ? (
             <NavLink
               to="/admin/orders"
-              className={classes.span}
+              className={style.span}
               style={navLinkStyles}
             >
               <span>مدیریت </span>
             </NavLink>
           ) : (
-            <NavLink to="/login" className={classes.span} style={navLinkStyles}>
+            <NavLink to="/login" className={style.span} style={navLinkStyles}>
               <span>مدیریت </span>
             </NavLink>
           )}
           <NavLink
             to="/shoppingCart"
-            className={classes.span}
+            className={style.span}
             style={navLinkStyles}
           >
-            <div className={classes.basket}>
+            <div className={style.basket}>
               <ShoppingCartSharpIcon />
               <span className="bag-quantity">{cartItems.length}</span>
             </div>

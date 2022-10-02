@@ -60,7 +60,7 @@ a {
   align-items: center;
 }
 .orders {
-  margin-top: 100px;
+  margin-top: 20px;
   display: flex;
   flex-direction: column;
 }
@@ -123,4 +123,12 @@ img {
 .img-product-details{
   width: 200px;
   height: 250px;
+}
+@media screen and (max-width: 800px) {
+  .orders {
+    margin-top: 40px;
+  }
+  .orders span{
+    font-size: 14px;
+  }
 }
