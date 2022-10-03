@@ -1,7 +1,7 @@
 import Modal from "react-bootstrap/Modal";
 import "../../index.css";
 import { Button, Table } from "react-bootstrap";
-import { makeStyles } from "@material-ui/core";
+import style from "./Orders.module.css"
 import { useDispatch } from "react-redux";
 import {
   fetchDelivered,
@@ -10,15 +10,9 @@ import {
 import { useState } from "react";
 import { digitsEnToFa } from "@persian-tools/persian-tools";
 
-const useStyles = makeStyles({
-  body: {
-    fontFamily: "Vazir-Medium",
-  },
-});
 
 function OrdersDisplayModal({ item }) {
   const dispatch = useDispatch();
-  const classes = useStyles();
   const [show, setShow] = useState(false);
   const handleShow = () => setShow(true);
   const handleClose = () => setShow(false);
@@ -33,7 +27,7 @@ function OrdersDisplayModal({ item }) {
       <Button variant="warning" onClick={handleShow} size="sm">
         بررسی سفارش
       </Button>
-      <Modal show={show} className={classes.body}>
+      <Modal show={show} className={style.body}>
         <Modal.Header onClick={handleClose}>
           <Modal.Title>نمایش سفارش</Modal.Title>
           <button

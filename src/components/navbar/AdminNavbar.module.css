@@ -41,7 +41,7 @@
   text-decoration: none;
   font-family: Vazir-Medium;
 }
-@media screen and (max-width: 860px) {
+@media only screen and (max-width: 860px) {
   .inventory,
   .orders,
   .logOut,

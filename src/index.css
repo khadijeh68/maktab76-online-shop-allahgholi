@@ -59,16 +59,7 @@ a {
   justify-content: center;
   align-items: center;
 }
-.orders {
-  margin-top: 20px;
-  display: flex;
-  flex-direction: column;
-}
 
-.order_table {
-  margin-right: 180px;
-  margin-top: 30px;
-}
 .paging {
   justify-content: center;
   align-items: center;
