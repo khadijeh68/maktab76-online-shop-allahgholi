@@ -1,27 +1,15 @@
 import React, { useEffect, useState } from "react";
 import { Button, Table } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
-import { makeStyles } from "@material-ui/core";
 import { Pagination } from "@mui/material";
 import { digitsEnToFa } from "@persian-tools/persian-tools";
 import { fetchProducts } from "../../../redux/features/product/productSlice";
 import instance from "../../../api/http";
 import { unwrapResult } from "@reduxjs/toolkit";
 import { toast } from "react-toastify";
-
-const useStyles = makeStyles({
-  page: {
-    direction: "ltr",
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-    marginTop: "20px",
-    marginBottom: "20px",
-  },
-});
-
+import style from "./Inventory.module.css";
+ 
 function Inventory() {
-  const classes = useStyles();
   const dispatch = useDispatch();
   const total = useSelector((state) => state.products.total);
   const productsList = useSelector((state) => state.products.productsList);
@@ -128,7 +116,7 @@ function Inventory() {
   };
 
   return (
-    <div className="orders">
+    <div className={style.orders}>
       <div className="d-flex flex-row justify-content-between mx-3">
         <h6>مدیریت موجودی و قیمت ها</h6>
         <div>
@@ -144,7 +132,7 @@ function Inventory() {
           </Button>
         </div>
       </div>
-      <Table striped bordered hover className="w-75 text-center order_table">
+      <Table striped bordered hover className={style.table}>
         <thead>
           <tr>
             <th>کالا</th>
@@ -199,7 +187,7 @@ function Inventory() {
         </tbody>
       </Table>
       <Pagination
-        className={classes.page}
+      className={style.page}
         count={count}
         variant="outlined"
         color="secondary"

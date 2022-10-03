@@ -4,26 +4,14 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchProducts } from "../../../redux/features/product/productSlice";
 import "react-toastify/dist/ReactToastify.css";
 import { Pagination } from "@mui/material";
-import { makeStyles } from "@material-ui/core";
 import { fetchCategory } from "../../../redux/features/category/categorySlice";
 import ProductAddModal from "../../../components/product/ProductAddModal";
 import { BASE_URL } from "../../../config/api";
 import ProductEditModal from "../../../components/product/ProductEditModal";
 import ProductDeleteModal from "../../../components/product/ProductDeleteModal";
-
-const useStyles = makeStyles({
-  page: {
-    direction: "ltr",
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-    marginTop: "20px",
-    marginBottom: "20px",
-  },
-});
+import style from "./Product.module.css";
 
 function Product() {
-  const classes = useStyles();
   const dispatch = useDispatch();
   const productsList = useSelector((state) => state.products.productsList);
   const categoryList = useSelector((state) => state.categories.categoryList);
@@ -49,12 +37,12 @@ function Product() {
   }, [currentPage, dispatch]);
 
   return (
-    <div className="orders">
+    <div className={style.orders}>
       <div className="d-flex flex-row justify-content-between mx-3">
         <h6>مدیریت کالا ها</h6>
       </div>
       <ProductAddModal categoryList={categoryList} />
-      <Table striped bordered hover className="w-75 text-center order_table ">
+      <Table striped bordered hover className={style.table}>
         <thead>
           <tr>
             <th>تصویر</th>
@@ -124,7 +112,7 @@ function Product() {
         currentPage={currentPage}
       />
       <Pagination
-        className={classes.page}
+        className={style.page}
         count={count}
         variant="outlined"
         color="secondary"
