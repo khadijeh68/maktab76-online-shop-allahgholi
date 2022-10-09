@@ -3,6 +3,7 @@ import ShoppingCartSharpIcon from "@mui/icons-material/ShoppingCartSharp";
 import "../../index.css";
 import { useSelector } from "react-redux";
 import style from "./Navbar.module.css";
+import SearchPage from "./SearchPage";
 
 function Navbar() {
   // const classes = useStyles();
@@ -32,6 +33,7 @@ function Navbar() {
             </span>
           </NavLink>
         </div>
+        <SearchPage/>
 
         <div className={style.leftNav}>
           {isLoggedIn ? (

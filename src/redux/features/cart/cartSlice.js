@@ -21,16 +21,16 @@ const cartSlice = createSlice({
       const existingIndex = state.cartItems.findIndex(
         (item) => item.id === action.payload.id
       );
-      if (existingIndex >= 0) {
-        state.cartItems[existingIndex] = {
-          ...state.cartItems[existingIndex],
+        if (existingIndex >= 0) {
+          state.cartItems[existingIndex] = {
+            ...state.cartItems[existingIndex],
 
-          cartQuantity: state.cartItems[existingIndex].cartQuantity + 1,
-          count: state.cartItems[existingIndex].cartQuantity + 1,
-        };
-        toast.success("به تعداد کالای مورد نظر اضافه شد", {
-          position: "bottom-right",
-        });
+            cartQuantity: state.cartItems[existingIndex].cartQuantity + 1,
+            count: state.cartItems[existingIndex].cartQuantity + 1,
+          };
+          toast.success("به تعداد کالای مورد نظر اضافه شد", {
+            position: "bottom-right",
+          });
       } else {
         let tempProductItem = {
           ...action.payload,
