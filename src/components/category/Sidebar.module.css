@@ -1,0 +1,40 @@
+.container {
+  font-family: Vazir-Light;
+  display: flex;
+  flex-direction: row;
+  margin-top: 20px;
+}
+.sidebar {
+  width: 200px;
+  height: 1100px;
+  margin-top: 40px;
+  padding: 20px;
+  background-color: #ffffff;
+  box-shadow: 0 0 6px rgb(0 0 0 / 30%);
+  font-size: 18px;
+}
+.Categories {
+  margin-right: 15px;
+  margin-top: 70px;
+}
+.body {
+  margin: 50px;
+}
+.page {
+  display: inline-flex;
+  align-items: center;
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: center;
+  padding: 20px;
+  font-family: Vazir-Medium;
+  color: black;
+}
+.img {
+  width: 14rem;
+  height: 20rem;
+  align-items: center;
+  padding: 10px;
+  background-color: #ffffff;
+  box-shadow: 0 0 6px rgb(0 0 0 / 20%);
+}

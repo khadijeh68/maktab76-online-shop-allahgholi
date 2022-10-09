@@ -6,6 +6,7 @@ import { useEffect } from "react";
 import {
   createOrder,
 } from "../../redux/features/orders/ordersSlice";
+import { clearLocalStorage } from "../../redux/features/cart/cartSlice";
 
 
 const useStyles = makeStyles({
@@ -81,7 +82,7 @@ function SuccessPaymant() {
     const data = JSON.parse(localStorage.getItem("cartItems"));
     const newOrder = JSON.parse(localStorage.getItem("userInfo"));
     newOrder.products = data;
-    dispatch(createOrder(newOrder));
+    dispatch(createOrder(newOrder)).unwrap().then(() => dispatch(clearLocalStorage()))
   }, [dispatch]);
 
   return (

@@ -30,7 +30,6 @@ function PaymantPanel() {
 
   const navigateSuccessPaymant = () => {
     navigate("/successPaymant");
-     localStorage.removeItem("cartItems")
   };
 
   const navigateFailPaymant = () => {

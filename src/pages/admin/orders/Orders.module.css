@@ -27,6 +27,8 @@ body {
 @media only screen and (max-width: 860px) {
   .table {
     width:25%;
+    margin-right:0px;
+    margin-top: 30px;
   }
   .manage{
     display: none;

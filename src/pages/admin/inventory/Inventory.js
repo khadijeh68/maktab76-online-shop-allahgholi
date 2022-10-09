@@ -117,8 +117,8 @@ function Inventory() {
 
   return (
     <div className={style.orders}>
-      <div className="d-flex flex-row justify-content-between mx-3">
-        <h6>مدیریت موجودی و قیمت ها</h6>
+      <div className={style.save}>
+        <h6 className="mb-3">مدیریت موجودی و قیمت ها</h6>
         <div>
           <Button
             variant="primary"
@@ -145,13 +145,14 @@ function Inventory() {
             productsList.map((item) => {
               return (
                 <tr key={item.id}>
-                  <td style={{ verticalAlign: "middle", maxWidth: "100px" }}>
+                  <td className={style.td} >
                     {item.name}
                   </td>
                   {editPrice===item.id ? (
-                    <td style={{ maxWidth: "70px" }}>
+                    <td>
                       <input
                         defaultValue={item.price}
+                        className={style.price}
                         onChange={(e) => {
                           handleChange(e, item.id);
                         }}
@@ -167,9 +168,10 @@ function Inventory() {
                     </td>
                   )}
                   {editQuantity===item.id ? (
-                    <td style={{ maxWidth: "50px" }}>
+                    <td>
                       <input
                         name="quantity"
+                        className={style.quantity}
                         defaultValue={item.quantity}
                         onChange={(e) => {
                           handleChangeStock(e, item.id);

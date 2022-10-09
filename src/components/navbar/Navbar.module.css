@@ -36,9 +36,13 @@
   width: 50px;
   height: 52px;
 }
+.search{
+  width: 50%;
+}
 
 @media only screen and (max-width: 800px) {
   .name {
     display: none;
   }
+  
 }

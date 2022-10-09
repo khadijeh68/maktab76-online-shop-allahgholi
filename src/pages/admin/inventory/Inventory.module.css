@@ -13,6 +13,16 @@ body {
   width: 75%;
   text-align: center;
 }
+.td {
+  vertical-align: middle;
+  max-width: 100px;
+}
+.price {
+  max-width: 90px;
+}
+.quantity {
+  max-width: 50px;
+}
 .page {
   direction: ltr;
   display: flex;
@@ -21,13 +31,40 @@ body {
   margin-top: 20px;
   margin-bottom: 20px;
 }
-.manage{
+.manage {
   margin-right: 20px;
+}
+.save {
+  display: flex;
+  justify-content: space-between;
+  margin-right: 15px;
+  margin-left: 15px;
 }
 @media only screen and (max-width: 860px) {
   .table {
-    width:50%;
+    width: 50%;
+    margin-right: 0px;
+    margin-top: 30px;
   }
-
+  .manage {
+    display: none;
+  }
+  .orders,
+  .page {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  .save {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+  }
+  .price {
+    max-width: 80px;
+  }
+  .quantity {
+    max-width: 30px;
+  }
 }
-

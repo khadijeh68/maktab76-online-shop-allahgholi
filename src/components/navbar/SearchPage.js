@@ -14,22 +14,19 @@ const SearchPage = () => {
     dispatch(getList());
   }, [dispatch]);
   const filterBySearch = (event) => {
-    const query = event.target.value;
+    const q = event.target.value;
     let updatedList = [...productsList];
-  
-    // Include all elements which includes the search query
+    console.log(updatedList.indexOf(q))
     updatedList = updatedList.filter((item) => {
-      return item.toLowerCase().indexOf(query.toLowerCase()) !== -1;
+      // return item.indexOf(query) !== -1;
    
     });
-  
-    // Trigger render with updated values
     setFilteredList(updatedList);
   };
 
   return (
-    <Col md="6">
-      <div className="input-group md-form form-sm form-1 pl-0">
+
+      <div className="input-group md-form form-sm form-1 pl-0 ">
         <input
           className="form-control my-0 py-1"
           style={{
@@ -52,7 +49,7 @@ const SearchPage = () => {
           </button>
         </div>
       </div>
-    </Col>
+
   );
 };
 

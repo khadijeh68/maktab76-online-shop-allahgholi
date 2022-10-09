@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import { makeStyles } from "@material-ui/core/styles";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useParams } from "react-router-dom";
 import {
@@ -9,53 +8,9 @@ import { Button, Card } from "react-bootstrap";
 import { BASE_URL } from "../../config/api";
 import { digitsEnToFa } from "@persian-tools/persian-tools";
 import { getLists } from "../../redux/features/fiestPage/firstPage";
-
-const useStyles = makeStyles({
-  container: {
-    fontFamily: "Vazir-Light",
-    display: "flex",
-    flexDirection: "row",
-    marginTop: "20px",
-   
-  },
-  sidebar: {
-    width: "200px",
-    height: "1100px",
-    marginTop: "40px",
-    padding: "20px",
-    backgroundColor: "#ffffff",
-    boxShadow: "0 0 6px rgb(0 0 0 / 30%)",
-    fontSize: "18px",
-  },
-  Categories: {
-    marginRight: "15px",
-    marginTop: "70px",
-  },
-  body: {
-    margin: "50px",
-  },
-  page: {
-    display: "inline-flex",
-    alignItems: "center",
-    flexWrap: "wrap",
-    flexDirection: "row",
-    justifyContent: "center",
-    padding: "20px",
-    fontFamily: "Vazir-Medium",
-    color: "black",
-  },
-  img: {
-    width: "14rem",
-    height: "20rem",
-    alignItems: "center",
-    padding: "10px",
-    backgroundColor: "#ffffff",
-    boxShadow: "0 0 6px rgb(0 0 0 / 20%)",
-  },
-});
+import styles from "./Sidebar.module.css"
 
 const SingleCategory = () => {
-  const classes = useStyles();
   const dispatch = useDispatch();
   const categoryList = useSelector((state) => state.categories.categoryList);
   const [category, setCategory] = useState([]);
@@ -69,8 +24,8 @@ const SingleCategory = () => {
   }, [dispatch, categoryId]);
 
   return (
-    <div className={classes.container}>
-      <div className={classes.sidebar}>
+    <div className={styles.container}>
+      <div className={styles.sidebar}>
         {categoryList.map((item) => {
           return (
             <div key={item.id}>
@@ -85,7 +40,7 @@ const SingleCategory = () => {
           );
         })}
       </div>
-      <div className={classes.body}>
+      <div className={styles.body}>
         {category.map((item) => {
           return (
             <Link
@@ -93,8 +48,8 @@ const SingleCategory = () => {
               className="text-decoration-none"
               key={item.id}
             >
-              <div className={classes.page}>
-                <Card className={classes.img}>
+              <div className={styles.page}>
+                <Card className={styles.img}>
                   <Card.Img
                     style={{ width: "100px" }}
                     variant="top"

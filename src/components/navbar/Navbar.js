@@ -6,7 +6,6 @@ import style from "./Navbar.module.css";
 import SearchPage from "./SearchPage";
 
 function Navbar() {
-  // const classes = useStyles();
   const cartItems = useSelector((state) => state.cart.cartItems);
   const isLoggedIn = useSelector((state) => state.users.isLoggedIn);
 
@@ -33,7 +32,10 @@ function Navbar() {
             </span>
           </NavLink>
         </div>
-        <SearchPage/>
+
+         <div className={style.search}>
+          <SearchPage />
+        </div>
 
         <div className={style.leftNav}>
           {isLoggedIn ? (
@@ -60,6 +62,7 @@ function Navbar() {
             </div>
           </NavLink>
         </div>
+    
       </div>
     </div>
   );
