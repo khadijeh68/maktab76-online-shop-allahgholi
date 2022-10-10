@@ -31,6 +31,9 @@ const PaymentPanel = React.lazy(() =>
 const SuccessPaymant = React.lazy(() =>
   import("../../pages/paymant/SuccessPaymant")
 );
+const SearchResult= React.lazy(() =>
+  import("../../pages/home/SearchResult")
+);
 const FailPaymant = React.lazy(() => import("../../pages/paymant/FailPaymant"));
 const Inventory = React.lazy(() =>
   import("../../pages/admin/inventory/Inventory")
@@ -69,6 +72,14 @@ function AppRouter() {
             element={
               <React.Suspense fallback={<Loading />}>
                 <Home />
+              </React.Suspense>
+            }
+          />
+          <Route
+            path="search/:query"
+            element={
+              <React.Suspense fallback={<Loading />}>
+                <SearchResult />
               </React.Suspense>
             }
           />

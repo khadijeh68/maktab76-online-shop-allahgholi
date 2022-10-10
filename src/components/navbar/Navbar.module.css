@@ -1,3 +1,8 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
 .nav {
   direction: rtl;
   display: flex;
@@ -14,7 +19,8 @@
   text-decoration: none;
   margin: 30px;
   font-family: Vazir-Medium;
-  color: inherit;
+  color: black;
+  cursor: pointer;
 }
 .basket {
   display: flex;
@@ -39,10 +45,43 @@
 .search{
   width: 50%;
 }
-
-@media only screen and (max-width: 800px) {
-  .name {
+.toggle {
+  font-family: Vazir-Medium;
+  text-decoration: none;
+  padding-top: 20px;
+}
+.sidebar {
+  padding-top: 20px;
+  text-decoration: none;
+  color: black;
+}
+.title {
+  text-decoration: none;
+  font-family: Vazir-Medium;
+}
+@media only screen and (max-width: 860px) {
+  .name,.admin,.basket {
     display: none;
   }
-  
+  .line {
+    height: 2px;
+    width: 35px;
+    margin: 0.5rem 0;
+    background: #000000;
+    transition: transform 0.75s ease, opacity 0.75s ease;
+    z-index: 100;
+  } 
+  .nav {
+    z-index: -1;
+    position: fixed;
+    top: 0;
+    width: 100vw;
+    height: 60px;
+    background-color: "#fff7fd";
+  }
+
+  .links {
+    display: flex;
+    flex-direction: column;
+  }
 }

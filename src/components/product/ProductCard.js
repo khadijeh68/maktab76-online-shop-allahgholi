@@ -1,7 +1,6 @@
 import { Button, Card } from "react-bootstrap";
 import { makeStyles } from "@material-ui/core";
 import { Link } from "react-router-dom";
-import { useSelector } from "react-redux";
 import { BASE_URL } from "../../config/api";
 import { digitsEnToFa } from "@persian-tools/persian-tools";
 
@@ -17,11 +16,6 @@ const useStyles = makeStyles({
     color: "black",
     textAlign:"center"
   },
-  title: {
-    textDecoration: "none",
-    fontFamily: "Vazir-Medium",
-    fontSize: "20px",
-  },
   img: {
     width: "14rem",
     height: "20rem",
@@ -29,7 +23,6 @@ const useStyles = makeStyles({
     padding: "10px",
     backgroundColor: "#ffffff",
     boxShadow: "0 0 6px rgb(0 0 0 / 20%)",
-    
   },
 });
 
