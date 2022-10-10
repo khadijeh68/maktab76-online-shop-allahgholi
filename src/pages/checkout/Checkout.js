@@ -3,6 +3,10 @@ import { Formik, Form, Field } from "formik";
 import { useDispatch, useSelector } from "react-redux";
 import * as Yup from "yup";
 import { getTotals } from "../../redux/features/cart/cartSlice";
+import DatePicker from "react-multi-date-picker";
+import persian from "react-date-object/calendars/persian";
+import persian_fa from "react-date-object/locales/persian_fa";
+import { useState } from "react";
 
 const useStyles = makeStyles({
   title: {
@@ -37,12 +41,24 @@ const SignupSchema = Yup.object().shape({
     .required("نام خانوادگی اجباری است"),
   address: Yup.string().required("آدرس اجباری است"),
   tel: Yup.number().required("شماره تماس اجباری است"),
-  expectAt: Yup.date().default(function () {
-    return new Date();
-  }),
+  // expectAt: Yup.date().default(function () {
+  //   return new Date();
+  // }),
 });
 
 function Checkout() {
+  const [date, setDate] = useState();
+  const [props, setProps] = useState({
+    value: new Date().toLocaleDateString("fa-IR"),
+    format: "YYYY-MM-DD",
+    onChange: (date) => {
+      date.format();
+      setDate(new Date(date.format()));
+    },
+    calendar: persian,
+    locale: persian_fa,
+    calendarPosition: "bottom-right",
+  });
   const classes = useStyles();
   const dispatch = useDispatch();
   const cartTotalAmount = useSelector((state) => state.cart.cartTotalAmount);
@@ -54,9 +70,9 @@ function Checkout() {
       lastname: data.lastname,
       address: data.address,
       tel: data.tel,
-      expectAt: Date.now(data.expectAt),
+      expectAt: date,
       prices: data.prices,
-      delivered: data.delivered
+      delivered: data.delivered,
     };
     localStorage.setItem("userInfo", JSON.stringify(userInfo));
   };
@@ -78,7 +94,7 @@ function Checkout() {
           }}
           validationSchema={SignupSchema}
           onSubmit={(values) => {
-            window.location.href = "http://localhost:3001/";
+            window.location.href = "http://localhost:3000/PaymantPanel";
             handle(values);
           }}
         >
@@ -98,7 +114,6 @@ function Checkout() {
                 {errors.username && touched.username ? (
                   <div className="text-danger">{errors.username}</div>
                 ) : null}
-    
               </div>
               <div>
                 <div>
@@ -149,7 +164,15 @@ function Checkout() {
                 <div>
                   <label className="mt-3">تاریخ تحویل :</label>
                 </div>
-                <Field
+                <div>
+                  <DatePicker
+                    {...props}
+                    onPropsChange={setProps}
+                    name="expectAt"
+                    type="date"
+                  />
+                </div>
+                {/* <Field
                   name="expectAt"
                   type="date"
                   className={classes.input}
@@ -158,7 +181,7 @@ function Checkout() {
                 />
                 {errors.expectAt && touched.expectAt ? (
                   <div className="text-danger">{errors.expectAt}</div>
-                ) : null}
+                ) : null} */}
               </div>
               <button type="submit" className="btn btn-primary m-3">
                 پرداخت

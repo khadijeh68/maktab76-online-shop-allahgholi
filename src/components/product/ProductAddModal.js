@@ -1,7 +1,7 @@
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import {
   createProduct,
   fetchProducts,
@@ -24,13 +24,15 @@ const useStyles = makeStyles({
 function ProductAddModal() {
   const classes = useStyles();
   const dispatch = useDispatch();
-  const [image, setImage] = useState();
-  const [name, setName] = useState();
-  const [category, setCategory] = useState();
-  const [price, setPrice] = useState();
-  const [quantity, setQuantity] = useState();
-  const [color, setColor] = useState();
-  const [description, setDescription] = useState();
+  const categoryList = useSelector((state) => state.categories.categoryList);
+  const productsList = useSelector((state) => state.products.productsList);
+  const [image, setImage] = useState([]);
+  const [name, setName] = useState("");
+  const [category, setCategory] = useState("");
+  const [price, setPrice] = useState(0);
+  const [quantity, setQuantity] = useState(0);
+  const [color, setColor] = useState("");
+  const [description, setDescription] = useState("");
   const [show, setShow] = useState(false);
   const handleOpen = () => setShow(true);
   const handleClose = () => setShow(false);
@@ -66,7 +68,7 @@ function ProductAddModal() {
     const product = {
       image,
       name,
-      category,
+      category: Number(category),
       price,
       quantity,
       color,
@@ -117,14 +119,24 @@ function ProductAddModal() {
               نام کالا را وارد کنید
             </Form.Control.Feedback>
             <Form.Group className="m-2" controlId="validationCustom03">
-              <Form.Label>دسته بندی:</Form.Label>
+              <Form.Label htmlFor="category">دسته بندی:</Form.Label>
               <Form.Select
                 defaultValue={"DEFAULT"}
                 value={category}
-                onChange={(e) => setCategory(e.target.value)}
+                onChange={(e) => {
+                  setCategory(e.target.value);
+                  console.log(category);
+                }}
                 required
               >
-                <option value="DEFAULT" disabled>
+                {/* <option defaultValue={true}>انتخاب کنید...</option> */}
+                {categoryList.map((category) => (
+                  <option key={category.id} value={category.id}>
+                    {category.name}
+                  </option>
+                ))}
+
+                {/* <option value="DEFAULT" disabled>
                   انتخاب کنید
                 </option>
                 <option>اپل</option>
@@ -132,7 +144,7 @@ function ProductAddModal() {
                 <option>شیائومی</option>
                 <option>هوآوی</option>
                 <option>آنر</option>
-                <option>نوکیا</option>
+                <option>نوکیا</option> */}
               </Form.Select>
             </Form.Group>
             <Form.Control.Feedback type="invalid">

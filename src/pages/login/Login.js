@@ -1,24 +1,12 @@
-import { makeStyles } from "@material-ui/core/styles";
+
 import { useState } from "react";
 import { Button, Form } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
-import "../../index.css";
+import style from "./Login.module.css";
 import { login } from "../../redux/features/user/usersSlice";
 
-const useStyles = makeStyles({
-  form: {
-    display: "flex",
-    justifyContent: "center",
-    flexDirection: "column",
-    fontFamily: "Vazir-Medium",
-    alignItems: "center",
-    marginTop: "50px",
-  },
-});
-
 function Login() {
-  const classes = useStyles();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const dispatch = useDispatch();
@@ -33,13 +21,14 @@ function Login() {
 
 
   return (
-    <div className={classes.form}>
+    <div className={style.form}>
       <h5 className="mt-4">ورود به پنل مدیریت فروشگاه</h5>
      
-      <Form className="form_data" onSubmit={handleSubmit}>
+      <Form className={style.form_data} onSubmit={handleSubmit}>
         {error && (
           <h6 className="text-white">نام کاربری و رمز عبور صحیح نمی باشد</h6>
         )}
+        
         <Form.Group className="mb-3" controlId="username">
           <Form.Label className="mt-2 text-white">نام کاربری :</Form.Label>
           <Form.Control
@@ -70,6 +59,7 @@ function Login() {
           <span>بازگشت به سایت </span>
         </Link>
       </Form>
+      <h6 className="mt-4">نام کاربری و رمز عبور، admin می باشد</h6>
     </div>
   );
 }

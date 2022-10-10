@@ -3,6 +3,7 @@ import {
   createProductRequest,
   deleteProductRequest,
   fetchAllProductsRequest,
+  getfirstPage,
   updateProductRequest,
 } from "../../../api/products";
 
@@ -30,8 +31,10 @@ export const deleteProduct = createAsyncThunk("products/deleteProduct", (id) =>
 
 export const updateProduct = createAsyncThunk(
   "products/updateProduct",
-  ({ id, newProduct }) => updateProductRequest({id, newProduct})
+  ({ id, newProduct }) => updateProductRequest({ id, newProduct })
 );
+
+export const getList = createAsyncThunk("list/getList", getfirstPage);
 
 const productSlice = createSlice({
   name: "products",
@@ -83,6 +86,22 @@ const productSlice = createSlice({
       return { ...state, loading: false };
     });
     builder.addCase(updateProduct.rejected, (state, action) => {
+      return { productsList: [], loading: false, error: action.payload };
+    });
+
+
+
+    builder.addCase(getList.pending, (state) => {
+      return { ...state, loading: true };
+    });
+    builder.addCase(getList.fulfilled, (state, action) => {
+      return {
+        ...state,
+        loading: false,
+        productsList: action.payload,
+      };
+    });
+    builder.addCase(getList.rejected, (state, action) => {
       return { productsList: [], loading: false, error: action.payload };
     });
   },

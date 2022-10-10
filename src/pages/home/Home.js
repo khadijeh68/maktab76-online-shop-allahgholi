@@ -1,5 +1,6 @@
 import { makeStyles } from "@material-ui/core/styles";
 import Categories from "../../components/category/Categories";
+import Slider from "../../components/slider/Slider";
 
 const useStyles = makeStyles({
   category: {
@@ -24,9 +25,13 @@ function Home() {
   const classes = useStyles();
 
   return (
+    <>
+    {/* <Slider/> */}
     <div className={classes.category}>
       <Categories />
     </div>
+    </>
+    
   );
 }
 

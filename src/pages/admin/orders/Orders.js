@@ -3,24 +3,11 @@ import { useEffect, useState } from "react";
 import { Table } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchOrders } from "../../../redux/features/orders/ordersSlice";
-import { makeStyles } from "@material-ui/core";
 import { digitsEnToFa } from "@persian-tools/persian-tools";
 import OrdersDisplayModal from "../../../components/orders/OrdersDisplayModal";
-
-const useStyles = makeStyles({
-  page: {
-    direction: "ltr",
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-    marginTop: "20px",
-    marginBottom: "20px",
-  },
-});
+import style from "./Orders.module.css";
 
 function Orders() {
-  const classes = useStyles();
-
   const dispatch = useDispatch();
   const ordersList = useSelector((state) => state.orders.ordersList);
   const total = useSelector((state) => state.orders.total);
@@ -33,11 +20,10 @@ function Orders() {
     dispatch(fetchOrders({ delivered, currentPage }));
   }, [delivered, currentPage, dispatch]);
 
-
   return (
-    <div className="orders">
+    <div className={style.orders}>
       <div className="d-flex flex-row justify-content-between">
-        <h6 className="mx-2">مدیریت سفارش ها</h6>
+        <h6 className={style.manage}>مدیریت سفارش ها</h6>
         <div className="d-flex flex-row mx-3">
           <span className="px-2">سفارش های تحویل شده </span>
           <input
@@ -56,7 +42,8 @@ function Orders() {
           />
         </div>
       </div>
-      <Table striped bordered hover className="w-75 text-center order_table">
+      <div style={{display: "flex",justifyContent: "center" }}>
+      <Table striped bordered hover className={style.table}>
         <thead>
           <tr>
             <th>نام کاربر</th>
@@ -81,23 +68,25 @@ function Orders() {
                         .replace(/\B(?=(\d{3})+(?!\d))/g, "،")
                     )}
                   </td>
-                  <td>{new Date(item.expectAt).toLocaleDateString("fa-IR")}</td>
+                  <td>
+                    {new Date(item.createdAt).toLocaleDateString("fa-IR")}
+                  </td>
                   <td>
                     {item.delivered === true ? "تحویل شد" : "در حال انتظار"}
                   </td>
                   <td>
-                    <OrdersDisplayModal item={item}
-                    />
+                    <OrdersDisplayModal item={item} />
                   </td>
                 </tr>
               );
             })}
         </tbody>
       </Table>
+      </div>
+     
 
       <Pagination
-        className={classes.page}
-        // sx={{ direction:"ltr" }}
+        className={style.page}
         count={count}
         variant="outlined"
         color="secondary"
