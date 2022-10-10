@@ -45,18 +45,10 @@
   display: none;
 }
 @media only screen and (max-width: 860px) {
-  .inventory,
-  .orders,
-  .logOut,
-  .product,
-  .site,
-  .home {
-    display: none;
-  }
 
   .burger {
     display: block;
-    padding: 0.5rem;
+    margin: 2px;
     cursor: pointer;
   }
   .line {

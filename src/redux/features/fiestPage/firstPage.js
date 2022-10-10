@@ -10,15 +10,9 @@ const initialState = {
 
 export const getCategory = createAsyncThunk("list/getCategory", () => {
   return axios
-    .get(`http://localhost:3002/categories`)
+    .get(`${BASE_URL}/categories`)
     .then((res) => res.headers["x-total-count"]);
 });
-
-// export const getList = createAsyncThunk("list/getList", () => {
-//   return axios
-//     .get(`http://localhost:3002/products`)
-//     .then((res) => res.data);
-// });
 
 export const getList = createAsyncThunk(
   "list/getList",
@@ -29,7 +23,7 @@ export const getList = createAsyncThunk(
 
 export const getLists = createAsyncThunk("list/getLists", ( id ) => {
   return axios
-    .get(`http://localhost:3002/products?category=${id}&_limit=10`)
+    .get(`${BASE_URL}/products?category=${id}&_limit=10`)
     .then((res) => res.data);
 });
 

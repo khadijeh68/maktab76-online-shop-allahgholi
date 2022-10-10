@@ -35,10 +35,10 @@ function Categories() {
     <>
       {categoryList.map((category) => {
         return (
-          <div>
+          <div key={category.id}>
             <Link
               to={`/categories/${category.id}`}
-              key={category.id}
+              
               className={classes.container}
             >
               {category.name}

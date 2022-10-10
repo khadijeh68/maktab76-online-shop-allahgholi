@@ -4,7 +4,7 @@ import "../../index.css";
 import { useSelector } from "react-redux";
 import style from "./Navbar.module.css";
 import SearchPage from "./SearchPage";
-import { Container, Nav, Offcanvas } from "react-bootstrap";
+import Header from "./BergerMenu";
 
 function Navbar() {
   const cartItems = useSelector((state) => state.cart.cartItems);
@@ -18,6 +18,7 @@ function Navbar() {
 
   return (
     <>
+    <Header/>
       <div>
         <div className={style.nav}>
           <div>
@@ -46,7 +47,7 @@ function Navbar() {
                 className={style.span}
                 style={navLinkStyles}
               >
-                <span>مدیریت </span>
+               <span className={style.admin}>مدیریت </span>
               </NavLink>
             ) : (
               <NavLink to="/login" className={style.span} style={navLinkStyles}>
@@ -65,55 +66,7 @@ function Navbar() {
             </NavLink>
           </div>
         </div>
-      </div>
-      {/* <div>
-        {[false].map((expand) => (
-          <Navbar key={expand} bg="#fff7fd" expand={expand} className="mb-3">
-            <Container fluid>
-              <Navbar.Toggle
-                aria-controls={`offcanvasNavbar-expand-${expand}`}
-              />
-              <Navbar.Offcanvas
-                id={`offcanvasNavbar-expand-${expand}`}
-                aria-labelledby={`offcanvasNavbarLabel-expand-${expand}`}
-                placement="end"
-              >
-                <Offcanvas.Header closeButton>
-                  <NavLink to="/" style={navLinkStyles} className={style.title}>
-                    <Offcanvas.Title
-                      id={`offcanvasNavbarLabel-expand-${expand}`}
-                    >
-                      فروشگاه آنلاین موبایل و لوازم جانبی{" "}
-                    </Offcanvas.Title>
-                  </NavLink>
-                </Offcanvas.Header>
-                <Offcanvas.Body className={style.toggle}>
-                  <Nav className="justify-content-end flex-grow-1 pe-3">
-                    <NavLink
-                      to="/admin/orders"
-                      className={style.sidebar}
-                      style={navLinkStyles}
-                    >
-                      مدیریت{" "}
-                    </NavLink>
-
-                    <NavLink
-                      to="/shoppingCart"
-                      className={style.sidebar}
-                      style={navLinkStyles}
-                    >
-                      <div>
-                        <ShoppingCartSharpIcon />
-                        <span className="bag-quantity">{cartItems.length}</span>
-                      </div>
-                    </NavLink>
-                  </Nav>
-                </Offcanvas.Body>
-              </Navbar.Offcanvas>
-            </Container>
-          </Navbar>
-        ))}
-      </div> */}
+      </div> 
     </>
   );
 }

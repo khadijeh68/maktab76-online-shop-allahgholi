@@ -5,10 +5,11 @@ body {
   margin-top: 20px;
   display: flex;
   flex-direction: column;
+  
 }
 
 .table {
-  margin-right: 180px;
+  /* margin-right: 180px; */
   margin-top: 30px;
   width: 75%;
   text-align: center;
@@ -24,10 +25,9 @@ body {
 .manage{
   margin-right: 20px;
 }
-@media only screen and (max-width: 860px) {
+@media only screen and (max-width: 870px) {
   .table {
     width:25%;
-    margin-right:0px;
     margin-top: 30px;
   }
   .manage{

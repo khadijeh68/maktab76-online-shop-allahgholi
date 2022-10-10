@@ -40,7 +40,7 @@ body {
   margin-right: 15px;
   margin-left: 15px;
 }
-@media only screen and (max-width: 860px) {
+@media only screen and (max-width: 870px) {
   .table {
     width: 50%;
     margin-right: 0px;
@@ -68,3 +68,4 @@ body {
     max-width: 30px;
   }
 }
+

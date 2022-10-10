@@ -42,6 +42,7 @@ function Orders() {
           />
         </div>
       </div>
+      <div style={{display: "flex",justifyContent: "center" }}>
       <Table striped bordered hover className={style.table}>
         <thead>
           <tr>
@@ -81,6 +82,8 @@ function Orders() {
             })}
         </tbody>
       </Table>
+      </div>
+     
 
       <Pagination
         className={style.page}

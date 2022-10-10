@@ -37,7 +37,11 @@
 }
 .logo {
   color: #c14795;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
+
 .img {
   width: 50px;
   height: 52px;
@@ -59,8 +63,9 @@
   text-decoration: none;
   font-family: Vazir-Medium;
 }
-@media only screen and (max-width: 860px) {
-  .name,.admin,.basket {
+
+@media screen and (max-width: 860px) {
+  .name,.img,.search,.admin,.basket {
     display: none;
   }
   .line {
@@ -85,3 +90,4 @@
     flex-direction: column;
   }
 }
+

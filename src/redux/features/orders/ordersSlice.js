@@ -26,22 +26,10 @@ export const fetchOrders = createAsyncThunk(
   }
 );
 
-// export const createOrder = createAsyncThunk(
-//   "orders/createOrder",
-//   (newOrder) => {
-//     return instance.post(`${BASE_URL}/orders?delivered=false`, newOrder).then((response) => {
-//       return {
-//         data: response.data,
-//       };
-//     });
-//   }
-// );
-
-
 export const createOrder = createAsyncThunk(
   "orders/createOrder",
   async (newOrder) => {
-    const res = await axios.post(`http://localhost:3002/orders`, newOrder);
+    const res = await axios.post(`${BASE_URL}/orders`, newOrder);
     return res.data;
   }
 );

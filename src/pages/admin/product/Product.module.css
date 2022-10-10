@@ -5,6 +5,7 @@ body {
   margin-top: 20px;
   display: flex;
   flex-direction: column;
+  
 }
 
 .table {
@@ -28,7 +29,7 @@ body {
 @media only screen and (max-width: 860px) {
   .table {
     width:50%;
-    margin-right: 0px;
+    margin-right: 180px;
     margin-top: 30px;
   }
 }
