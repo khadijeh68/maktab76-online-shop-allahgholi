@@ -47,19 +47,6 @@ a {
 }
 
 
-.form_data {
-  width: 400px;
-  height: 450px;
-  background-image: url("../public/image/bg-login.png");
-  border-radius: 10px;
-  box-shadow: 1px 1px 8px rgb(156, 86, 177);
-  margin-top: 20px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
-
 .paging {
   justify-content: center;
   align-items: center;
