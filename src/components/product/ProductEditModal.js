@@ -1,6 +1,6 @@
 import Modal from "react-bootstrap/Modal";
 import { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import "../../index.css";
 import { CKEditor } from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
@@ -31,6 +31,7 @@ function ProductEditModal({ showEdit, item, setShowEdit, currentPage }) {
   const [category, setCategory] = useState(item.category);
   const [description, setDescription] = useState(item.description);
   const handleClose = () => setShowEdit(false);
+  const categoryList = useSelector((state) => state.categories.categoryList);
 
   const handlePicture = (e) => {
     let file = e.target.files[0];
@@ -40,7 +41,7 @@ function ProductEditModal({ showEdit, item, setShowEdit, currentPage }) {
   };
 
   const handleSubmit = (e, id) => {
-    const newProduct = { name, price, quantity, color, category, description };
+    const newProduct = { name, price, quantity, color, category: Number(category), description };
     e.preventDefault();
     dispatch(updateProduct({ id, newProduct }))
       .then(unwrapResult)
@@ -89,15 +90,11 @@ function ProductEditModal({ showEdit, item, setShowEdit, currentPage }) {
                 defaultValue={item.category}
                 onChange={(e) => setCategory(e.target.value)}
               >
-                <option selected disabled>
-                  انتخاب کنید
-                </option>
-                <option>اپل</option>
-                <option>سامسونگ</option>
-                <option>شیائومی</option>
-                <option>هوآوی</option>
-                <option>آنر</option>
-                <option>نوکیا</option>
+                {categoryList.map((category) => (
+                  <option key={category.id} value={category.id}>
+                    {category.name}
+                  </option>
+                ))}
               </Form.Select>
             </Form.Group>
             <Form.Group className="m-2">

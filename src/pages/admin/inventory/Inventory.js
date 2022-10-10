@@ -1,50 +1,138 @@
 import React, { useEffect, useState } from "react";
 import { Button, Table } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchInventory } from "../../../redux/features/inventory/inventorySlice";
-import { makeStyles } from "@material-ui/core";
 import { Pagination } from "@mui/material";
 import { digitsEnToFa } from "@persian-tools/persian-tools";
-import { EditText } from "react-edit-text";
-import "react-edit-text/dist/index.css";
-
-const useStyles = makeStyles({
-  page: {
-    direction: "ltr",
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-    marginTop: "20px",
-    marginBottom: "20px",
-  },
-});
-
+import { fetchProducts } from "../../../redux/features/product/productSlice";
+import instance from "../../../api/http";
+import { unwrapResult } from "@reduxjs/toolkit";
+import { toast } from "react-toastify";
+import style from "./Inventory.module.css";
+ 
 function Inventory() {
-  const classes = useStyles();
   const dispatch = useDispatch();
-  const total = useSelector((state) => state.inventory.total);
+  const total = useSelector((state) => state.products.total);
+  const productsList = useSelector((state) => state.products.productsList);
   const [currentPage, setCurrentPage] = useState(1);
-  const inventoriesList = useSelector(
-    (state) => state.inventory.inventoriesList
-  );
   const limit = 5;
   const count = Math.ceil(total / limit);
+  const [state, setState] = useState([]);
+  const [newPrice, setNewPrice] = useState([]);
+  const [editPrice, setEditPrice] = useState(null);
+  const [editQuantity, setEditQuantity] = useState(null);
+  const [displayButton, setDisplayButton] = useState("false");
+
+
+  // price
+  const handleChange = (e, id) => {
+    setDisplayButton("true");
+    const idx = state.findIndex((item) => item.id === id);
+    const newPost = [...state];
+    newPost[idx] = { ...newPost[idx], price: e.target.value };
+    const newPriceList = [...newPrice];
+
+    const newIdx = newPrice.findIndex((item) => item.id === id);
+    if (newIdx === -1) {
+      const newObject = {
+        id: id,
+        newValPrice: e.target.value,
+        newValStock: newPost[idx].quantity,
+      };
+      newPriceList.push(newObject);
+    } else {
+      newPriceList[newIdx].newValPrice = e.target.value;
+    }
+    setNewPrice(newPriceList);
+  };
+
+  // // Stock
+  const handleChangeStock = (e, id) => {
+    setDisplayButton("true");
+    const idx = state.findIndex((item) => item.id === id);
+    const newPost = [...state];
+    newPost[idx] = { ...newPost[idx], quantity: e.target.value };
+    const newStockList = [...newPrice];
+
+    const newIdx = newPrice.findIndex((item) => item.id === id);
+    if (newIdx === -1) {
+      const newObject = {
+        id: id,
+        newValPrice: newPost[idx].price,
+        newValStock: e.target.value,
+      };
+      newStockList.push(newObject);
+    } else {
+      newStockList[newIdx].newValStock = e.target.value;
+    }
+    setNewPrice(newStockList);
+  };
+
+  const cancelEdit = () => {
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape") {
+        setDisplayButton("false");
+        setState([]);
+        setEditQuantity(false);
+        setEditPrice(false);
+      }
+    });
+  };
 
   useEffect(() => {
-    dispatch(fetchInventory(currentPage));
-  }, [currentPage, dispatch]);
+    dispatch(fetchProducts(currentPage))
+      .unwrap()
+      .then((res) => setState(res.data));
+    cancelEdit();
+    setState([]);
+  }, [currentPage, dispatch, displayButton]);
+
+  const saveEdit = (e) => {
+    e.preventDefault();
+    newPrice.forEach((element) => {
+      console.log(element);
+      try {
+        let entiresData = {
+          price: Number(element.newValPrice),
+          quantity: Number(element.newValStock),
+        };
+        instance
+          .patch(`http://localhost:3002/products/${element.id}`, entiresData)
+          .then(() => {
+            dispatch(fetchProducts(currentPage))
+              .then(unwrapResult)
+              .then(() => {
+                toast.success("تغییرات با موفقیت اعمال شد", {
+                  position: toast.POSITION.BOTTOM_RIGHT,
+                });
+              });
+            setEditPrice(null);
+            setEditQuantity(null);
+            setDisplayButton("false");
+          });
+      } catch (error) {
+        console.log("error!");
+      }
+    });
+  };
 
   return (
-    <div className="orders">
-      <div className="d-flex flex-row justify-content-between mx-3">
-        <h6>مدیریت موجودی و قیمت ها</h6>
+    <div className={style.orders}>
+      <div className={style.save}>
+        <h6 className="mb-3">مدیریت موجودی و قیمت ها</h6>
         <div>
-          <Button variant="primary" type="submit">
+          <Button
+            variant="primary"
+            type="submit"
+            onClick={(e) => {
+              saveEdit(e);
+            }}
+            disabled={displayButton === "false"}
+          >
             ذخیره
           </Button>
         </div>
       </div>
-      <Table striped bordered hover className="w-75 text-center order_table">
+      <Table striped bordered hover className={style.table}>
         <thead>
           <tr>
             <th>کالا</th>
@@ -53,39 +141,55 @@ function Inventory() {
           </tr>
         </thead>
         <tbody>
-          {inventoriesList.length &&
-            inventoriesList.map((item) => {
+          {productsList.length &&
+            productsList.map((item) => {
               return (
                 <tr key={item.id}>
-                  <td style={{ verticalAlign: "middle", maxWidth: "100px" }}>
+                  <td className={style.td} >
                     {item.name}
                   </td>
-                  <td style={{ maxWidth: "70px" }}>
-                    <EditText
-                      value={digitsEnToFa(
+                  {editPrice===item.id ? (
+                    <td>
+                      <input
+                        defaultValue={item.price}
+                        className={style.price}
+                        onChange={(e) => {
+                          handleChange(e, item.id);
+                        }}
+                      />
+                    </td>
+                  ) : (
+                    <td onClick={() => setEditPrice(item.id)}>
+                      {digitsEnToFa(
                         item.price
                           .toString()
                           .replace(/\B(?=(\d{3})+(?!\d))/g, "،")
                       )}
-                    />
-                  </td>
-                  <td style={{ maxWidth: "50px" }}>
-                    <EditText
-                      name="quantity"
-                      value={digitsEnToFa(
-                        item.quantity
-                          .toString()
-                          .replace(/\B(?=(\d{3})+(?!\d))/g, "،")
-                      )}
-                    />
-                  </td>
+                    </td>
+                  )}
+                  {editQuantity===item.id ? (
+                    <td>
+                      <input
+                        name="quantity"
+                        className={style.quantity}
+                        defaultValue={item.quantity}
+                        onChange={(e) => {
+                          handleChangeStock(e, item.id);
+                        }}
+                      />
+                    </td>
+                  ) : (
+                    <td onClick={() => setEditQuantity(item.id)}>
+                      {digitsEnToFa(item.quantity)}
+                    </td>
+                  )}
                 </tr>
               );
             })}
         </tbody>
       </Table>
       <Pagination
-        className={classes.page}
+      className={style.page}
         count={count}
         variant="outlined"
         color="secondary"

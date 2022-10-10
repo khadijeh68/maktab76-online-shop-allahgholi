@@ -1,0 +1,27 @@
+.form_data {
+  width: 400px;
+  height: 450px;
+  background-image: url("../../../public/image/bg-login.png");
+  border-radius: 10px;
+  box-shadow: 1px 1px 8px rgb(156, 86, 177);
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.form {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  font-family: Vazir-Medium;
+  align-items: center;
+  margin-top: 50px;
+}
+@media only screen and (max-width: 768px) {
+  .form_data {
+    width: 300px;
+    height: 450px;
+  }
+}

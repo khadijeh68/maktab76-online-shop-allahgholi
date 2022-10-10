@@ -1,7 +1,7 @@
-export const BASE_URL = "http://localhost:3002";
+export const BASE_URL = "https://server-okup.onrender.com";
 
 // post
-export const PRODUCTS_URL = "http://localhost:3002/products";
+export const PRODUCTS_URL = "https://server-okup.onrender.com/products";
 
 // users
 export const LOGIN_URL = "/auth/login";
