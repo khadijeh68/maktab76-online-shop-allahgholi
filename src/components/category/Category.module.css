@@ -3,4 +3,16 @@
   font-family: Vazir-Medium;
   font-size: 20px;
   margin-top: 20px;
+  z-index: -100;
+}
+
+@media only screen and (max-width: 870px)   {
+  .container {
+    text-decoration: none;
+    font-family: Vazir-Medium;
+    font-size: 20px;
+    margin-top: 20px;
+    z-index: -100;
+    margin-right: 20px;
+  }
 }
