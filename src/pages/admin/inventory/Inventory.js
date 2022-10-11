@@ -8,6 +8,7 @@ import instance from "../../../api/http";
 import { unwrapResult } from "@reduxjs/toolkit";
 import { toast } from "react-toastify";
 import style from "./Inventory.module.css";
+import {BASE_URL} from "../../../config/api"
  
 function Inventory() {
   const dispatch = useDispatch();
@@ -96,7 +97,7 @@ function Inventory() {
           quantity: Number(element.newValStock),
         };
         instance
-          .patch(`http://localhost:3002/products/${element.id}`, entiresData)
+          .patch(`${BASE_URL}/products/${element.id}`, entiresData)
           .then(() => {
             dispatch(fetchProducts(currentPage))
               .then(unwrapResult)
@@ -132,6 +133,7 @@ function Inventory() {
           </Button>
         </div>
       </div>
+      <div style={{display: "flex",justifyContent: "center" }}>
       <Table striped bordered hover className={style.table}>
         <thead>
           <tr>
@@ -188,6 +190,7 @@ function Inventory() {
             })}
         </tbody>
       </Table>
+      </div>
       <Pagination
       className={style.page}
         count={count}

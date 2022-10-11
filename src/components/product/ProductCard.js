@@ -11,7 +11,7 @@ const useStyles = makeStyles({
     flexWrap: "wrap",
     flexDirection: "row",
     justifyContent: "center",
-    padding: "20px",
+    padding: "10px",
     fontFamily: "Vazir-Medium",
     color: "black",
     textAlign:"center"

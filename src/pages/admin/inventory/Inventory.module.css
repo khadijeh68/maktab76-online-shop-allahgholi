@@ -8,7 +8,7 @@ body {
 }
 
 .table {
-  margin-right: 180px;
+  /* margin-right: 180px; */
   margin-top: 30px;
   width: 75%;
   text-align: center;
@@ -43,7 +43,6 @@ body {
 @media only screen and (max-width: 870px) {
   .table {
     width: 50%;
-    margin-right: 0px;
     margin-top: 30px;
   }
   .manage {

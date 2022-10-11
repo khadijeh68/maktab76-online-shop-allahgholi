@@ -56,8 +56,7 @@ function Checkout() {
       setDate(new Date(date.format()));
     },
     calendar: persian,
-    locale: persian_fa,
-    calendarPosition: "bottom-right",
+    locale: persian_fa
   });
   const classes = useStyles();
   const dispatch = useDispatch();

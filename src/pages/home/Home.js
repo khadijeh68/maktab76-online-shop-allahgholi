@@ -1,33 +1,15 @@
-import { makeStyles } from "@material-ui/core/styles";
+
 import Categories from "../../components/category/Categories";
 import Slider from "../../components/slider/Slider";
-
-const useStyles = makeStyles({
-  category: {
-    display: "flex",
-    flexDirection: "column",
-    padding: "20px",
-    marginTop: "70px",
-    alignItems: "center",
-  },
-  link: {
-    marginTop: "20px",
-    fontFamily: "Vazir-Light",
-    color: "inherit",
-  },
-  h4: {
-    marginTop: "20px",
-    fontFamily: "Vazir-Medium",
-  },
-});
+import style from "./Home.module.css"
 
 function Home() {
-  const classes = useStyles();
+
 
   return (
     <>
-    {/* <Slider/> */}
-    <div className={classes.category}>
+    <Slider/>
+    <div className={style.category}>
       <Categories />
     </div>
     </>

@@ -9,7 +9,7 @@ body {
 }
 
 .table {
-  /* margin-right: 180px; */
+
   margin-top: 30px;
   width: 75%;
   text-align: center;
@@ -27,7 +27,7 @@ body {
 }
 @media only screen and (max-width: 870px) {
   .table {
-    width:25%;
+    width:50%;
     margin-top: 30px;
   }
   .manage{
@@ -40,4 +40,5 @@ body {
     align-items: center;
   }
 }
+ 
 
