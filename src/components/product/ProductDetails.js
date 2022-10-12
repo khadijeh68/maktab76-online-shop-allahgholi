@@ -7,6 +7,7 @@ import "../../index.css";
 import { BASE_URL } from "../../config/api";
 import { addToCart, decrease } from "../../redux/features/cart/cartSlice";
 import style from "./ProductDetails.module.css"
+import { digitsEnToFa } from "@persian-tools/persian-tools";
 
 function ProductDetails() {
   const dispatch = useDispatch();
@@ -43,7 +44,7 @@ function ProductDetails() {
       <div className={style.font}>
         <h5>{product.name}</h5>
         <p>{`رنگ: ${product.color}`}</p>
-        <p>{`قیمت: ${(product.price)}`}</p>
+        <p>{`قیمت: ${(product.price)}`} تومان</p>
         <div className="d-flex flex-direction-row align-items-center">
           <div>تعداد: </div>
           <Button
