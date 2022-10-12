@@ -10,6 +10,7 @@ import { BASE_URL } from "../../../config/api";
 import ProductEditModal from "../../../components/product/ProductEditModal";
 import ProductDeleteModal from "../../../components/product/ProductDeleteModal";
 import style from "./Product.module.css";
+import AdminNavbar from "../../../components/navbar/AdminNavbar";
 
 function Product() {
   const dispatch = useDispatch();
@@ -37,6 +38,7 @@ function Product() {
   }, [currentPage, dispatch]);
 
   return (
+    <>
     <div className={style.orders}>
       <div className="d-flex flex-row justify-content-between mx-3">
         <h6>مدیریت کالا ها</h6>
@@ -119,6 +121,7 @@ function Product() {
         onChange={(event, value) => setCurrentPage(value)}
       />
     </div>
+    </>
   );
 }
 

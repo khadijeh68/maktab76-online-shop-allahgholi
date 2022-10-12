@@ -55,26 +55,8 @@ a {
 .li {
   list-style-type: none;
 }
-.btn-product{
-  width: 100px;
-  position: absolute;
-  left: 10px;
-  margin-left: 265px;
-  margin-top: 59px;
-}
-.btn-products{
-  width: 100px;
-  position: absolute;
-  left: 10px;
-}
-.product-details{
-  margin: 70px;
-  display: flex;
-  flex-direction: row;
-  padding: 70px;
-  justify-content: center;
-  align-items: center;
-}
+
+
 .loading{
   font-family: "Vazir-Light";
   direction: rtl;
@@ -98,10 +80,7 @@ img {
   width: 100px;
   height: 120px;
 }
-.img-product-details{
-  width: 200px;
-  height: 250px;
-}
+
 /* @media screen and (max-width: 800px) {
   .orders {
     margin-top: 40px;

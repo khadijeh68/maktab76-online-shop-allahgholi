@@ -10,19 +10,12 @@ import "../../index.css";
 import { CKEditor } from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import { instance } from "../../api/http";
-import { makeStyles } from "@material-ui/core";
 import { Form } from "react-bootstrap";
 import { unwrapResult } from "@reduxjs/toolkit";
 import { toast } from "react-toastify";
-
-const useStyles = makeStyles({
-  body: {
-    fontFamily: "Vazir-Medium",
-  },
-});
+import style from "./ProductAddModal.module.css"
 
 function ProductAddModal() {
-  const classes = useStyles();
   const dispatch = useDispatch();
   const categoryList = useSelector((state) => state.categories.categoryList);
   const productsList = useSelector((state) => state.products.productsList);
@@ -79,10 +72,10 @@ function ProductAddModal() {
 
   return (
     <>
-      <Button variant="success" onClick={handleOpen} className="btn-products">
+      <Button variant="success" onClick={handleOpen} className={style.btnProduct}>
         افزودن کالا
       </Button>
-      <Modal show={show} className={classes.body}>
+      <Modal show={show} className={style.body}>
         <Modal.Header onClick={handleClose}>
           <Modal.Title>افزودن/ ویرایش کالا</Modal.Title>
           <button
@@ -129,22 +122,11 @@ function ProductAddModal() {
                 }}
                 required
               >
-                {/* <option defaultValue={true}>انتخاب کنید...</option> */}
                 {categoryList.map((category) => (
                   <option key={category.id} value={category.id}>
                     {category.name}
                   </option>
                 ))}
-
-                {/* <option value="DEFAULT" disabled>
-                  انتخاب کنید
-                </option>
-                <option>اپل</option>
-                <option>سامسونگ</option>
-                <option>شیائومی</option>
-                <option>هوآوی</option>
-                <option>آنر</option>
-                <option>نوکیا</option> */}
               </Form.Select>
             </Form.Group>
             <Form.Control.Feedback type="invalid">

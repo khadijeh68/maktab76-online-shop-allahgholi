@@ -5,7 +5,7 @@ import SAMSUNG from "../../assets/image/SAMSUNG.jpg"
 import style from "./Slider.module.css"
 function Slider() {
   return (
-    <Carousel fade>
+    <Carousel fade className={style.carousel}>
       <Carousel.Item>
         <img
           className={style.slider}

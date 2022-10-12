@@ -50,6 +50,8 @@
     display: block;
     margin: 2px;
     cursor: pointer;
+    z-index: 100;
+    position: fixed;
   }
   .line {
     height: 2px;

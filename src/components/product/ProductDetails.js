@@ -6,6 +6,7 @@ import { getDetails } from "../../redux/features/productDetail/productDetailSlic
 import "../../index.css";
 import { BASE_URL } from "../../config/api";
 import { addToCart, decrease } from "../../redux/features/cart/cartSlice";
+import style from "./ProductDetails.module.css"
 
 function ProductDetails() {
   const dispatch = useDispatch();
@@ -30,16 +31,16 @@ function ProductDetails() {
   };
 
   return (
-    <div className="product-details">
+    <div className={style.productDetails}>
       <div>
         <img
-          className="mx-5 img-product-details"
+          className={style.imgProduct}
           variant="top"
           src={`${BASE_URL}/files/${product.image}`}
           alt="mobile"
         />
       </div>
-      <div>
+      <div className={style.font}>
         <h5>{product.name}</h5>
         <p>{`رنگ: ${product.color}`}</p>
         <p>{`قیمت: ${(product.price)}`}</p>
@@ -68,7 +69,7 @@ function ProductDetails() {
           </Button>
         </div>
         <div  className="mt-2" dangerouslySetInnerHTML={{ __html: product.description }} />
-        <Button variant="primary" onClick={() => handleAddToCart(product)}  disabled={orderCount >= product.quantity || orderCount < 0 ? "disabled" : ""}>
+        <Button variant="primary" className={style.btn} onClick={() => handleAddToCart(product)}  disabled={orderCount >= product.quantity || orderCount < 0 ? "disabled" : ""}>
           افزودن به سبد خرید
         </Button>
       </div>

@@ -1,0 +1,9 @@
+body {
+  font-family: Vazir-Medium;
+}
+
+.btnProduct{
+    width: 100px;
+    position: absolute;
+    left: 10px;
+  }
