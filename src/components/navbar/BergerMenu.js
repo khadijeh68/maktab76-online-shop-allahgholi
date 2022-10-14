@@ -1,6 +1,7 @@
 import { Container, Nav, Navbar, Offcanvas } from "react-bootstrap";
 import { NavLink } from "react-router-dom";
 import style from "./BergerMenu.module.css";
+import SearchPage from "./SearchPage";
 function Header() {
   const navLinkStyles = ({ isActive }) => {
     return {
@@ -8,10 +9,10 @@ function Header() {
     };
   };
   return (
-    <>
+
       <div className={style.burger}>
         {[false].map((expand) => (
-          <Navbar key={expand} bg="#fff7fd" expand={expand} >
+          <Navbar key={expand} bg="#fff7fd" expand={expand}>
             <Container fluid>
               <Navbar.Toggle
                 aria-controls={`offcanvasNavbar-expand-${expand}`}
@@ -26,7 +27,9 @@ function Header() {
                     <Offcanvas.Title
                       id={`offcanvasNavbarLabel-expand-${expand}`}
                     >
-                      فروشگاه آنلاین موبایل و لوازم جانبی
+                      <span className={style.name}>
+                        فروشگاه آنلاین موبایل و لوازم جانبی
+                      </span>
                     </Offcanvas.Title>
                   </NavLink>
                 </Offcanvas.Header>
@@ -44,7 +47,7 @@ function Header() {
                       className={style.sidebar}
                       style={navLinkStyles}
                     >
-                      سبدخرید
+                      سبد خرید
                     </NavLink>
                   </Nav>
                 </Offcanvas.Body>
@@ -52,8 +55,9 @@ function Header() {
             </Container>
           </Navbar>
         ))}
+        <SearchPage />
       </div>
-    </>
+
   );
 }
 

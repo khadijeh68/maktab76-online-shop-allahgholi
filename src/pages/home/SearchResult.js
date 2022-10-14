@@ -33,10 +33,12 @@ const useStyles = makeStyles({
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
+    flexDirection: "column",
     color: "rgb(68, 68, 68)",
     fontFamily: "Vazir-Medium",
-    marginTop: "200px"
-  }
+    marginTop: "200px",
+
+  },
 });
 
 function SearchResult() {
@@ -55,8 +57,19 @@ function SearchResult() {
   }, [query]);
 
   return data.length === 0 ? (
-    <div className={classes.notFound}> <BsFillExclamationCircleFill style={{color: "#ffd400", marginLeft: "5px"}}/>
-      نتیجه ای یافت نشد! </div>
+    <div className={classes.notFound}>
+      <div className="mb-3">
+        <BsFillExclamationCircleFill
+          style={{ color: "#ffd400", marginLeft: "5px" }}
+        />
+        نتیجه ای یافت نشد!
+      </div>
+      <div>
+        <Link to="/" className="text-decoration-none">
+          بازگشت به صفحه اصلی
+        </Link>
+      </div>
+    </div>
   ) : (
     <div>
       {data.map((product) => {
