@@ -7,7 +7,6 @@ import "../../index.css";
 import { BASE_URL } from "../../config/api";
 import { addToCart, decrease } from "../../redux/features/cart/cartSlice";
 import style from "./ProductDetails.module.css"
-import { digitsEnToFa } from "@persian-tools/persian-tools";
 
 function ProductDetails() {
   const dispatch = useDispatch();
@@ -64,7 +63,7 @@ function ProductDetails() {
             onClick={() => {
               dispatch(handleDecreaseCart(product));
             }}
-            disabled={orderCount < 0 ? "disabled" : ""}
+            disabled={orderCount <= 0 ? "disabled" : ""}
           >
             -
           </Button>
