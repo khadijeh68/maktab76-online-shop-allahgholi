@@ -3,48 +3,14 @@ import axios from "axios";
 import { useState } from "react";
 import { BASE_URL } from "../../config/api";
 import { useEffect } from "react";
-import { makeStyles } from "@material-ui/core";
 import { Button, Card } from "react-bootstrap";
 import { digitsEnToFa } from "@persian-tools/persian-tools";
 import { BsFillExclamationCircleFill } from "react-icons/bs";
-
-const useStyles = makeStyles({
-  page: {
-    display: "inline-flex",
-    alignItems: "center",
-    flexWrap: "wrap",
-    flexDirection: "row",
-    justifyContent: "center",
-    padding: "20px",
-    fontFamily: "Vazir-Medium",
-    color: "black",
-    textAlign: "center",
-    marginTop: "70px",
-  },
-  img: {
-    width: "14rem",
-    height: "20rem",
-    alignItems: "center",
-    padding: "10px",
-    backgroundColor: "#ffffff",
-    boxShadow: "0 0 6px rgb(0 0 0 / 20%)",
-  },
-  notFound: {
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-    flexDirection: "column",
-    color: "rgb(68, 68, 68)",
-    fontFamily: "Vazir-Medium",
-    marginTop: "200px",
-
-  },
-});
+import style from "./SearchResult.module.css"
 
 function SearchResult() {
   const { query } = useParams();
   const [data, setData] = useState([]);
-  const classes = useStyles();
 
   const getData = () => {
     axios
@@ -57,7 +23,7 @@ function SearchResult() {
   }, [query]);
 
   return data.length === 0 ? (
-    <div className={classes.notFound}>
+    <div className={style.notFound}>
       <div className="mb-3">
         <BsFillExclamationCircleFill
           style={{ color: "#ffd400", marginLeft: "5px" }}
@@ -79,8 +45,8 @@ function SearchResult() {
             className="text-decoration-none"
             key={product.id}
           >
-            <div className={classes.page}>
-              <Card className={classes.img}>
+            <div className={style.page}>
+              <Card className={style.img}>
                 <Card.Img
                   style={{ width: "100px" }}
                   variant="top"

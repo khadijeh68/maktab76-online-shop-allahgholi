@@ -13,7 +13,7 @@ function Header() {
       <div className={style.burger}>
         {[false].map((expand) => (
           <Navbar key={expand} bg="#fff7fd" expand={expand}>
-            <Container fluid>
+            <Container fluid style={{zIndex: "100"}}>
               <Navbar.Toggle
                 aria-controls={`offcanvasNavbar-expand-${expand}`}
               />
@@ -22,7 +22,7 @@ function Header() {
                 aria-labelledby={`offcanvasNavbarLabel-expand-${expand}`}
                 placement="end"
               >
-                <Offcanvas.Header closeButton>
+                <Offcanvas.Header closeButton >
                   <NavLink to="/" style={navLinkStyles} className={style.title}>
                     <Offcanvas.Title
                       id={`offcanvasNavbarLabel-expand-${expand}`}
@@ -55,7 +55,7 @@ function Header() {
             </Container>
           </Navbar>
         ))}
-        <SearchPage />
+        <SearchPage style={{zIndex: "100"}}/>
       </div>
 
   );
