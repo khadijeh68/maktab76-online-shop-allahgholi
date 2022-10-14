@@ -39,10 +39,11 @@ body {
   justify-content: space-between;
   margin-right: 15px;
   margin-left: 15px;
+  align-items: center;
 }
-@media only screen and (max-width: 870px) {
+@media only screen and (max-width: 400px) {
   .table {
-    width: 50%;
+    width:100%;
     margin-top: 30px;
   }
   .manage {
@@ -54,11 +55,15 @@ body {
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    font-size: 12px;
   }
   .save {
     display: flex;
     align-items: center;
     flex-direction: column;
+  }
+  .save h6 {
+    font-size: 14px;
   }
   .price {
     max-width: 80px;

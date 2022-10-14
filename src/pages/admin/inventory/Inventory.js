@@ -119,7 +119,7 @@ function Inventory() {
   return (
     <div className={style.orders}>
       <div className={style.save}>
-        <h6 className="mb-3">مدیریت موجودی و قیمت ها</h6>
+        <h6>مدیریت موجودی و قیمت ها</h6>
         <div>
           <Button
             variant="primary"

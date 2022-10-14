@@ -40,10 +40,12 @@ function Product() {
   return (
     <>
     <div className={style.orders}>
-      <div className="d-flex flex-row justify-content-between mx-3">
+      <div className={style.add}>
         <h6>مدیریت کالا ها</h6>
+        <ProductAddModal categoryList={categoryList} />
       </div>
-      <ProductAddModal categoryList={categoryList} />
+     
+      <div style={{display: "flex",justifyContent: "center" }}>
       <Table striped bordered hover className={style.table}>
         <thead>
           <tr>
@@ -53,7 +55,7 @@ function Product() {
             <th></th>
           </tr>
         </thead>
-        <tbody>
+        <tbody  style={{verticalAlign: "middle" }}>
           {productsList.length &&
             productsList.map((item) => {
               return (
@@ -79,7 +81,7 @@ function Product() {
                   <td style={{ verticalAlign: "middle" }}>
                     <Button
                       variant="warning"
-                      className="m-2"
+                      className={style.edit}
                       onClick={() => handleOpenEdit(item.id)}
                       size="sm"
                     >
@@ -90,7 +92,7 @@ function Product() {
                       variant="danger"
                       onClick={handleOpenDelete}
                       size="sm"
-                      className="m-2"
+                      className={style.delete}
                     >
                       حذف
                     </Button>
@@ -107,6 +109,7 @@ function Product() {
             })}
         </tbody>
       </Table>
+      </div>
       <ProductEditModal
         showEdit={showEdit}
         item={currentProduct}

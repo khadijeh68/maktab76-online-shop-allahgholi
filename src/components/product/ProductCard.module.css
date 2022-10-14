@@ -28,7 +28,7 @@
         font-family: Vazir-Medium;
         color: black;
         text-align: center;
-        z-index: -100;
+        z-index:-100;
       }
       .img {
         width: 14rem;

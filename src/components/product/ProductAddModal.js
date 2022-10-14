@@ -77,7 +77,7 @@ function ProductAddModal() {
       </Button>
       <Modal show={show} className={style.body}>
         <Modal.Header onClick={handleClose}>
-          <Modal.Title>افزودن/ ویرایش کالا</Modal.Title>
+          <Modal.Title className={style.titr}>افزودن/ ویرایش کالا</Modal.Title>
           <button
             type="button"
             className="btn-close"

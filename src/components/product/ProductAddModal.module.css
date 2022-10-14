@@ -4,16 +4,15 @@ body {
 
 .btnProduct{
     width: 100px;
-    position: absolute;
-    left: 10px;
   }
   @media only screen and (max-width: 860px) {
     .btnProduct{
-      width: 100px;
-      position: absolute;
-      left: 10px;
-  
-      
+      width:80px;
+      height: 30px;
+      font-size: 12px;
+    }
+    .titr{
+font-size: medium;
     }
   }
   
