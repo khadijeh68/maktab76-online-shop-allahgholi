@@ -1,31 +1,9 @@
-import { makeStyles } from "@material-ui/core/styles";
+import style from "./PaymantPanel.module.css";
 import { Button } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
-
-
-const useStyles = makeStyles({
-  title: {
-    fontFamily: "Vazir-Medium",
-    margin: "30px 20px",
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-    flexDirection: "column",
-  },
-  img: {
-    width: "650px",
-    height: "500px",
-  },
-  btn: {
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-    margin: "10px",
-  },
-});
+import sepehr3 from "../../assets/image/sepehr3.png"
 
 function PaymantPanel() {
-  const classes = useStyles();
   const navigate = useNavigate();
 
   const navigateSuccessPaymant = () => {
@@ -37,13 +15,13 @@ function PaymantPanel() {
   };
 
   return (
-    <div className={classes.title}>
+    <div className={style.title}>
       <img
-        className={classes.img}
-        src={`../../../image/sepehr3.png`}
+        className={style.img}
+        src={sepehr3}
         alt="dargah"
       />
-      <div className={classes.btn}>
+      <div className={style.btn}>
         <Button
           variant="success"
           type="submit"
