@@ -1,0 +1,28 @@
+
+    .title {
+      font-family: Vazir-Medium;
+      margin-top: 80px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+    }
+    .form {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      /* background-image: url("../../assets/image/shop.jpg");
+      background-repeat: no-repeat;
+   */
+      width: 100vw;
+      height: 500px;
+      margin-top: 20px;
+      border-radius: 5px;
+    }
+   
+    @media only screen and (max-width: 860px) {
+        .title h5{
+            font-size: medium;
+        }
+    }

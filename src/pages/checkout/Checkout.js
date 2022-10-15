@@ -1,4 +1,4 @@
-import { makeStyles } from "@material-ui/core/styles";
+import style from "./Checkout.module.css";
 import { Formik, Form, Field } from "formik";
 import { useDispatch, useSelector } from "react-redux";
 import * as Yup from "yup";
@@ -9,27 +9,6 @@ import persian_fa from "react-date-object/locales/persian_fa";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-const useStyles = makeStyles({
-  title: {
-    fontFamily: "Vazir-Medium",
-    marginTop: "80px",
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-    flexDirection: "column",
-  },
-  form: {
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-    flexDirection: "column",
-    backgroundColor: "#efdada",
-    width: "500px",
-    height: "600px",
-    marginTop: "20px",
-    borderRadius: "5px",
-  },
-});
 
 const SignupSchema = Yup.object().shape({
   username: Yup.string()
@@ -59,7 +38,7 @@ function Checkout() {
     calendar: persian,
     locale: persian_fa
   });
-  const classes = useStyles();
+  
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const cartTotalAmount = useSelector((state) => state.cart.cartTotalAmount);
@@ -79,8 +58,8 @@ function Checkout() {
   };
 
   return (
-    <div className={classes.title}>
-      <h3>نهایی کردن خرید</h3>
+    <div className={style.title}>
+      <h5>نهایی کردن خرید</h5>
       <div>
         <Formik
           initialValues={{
@@ -95,12 +74,13 @@ function Checkout() {
           }}
           validationSchema={SignupSchema}
           onSubmit={(values) => {
-            navigate("/successPaymant");
+            // window.location.href = "http://localhost:3000/PaymantPanel";
+            navigate("/paymantPanel");
             handle(values);
           }}
         >
           {({ errors, touched, values, handleChange }) => (
-            <Form className={classes.form}>
+            <Form className={style.form}>
               <div>
                 <div>
                   <label>نام:</label>
@@ -108,7 +88,7 @@ function Checkout() {
                 <Field
                   name="username"
                   type="text"
-                  className={classes.input}
+                  className={style.input}
                   value={values.username}
                   onChange={handleChange}
                 />
@@ -123,7 +103,7 @@ function Checkout() {
                 <Field
                   name="lastname"
                   type="text"
-                  className={classes.input}
+                  className={style.input}
                   value={values.lastname}
                   onChange={handleChange}
                 />
@@ -140,7 +120,7 @@ function Checkout() {
                   type="address"
                   value={values.address}
                   onChange={handleChange}
-                  className={classes.input}
+                  className={style.input}
                 />
                 {errors.address && touched.address ? (
                   <div className="text-danger">{errors.address}</div>
@@ -153,7 +133,7 @@ function Checkout() {
                 <Field
                   name="tel"
                   type="tel"
-                  className={classes.input}
+                  className={style.input}
                   value={values.tel}
                   onChange={handleChange}
                 />
@@ -176,7 +156,7 @@ function Checkout() {
                 {/* <Field
                   name="expectAt"
                   type="date"
-                  className={classes.input}
+                  className={style.input}
                   value={values.date}
                   onChange={handleChange}
                 />
