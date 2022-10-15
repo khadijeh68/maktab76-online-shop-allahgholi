@@ -3,6 +3,7 @@ import { NavLink } from "react-router-dom";
 import ShoppingCartSharpIcon from "@mui/icons-material/ShoppingCartSharp";
 import { useSelector } from "react-redux";
 import fail from "../../assets/image/fail.png"
+import logo from "../../assets/image/logo.png"
 
 function FailPaymant() {
   const { cartTotalQuantity } = useSelector((state) => state.cart);
@@ -20,7 +21,7 @@ function FailPaymant() {
           <NavLink to="/" className={style.span} style={navLinkStyles}>
             <img
               className={style.img}
-              src={`../../../image/logo.png`}
+              src={logo}
               alt="logo"
             />
             <span className={style.logo}>

@@ -12,13 +12,13 @@
       align-items: center;
       justify-content: center;
       flex-direction: column;
-      /* background-image: url("../../assets/image/shop.jpg");
-      background-repeat: no-repeat;
-   */
+      margin-top: 20px;
+      /* background-image: url("../../assets/image/bg-login.png"); */
+      /* border-radius: 10px;
+      box-shadow: 1px 1px 8px rgb(156, 86, 177);
       width: 100vw;
       height: 500px;
-      margin-top: 20px;
-      border-radius: 5px;
+      border-radius: 5px; */
     }
    
     @media only screen and (max-width: 860px) {
