@@ -99,7 +99,6 @@ function Basket() {
                   <td className={style.count}>
                     <Button
                       variant="outline-success"
-                      size="sm"
                       style={{border: "none"}}
                       onClick={() => handleAddToCart(item)}
                       disabled={item.cartQuantity  >= item.quantity ? "disabled" : ""}
@@ -109,7 +108,6 @@ function Basket() {
                     <p style={{marginBottom: 0}} >{digitsEnToFa(item.cartQuantity)}</p>
                     <Button
                       variant="outline-warning"
-                      size="sm"
                       style={{border: "none"}}
                       onClick={() => {
                         dispatch(handleDecreaseCart(item));
@@ -135,12 +133,12 @@ function Basket() {
                       تومان
                     </div>
                   </td> */}
-                  <td className={style.align}>
+                  <td >
                     <Button
                       variant="outline-danger"
                       onClick={handleOpenDelete}
-                      size="sm"
                       style={{border: "none"}}
+                      className={style.trash}
                     >
                       <BsTrashFill/>
                     </Button>

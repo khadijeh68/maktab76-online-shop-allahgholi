@@ -1,0 +1,36 @@
+body {
+  font-family: Vazir-Medium;
+}
+.modalTitle {
+  font-size: 16px;
+}
+.modalHeader {
+  padding: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0;
+}
+.modalBody p {
+  font-size: 14px;
+  padding: 5px;
+  margin-bottom: 0;
+}
+@media only screen and (max-width: 400px) {
+    .modalTitle {
+        font-size: 14px;
+      }
+      .modalHeader {
+        padding: 10px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    
+      }
+    
+      .modalBody p {
+        font-size: 12px;
+        padding: 10px;
+        margin-bottom: 0;
+      }
+}

@@ -27,28 +27,31 @@ th, td{
 .align {
   vertical-align: middle;
 }
-.count{
-  
+.count button{
+  font-size: large;
 }
 .table{
     width: 100%;
     text-align: center;
 }
-@media only screen and (max-width: 400px) {
+.trash{
+  vertical-align: middle;
+  font-size: large;
+}
+@media only screen and (max-width: 870px) {
 h4{
    font-size: 18px;
    text-align: center;
 }
 .table{
     font-size: 12px;
-    width: 50%;
+    width: 100%;
 }
 img{
     width: 50px;
     height: 60px;
     vertical-align: middle;
 }
-
 .total {
     display: flex;
     flex-direction: column;
