@@ -1,5 +1,11 @@
 body {
   font-family: Vazir-Medium;
 }
-.order_table {
+@media only screen and (max-width: 400px) {
+  .body{
+    font-size: 12px;
+  }
+  .modal-titr{
+    font-size: 14px;
+  }
 }

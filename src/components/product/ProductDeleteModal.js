@@ -6,13 +6,7 @@ import {
   fetchProducts,
 } from "../../redux/features/product/productSlice";
 import { Button, Modal } from "react-bootstrap";
-import { makeStyles } from "@material-ui/core";
-
-const useStyles = makeStyles({
-  body: {
-    fontFamily: "Vazir-Medium",
-  },
-});
+import style from "./ProductDeleteModal.module.css";
 
 function ProductDeleteModal({
   openDelete,
@@ -22,7 +16,6 @@ function ProductDeleteModal({
   currentPage,
 }) {
   const dispatch = useDispatch();
-  const classes = useStyles();
 
   const handleDelete = (id) => {
     dispatch(deleteProduct(id))
@@ -37,7 +30,7 @@ function ProductDeleteModal({
   };
 
   return (
-    <Modal show={openDelete} animation={true} className={classes.body}>
+    <Modal show={openDelete} animation={true} className={style.body}>
       <Modal.Header onClick={handleCloseDelete}>
         <Modal.Title>حذف کالا</Modal.Title>
         <button

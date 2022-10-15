@@ -29,7 +29,7 @@ function OrdersDisplayModal({ item }) {
       </Button>
       <Modal show={show} className={style.body}>
         <Modal.Header onClick={handleClose}>
-          <Modal.Title>نمایش سفارش</Modal.Title>
+          <Modal.Title className={style.titr}>نمایش سفارش</Modal.Title>
           <button
             type="button"
             className="btn-close"
