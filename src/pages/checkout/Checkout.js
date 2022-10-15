@@ -7,6 +7,7 @@ import DatePicker from "react-multi-date-picker";
 import persian from "react-date-object/calendars/persian";
 import persian_fa from "react-date-object/locales/persian_fa";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const useStyles = makeStyles({
   title: {
@@ -60,6 +61,7 @@ function Checkout() {
   });
   const classes = useStyles();
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const cartTotalAmount = useSelector((state) => state.cart.cartTotalAmount);
 
   const handle = (data) => {
@@ -93,7 +95,7 @@ function Checkout() {
           }}
           validationSchema={SignupSchema}
           onSubmit={(values) => {
-            window.location.href = "http://localhost:3000/PaymantPanel";
+            navigate("/successPaymant");
             handle(values);
           }}
         >
