@@ -76,7 +76,7 @@ function Checkout() {
           validationSchema={SignupSchema}
           onSubmit={(values) => {
             // window.location.href = "http://localhost:3000/PaymantPanel";
-            // navigate("/paymantPanel");
+            navigate("/paymantPanel");
             handle(values);
           }}
         >
