@@ -5,6 +5,7 @@ import { useSelector } from "react-redux";
 import style from "./Navbar.module.css";
 import SearchPage from "./SearchPage";
 import Header from "./BergerMenu";
+import logo from "../../assets/image/logo.png"
 
 function Navbar() {
   const cartItems = useSelector((state) => state.cart.cartItems);
@@ -26,7 +27,7 @@ function Navbar() {
               <span className={style.logo}>
                 <img
                   className={style.img}
-                  src={`../../../image/logo.png`}
+                  src={logo}
                   alt="logo"
                 />
                 <span className={style.name}>

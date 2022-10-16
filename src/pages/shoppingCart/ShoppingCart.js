@@ -1,4 +1,3 @@
-
 import { digitsEnToFa } from "@persian-tools/persian-tools";
 import { useEffect } from "react";
 import { useState } from "react";
@@ -14,8 +13,12 @@ import {
   getTotals,
 } from "../../redux/features/cart/cartSlice";
 import DeleteModal from "../../components/cart/DeleteModal";
-import style from "./ShoppingCart.module.css"
-import { BsTrashFill,BsPlusCircleFill,BsDashCircleFill } from "react-icons/bs";
+import style from "./ShoppingCart.module.css";
+import {
+  BsTrashFill,
+  BsPlusCircleFill,
+  BsDashCircleFill,
+} from "react-icons/bs";
 
 function Basket() {
   const dispatch = useDispatch();
@@ -50,80 +53,83 @@ function Basket() {
         </div>
       ) : (
         <div>
-          <h5 style={{textAlign: "center",margin: "15px"}}>سبد خرید</h5>
-          <div style={{display: "flex",justifyContent: "center" }}>
-          <Table striped bordered hover className={style.table}>
-            <thead>
-              <tr>
-                <th>تصویر کالا</th>
-                <th>نام کالا</th>
-                <th>قیمت کالا</th>
-                {/* <th>
+          <h5 style={{ textAlign: "center", margin: "15px" }}>سبد خرید</h5>
+          <div style={{ display: "flex", justifyContent: "center" }}>
+            <Table striped bordered hover className={style.table}>
+              <thead>
+                <tr>
+                  <th>تصویر کالا</th>
+                  <th>نام کالا</th>
+                  <th>قیمت کالا</th>
+                  {/* <th>
                   <FaArrowUp />
                 </th> */}
-                <th>تعداد</th>
-                {/* <th>
+                  <th>تعداد</th>
+                  {/* <th>
                   <FaArrowDown />
                 </th> */}
-                {/* <th className={style.price}>مبلغ قابل پرداخت</th> */}
-                <th>حذف کالا</th>
-              </tr>
-            </thead>
-            <tbody>
-              {cartItems.map((item) => (
-                <tr key={item.id}>
-                  <td className={style.align}>
-                    <Link to={`/products/${item.id}`}>
-                      <img
-                        src={`${BASE_URL}/files/${item.image}`}
-                        alt="mobile"
-                      />
-                    </Link>
-                  </td>
-                  <td className={style.align}>
-                    <Link
-                      to={`/products/${item.id}`}
-                      className="text-decoration-none text-black"
-                    >
-                      {item.name}
-                    </Link>
-                  </td>
-                  <td className={style.align}>
-                    {digitsEnToFa(
-                      item.price
-                        .toString()
-                        .replace(/\B(?=(\d{3})+(?!\d))/g, "،")
-                    )}{" "}
-                    تومان
-                  </td>
-                  <td className={style.count}>
-                    <Button
-                      variant="outline-success"
-                      style={{border: "none"}}
-                      onClick={() => handleAddToCart(item)}
-                      disabled={item.cartQuantity  >= item.quantity ? "disabled" : ""}
-                    >
-                      <BsPlusCircleFill/>
-                    </Button>
-                    <p style={{marginBottom: 0}} >{digitsEnToFa(item.cartQuantity)}</p>
-                    <Button
-                      variant="outline-warning"
-                      style={{border: "none"}}
-                      onClick={() => {
-                        dispatch(handleDecreaseCart(item));
-                      }}
-                     
-                    >
-                      <BsDashCircleFill/>
-                    </Button>
-                  </td>
-                  {/* <td className={style.align}>
+                  {/* <th className={style.price}>مبلغ قابل پرداخت</th> */}
+                  <th>حذف کالا</th>
+                </tr>
+              </thead>
+              <tbody>
+                {cartItems.map((item) => (
+                  <tr key={item.id}>
+                    <td className={style.align}>
+                      <Link to={`/products/${item.id}`}>
+                        <img
+                          src={`${BASE_URL}/files/${item.image}`}
+                          alt="mobile"
+                        />
+                      </Link>
+                    </td>
+                    <td className={style.align}>
+                      <Link
+                        to={`/products/${item.id}`}
+                        className="text-decoration-none text-black"
+                      >
+                        {item.name}
+                      </Link>
+                    </td>
+                    <td className={style.align}>
+                      {digitsEnToFa(
+                        item.price
+                          .toString()
+                          .replace(/\B(?=(\d{3})+(?!\d))/g, "،")
+                      )}{" "}
+                      تومان
+                    </td>
+                    <td className={style.count}>
+                      <Button
+                        variant="outline-success"
+                        style={{ border: "none" }}
+                        onClick={() => handleAddToCart(item)}
+                        disabled={
+                          item.cartQuantity >= item.quantity ? "disabled" : ""
+                        }
+                      >
+                        <BsPlusCircleFill />
+                      </Button>
+                      <p style={{ marginBottom: 0 }}>
+                        {digitsEnToFa(item.cartQuantity)}
+                      </p>
+                      <Button
+                        variant="outline-warning"
+                        style={{ border: "none" }}
+                        onClick={() => {
+                          dispatch(handleDecreaseCart(item));
+                        }}
+                      >
+                        <BsDashCircleFill />
+                      </Button>
+                    </td>
+                    {/* <td className={style.align}>
                     
                   </td>
                   <td className={style.align}>
                    
                   </td> */}
-                  {/* <td className={style.align}>
+                    {/* <td className={style.align}>
                     <div className={style.totalPrice}>
                       {digitsEnToFa(
                         (item.price * item.cartQuantity)
@@ -133,26 +139,26 @@ function Basket() {
                       تومان
                     </div>
                   </td> */}
-                  <td >
-                    <Button
-                      variant="outline-danger"
-                      onClick={handleOpenDelete}
-                      style={{border: "none"}}
-                      className={style.trash}
-                    >
-                      <BsTrashFill/>
-                    </Button>
-                    <DeleteModal
-                      openDelete={openDelete}
-                      handleCloseDelete={handleCloseDelete}
-                      itemId={item.id}
-                      setOpenDelete={setOpenDelete}
-                    />
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </Table>
+                    <td>
+                      <Button
+                        variant="outline-danger"
+                        onClick={handleOpenDelete}
+                        style={{ border: "none" }}
+                        className={style.trash}
+                      >
+                        <BsTrashFill />
+                      </Button>
+                      <DeleteModal
+                        openDelete={openDelete}
+                        handleCloseDelete={handleCloseDelete}
+                        itemId={item.id}
+                        setOpenDelete={setOpenDelete}
+                      />
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </Table>
           </div>
           <div className={style.total}>
             <div>
@@ -163,7 +169,8 @@ function Basket() {
                     cartTotalAmount
                       .toString()
                       .replace(/\B(?=(\d{3})+(?!\d))/g, ",")
-                )}
+                )}{" "}
+                تومان
               </h5>
             </div>
             <div className={style.btn}>
