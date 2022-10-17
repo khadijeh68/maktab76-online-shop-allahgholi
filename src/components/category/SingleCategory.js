@@ -57,15 +57,15 @@ const SingleCategory = () => {
                     alt="mobile"
                   />
                   <Card.Body>
-                    <Card.Text style={{textAlign: "center"}}>{item.name}</Card.Text>
-                    <Card.Text style={{textAlign: "center"}}>
+                    <Card.Text style={{textAlign: "center"}}  className={styles.price}>{item.name}</Card.Text>
+                    <Card.Text style={{textAlign: "center"}} className={styles.price}>
                       {digitsEnToFa(
                         item.price
                           .toString()
                           .replace(/\B(?=(\d{3})+(?!\d))/g, "،")
                       )} تومان 
                     </Card.Text>
-                    <Button style={{marginRight: "22px"}} variant="outline-primary" size="sm">توضیحات بیشتر...  </Button>
+                    <Button variant="outline-primary" size="sm">توضیحات بیشتر...  </Button>
                   </Card.Body>
                 </Card>
               </div>

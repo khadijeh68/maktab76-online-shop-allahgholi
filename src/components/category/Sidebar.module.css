@@ -1,3 +1,4 @@
+
 .container {
   font-family: Vazir-Light;
   display: flex;
@@ -38,10 +39,15 @@
   background-color: #ffffff;
   box-shadow: 0 0 6px rgb(0 0 0 / 20%);
 }
+
+.body button{
+  margin-right: 22px;
+}
+
 @media only screen and (max-width: 480px) {
   .sidebar {
     width: 200px;
-    height: 1100px;
+    height: 2000px;
     margin-top: 40px;
     padding: 20px;
     background-color: #ffffff;
@@ -67,6 +73,9 @@
     background-color: #ffffff;
     box-shadow: 0 0 6px rgb(0 0 0 / 20%);
   }
+  .images{
+    width: 100px;
+  }
   .body {
     margin-top: 35px;
   }
@@ -76,4 +85,47 @@
     height: 30px;
     margin-right: 20px;
   }
+}
+@media only screen and (max-width: 355px) {
+  .sidebar {
+    width: 200px;
+    height: 2000px;
+    margin-top: 40px;
+    padding: 20px;
+    background-color: #ffffff;
+    box-shadow: 0 0 6px rgb(0 0 0 / 30%);
+    font-size: 14px;
+  }
+  .page {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    flex-direction: column;
+    justify-content: center;
+    padding: 20px;
+    font-family: Vazir-Medium;
+    color: black;
+    font-size: 12px;
+  }
+  .img {
+    width: 10rem;
+    height: 15rem;
+    align-items: center;
+    padding: 10px;
+    background-color: #ffffff;
+    box-shadow: 0 0 6px rgb(0 0 0 / 20%);
+  }
+  .body {
+    margin-top: 35px;
+  }
+  .body button{
+    width: 95px;
+    font-size: 10px;
+    height: 25px;
+    margin-right: 5px;
+  }
+ .price{
+  margin-bottom: 0;
+  margin-top: 0;
+ }
 }
